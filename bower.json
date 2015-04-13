@@ -1,10 +1,11 @@
 {
-  "name": "ember-forms",
-  "version": "0.5.0-SNAPSHOT",
-  "description": "Intuitive, Smart and Beautiful Forms for Ember.js",
-  "homepage": "http://ember-addons.github.io/ember-forms",
+  "name": "ember-rapid-forms",
+  "version": "0.6.0",
+  "description": "Rapid, Intuitive, Smart and Beautiful Forms for Ember.js",
+  "homepage": "",
   "authors": [
-    "Asaf Shakarchi <asaf000@gmail.com>"
+    "Asaf Shakarchi <asaf000@gmail.com>",
+    "Spruce <dev@spruce.de>"
   ],
   "keywords": [
     "ember",

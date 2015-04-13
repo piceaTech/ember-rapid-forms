@@ -1,26 +1,18 @@
+# Ember-Rapid-Forms
 
-```
-                  __                    ____                         
-  ___  ____ ___  / /_  ___  _____      / __/___  _________ ___  _____
- / _ \/ __ `__ \/ __ \/ _ \/ ___/_____/ /_/ __ \/ ___/ __ `__ \/ ___/
-/  __/ / / / / / /_/ /  __/ /  /_____/ __/ /_/ / /  / / / / / (__  ) 
-\___/_/ /_/ /_/_.___/\___/_/        /_/  \____/_/  /_/ /_/ /_/____/  
-                                                                     
-```
+Rapid, Smart, Intuitive forms for Ember.js styled with Bootstrap &amp; Validation ready.
 
-# Ember-Forms
-
-Smart, Intuitive forms for Ember.js styled with Bootstrap &amp; Validation ready.
+This is a fork of the original over at https://github.com/indexiatech/ember-forms
 
 ## Installation & Tutorial
 
 With Ember-CLI:
 
 ```
-npm install --save-dev ember-idx-forms
+npm install --save-dev ember-rapid-forms
 ```
 
-Please visit the documentation for installation & usage documentations: http://indexiatech.github.io/ember-forms
+Please visit the documentation for installation & usage documentations: http://piceatech.github.io/ember-rapid-forms
 
 
 ## Plugin Development
@@ -32,7 +24,10 @@ Please visit the documentation for installation & usage documentations: http://i
 
 ## Running Tests
 
-* `ember test`
+To test on all ember versions:
+`ember try:testall`
+
+
 * `ember test --server`
 
 ## Building

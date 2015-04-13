@@ -1,6 +1,7 @@
 {
-  "name": "ember-idx-forms",
-  "version": "0.5.1",
+  "name": "ember-rapid-forms",
+  "version": "0.6.0",
+  "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -8,11 +9,11 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember test"
+    "test": "ember try:testall"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/indexiatech/ember-forms.git"
+    "url": "https://github.com/piceaTech/ember-rapid-forms.git"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -41,7 +42,8 @@
   },
   "description": "Intuitive, Smart and Beautiful Forms for Ember.js",
   "authors": [
-    "Indexia Technologies, ltd."
+    "Indexia Technologies, ltd.",
+    "Spruce, <dev@spruce.de>"
   ],
   "keywords": [
     "ember-addon"

@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-    name: 'ember-idx-forms'
+  name: 'ember-rapid-forms'
 };
