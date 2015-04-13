@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'dummy',
     environment: environment,
-    baseURL: '/ember-forms',
+    baseURL: '/ember-rapid-forms',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
