@@ -1,6 +1,5 @@
 import Em from 'ember';
 import FormGroupComponent from './group';
-import FormCheckboxComponent from './checkbox';
 import ControlMixin from 'ember-idx-forms/mixins/control';
 
 /*
