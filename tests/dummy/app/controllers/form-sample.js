@@ -1,9 +1,9 @@
-import Em from 'ember';
+import Ember from 'ember';
 /*global alert*/
 
-export default Em.Controller.extend({
+export default Ember.Controller.extend({
   layout: 'default',
-  genderOptions: [
+  genderOptions: Ember.A([
     {
       id: 'M',
       name: 'Male'
@@ -14,7 +14,7 @@ export default Em.Controller.extend({
       id: 'O',
       name: 'Other'
     }
-  ],
+  ]),
   actions: {
     submit: function() {
       return alert("Submitted!");

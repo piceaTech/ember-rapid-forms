@@ -1,4 +1,4 @@
-import Em from 'ember';
+import Ember from 'ember';
 import FormGroupComponent from './group';
 import ControlMixin from 'ember-rapid-forms/mixins/control';
 
@@ -12,30 +12,30 @@ export default FormGroupComponent.extend({
   v_icons: false,
   validations: false,
   yieldInLabel: true,
-  controlView: Em.Checkbox.extend(ControlMixin, {
+  controlView: Ember.Checkbox.extend(ControlMixin, {
     "class": false,
-    model: Em.computed.alias('parentView.parentView.model'),
-    propertyName: Em.computed.alias('parentView.parentView.propertyName'),
+    model: Ember.computed.alias('parentView.parentView.model'),
+    propertyName: Ember.computed.alias('parentView.parentView.propertyName'),
     init: function() {
       this._super();
-      return Em.Binding.from("model." + (this.get('propertyName'))).to('checked').connect(this);
+      return Ember.Binding.from("model." + (this.get('propertyName'))).to('checked').connect(this);
     }
   }),
-  wrapperClass: (function() {
+  wrapperClass: Ember.computed('form.form_layout', function() {
     if (this.get('form.form_layout') === 'horizontal') {
       return 'col-sm-offset-2 col-sm-10';
     }
-  }).property('form.form_layout'),
-  labelWrapperClass: (function() {
+  }),
+  labelWrapperClass: Ember.computed('form.form_layout', function() {
     if (this.get('form.form_layout') === 'horizontal') {
       return 'checkbox';
     }
     return null;
-  }).property('form.form_layout'),
-  "class": (function() {
+  }),
+  "class": Ember.computed('form.form_layout', function() {
     if (this.get('form.form_layout') !== 'horizontal') {
       return 'checkbox';
     }
     return 'form-group';
-  }).property('form.form_layout')
+  })
 });

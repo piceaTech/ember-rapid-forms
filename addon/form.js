@@ -1,4 +1,4 @@
-import Em from 'ember';
+import Ember from 'ember';
 import Utils from 'ember-rapid-forms/utils/utils';
 
 
@@ -21,12 +21,12 @@ Syntax:
     v_icons=true|false
 }}
 */
-export default Em.Component.extend({
+export default Ember.Component.extend({
   tagName: 'form',
   classNameBindings: ['form_layout_class'],
   attributeBindings: ['role'],
   role: 'form',
-  form_layout_class: (function() {
+  form_layout_class: Ember.computed('form_layout', function() {
     switch (this.get('form_layout')) {
       case 'horizontal':
       case 'inline':
@@ -34,7 +34,7 @@ export default Em.Component.extend({
       default:
         return 'form';
     }
-  }).property('form_layout'),
+  }),
   isDefaultLayout: Utils.createBoundSwitchAccessor('form', 'form_layout', 'form'),
   isInline: Utils.createBoundSwitchAccessor('inline', 'form_layout', 'form'),
   isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'form_layout', 'form'),
@@ -54,7 +54,7 @@ export default Em.Component.extend({
     if (e) {
       e.preventDefault();
     }
-    if (Em.isNone(this.get('model.validate'))) {
+    if (Ember.isNone(this.get('model.validate'))) {
       return this.get('targetObject').send(this.get('action'));
     } else {
       promise = this.get('model').validate();

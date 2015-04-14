@@ -1,4 +1,4 @@
-import Em from 'ember';
+import Ember from 'ember';
 import InFormMixin from 'ember-rapid-forms/mixins/in_form';
 
 /*
@@ -11,31 +11,31 @@ Note: currently must be a direct descendant of a form-group or 'property' must b
 Syntax:
 {{em-form-control-help}}
  */
-export default Em.Component.extend(InFormMixin, {
+export default Ember.Component.extend(InFormMixin, {
   tagName: 'span',
   classNames: ['help-block'],
   classNameBindings: ['extraClass', 'horiClassCalc'],
   text: void 0,
   extraClass: void 0,
   horiClass: 'col-sm-offset-2 col-sm-10',
-  horiClassCalc: (function() {
+  horiClassCalc: Ember.computed('form.isHorizontal', function() {
     if (this.get('form.isHorizontal') && this.get('horiClass')) {
       return this.get('horiClass');
     }
-  }).property('form.isHorizontal'),
+  }),
   init: function() {
     this._super();
-    return Em.Binding.from('model.errors.' + this.get('parentView.propertyName')).to('errors').connect(this);
+    return Ember.Binding.from('model.errors.' + this.get('parentView.propertyName')).to('errors').connect(this);
   },
-  helpText: (function() {
+  helpText: Ember.computed('text', 'errors.firstObject', function() {
     return this.get('errors.firstObject') || this.get('text');
-  }).property('text', 'errors.firstObject'),
-  hasHelp: (function() {
+  }),
+  hasHelp: Ember.computed('helpText', function() {
     var _ref;
     return ((_ref = this.get('helpText')) != null ? _ref.length : void 0) > 0;
-  }).property('helpText'),
-  hasError: (function() {
+  }),
+  hasError: Ember.computed('errors.length', function() {
     var _ref;
     return (_ref = this.get('errors')) != null ? _ref.length : void 0;
-  }).property('errors.length')
+  })
 });

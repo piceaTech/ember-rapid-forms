@@ -1,4 +1,4 @@
-import Em from 'ember';
+import Ember from 'ember';
 import FormGroupComponent from './group';
 import ControlMixin from 'ember-rapid-forms/mixins/control';
 
@@ -14,24 +14,24 @@ Syntax:
  */
 export default FormGroupComponent.extend({
   v_icons: false,
-  controlView: Em.Select.extend(ControlMixin, {
-    model: Em.computed.alias('parentView.model'),
-    propertyName: Em.computed.alias('parentView.propertyName'),
-    content: Em.computed.alias('parentView.content'),
-    optionValuePath: Em.computed.alias('parentView.optionValuePath'),
-    optionLabelPath: Em.computed.alias('parentView.optionLabelPath'),
-    prompt: Em.computed.alias('parentView.prompt'),
-    multiple: Em.computed.alias('parentView.multiple')
+  controlView: Ember.Select.extend(ControlMixin, {
+    model: Ember.computed.alias('parentView.model'),
+    propertyName: Ember.computed.alias('parentView.propertyName'),
+    content: Ember.computed.alias('parentView.content'),
+    optionValuePath: Ember.computed.alias('parentView.optionValuePath'),
+    optionLabelPath: Ember.computed.alias('parentView.optionLabelPath'),
+    prompt: Ember.computed.alias('parentView.prompt'),
+    multiple: Ember.computed.alias('parentView.multiple')
   }),
   property: void 0,
   content: void 0,
   optionValuePath: void 0,
   optionLabelPath: void 0,
   prompt: void 0,
-  controlWrapper: (function() {
+  controlWrapper: Ember.computed('form.form_layout', function() {
     if (this.get('form.form_layout') === 'horizontal') {
       return 'col-sm-10';
     }
     return null;
-  }).property('form.form_layout')
+  })
 });
