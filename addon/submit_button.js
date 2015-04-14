@@ -1,5 +1,5 @@
 import Em from 'ember';
-import InFormMixin from 'ember-idx-forms/mixins/in_form';
+import InFormMixin from 'ember-rapid-forms/mixins/in_form';
 
 /*
 Form Submit Button

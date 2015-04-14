@@ -1,7 +1,7 @@
 import Em from 'ember';
-import InFormMixin from 'ember-idx-forms/mixins/in_form';
-import HasPropertyMixin from 'ember-idx-forms/mixins/has_property';
-import HasPropertyValidationMixin from 'ember-idx-forms/mixins/has_property_validation';
+import InFormMixin from 'ember-rapid-forms/mixins/in_form';
+import HasPropertyMixin from 'ember-rapid-forms/mixins/has_property';
+import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has_property_validation';
 
 /*
 Form Group

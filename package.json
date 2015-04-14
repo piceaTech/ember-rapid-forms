@@ -9,7 +9,8 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:testall"
+    "test": "ember try:testall",
+    "update-page": "ember build --environment=production && echo \"now build checking out gh-pages branch\" && git checkout gh-pages && echo \"copying it into root folder and adding\"  && cp -R dist/* . && git add . && echo \"now commiting\" && git commit -m \"Update GH-Page\" && git checkout master"
   },
   "repository": {
     "type": "git",

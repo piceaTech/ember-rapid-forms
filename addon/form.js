@@ -1,5 +1,5 @@
 import Em from 'ember';
-import Utils from 'ember-idx-forms/utils/utils';
+import Utils from 'ember-rapid-forms/utils/utils';
 
 
 /*

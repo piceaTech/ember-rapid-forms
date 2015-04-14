@@ -1,6 +1,6 @@
 import Em from 'ember';
 import FormGroupComponent from './group';
-import ControlMixin from 'ember-idx-forms/mixins/control';
+import ControlMixin from 'ember-rapid-forms/mixins/control';
 
 /*
 Form Select
