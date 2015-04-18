@@ -85,5 +85,14 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
    */
   focusOut: function() {
     return this.set('canShowErrors', true);
+  },
+
+  /*
+  Listen to the keyUp of the form group and display the errors if showOnKeyUp is true.
+   */
+  keyUp: function() {
+    if (this.get('showOnKeyUp')) {
+      return this.set('canShowErrors', true);
+    }
   }
 });
