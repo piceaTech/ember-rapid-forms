@@ -1,5 +1,7 @@
 # Ember-Rapid-Forms
 
+[![Build Status](https://travis-ci.org/piceaTech/ember-rapid-forms.svg?branch=master)](https://travis-ci.org/piceaTech/ember-rapid-forms)
+
 Rapid, Smart, Intuitive forms for Ember.js styled with Bootstrap &amp; Validation ready.
 
 This is a fork of the original over at https://github.com/indexiatech/ember-forms
