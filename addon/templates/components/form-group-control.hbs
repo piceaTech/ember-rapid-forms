@@ -1,0 +1,7 @@
+{{#if controlWrapper}}
+    <div class={{controlWrapper}}>
+        {{view controlView viewName=controlViewName property=propertyName id=cid mainComponent=mainComponent}}
+    </div>
+{{else}}
+    {{view controlView viewName=controlViewName property=propertyName id=cid mainComponent=mainComponent}}
+{{/if}}

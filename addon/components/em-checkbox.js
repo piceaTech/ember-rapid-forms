@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import FormGroupComponent from './group';
+import FormGroupComponent from './em-form-group';
 import ControlMixin from 'ember-rapid-forms/mixins/control';
 
 /*
@@ -14,8 +14,8 @@ export default FormGroupComponent.extend({
   yieldInLabel: true,
   controlView: Ember.Checkbox.extend(ControlMixin, {
     "class": false,
-    model: Ember.computed.alias('parentView.parentView.model'),
-    propertyName: Ember.computed.alias('parentView.parentView.propertyName'),
+    model: Ember.computed.alias('form.model'),
+    propertyName: Ember.computed.alias('mainComponent.propertyName'),
     init: function() {
       this._super();
       return Ember.Binding.from("model." + (this.get('propertyName'))).to('checked').connect(this);

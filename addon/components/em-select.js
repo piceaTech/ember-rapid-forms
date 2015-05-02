@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import FormGroupComponent from './group';
+import FormGroupComponent from './em-form-group';
 import ControlMixin from 'ember-rapid-forms/mixins/control';
 
 /*
@@ -15,13 +15,13 @@ Syntax:
 export default FormGroupComponent.extend({
   v_icons: false,
   controlView: Ember.Select.extend(ControlMixin, {
-    model: Ember.computed.alias('parentView.model'),
-    propertyName: Ember.computed.alias('parentView.propertyName'),
-    content: Ember.computed.alias('parentView.content'),
-    optionValuePath: Ember.computed.alias('parentView.optionValuePath'),
-    optionLabelPath: Ember.computed.alias('parentView.optionLabelPath'),
-    prompt: Ember.computed.alias('parentView.prompt'),
-    multiple: Ember.computed.alias('parentView.multiple')
+    model: Ember.computed.alias('mainComponent.model'),
+    propertyName: Ember.computed.alias('mainComponent.propertyName'),
+    content: Ember.computed.alias('mainComponent.content'),
+    optionValuePath: Ember.computed.alias('mainComponent.optionValuePath'),
+    optionLabelPath: Ember.computed.alias('mainComponent.optionLabelPath'),
+    prompt: Ember.computed.alias('mainComponent.prompt'),
+    multiple: Ember.computed.alias('mainComponent.multiple')
   }),
   property: void 0,
   content: void 0,

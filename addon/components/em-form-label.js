@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import InFormMixin from 'ember-rapid-forms/mixins/in_form';
+import layout from '../templates/components/em-form-label';
 
 /*
 Form Label
@@ -19,6 +20,7 @@ Or can serve as a block helper for elements that needs to be wrapped within labe
 {{/em-form-label}}
  */
 export default Ember.Component.extend(InFormMixin, {
+  layout: layout,
   tagName: 'label',
   classNames: ['control-label'],
   classNameBindings: ['extraClass', 'inlineClassCalc', 'horiClassCalc'],

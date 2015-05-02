@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import FormGroupComponent from './group';
+import FormGroupComponent from './em-form-group';
 import ControlMixin from 'ember-rapid-forms/mixins/control';
 
 /*
@@ -11,10 +11,10 @@ Syntax:
 export default FormGroupComponent.extend({
   controlView: Ember.TextArea.extend(ControlMixin, {
     attributeBindings: ['placeholder'],
-    placeholder: Ember.computed.alias('parentView.placeholder'),
-    model: Ember.computed.alias('parentView.model'),
-    propertyName: Ember.computed.alias('parentView.propertyName'),
-    rows: Ember.computed.alias('parentView.rows')
+    placeholder: Ember.computed.alias('mainComponent.placeholder'),
+    model: Ember.computed.alias('mainComponent.model'),
+    propertyName: Ember.computed.alias('mainComponent.propertyName'),
+    rows: Ember.computed.alias('mainComponent.rows')
   }),
   property: void 0,
   label: void 0,
