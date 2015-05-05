@@ -1,6 +1,6 @@
-import Em from 'ember';
+import Ember from 'ember';
 
-export default Em.Route.extend({
+export default Ember.Route.extend({
   model: function() {
     var model;
     model = this.get('store').createRecord('credentials');

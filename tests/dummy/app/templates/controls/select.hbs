@@ -17,12 +17,15 @@ Selectbox let a user select one item of a multi pre defined options.
 <h3>Controller Code</h3>
 <div class="well line-example">
     <pre><code class="coffeescript">
-        App.ControlsSelectController = Em.ObjectController.extend
-            genderOptions: [
+        App.ControlsSelectController = Ember.Controller.extend({
+            // Ember.A ist only neccessary when prototype-extensions are turned off
+            genderOptions: Ember.A([
                 {id: 'M', name: 'Male'}
                 {id: 'F', name: 'Female'}
                 {id: 'O', name: 'Other'}
-            ]
+            ])
+        })
+            
     </code></pre>
 </div>
 

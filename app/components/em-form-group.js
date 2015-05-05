@@ -1,4 +1,4 @@
 import Ember from 'ember';
-import FormGroupComponent from 'ember-idx-forms/group';
+import FormGroupComponent from 'ember-rapid-forms/group';
  
 export default FormGroupComponent;

@@ -1,3 +1,3 @@
-import Em from 'ember';
+import Ember from 'ember';
 
-export default Em.ObjectController.extend();
+export default Ember.Controller.extend();

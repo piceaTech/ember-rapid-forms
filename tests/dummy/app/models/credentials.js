@@ -1,11 +1,11 @@
-import Em from 'ember';
+import Ember from 'ember';
 import DS from 'ember-data';
 import EV from 'ember-validations';
 
 var Credentials = DS.Model.extend(EV.Mixin, {
   user: DS.attr('string'),
   password: DS.attr('string'),
-  isntValid: Em.computed.not('isValid')
+  isntValid: Ember.computed.not('isValid')
 });
 
 Credentials.reopen({

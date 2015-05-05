@@ -1,13 +1,13 @@
-import Em from 'ember';
+import Ember from 'ember';
 /*global hljs*/
 
 export default {
   name: 'hightlightjs',
   initialize: function() {
-    return Em.Route.reopen({
+    return Ember.Route.reopen({
       renderTemplate: function() {
         this._super();
-        return Em.run.next(this, function() {
+        return Ember.run.next(this, function() {
           return $('pre code').each(function(i, e) {
             return hljs.highlightBlock(e);
           });

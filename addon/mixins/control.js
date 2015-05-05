@@ -1,9 +1,9 @@
-import Em from 'ember';
+import Ember from 'ember';
 
 /***
 Mixin that should be applied for all controls
  */
-export default Em.Mixin.create({
+export default Ember.Mixin.create({
   classNameBindings: ['class'],
   "class": 'form-control',
   init: function() {
@@ -15,9 +15,8 @@ export default Em.Mixin.create({
     } else {
     	return Em.Binding.from("model" + '.' + (this.get('propertyName'))).to('value').connect(this);    	
     }
-    
   },
-  hasValue: (function() {
+  hasValue: Ember.computed.readOnly('value', function() {
     return this.get('value') !== null;
-  }).property('value').readOnly()
+  })
 });

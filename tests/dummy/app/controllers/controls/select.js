@@ -1,7 +1,7 @@
-import Em from 'ember';
+import Ember from 'ember';
 
-export default Em.Controller.extend({
-  genderOptions: [
+export default Ember.Controller.extend({
+  genderOptions: Ember.A([
     {
       id: 'M',
       name: 'Male'
@@ -12,5 +12,5 @@ export default Em.Controller.extend({
       id: 'O',
       name: 'Other'
     }
-  ]
+  ])
 });

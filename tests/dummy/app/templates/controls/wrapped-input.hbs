@@ -16,11 +16,14 @@ This gives you the freedom to support extra visual effects when neccessary.
 <h2>The custom component code</h2>
 <div class="well line-example">
     <pre><code class="coffeescript">
-        WrappedInputComponent = Em.Component.extend
-            attributeBindings: ['style']
-            style: (->
-                "border: dotted 2px;"
-            ).property()
+        WrappedInputComponent = Em.Component.extend({
+            attributeBindings: ['style'],
+            style: Ember.computed(function(){
+                return "border: dotted 2px;"
+            })
+        })
+            
+            
     </code></pre>
 </div>
 

@@ -1,4 +1,4 @@
 import Ember from 'ember';
-import InputComponent from 'ember-idx-forms/input';
+import InputComponent from 'ember-rapid-forms/input';
  
 export default InputComponent;
