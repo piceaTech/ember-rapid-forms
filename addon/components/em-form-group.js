@@ -2,7 +2,7 @@ import Ember from 'ember';
 import InFormMixin from 'ember-rapid-forms/mixins/in_form';
 import HasPropertyMixin from 'ember-rapid-forms/mixins/has_property';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has_property_validation';
-
+import layout from '../templates/components/em-form-group';
 /*
 Form Group
 
@@ -28,7 +28,7 @@ Syntax:
 export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasPropertyValidationMixin, {
   tagName: 'div',
   "class": 'form-group',
-  layoutName: 'components/em-form-group',
+  layout: layout,
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'v_icons:has-feedback'],
   attributeBindings: ['disabled'],
   canShowErrors: false,

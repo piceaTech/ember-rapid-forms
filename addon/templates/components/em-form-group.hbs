@@ -1,0 +1,23 @@
+{{#if wrapperClass}}
+    <div class={{wrapperClass}}>
+      {{#unless template}}
+        {{form-group label=label yieldInLabel=yieldInLabel
+          labelWrapperClass=labelWrapperClass labelViewName=labelViewName
+          help=help helpViewName=helpViewName canShowErrors=canShowErrors
+          controlView=controlView controlViewName=controlViewName controlWrapper=controlWrapper
+          id=cid v_icons=v_icons mainComponent=this}}
+      {{else}}
+        {{yield}}
+      {{/unless}}
+    </div>
+{{else}}
+  {{#unless template}}
+    {{form-group label=label yieldInLabel=yieldInLabel
+      labelWrapperClass=labelWrapperClass labelViewName=labelViewName
+      help=help helpViewName=helpViewName canShowErrors=canShowErrors
+      controlView=controlView controlViewName=controlViewName controlWrapper=controlWrapper
+      id=cid v_icons=v_icons mainComponent=this}}
+  {{else}}
+    {{yield}}
+  {{/unless}}
+{{/if}}

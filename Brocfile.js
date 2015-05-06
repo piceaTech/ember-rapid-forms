@@ -3,7 +3,7 @@
 var mergeTrees = require( 'broccoli-merge-trees' ),
     pickFiles  = require( 'broccoli-static-compiler' );
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
-var isProduction = ( process.env.EMBER_ENV || 'development' ) === 'production';
+//var isProduction = ( process.env.EMBER_ENV || 'development' ) === 'production';
 
 var app = new EmberAddon();
 
@@ -31,6 +31,6 @@ var extraAssets = pickFiles( 'bower_components/fontawesome/fonts', {
     srcDir  : '/',
     files   : [ 'fontawesome-webfont.woff' ],
     destDir : '/fonts'
-})
+});
 
-module.exports = mergeTrees([app.toTree(), extraAssets])
+module.exports = mergeTrees([app.toTree(), extraAssets]);

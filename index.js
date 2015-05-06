@@ -2,5 +2,8 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-rapid-forms'
+  name: 'ember-rapid-forms',
+  isDevelopingAddon: function() {
+    return true;
+  }
 };
