@@ -20,20 +20,18 @@
                 {{em-form-label text=label viewName=labelViewName}}
                 {{form-group-control controlView=controlView
                   controlViewName=controlViewName controlWrapper=controlWrapper
-                  controlWrapper=controlWrapper
                   cid=cid mainComponent=mainComponent}}
             </div>
         {{else}}
             {{em-form-label text=label viewName=labelViewName}}
             {{form-group-control controlView=controlView
               controlViewName=controlViewName controlWrapper=controlWrapper
-              controlWrapper=controlWrapper
               cid=cid mainComponent=mainComponent}}
         {{/if}}
     {{/if}}
 {{else}}
   {{form-group-control controlView=controlView
-    controlViewName=controlViewName controlWrapper=controlWrapper
+    controlViewName=controlViewName
     controlWrapper=controlWrapper cid=cid
     mainView=mainView}}
 {{/if}}
