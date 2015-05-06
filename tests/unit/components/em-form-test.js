@@ -8,7 +8,7 @@ import Ember from 'ember';
 
 moduleForComponent('em-form', {
   // Specify the other units that are required for this test
-  needs: ['component:em-form-submit', 'template:components/em-form-submit']
+  needs: ['component:em-form-submit']
 });
 
 var FormController = Ember.Controller.extend({

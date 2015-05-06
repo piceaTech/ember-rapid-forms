@@ -6,7 +6,7 @@ import Ember from 'ember';
 
 moduleForComponent('em-form', 'em-form-submit tests', {
   // Specify the other units that are required for this test
-  needs: ['component:em-form-submit', 'template:components/em-form-submit']
+  needs: ['component:em-form-submit']
 });
 
 test('a form with em-form-submit components renders correctly', function(assert) {

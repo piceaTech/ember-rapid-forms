@@ -59,7 +59,7 @@ test('Help error binding', function(assert) {
       name: 'my-name',
       errors: Ember.Object.create()
     }),
-    parentView: Ember.View.create({
+    mainComponent: Ember.Component.create({
       propertyName: 'name'
     })
   });
