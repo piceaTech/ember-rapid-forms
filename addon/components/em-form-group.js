@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import InFormMixin from 'ember-rapid-forms/mixins/in_form';
-import HasPropertyMixin from 'ember-rapid-forms/mixins/has_property';
-import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has_property_validation';
+import InFormMixin from 'ember-rapid-forms/mixins/in-form';
+import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
+import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
 /*
 Form Group

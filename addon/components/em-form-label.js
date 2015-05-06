@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import InFormMixin from 'ember-rapid-forms/mixins/in_form';
+import InFormMixin from 'ember-rapid-forms/mixins/in-form';
 import layout from '../templates/components/em-form-label';
 
 /*
