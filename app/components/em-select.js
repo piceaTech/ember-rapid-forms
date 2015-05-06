@@ -1,4 +1,4 @@
-import Ember from 'ember';
-import SelectComponent from 'ember-rapid-forms/select';
- 
+//import Ember from 'ember';
+import SelectComponent from 'ember-rapid-forms/components/em-select';
+
 export default SelectComponent;

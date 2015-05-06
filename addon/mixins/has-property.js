@@ -11,7 +11,7 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
 
 export default Ember.Mixin.create({
   property: void 0,
-  propertyName: Ember.computed('parentView.property', function() {
+  propertyName: Ember.computed('property', 'parentView.property', function() {
     if (this.get('property')) {
       return this.get('property');
     } else if (this.get('parentView.property')) {

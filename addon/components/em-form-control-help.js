@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import InFormMixin from 'ember-rapid-forms/mixins/in_form';
+import InFormMixin from 'ember-rapid-forms/mixins/in-form';
+import layout from '../templates/components/em-form-control-help';
 
 /*
 Form Control Help
@@ -12,6 +13,7 @@ Syntax:
 {{em-form-control-help}}
  */
 export default Ember.Component.extend(InFormMixin, {
+  layout: layout,
   tagName: 'span',
   classNames: ['help-block'],
   classNameBindings: ['extraClass', 'horiClassCalc'],
@@ -25,7 +27,7 @@ export default Ember.Component.extend(InFormMixin, {
   }),
   init: function() {
     this._super();
-    return Ember.Binding.from('model.errors.' + this.get('parentView.propertyName')).to('errors').connect(this);
+    return Ember.Binding.from('model.errors.' + this.get('mainComponent.propertyName')).to('errors').connect(this);
   },
   helpText: Ember.computed('text', 'errors.firstObject', function() {
     return this.get('errors.firstObject') || this.get('text');

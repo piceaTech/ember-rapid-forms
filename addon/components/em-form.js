@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Utils from 'ember-rapid-forms/utils/utils';
-
+import layout from '../templates/components/em-form';
 
 /*
 Form View
@@ -22,6 +22,7 @@ Syntax:
 }}
 */
 export default Ember.Component.extend({
+  layout: layout,
   tagName: 'form',
   classNameBindings: ['form_layout_class'],
   attributeBindings: ['role'],
@@ -46,7 +47,7 @@ export default Ember.Component.extend({
 
   /*
   Form submit
-  
+
   Optionally execute model validations and perform a form submission.
    */
   submit: function(e) {
