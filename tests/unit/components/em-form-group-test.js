@@ -6,7 +6,7 @@ import Ember from 'ember';
 
 moduleForComponent('em-form-group', {
   // Specify the other units that are required for this test
-  needs: ['component:form-group', 'component:form-group-control', 'component:em-form-label', 'template:dummy']
+  needs: ['component:form-group', 'component:form-group-control', 'component:em-form-label', 'component:em-form-control-help', 'template:dummy']
 });
 
 test('it renders', function(assert) {
