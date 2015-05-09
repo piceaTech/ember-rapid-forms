@@ -42,7 +42,7 @@
 
 {{!Currently no errors when layout is inline}}
 {{#unless form.isInline}}
-    {{#if canShowErrors}}
-        {{em-form-control-help text=help viewName=helpViewName}}
+    {{#if shouldShowErrors}}
+        {{em-form-control-help text=help mainComponentName=mainComponent.propertyName}}
     {{/if}}
 {{/unless}}
