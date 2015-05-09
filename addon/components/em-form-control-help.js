@@ -27,17 +27,19 @@ export default Ember.Component.extend(InFormMixin, {
   }),
   init: function() {
     this._super();
-    return Ember.Binding.from('model.errors.' + this.get('mainComponent.propertyName')).to('errors').connect(this);
+    return Ember.Binding.from('model.errors.' + this.get('mainComponentName')).to('errors').connect(this);
   },
   helpText: Ember.computed('text', 'errors.firstObject', function() {
     return this.get('errors.firstObject') || this.get('text');
   }),
   hasHelp: Ember.computed('helpText', function() {
-    var _ref;
-    return ((_ref = this.get('helpText')) != null ? _ref.length : void 0) > 0;
+    var helpText = this.get('helpText');
+    if(!helpText){
+      return false;
+    }
+    return helpText.length > 0;
   }),
   hasError: Ember.computed('errors.length', function() {
-    var _ref;
-    return (_ref = this.get('errors')) != null ? _ref.length : void 0;
+    return this.get('errors') != null;
   })
 });
