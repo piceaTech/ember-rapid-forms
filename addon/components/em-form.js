@@ -56,7 +56,7 @@ export default Ember.Component.extend({
 
   Optionally execute model validations and perform a form submission.
    */
-  submit: function(e) {
+  submit(e) {
     var promise;
     if (e) {
       e.preventDefault();

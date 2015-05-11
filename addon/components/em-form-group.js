@@ -82,15 +82,15 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   helpText: Ember.computed('text', 'errors.firstObject', function() {
     return this.get('errors.firstObject') || this.get('text');
   }),
-  init: function() {
-    return this._super();
+  init() {
+    return this._super(...arguments);
   },
 
   /*
   Observes the helpHasErrors of the help control and modify the 'status' property accordingly.
    */
 
-  focusIn: function() {
+  focusIn() {
     if (this.get('form.showErrorsOnFocusIn')) {
       return this.set('canShowErrors', true);
     }
@@ -99,14 +99,14 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   /*
   Listen to the focus out of the form group and display the errors
    */
-  focusOut: function() {
+  focusOut() {
     return this.set('canShowErrors', true);
   },
 
   /*
   Listen to the keyUp of the form group and display the errors if showOnKeyUp is true.
    */
-  keyUp: function() {
+  keyUp() {
     if (this.get('showOnKeyUp')) {
       return this.set('canShowErrors', true);
     }

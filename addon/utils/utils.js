@@ -1,7 +1,7 @@
 import Ember from 'ember';
 var Utils;
 export default Utils = {
-  createBoundSwitchAccessor: function(switchValue, myProperty, myDefault) {
+  createBoundSwitchAccessor(switchValue, myProperty, myDefault) {
     if (myDefault == null) {
       myDefault = 'default';
     }
@@ -11,8 +11,5 @@ export default Utils = {
       }
       return this.get(myProperty) === switchValue;
     });
-  },
-  namelize: function(string) {
-    return string.underscore().split('_').join(' ').capitalize();
   }
 };
