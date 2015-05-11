@@ -21,7 +21,7 @@ Syntax:
     //If true the control view is yieled within the label
     yieldInLabel=true|false
     //If true validation icons will be rendered, by default inherited from the form
-    v_icons: true
+    validationIcons: true
     //Label of the form group, default is a human friendly form of the property name
     label="Some label"
 }}
@@ -53,9 +53,12 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   }),
   v_icons: Ember.computed.deprecatingAlias('validationIcons'),
   validationIcons: Ember.computed.alias('form.validationIcons'),
-  v_success_icon: 'fa fa-check',
-  v_warn_icon: 'fa fa-exclamation-triangle',
-  v_error_icon: 'fa fa-times',
+  v_success_icon: Ember.computed.deprecatingAlias('successIcon'),
+  successIcon: 'fa fa-check',
+  v_warn_icon: Ember.computed.deprecatingAlias('warningIcon'),
+  warningIcon: 'fa fa-exclamation-triangle',
+  v_error_icon: Ember.computed.deprecatingAlias('errorIcon'),
+  errorIcon: 'fa fa-times',
   validations: true,
   yieldInLabel: false,
   v_icon: Ember.computed.deprecatingAlias('validationIcon'),
@@ -65,12 +68,12 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
     }
     switch (this.get('status')) {
       case 'success':
-        return this.get('v_success_icon');
+        return this.get('successIcon');
       case 'warning':
       case 'warn':
-        return this.get('v_warn_icon');
+        return this.get('warningIcon');
       case 'error':
-        return this.get('v_error_icon');
+        return this.get('errorIcon');
       default:
         return null;
     }

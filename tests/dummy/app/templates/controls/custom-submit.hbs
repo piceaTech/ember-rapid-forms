@@ -7,7 +7,7 @@ It is possible to have a custom submit button by not rendering the default submi
 <h2>Markup</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-        \{{#em-form model=model submit_button=false}}
+        \{{#em-form model=model submitButton=false}}
         &lt;div class="form-actions"&gt;
             &lt;input \{{bind-attr disabled=model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
         &lt;/div&gt;
@@ -19,7 +19,7 @@ It is possible to have a custom submit button by not rendering the default submi
 Few things happen here:
 <ol>
     <li>Bind the controller's model to the <i>model</i> property of the form component.</li>
-    <li>Disable rendering the default submit button by setting <i>submit_button=false</i></li>
+    <li>Disable rendering the default submit button by setting <i>submitButton=false</i></li>
     <li>We add an input button (type must be <i>submit</i>) and bind its <i>disabled</i> property to the <i>isntValid</i> property of our model</li>
 </ol>
 </p>
@@ -51,7 +51,7 @@ Few things happen here:
         }
       }
     });
-        
+
 
     #Our controller
     export default Em.Controller.extend({
@@ -67,7 +67,7 @@ Few things happen here:
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form model=model submit_button=false}}
+    {{#em-form model=model submitButton=false}}
         {{em-input label="Name" property="user"}}
         {{em-input label="Password" property="password"}}
         <div class="form-actions">
