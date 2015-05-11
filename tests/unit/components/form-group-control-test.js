@@ -17,8 +17,7 @@ test('renders the component', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  assert.ok(Ember.$(component._parentView.element).find('div:contains("dummy!")'), 'Has controlView rendered');
+  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
 });
 
 test('renders the component with wrapper', function(assert) {
@@ -30,7 +29,6 @@ test('renders the component with wrapper', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  assert.ok(Ember.$(component._parentView.element).find('div:contains("dummy!")'), 'Has controlView rendered');
-  assert.ok(Ember.$(component._parentView.element).find('div.control-wrapper-class'), 'Has wrapper div');
+  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
+  assert.ok(Ember.$(component.get('parentView').element).find('div.control-wrapper-class'), 'Has wrapper div');
 });

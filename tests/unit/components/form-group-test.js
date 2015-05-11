@@ -19,8 +19,7 @@ test('renders the component', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  assert.ok(Ember.$(component._parentView.element).find('div:contains("dummy!")'), 'Has controlView rendered');
+  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
 });
 
 test('renders with label', function(assert) {
@@ -32,9 +31,8 @@ test('renders with label', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  assert.ok(Ember.$(component._parentView.element).find('div:contains("my-label")'), 'Has a label');
-  assert.ok(Ember.$(component._parentView.element).find('div:contains("dummy!")'), 'Has controlView rendered');
+  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("my-label")'), 'Has a label');
+  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
 });
 
 test('renders with labelWrapperClass', function(assert) {
@@ -47,8 +45,7 @@ test('renders with labelWrapperClass', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  var wrapper = Ember.$(component._parentView.element).find('div.wrapper-class');
+  var wrapper = Ember.$(component.get('parentView').element).find('div.wrapper-class');
 
   assert.ok(wrapper, 'Wrapper exists');
   assert.ok(wrapper.find('div:contains("my-label")'), 'Label is inside wrapper');
@@ -65,8 +62,7 @@ test('renders with yieldInLabel', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  var label = Ember.$(component._parentView.element).find('label');
+  var label = Ember.$(component.get('parentView').element).find('label');
   assert.ok(label, 'Label is a wrapper tag');
   assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
   assert.ok(label.find('div:contains("dummy!")'), 'Label has controlView div');
@@ -83,8 +79,7 @@ test('renders with yieldInLabel with labelWrapperClass', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  var wrapper = Ember.$(component._parentView.element).find('div.wrapper-class');
+  var wrapper = Ember.$(component.get('parentView').element).find('div.wrapper-class');
   assert.ok(wrapper, 'Wrapper exists');
 
   var label = wrapper.find('label');
@@ -105,8 +100,7 @@ test('renders v_icon', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  var icons = Ember.$(component._parentView.element).find('span');
+  var icons = Ember.$(component.get('parentView').element).find('span');
   assert.ok(icons, 'Has icon span');
   assert.ok(icons.hasClass('form-control-feedback'), 'Has proper class');
   assert.ok(icons.find('i'), 'Has icon');
@@ -123,8 +117,7 @@ test('renders error message', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  var parent = Ember.$(component._parentView.element);
+  var parent = Ember.$(component.get('parentView').element);
   assert.ok(parent.find('div:contains("dummy!")'), 'Has controlView rendered');
 
   var helpSpan = parent.find('span');
@@ -146,8 +139,7 @@ test('does not renders error message when layout is inline', function(assert) {
   });
   this.render();
 
-  // FIXME: _parentView is a private API
-  var parent = Ember.$(component._parentView.element);
+  var parent = Ember.$(component.get('parentView').element);
   assert.ok(parent.find('div:contains("dummy!")'), 'Has controlView rendered');
 
   var helpSpan = parent.find('span');
