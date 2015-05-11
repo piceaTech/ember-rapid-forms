@@ -60,7 +60,7 @@ test('submit button rendering', function(assert) {
   assert.ok(elem.find('button').get(0), "Submit got rendered");
 
   Ember.run(() => {
-    component.set('submit_button', false);
+    component.set('submitButton', false);
   });
 
   assert.ok(!elem.find('button').get(0), "No submit button is rendered");
@@ -82,7 +82,7 @@ test('form layout - default', function(assert) {
 
 test('form layout - inline', function(assert) {
   var component = this.subject({
-    form_layout: 'inline'
+    formLayout: 'inline'
   });
   this.render();
 
@@ -98,7 +98,7 @@ test('form layout - inline', function(assert) {
 
 test('form layout - horizontal', function(assert) {
   var component = this.subject({
-    form_layout: 'horizontal'
+    formLayout: 'horizontal'
   });
   this.render();
 

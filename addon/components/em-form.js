@@ -16,34 +16,38 @@ Syntax:
     //The action to be invoked on the controller when a form is submitted.
     action="some_action"
     //if true a submit button will be rendered
-    submit_button=true|false
+    submitButton=true|false
     //if true validation icons will be rendered
-    v_icons=true|false
+    validationIcons=true|false
 }}
 */
 export default Ember.Component.extend({
   layout: layout,
   tagName: 'form',
-  classNameBindings: ['form_layout_class'],
+  classNameBindings: ['formLayoutClass'],
   attributeBindings: ['role'],
   role: 'form',
-  form_layout_class: Ember.computed('form_layout', function() {
-    switch (this.get('form_layout')) {
+  form_layout_class: Ember.computed.deprecatingAlias('formLayoutClass'),
+  formLayoutClass: Ember.computed('formLayout', function() {
+    switch (this.get('formLayout')) {
       case 'horizontal':
       case 'inline':
-        return "form-" + (this.get('form_layout'));
+        return "form-" + (this.get('formLayout'));
       default:
         return 'form';
     }
   }),
-  isDefaultLayout: Utils.createBoundSwitchAccessor('form', 'form_layout', 'form'),
-  isInline: Utils.createBoundSwitchAccessor('inline', 'form_layout', 'form'),
-  isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'form_layout', 'form'),
+  isDefaultLayout: Utils.createBoundSwitchAccessor('form', 'formLayout', 'form'),
+  isInline: Utils.createBoundSwitchAccessor('inline', 'formLayout', 'form'),
+  isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'formLayout', 'form'),
   action: 'submit',
-  model: void 0,
-  form_layout: 'form',
-  submit_button: true,
-  v_icons: true,
+  model: null,
+  form_layout: Ember.computed.deprecatingAlias('formLayout'),
+  formLayout: 'form',
+  submit_button: Ember.computed.deprecatingAlias('submitButton'),
+  submitButton: true,
+  v_icons: Ember.computed.deprecatingAlias('validationIcons'),
+  validationIcons: true,
   showErrorsOnRender: false,
   showErrorsOnFocusIn: false,
 

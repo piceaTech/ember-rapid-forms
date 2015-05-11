@@ -16,7 +16,8 @@ Syntax:
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
 export default FormGroupComponent.extend({
-  v_icons: false,
+  v_icons: Ember.computed.deprecatingAlias('validationIcons'),
+  validationIcons: false,
   controlView: Ember.Select.extend(ControlMixin, {
     model: Ember.computed.alias('mainComponent.model'),
     propertyName: Ember.computed.alias('mainComponent.propertyName'),
@@ -34,8 +35,8 @@ export default FormGroupComponent.extend({
   optionValuePath: void 0,
   optionLabelPath: void 0,
   prompt: void 0,
-  controlWrapper: Ember.computed('form.form_layout', function() {
-    if (this.get('form.form_layout') === 'horizontal') {
+  controlWrapper: Ember.computed('form.formLayout', function() {
+    if (this.get('form.formLayout') === 'horizontal') {
       return 'col-sm-10';
     }
     return null;

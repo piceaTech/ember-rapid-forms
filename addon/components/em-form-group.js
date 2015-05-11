@@ -3,6 +3,7 @@ import InFormMixin from 'ember-rapid-forms/mixins/in-form';
 import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
+
 /*
 Form Group
 
@@ -29,7 +30,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   tagName: 'div',
   "class": 'form-group',
   layout: layout,
-  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'v_icons:has-feedback'],
+  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
   hasSuccess: Ember.computed('status', 'canShowErrors', function() {
@@ -50,13 +51,15 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
     this.set('error', error);
     return error;
   }),
-  v_icons: Ember.computed.alias('form.v_icons'),
+  v_icons: Ember.computed.deprecatingAlias('validationIcons'),
+  validationIcons: Ember.computed.alias('form.validationIcons'),
   v_success_icon: 'fa fa-check',
   v_warn_icon: 'fa fa-exclamation-triangle',
   v_error_icon: 'fa fa-times',
   validations: true,
   yieldInLabel: false,
-  v_icon: Ember.computed('status', 'canShowErrors', function() {
+  v_icon: Ember.computed.deprecatingAlias('validationIcon'),
+  validationIcon: Ember.computed('status', 'canShowErrors', function() {
     if (!this.get('canShowErrors')) {
       return;
     }

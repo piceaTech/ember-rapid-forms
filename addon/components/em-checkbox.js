@@ -9,7 +9,8 @@ Syntax:
 {{em-checkbox property="property name"}}
  */
 export default FormGroupComponent.extend({
-  v_icons: false,
+  v_icons: Ember.computed.deprecatingAlias('validationIcons'),
+  validationIcons: false,
   validations: false,
   yieldInLabel: true,
   controlView: Ember.Checkbox.extend(ControlMixin, {
@@ -21,19 +22,19 @@ export default FormGroupComponent.extend({
       return Ember.Binding.from("model." + (this.get('propertyName'))).to('checked').connect(this);
     }
   }),
-  wrapperClass: Ember.computed('form.form_layout', function() {
-    if (this.get('form.form_layout') === 'horizontal') {
+  wrapperClass: Ember.computed('form.formLayout', function() {
+    if (this.get('form.formLayout') === 'horizontal') {
       return 'col-sm-offset-2 col-sm-10';
     }
   }),
-  labelWrapperClass: Ember.computed('form.form_layout', function() {
-    if (this.get('form.form_layout') === 'horizontal') {
+  labelWrapperClass: Ember.computed('form.formLayout', function() {
+    if (this.get('form.formLayout') === 'horizontal') {
       return 'checkbox';
     }
     return null;
   }),
-  "class": Ember.computed('form.form_layout', function() {
-    if (this.get('form.form_layout') !== 'horizontal') {
+  "class": Ember.computed('form.formLayout', function() {
+    if (this.get('form.formLayout') !== 'horizontal') {
       return 'checkbox';
     }
     return 'form-group';
