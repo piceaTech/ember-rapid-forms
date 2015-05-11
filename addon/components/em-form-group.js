@@ -74,7 +74,6 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   }),
   shouldShowErrors: Ember.computed('canShowErrors', 'helpText', function() {
     var text = this.get('helpText') || "";
-    console.log(text, this.get('canShowErrors'));
     return text.length > 0 && this.get('canShowErrors');
   }),
   helpText: Ember.computed('text', 'errors.firstObject', function() {
