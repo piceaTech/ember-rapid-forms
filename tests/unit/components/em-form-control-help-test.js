@@ -59,9 +59,7 @@ test('Help error binding', function(assert) {
       name: 'my-name',
       errors: Ember.Object.create()
     }),
-    mainComponent: Ember.Component.create({
-      propertyName: 'name'
-    })
+    mainComponentName: 'name'
   });
   this.render();
 
@@ -84,7 +82,7 @@ test('Help error binding', function(assert) {
   assert.ok(component.get('hasError'), 'hasError is true if prop has array with errors');
 
   Ember.run(() => {
-    component.set('model.errors.name', []);
+    component.set('model.errors.name', null);
   });
 
   assert.ok(!component.get('helpText'), 'no help text');
