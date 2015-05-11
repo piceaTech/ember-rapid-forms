@@ -44,6 +44,8 @@ export default Ember.Component.extend({
   form_layout: 'form',
   submit_button: true,
   v_icons: true,
+  showErrorsOnRender: false,
+  showErrorsOnFocusIn: false,
 
   /*
   Form submit

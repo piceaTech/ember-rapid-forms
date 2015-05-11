@@ -8,7 +8,7 @@ import Ember from 'ember';
 
 moduleForComponent('em-form', {
   // Specify the other units that are required for this test
-  needs: ['component:em-form-submit']
+  needs: ['component:em-form-submit', 'component:em-input', 'component:form-group', 'component:em-form-control-help', 'component:form-group-control']
 });
 
 var FormController = Ember.Controller.extend({
@@ -118,6 +118,52 @@ test('form model is set', function(assert) {
   });
 
   assert.equal(component.get('model.name'), 'my-name', 'Model was set.');
+});
+
+test('a form display errors when rendered if showErrorsOnRender is set', function(assert) {
+  assert.expect(1);
+  var component = this.subject({
+    targetObject: FormController.create(),
+    model: somePerson,
+    showErrorsOnRender: true,
+    template: Ember.HTMLBars.compile('{{em-input property="name"}}')
+  });
+
+  Ember.run(() => {
+    component.get('model').set('isValid', false);
+    component.get('model').set('errors.name', Ember.A(['name!']));
+  });
+
+  this.render();
+
+  Ember.run(() => {
+    assert.equal(Ember.$(component.element).find('div:contains("name!")').length, 1, "Found help text on form");
+  });
+});
+
+test('a form display errors when field is focused', function(assert) {
+  assert.expect(1);
+  var component = this.subject({
+    targetObject: FormController.create(),
+    model: somePerson,
+    showErrorsOnFocusIn: true,
+    template: Ember.HTMLBars.compile('{{em-input property="name"}}')
+  });
+
+  Ember.run(() => {
+    component.get('model').set('isValid', false);
+    component.get('model').set('errors.name', Ember.A(['name!']));
+  });
+
+  this.render();
+
+  Ember.run(() => {
+    Ember.$(component.element).find('input').focusin();
+  });
+
+  Ember.run(() => {
+    assert.equal(Ember.$(component.element).find('div:contains("name!")').length, 1, "Found help text on form");
+  });
 });
 
 test('form cannot be submitted if model is invalid', function(assert) {

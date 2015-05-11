@@ -15,6 +15,9 @@ export default Ember.Mixin.create({
   },
   status: Ember.computed('errors.length', function() {
     if (this.get('errors.length')) {
+      if (this.get('form.showErrorsOnRender')) {
+        this.set('canShowErrors', true);
+      }
       return 'error';
     } else {
       return 'success';

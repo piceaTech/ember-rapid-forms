@@ -80,6 +80,12 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   Observes the helpHasErrors of the help control and modify the 'status' property accordingly.
    */
 
+  focusIn: function() {
+    if (this.get('form.showErrorsOnFocusIn')) {
+      return this.set('canShowErrors', true);
+    }
+  },
+
   /*
   Listen to the focus out of the form group and display the errors
    */
