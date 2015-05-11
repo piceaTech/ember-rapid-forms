@@ -20,8 +20,8 @@ export default Ember.Mixin.create({
       return Ember.assert(false, 'Property could not be found.');
     }
   }),
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     return Ember.Binding.from('model.errors.' + this.get('propertyName')).to('errors').connect(this);
   }
 });

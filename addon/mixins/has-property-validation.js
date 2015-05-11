@@ -8,8 +8,8 @@ This mixin binds a property named `errors` to the model's `model.errors.@propert
  */
 
 export default Ember.Mixin.create({
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     Ember.assert(!Ember.isNone(this.get('propertyName')), 'propertyName is required.');
     return Ember.Binding.from('model.errors.' + this.get('propertyName')).to('errors').connect(this);
   },
