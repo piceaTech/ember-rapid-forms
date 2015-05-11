@@ -166,6 +166,34 @@ test('a form display errors when field is focused', function(assert) {
   });
 });
 
+test('a form update inputs on model change', function(assert) {
+  var component = this.subject({
+    targetObject: FormController.create(),
+    model: somePerson,
+    template: Ember.HTMLBars.compile('{{em-input property="name"}}')
+  });
+
+  this.render();
+
+  var input = Ember.$(component.element).find('input');
+  assert.equal(input.length, 1, "Found input");
+  input = Ember.$(input[0]);
+  assert.equal(input.val(), 'my-name', "Input has original model value");
+
+  Ember.run(() => {
+    somePerson.set('name', 'joseph');
+  });
+
+  assert.equal(input.val(), 'joseph', "Input has new model value");
+
+  Ember.run(() => {
+    somePerson.set('name', 'my-name');
+  });
+
+  assert.equal(input.val(), 'my-name', "Input has original model value again");
+
+});
+
 test('form cannot be submitted if model is invalid', function(assert) {
   assert.expect(0);
   var component = this.subject({
