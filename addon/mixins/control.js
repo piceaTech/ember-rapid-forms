@@ -9,7 +9,7 @@ export default Ember.Mixin.create({
   init() {
     this._super(...arguments);
 
-    var propertyIsModel = this.get('parentView.propertyIsModel');
+    var propertyIsModel = this.get('mainComponent.propertyIsModel');
     if(propertyIsModel) {
       return Ember.Binding.from("model" + '.' + (this.get('propertyName')) + '.content').to('selection').connect(this);
     } else {

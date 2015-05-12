@@ -11,15 +11,16 @@ Syntax:
     optionValuePath=keyForValue
     optionLabelPath=keyForLabel
     prompt="Optional default prompt"}}
-    
+
     //Optional params
-    @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath 
+    @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
 export default FormGroupComponent.extend({
   v_icons: false,
   controlView: Ember.Select.extend(ControlMixin, {
     model: Ember.computed.alias('mainComponent.model'),
     propertyName: Ember.computed.alias('mainComponent.propertyName'),
+    selection: Ember.computed.alias('mainComponent.selection'),
     content: Ember.computed.alias('mainComponent.content'),
     optionValuePath: Ember.computed.alias('mainComponent.optionValuePath'),
     optionLabelPath: Ember.computed.alias('mainComponent.optionLabelPath'),
@@ -29,6 +30,7 @@ export default FormGroupComponent.extend({
   propertyIsModel:false,
   property: void 0,
   content: void 0,
+  selection: null,
   optionValuePath: void 0,
   optionLabelPath: void 0,
   prompt: void 0,
