@@ -43,6 +43,6 @@
 {{!Currently no errors when layout is inline}}
 {{#unless form.isInline}}
     {{#if shouldShowErrors}}
-        {{em-form-control-help text=help viewName=helpViewName mainComponentName=mainComponent.propertyName}}
+        {{em-form-control-help text=help viewName=helpViewName mainComponent=mainComponent}}
     {{/if}}
 {{/unless}}

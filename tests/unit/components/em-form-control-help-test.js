@@ -55,18 +55,20 @@ test('Help properties', function(assert) {
 
 test('Help error binding', function(assert) {
   var component = this.subject({
-    model: Ember.Object.create({
-      name: 'my-name',
-      errors: Ember.Object.create()
-    }),
-    mainComponentName: 'name'
+    mainComponent: Ember.Object.create({
+      propertyName: 'name',
+      model: Ember.Object.create({
+        name: 'my-name',
+        errors: Ember.Object.create()
+      })
+    })
   });
   this.render();
 
   assert.ok(!component.get('hasError'), 'hasError is false');
 
   Ember.run(() => {
-    component.set('model.errors.age', Ember.A(['age!']));
+    component.set('mainComponent.model.errors.age', Ember.A(['age!']));
   });
 
   assert.ok(!component.get('helpText'), 'no help text if errors has some props but not the bound prop');
@@ -74,7 +76,7 @@ test('Help error binding', function(assert) {
   assert.ok(!component.get('hasError'), 'hasError is false if errors has some props but not the bound prop');
 
   Ember.run(() => {
-    component.set('model.errors.name', Ember.A(['name!']));
+    component.set('mainComponent.model.errors.name', Ember.A(['name!']));
   });
 
   assert.equal(component.get('helpText'), 'name!', 'Help error text found!');
@@ -82,7 +84,7 @@ test('Help error binding', function(assert) {
   assert.ok(component.get('hasError'), 'hasError is true if prop has array with errors');
 
   Ember.run(() => {
-    component.set('model.errors.name', null);
+    component.set('mainComponent.model.errors.name', null);
   });
 
   assert.ok(!component.get('helpText'), 'no help text');
