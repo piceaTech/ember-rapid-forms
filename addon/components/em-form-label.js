@@ -32,7 +32,7 @@ export default Ember.Component.extend(InFormMixin, {
     }
   }),
   inlineClass: 'sr-only',
-  inlineClassCalc: Ember.computed('form.form_layout', function() {
+  inlineClassCalc: Ember.computed('form.formLayout', function() {
     if (this.get('form.isInline') && this.get('inlineClass')) {
       return this.get('inlineClass');
     }

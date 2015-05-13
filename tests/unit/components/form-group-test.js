@@ -93,9 +93,9 @@ test('renders v_icon', function(assert) {
     controlView: Ember.View.create({
       templateName: 'dummy'
     }),
-    v_icons: true,
+    validationIcons: true,
     mainComponent: Ember.Component.create({
-      v_icon: 'some-icon-class'
+      validationIcon: 'some-icon-class'
     })
   });
   this.render();

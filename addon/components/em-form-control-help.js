@@ -17,16 +17,16 @@ export default Ember.Component.extend(InFormMixin, {
   tagName: 'span',
   classNames: ['help-block'],
   classNameBindings: ['extraClass', 'horiClassCalc'],
-  text: void 0,
-  extraClass: void 0,
+  text: null,
+  extraClass: null,
   horiClass: 'col-sm-offset-2 col-sm-10',
   horiClassCalc: Ember.computed('form.isHorizontal', function() {
     if (this.get('form.isHorizontal') && this.get('horiClass')) {
       return this.get('horiClass');
     }
   }),
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     return Ember.Binding.from('mainComponent.model.errors.' + this.get('mainComponent.propertyName')).to('errors').connect(this);
   },
   helpText: Ember.computed('text', 'errors.firstObject', function() {

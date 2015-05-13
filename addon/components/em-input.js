@@ -25,8 +25,8 @@ export default FormGroupComponent.extend({
   required: void 0,
   autofocus: void 0,
   disabled: void 0,
-  controlWrapper: Ember.computed('form.form_layout', function() {
-    if (this.get('form.form_layout') === 'horizontal') {
+  controlWrapper: Ember.computed('form.formLayout', function() {
+    if (this.get('form.formLayout') === 'horizontal') {
       return 'col-sm-10';
     }
     return null;

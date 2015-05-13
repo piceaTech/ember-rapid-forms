@@ -11,7 +11,7 @@ moduleForComponent('em-form', 'em-form-submit tests', {
 
 test('a form with em-form-submit components renders correctly', function(assert) {
   var component = this.subject({
-    submit_button: false,
+    submitButton: false,
     template: Ember.HTMLBars.compile('{{em-form-submit text="Submit!"}}')
   });
 
@@ -26,7 +26,7 @@ test('a form with em-form-submit components renders correctly', function(assert)
 test('Form submit button is disabled when model isnt valid & enabled when is valid', function(assert) {
 
   var component = this.subject({
-    submit_button: false,
+    submitButton: false,
     template: Ember.HTMLBars.compile('{{em-form-submit text="Submit!"}}'),
     model: Ember.Object.create({isValid: false})
   });
