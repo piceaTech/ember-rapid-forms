@@ -41,3 +41,63 @@ test('it renders with no label', function(assert) {
 
   assert.equal(component.get('label'), 'hello', 'group has label after it being set');
 });
+
+test('it renders proper error validation icon', function(assert) {
+  // Creates the component instance
+  var component = this.subject({
+    controlView: Ember.View.extend({
+      templateName: 'dummy'
+    }),
+    label: 'my-label',
+    form: Ember.Object.extend({}),
+    canShowErrors: true,
+    validationIcons: true,
+    status: 'error'
+  });
+
+  // Renders the component to the page
+  this.render();
+  var icons = Ember.$(component.element).find('span i');
+  assert.equal(icons.length, 1, 'found validation icon');
+  assert.ok(Ember.$(icons[0]).hasClass(component.get('errorIcon')));
+});
+
+test('it renders proper warning validation icon', function(assert) {
+  // Creates the component instance
+  var component = this.subject({
+    controlView: Ember.View.extend({
+      templateName: 'dummy'
+    }),
+    label: 'my-label',
+    form: Ember.Object.extend({}),
+    canShowErrors: true,
+    validationIcons: true,
+    status: 'warning'
+  });
+
+  // Renders the component to the page
+  this.render();
+  var icons = Ember.$(component.element).find('span i');
+  assert.equal(icons.length, 1, 'found validation icon');
+  assert.ok(Ember.$(icons[0]).hasClass(component.get('warningIcon')));
+});
+
+test('it renders proper success validation icon', function(assert) {
+  // Creates the component instance
+  var component = this.subject({
+    controlView: Ember.View.extend({
+      templateName: 'dummy'
+    }),
+    label: 'my-label',
+    form: Ember.Object.extend({}),
+    canShowErrors: true,
+    validationIcons: true,
+    status: 'success'
+  });
+
+  // Renders the component to the page
+  this.render();
+  var icons = Ember.$(component.element).find('span i');
+  assert.equal(icons.length, 1, 'found validation icon');
+  assert.ok(Ember.$(icons[0]).hasClass(component.get('successIcon')));
+});

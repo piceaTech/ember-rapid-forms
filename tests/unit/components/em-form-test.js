@@ -141,7 +141,7 @@ test('a form display errors when rendered if showErrorsOnRender is set', functio
   });
 });
 
-test('a form display errors when field is focused', function(assert) {
+test('a form display errors when field is focused in', function(assert) {
   assert.expect(1);
   var component = this.subject({
     targetObject: FormController.create(),
@@ -159,6 +159,54 @@ test('a form display errors when field is focused', function(assert) {
 
   Ember.run(() => {
     Ember.$(component.element).find('input').focusin();
+  });
+
+  Ember.run(() => {
+    assert.equal(Ember.$(component.element).find('div:contains("name!")').length, 1, "Found help text on form");
+  });
+});
+
+test('a form display errors when field is focused out', function(assert) {
+  assert.expect(1);
+  var component = this.subject({
+    targetObject: FormController.create(),
+    model: somePerson,
+    template: Ember.HTMLBars.compile('{{em-input property="name"}}')
+  });
+
+  Ember.run(() => {
+    component.get('model').set('isValid', false);
+    component.get('model').set('errors.name', Ember.A(['name!']));
+  });
+
+  this.render();
+
+  Ember.run(() => {
+    Ember.$(component.element).find('input').focusout();
+  });
+
+  Ember.run(() => {
+    assert.equal(Ember.$(component.element).find('div:contains("name!")').length, 1, "Found help text on form");
+  });
+});
+
+test('a form display errors on key up events when field has showOnKeyUp is set', function(assert) {
+  assert.expect(1);
+  var component = this.subject({
+    targetObject: FormController.create(),
+    model: somePerson,
+    template: Ember.HTMLBars.compile('{{em-input property="name" showOnKeyUp=true}}')
+  });
+
+  Ember.run(() => {
+    component.get('model').set('isValid', false);
+    component.get('model').set('errors.name', Ember.A(['name!']));
+  });
+
+  this.render();
+
+  Ember.run(() => {
+    Ember.$(component.element).find('input').keyup();
   });
 
   Ember.run(() => {
