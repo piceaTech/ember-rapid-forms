@@ -51,5 +51,6 @@ test('Textarea can be disabled', function(assert) {
   var component = this.subject({disabled: true});
 
   this.render();
-  assert.ok(Ember.$(component.element).attr('disabled'), 'textarea renders disabled');
+  assert.ok(Ember.$(component.element).attr('disabled'), 'outer div renders disabled');
+  assert.ok(Ember.$(component.element).find('textarea').attr('disabled'), 'textarea renders disabled');
 });

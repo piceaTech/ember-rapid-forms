@@ -15,7 +15,7 @@ export default FormGroupComponent.extend({
     propertyName: Ember.computed.alias('mainComponent.propertyName'),
     rows: Ember.computed.alias('mainComponent.rows'),
     cols: Ember.computed.alias('mainComponent.cols'),
-    disabled: Ember.computed.alias('parentView.disabled')
+    disabled: Ember.computed.alias('mainComponent.disabled')
   }),
   property: null,
   label: null,
