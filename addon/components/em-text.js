@@ -10,7 +10,6 @@ Syntax:
  */
 export default FormGroupComponent.extend({
   controlView: Ember.TextArea.extend(ControlMixin, {
-    attributeBindings: ['placeholder', 'required', 'autofocus', 'disabled'],
     placeholder: Ember.computed.alias('mainComponent.placeholder'),
     model: Ember.computed.alias('mainComponent.model'),
     propertyName: Ember.computed.alias('mainComponent.propertyName'),
