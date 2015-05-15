@@ -15,7 +15,7 @@ export default Ember.Mixin.create({
     }
     return Ember.assert(false, 'Cannot find form');
   }),
-  model: Ember.computed('form', function() {
+  model: Ember.computed('form', 'form.model', function() {
     return this.get('form.model');
   })
 });
