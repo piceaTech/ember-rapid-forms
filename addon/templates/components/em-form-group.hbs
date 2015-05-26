@@ -2,7 +2,7 @@
     <div class={{wrapperClass}}>
       {{#unless template}}
         {{form-group label=label yieldInLabel=yieldInLabel
-          labelWrapperClass=labelWrapperClass labelViewName=labelViewName
+          labelWrapperClass=labelWrapperClass labelViewName=labelViewName labelClass=labelClass
           help=help helpViewName=helpViewName shouldShowErrors=shouldShowErrors
           controlView=controlView controlViewName=controlViewName controlWrapper=controlWrapper
           id=cid validationIcons=validationIcons mainComponent=this}}
@@ -13,7 +13,7 @@
 {{else}}
   {{#unless template}}
     {{form-group label=label yieldInLabel=yieldInLabel
-      labelWrapperClass=labelWrapperClass labelViewName=labelViewName
+      labelWrapperClass=labelWrapperClass labelViewName=labelViewName labelClass=labelClass
       help=help helpViewName=helpViewName shouldShowErrors=shouldShowErrors
       controlView=controlView controlViewName=controlViewName controlWrapper=controlWrapper
       id=cid validationIcons=validationIcons mainComponent=this}}

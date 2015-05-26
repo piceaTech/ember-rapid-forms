@@ -3,13 +3,13 @@
     {{#if yieldInLabel}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{control-within-label label=label labelViewName=labelViewName
+                {{control-within-label label=label labelViewName=labelViewName extraClass=labelClass
                   controlView=controlView controlViewName=controlViewName
                   controlWrapper=controlWrapper
                   cid=cid mainComponent=mainComponent}}
             </div>
         {{else}}
-            {{control-within-label label=label labelViewName=labelViewName
+            {{control-within-label label=label labelViewName=labelViewName extraClass=labelClass
               controlView=controlView controlViewName=controlViewName
               controlWrapper=controlWrapper
               cid=cid mainComponent=mainComponent}}
@@ -17,13 +17,13 @@
     {{else}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{em-form-label text=label viewName=labelViewName}}
+                {{em-form-label text=label viewName=labelViewName extraClass=labelClass}}
                 {{form-group-control controlView=controlView
                   controlViewName=controlViewName controlWrapper=controlWrapper
                   cid=cid mainComponent=mainComponent}}
             </div>
         {{else}}
-            {{em-form-label text=label viewName=labelViewName}}
+            {{em-form-label text=label viewName=labelViewName extraClass=labelClass}}
             {{form-group-control controlView=controlView
               controlViewName=controlViewName controlWrapper=controlWrapper
               cid=cid mainComponent=mainComponent}}

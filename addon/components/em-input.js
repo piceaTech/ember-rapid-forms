@@ -10,8 +10,8 @@ Syntax:
  */
 export default FormGroupComponent.extend({
   controlView: Ember.TextField.extend(ControlMixin, {
-    attributeBindings: ['placeholder', 'required', 'autofocus', 'disabled'],
     placeholder: Ember.computed.alias('mainComponent.placeholder'),
+    name: Ember.computed.alias('mainComponent.name'),
     required: Ember.computed.alias('mainComponent.required'),
     autofocus: Ember.computed.alias('mainComponent.autofocus'),
     disabled: Ember.computed.alias('mainComponent.disabled'),
@@ -19,12 +19,13 @@ export default FormGroupComponent.extend({
     model: Ember.computed.alias('mainComponent.model'),
     propertyName: Ember.computed.alias('mainComponent.propertyName')
   }),
-  property: void 0,
-  label: void 0,
-  placeholder: void 0,
-  required: void 0,
-  autofocus: void 0,
-  disabled: void 0,
+  property: null,
+  label: null,
+  name: null,
+  placeholder: null,
+  required: null,
+  autofocus: null,
+  disabled: null,
   controlWrapper: Ember.computed('form.formLayout', function() {
     if (this.get('form.formLayout') === 'horizontal') {
       return 'col-sm-10';

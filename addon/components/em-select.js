@@ -29,12 +29,12 @@ export default FormGroupComponent.extend({
     multiple: Ember.computed.alias('mainComponent.multiple')
   }),
   propertyIsModel:false,
-  property: void 0,
-  content: void 0,
+  property: null,
+  content: null,
   selection: null,
-  optionValuePath: void 0,
-  optionLabelPath: void 0,
-  prompt: void 0,
+  optionValuePath: null,
+  optionLabelPath: null,
+  prompt: null,
   controlWrapper: Ember.computed('form.formLayout', function() {
     if (this.get('form.formLayout') === 'horizontal') {
       return 'col-sm-10';
