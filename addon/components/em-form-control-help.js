@@ -30,7 +30,7 @@ export default Ember.Component.extend(InFormMixin, {
     return Ember.Binding.from('mainComponent.model.errors.' + this.get('mainComponent.propertyName')).to('errors').connect(this);
   },
   helpText: Ember.computed('text', 'errors.firstObject', function() {
-    return this.get('errors.firstObject') || this.get('text');
+    return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
   }),
   hasHelp: Ember.computed('helpText', function() {
     var helpText = this.get('helpText');
