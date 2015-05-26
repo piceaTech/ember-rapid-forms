@@ -286,6 +286,64 @@ test('a form changes its model and fields are updated', function(assert) {
 
 });
 
+test('a form changes its model and errors are reseted', function(assert) {
+  var modelA = Ember.Object.create({
+    name: 'model-a',
+    errors: Ember.Object.create(),
+    validate() {
+      var promise = new Ember.RSVP.Promise((resolve) => {
+        resolve('ok!');
+      });
+      return promise;
+    }
+  });
+
+  Ember.run(() => {
+    modelA.set('isValid', false);
+    modelA.set('errors.name', Ember.A(['name!']));
+  });
+
+  var modelB = Ember.Object.create({
+    name: 'model-b',
+    errors: Ember.Object.create(),
+    validate() {
+      var promise = new Ember.RSVP.Promise((resolve) => {
+        resolve('ok!');
+      });
+      return promise;
+    }
+  });
+
+  var component = this.subject({
+    targetObject: FormController.create(),
+    model: modelA,
+    template: Ember.HTMLBars.compile('{{em-input property="name"}}')
+  });
+
+  this.render();
+
+  var input = Ember.$(component.element).find('input');
+  assert.equal(input.length, 1, "Found input");
+  input = Ember.$(input[0]);
+  assert.equal(input.val(), 'model-a', "Input has original model value");
+
+  Ember.run(() => {
+    Ember.$(component.element).find('input').focusout();
+  });
+
+  Ember.run(() => {
+    assert.equal(Ember.$(component.element).find('div:contains("name!")').length, 1, "Found help text on form");
+  });
+
+  Ember.run(() => {
+    component.set('model', modelB);
+  });
+
+  assert.ok(!input.parent().hasClass('has-success'), "Input is not marked as valid");
+  assert.equal(input.val(), 'model-b', "Input has new model value");
+
+});
+
 test('form cannot be submitted if model is invalid', function(assert) {
   assert.expect(0);
   var component = this.subject({
