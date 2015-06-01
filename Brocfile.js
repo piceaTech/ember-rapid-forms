@@ -1,7 +1,7 @@
 /* jshint node: true */
 /* global require, module */
-var mergeTrees = require( 'broccoli-merge-trees' ),
-    pickFiles  = require( 'broccoli-static-compiler' );
+var mergeTrees = require('broccoli-merge-trees');
+var funnel = require('broccoli-funnel');
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 //var isProduction = ( process.env.EMBER_ENV || 'development' ) === 'production';
 
@@ -27,7 +27,7 @@ app.import('bower_components/highlightjs/highlight.pack.js');
 app.import('bower_components/highlightjs/styles/tomorrow.css');
 app.import('bower_components/ember/ember-template-compiler.js');
 
-var extraAssets = pickFiles( 'bower_components/fontawesome/fonts', {
+var extraAssets = funnel('bower_components/fontawesome/fonts', {
     srcDir  : '/',
     files   : [ 'fontawesome-webfont.woff' ],
     destDir : '/fonts'
