@@ -24,6 +24,8 @@ Syntax:
     validationIcons: true
     //Label of the form group, default is a human friendly form of the property name
     label="Some label"
+    //if true show all errors, by default inherited from the form
+    showAllErrors=false
 }}
  */
 export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasPropertyValidationMixin, {
@@ -59,6 +61,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   }),
   v_icons: Ember.computed.deprecatingAlias('validationIcons'),
   validationIcons: Ember.computed.alias('form.validationIcons'),
+  showAllErrors: Em.computed.alias('form.showAllErrors'),
   v_success_icon: Ember.computed.deprecatingAlias('successIcon'),
   successIcon: 'fa fa-check',
   v_warn_icon: Ember.computed.deprecatingAlias('warningIcon'),
@@ -86,6 +89,10 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       }
     }
   }),
+  canShowErrors: Ember.computed('showAllErrors', 'canShowErrorsFromFocus', function() {
+    return (this.get('showAllErrors')) || this.get('canShowErrorsFromFocus');
+  }),
+
   hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
     this.set('canShowErrors', false);
   }),
@@ -110,7 +117,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
 
   focusIn() {
     if (this.get('form.showErrorsOnFocusIn')) {
-      return this.set('canShowErrors', true);
+      return this.set('canShowErrorsFromFocus', true);
     }
   },
 
