@@ -34,3 +34,47 @@ To test on all ember versions:
 ## Building
 
 * `ember build`
+
+
+## Contributing
+
+### Process of creating a PR
+1. Create PR
+2. Wait for one of the Team members to review change
+3. Respond to feedback
+4. Get changed merged
+
+### What a PR should include
+A PR should include the following things:
+* Changed Files (duuh)
+* Test(s) showing what was fixed / added / deprecated
+* No failing tests
+* Added Documentation if needed
+
+### Issues
+* Make sure you test against master. It may already got fixed
+* Search for similiar issues
+* Provide a JSBin with an example if possible
+
+## Contributors
+
+* Asaf Shakarchi (asaf)
+* Ben Limmer (blimmer)
+* Brandon Parsons (brandonparsons)
+* Felix Fichte (spruce)
+* Jack Matthews
+* Josemar Luedke (josemarluedke)
+* Josh Pfosi (joshpfosi)
+* Michael Latta (TechnoMage)
+* Patrick Ma (fivetwentysix)
+* Pedro Kiefer (pedrokiefer)
+
+## Building and updating the Documentation
+
+1. Build the docs: `npm run update-page`
+2. Upload the new pages `git push origin gh-pages`
+3. If you don't have push access create PR (see section about PR)
+
+
+
+
