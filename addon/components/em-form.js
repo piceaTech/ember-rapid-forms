@@ -19,6 +19,8 @@ Syntax:
     submitButton=true|false
     //if true validation icons will be rendered
     validationIcons=true|false
+    //if true show all errors whether user entered something in the field or not
+    showAllErrors=true|false
 }}
 */
 export default Ember.Component.extend({
@@ -49,6 +51,7 @@ export default Ember.Component.extend({
   submit_button: Ember.computed.deprecatingAlias('submitButton', {'id': 'ember-rapid-forms.em-form-submit_button','until':'v2.0'}),
   submitButton: true,
   v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'ember-rapid-forms.em-form-v_icons','until':'v2.0'}),
+  showAllErrors: false,
   validationIcons: true,
   showErrorsOnRender: false,
   showErrorsOnFocusIn: false,
