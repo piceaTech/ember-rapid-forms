@@ -34,7 +34,6 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   layout: layout,
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
-  canShowErrors: false,
   hasSuccess: Ember.computed('status', 'canShowErrors', function() {
     var success;
     success = this.get('validations') && this.get('status') === 'success' && this.get('canShowErrors');
@@ -55,7 +54,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   }),
   v_icons: Ember.computed.deprecatingAlias('validationIcons'),
   validationIcons: Ember.computed.alias('form.validationIcons'),
-  showAllErrors: Em.computed.alias('form.showAllErrors'),
+  showAllErrors: Ember.computed.alias('form.showAllErrors'),
   v_success_icon: Ember.computed.deprecatingAlias('successIcon'),
   successIcon: 'fa fa-check',
   v_warn_icon: Ember.computed.deprecatingAlias('warningIcon'),

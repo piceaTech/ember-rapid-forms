@@ -1,11 +1,11 @@
 <div class="well sidebar">
     <ul class="nav">
-        {{#each link in model}}
+        {{#each model as |link|}}
             <li>{{#link-to link.route}}{{link.text}}{{/link-to}}</li>
             {{#if link.items}}
                 <ul class="nav">
-                {{#each item in link.items}}
-                    <li>{{#link-to item.route}}{{item.text}}{{/link-to}}</li>                
+                {{#each link.items as |item|}}
+                    <li>{{#link-to item.route}}{{item.text}}{{/link-to}}</li>
                 {{/each}}
                 </ul>
             {{/if}}
