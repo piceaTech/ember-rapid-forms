@@ -15,7 +15,7 @@ export default FormGroupComponent.extend({
   yieldInLabel: true,
   controlView: Ember.Checkbox.extend(ControlMixin, {
     "class": false,
-    model: Ember.computed.alias('form.model'),
+    model: Ember.computed.alias('mainComponent.model'),
     propertyName: Ember.computed.alias('mainComponent.propertyName'),
     init: function() {
       this._super();
