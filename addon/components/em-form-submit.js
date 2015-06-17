@@ -14,7 +14,6 @@ export default Ember.Component.extend(InFormMixin, {
   classNames: ['form-group'],
   text: 'Submit',
   type: 'submit',
-  attributeBindings: ['disabled'],
   horiClass: 'col-sm-offset-2 col-sm-10',
   disabled: Ember.computed('model.isValid', function() {
     if (!Ember.isNone(this.get('model.isValid'))) {

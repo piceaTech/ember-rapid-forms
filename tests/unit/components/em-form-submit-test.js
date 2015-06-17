@@ -40,3 +40,15 @@ test('Form submit button is disabled when model isnt valid & enabled when is val
 
   assert.ok(!Ember.$(component.element).find('button').attr('disabled'), 'Button is enabled');
 });
+
+test('Submit button has the correct type attribute', function(assert) {
+
+  var component = this.subject({
+    submitButton: false,
+    template: Ember.HTMLBars.compile('{{em-form-submit text="Submit!"}}'),
+  });
+
+  this.render();
+  assert.equal(Ember.$(component.element).find('button').attr('type'), 'submit', 'default type is submit');
+  console.log(Ember.$(component.element).find('button').attr('type'));
+});
