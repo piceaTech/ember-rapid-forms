@@ -5,11 +5,13 @@ export default Utils = {
     if (myDefault == null) {
       myDefault = 'default';
     }
-    return Ember.computed(myProperty, function(key, value) {
-      if (arguments.length === 2) {
-        this.set(myProperty, (value ? switchValue : myDefault));
-      }
-      return this.get(myProperty) === switchValue;
-    });
+    return Ember.computed(myProperty, {
+        get() {
+          return this.get(myProperty) === switchValue;
+        },
+        set(key, value) {
+          this.set(myProperty, (value ? switchValue : myDefault));
+        }
+      });
   }
 };
