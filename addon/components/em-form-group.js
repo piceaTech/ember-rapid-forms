@@ -33,23 +33,29 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
-  hasSuccess: Ember.computed('status', 'canShowErrors', function() {
-    var success;
-    success = this.get('validations') && this.get('status') === 'success' && this.get('canShowErrors');
-    this.set('success', success);
-    return success;
+  hasSuccess: Ember.computed('status', 'canShowErrors', {
+    get: function() {
+      var success;
+      success = this.get('validations') && this.get('status') === 'success' && this.get('canShowErrors');
+      this.set('success', success);
+      return success;
+    }
   }),
-  hasWarning: Ember.computed('status', 'canShowErrors', function() {
-    var warning;
-    warning = this.get('validations') && this.get('status') === 'warning' && this.get('canShowErrors');
-    this.set('warning', warning);
-    return warning;
+  hasWarning: Ember.computed('status', 'canShowErrors', {
+    get: function() {
+      var warning;
+      warning = this.get('validations') && this.get('status') === 'warning' && this.get('canShowErrors');
+      this.set('warning', warning);
+      return warning;
+    }
   }),
-  hasError: Ember.computed('status', 'canShowErrors', function() {
-    var error;
-    error = this.get('validations') && this.get('status') === 'error' && this.get('canShowErrors');
-    this.set('error', error);
-    return error;
+  hasError: Ember.computed('status', 'canShowErrors', {
+    get: function() {
+      var error;
+      error = this.get('validations') && this.get('status') === 'error' && this.get('canShowErrors');
+      this.set('error', error);
+      return error;
+    }
   }),
   v_icons: Ember.computed.deprecatingAlias('validationIcons'),
   validationIcons: Ember.computed.alias('form.validationIcons'),
@@ -62,31 +68,39 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   validations: true,
   yieldInLabel: false,
   v_icon: Ember.computed.deprecatingAlias('validationIcon'),
-  validationIcon: Ember.computed('status', 'canShowErrors', function() {
-    if (!this.get('canShowErrors')) {
-      return;
+  validationIcon: Ember.computed('status', 'canShowErrors', {
+    get: function() {
+      if (!this.get('canShowErrors')) {
+        return;
+      }
+      switch (this.get('status')) {
+        case 'success':
+          return this.get('successIcon');
+        case 'warning':
+        case 'warn':
+          return this.get('warningIcon');
+        case 'error':
+          return this.get('errorIcon');
+        default:
+          return null;
+      }
     }
-    switch (this.get('status')) {
-      case 'success':
-        return this.get('successIcon');
-      case 'warning':
-      case 'warn':
-        return this.get('warningIcon');
-      case 'error':
-        return this.get('errorIcon');
-      default:
-        return null;
+  }),
+  hideValidationsOnFormChange: Ember.observer('form', 'form.model', {
+    get: function() {
+      this.set('canShowErrors', false);
     }
   }),
-  hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
-    this.set('canShowErrors', false);
+  shouldShowErrors: Ember.computed('canShowErrors', 'helpText', {
+    get: function() {
+      var text = this.get('helpText') || "";
+      return text.length > 0 && this.get('canShowErrors');
+    }
   }),
-  shouldShowErrors: Ember.computed('canShowErrors', 'helpText', function() {
-    var text = this.get('helpText') || "";
-    return text.length > 0 && this.get('canShowErrors');
-  }),
-  helpText: Ember.computed('text', 'errors.firstObject', function() {
-    return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
+  helpText: Ember.computed('text', 'errors.firstObject', {
+    get: function() {
+      return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
+    }
   }),
   init() {
     return this._super(...arguments);

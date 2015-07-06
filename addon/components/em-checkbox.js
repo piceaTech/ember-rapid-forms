@@ -14,21 +14,27 @@ export default FormGroupComponent.extend({
   validations: false,
   yieldInLabel: true,
   htmlComponent: 'ember-rapid-forms/html-checkbox',
-  wrapperClass: Ember.computed('form.formLayout', function() {
-    if (this.get('form.formLayout') === 'horizontal') {
-      return 'col-sm-offset-2 col-sm-10';
+  wrapperClass: Ember.computed('form.formLayout', {
+    get: function() {
+      if (this.get('form.formLayout') === 'horizontal') {
+        return 'col-sm-offset-2 col-sm-10';
+      }
     }
   }),
-  labelWrapperClass: Ember.computed('form.formLayout', function() {
-    if (this.get('form.formLayout') === 'horizontal') {
-      return 'checkbox';
+  labelWrapperClass: Ember.computed('form.formLayout', {
+    get: function() {
+      if (this.get('form.formLayout') === 'horizontal') {
+        return 'checkbox';
+      }
+      return null;
     }
-    return null;
   }),
-  "class": Ember.computed('form.formLayout', function() {
-    if (this.get('form.formLayout') !== 'horizontal') {
-      return 'checkbox';
+  "class": Ember.computed('form.formLayout', {
+    get: function() {
+      if (this.get('form.formLayout') !== 'horizontal') {
+        return 'checkbox';
+      }
+      return 'form-group';
     }
-    return 'form-group';
   })
 });

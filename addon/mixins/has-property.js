@@ -11,16 +11,18 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
 
 export default Ember.Mixin.create({
   property: void 0,
-  propertyName: Ember.computed('property', 'parentView.property', function() {
-    if (this.get('property')) {
-      return this.get('property');
-    } else if (this.get('parentView.property')) {
-      return this.get('parentView.property');
-    } else {
-      return Ember.assert(false, 'Property could not be found.');
+  propertyName: Ember.computed('property', 'parentView.property', {
+    get: function() {
+      if (this.get('property')) {
+        return this.get('property');
+      } else if (this.get('parentView.property')) {
+        return this.get('parentView.property');
+      } else {
+        return Ember.assert(false, 'Property could not be found.');
+      }
     }
   }),
-  init() {
+  init: function() {
     this._super(...arguments);
     return Ember.Binding.from('model.errors.' + this.get('propertyName')).to('errors').connect(this);
   }

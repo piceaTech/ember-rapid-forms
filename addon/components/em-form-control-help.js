@@ -20,26 +20,34 @@ export default Ember.Component.extend(InFormMixin, {
   text: null,
   extraClass: null,
   horiClass: 'col-sm-offset-2 col-sm-10',
-  horiClassCalc: Ember.computed('form.isHorizontal', function() {
-    if (this.get('form.isHorizontal') && this.get('horiClass')) {
-      return this.get('horiClass');
+  horiClassCalc: Ember.computed('form.isHorizontal', {
+    get: function() {
+      if (this.get('form.isHorizontal') && this.get('horiClass')) {
+        return this.get('horiClass');
+      }
     }
   }),
   init() {
     this._super(...arguments);
     return Ember.Binding.from('mainComponent.model.errors.' + this.get('mainComponent.propertyName')).to('errors').connect(this);
   },
-  helpText: Ember.computed('text', 'errors.firstObject', function() {
-    return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
-  }),
-  hasHelp: Ember.computed('helpText', function() {
-    var helpText = this.get('helpText');
-    if(!helpText){
-      return false;
+  helpText: Ember.computed('text', 'errors.firstObject', {
+    get: function() {
+      return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
     }
-    return helpText.length > 0;
   }),
-  hasError: Ember.computed('errors.length', function() {
-    return this.get('errors') != null;
+  hasHelp: Ember.computed('helpText', {
+    get: function() {
+      var helpText = this.get('helpText');
+      if (!helpText) {
+        return false;
+      }
+      return helpText.length > 0;
+    }
+  }),
+  hasError: Ember.computed('errors.length', {
+    get: function() {
+      return this.get('errors') != null;
+    }
   })
 });
