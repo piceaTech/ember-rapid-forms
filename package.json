@@ -1,6 +1,6 @@
 {
   "name": "ember-rapid-forms",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Intuitive, Smart and Beautiful Forms for Ember.js",
   "directories": {
     "doc": "doc",
