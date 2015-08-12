@@ -6,34 +6,34 @@
                 {{control-within-label label=label labelViewName=labelViewName extraClass=labelClass
                   controlView=controlView controlViewName=controlViewName
                   controlWrapper=controlWrapper
-                  cid=cid mainComponent=mainComponent}}
+                  cid=cid mainComponent=mainComponent form=form}}
             </div>
         {{else}}
             {{control-within-label label=label labelViewName=labelViewName extraClass=labelClass
               controlView=controlView controlViewName=controlViewName
               controlWrapper=controlWrapper
-              cid=cid mainComponent=mainComponent}}
+              cid=cid mainComponent=mainComponent form=form}}
         {{/if}}
     {{else}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{em-form-label text=label viewName=labelViewName extraClass=labelClass}}
+                {{em-form-label text=label viewName=labelViewName extraClass=labelClass form=form}}
                 {{form-group-control controlView=controlView
                   controlViewName=controlViewName controlWrapper=controlWrapper
-                  cid=cid mainComponent=mainComponent}}
+                  cid=cid mainComponent=mainComponent form=form}}
             </div>
         {{else}}
-            {{em-form-label text=label viewName=labelViewName extraClass=labelClass}}
+            {{em-form-label text=label viewName=labelViewName extraClass=labelClass form=form}}
             {{form-group-control controlView=controlView
               controlViewName=controlViewName controlWrapper=controlWrapper
-              cid=cid mainComponent=mainComponent}}
+              cid=cid mainComponent=mainComponent form=form}}
         {{/if}}
     {{/if}}
 {{else}}
   {{form-group-control controlView=controlView
     controlViewName=controlViewName
     controlWrapper=controlWrapper cid=cid
-    mainView=mainView mainComponent=mainComponent}}
+    mainView=mainView mainComponent=mainComponent form=form}}
 {{/if}}
 
 {{#if validationIcons}}
@@ -43,6 +43,6 @@
 {{!Currently no errors when layout is inline}}
 {{#unless form.isInline}}
     {{#if shouldShowErrors}}
-        {{em-form-control-help text=help viewName=helpViewName mainComponent=mainComponent}}
+        {{em-form-control-help text=help viewName=helpViewName mainComponent=mainComponent form=form}}
     {{/if}}
 {{/unless}}
