@@ -1,0 +1,12 @@
+<select {{action 'change' on='change'}}>
+{{#if mainComponent.prompt}}
+  <option value="null" selected={{eq null selectedValue}}>
+    {{mainComponent.prompt}}
+  </option>
+{{/if}}
+{{#each (get mainComponent "content") key="@index" as |item|}}
+  <option value="{{get item mainComponent.optionValuePath}}" selected={{eq (get item mainComponent.optionValuePath) selectedValue}}>
+    {{get item mainComponent.optionLabelPath}}
+  </option>
+  {{/each}}
+</select>

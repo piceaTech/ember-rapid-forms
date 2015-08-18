@@ -18,22 +18,13 @@ Syntax:
 export default FormGroupComponent.extend({
   v_icons: Ember.computed.deprecatingAlias('validationIcons'),
   validationIcons: false,
-  controlView: Ember.Select.extend(ControlMixin, {
-    model: Ember.computed.alias('mainComponent.model'),
-    propertyName: Ember.computed.alias('mainComponent.propertyName'),
-    selection: Ember.computed.alias('mainComponent.selection'),
-    content: Ember.computed.alias('mainComponent.content'),
-    optionValuePath: Ember.computed.alias('mainComponent.optionValuePath'),
-    optionLabelPath: Ember.computed.alias('mainComponent.optionLabelPath'),
-    prompt: Ember.computed.alias('mainComponent.prompt'),
-    multiple: Ember.computed.alias('mainComponent.multiple')
-  }),
+  htmlComponent: 'ember-rapid-forms/html-select',
   propertyIsModel:false,
   property: null,
   content: null,
   selection: null,
-  optionValuePath: null,
-  optionLabelPath: null,
+  optionValuePath: 'id',
+  optionLabelPath: 'value',
   prompt: null,
   controlWrapper: Ember.computed('form.formLayout', function() {
     if (this.get('form.formLayout') === 'horizontal') {

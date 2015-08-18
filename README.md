@@ -10,7 +10,12 @@ This is a fork of the original over at https://github.com/indexiatech/ember-form
 With Ember-CLI:
 
 ```
-npm install --save-dev ember-rapid-forms
+ember install ember-truth-helpers
+ember install ember-rapid-forms
+```
+When Using ember < 2.0.0 This is important
+```
+ember install ember-get-helper
 ```
 
 Please visit the documentation for installation & usage documentations: http://piceatech.github.io/ember-rapid-forms
