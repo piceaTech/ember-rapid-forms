@@ -1,6 +1,6 @@
 {{#if wrapperClass}}
     <div class={{wrapperClass}}>
-      {{#unless template}}
+      {{#unless hasBlock}}
         {{form-group label=label yieldInLabel=yieldInLabel
           labelWrapperClass=labelWrapperClass labelViewName=labelViewName labelClass=labelClass
           help=help helpViewName=helpViewName shouldShowErrors=shouldShowErrors
@@ -11,7 +11,7 @@
       {{/unless}}
     </div>
 {{else}}
-  {{#unless template}}
+  {{#unless hasBlock}}
     {{form-group label=label yieldInLabel=yieldInLabel
       labelWrapperClass=labelWrapperClass labelViewName=labelViewName labelClass=labelClass
       help=help helpViewName=helpViewName shouldShowErrors=shouldShowErrors
