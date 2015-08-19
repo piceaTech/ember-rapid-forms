@@ -13,15 +13,7 @@ export default FormGroupComponent.extend({
   validationIcons: false,
   validations: false,
   yieldInLabel: true,
-  controlView: Ember.Checkbox.extend(ControlMixin, {
-    "class": false,
-    model: Ember.computed.alias('mainComponent.model'),
-    propertyName: Ember.computed.alias('mainComponent.propertyName'),
-    init: function() {
-      this._super();
-      return Ember.Binding.from("model." + (this.get('propertyName'))).to('checked').connect(this);
-    }
-  }),
+  htmlComponent: 'ember-rapid-forms/html-checkbox',
   wrapperClass: Ember.computed('form.formLayout', function() {
     if (this.get('form.formLayout') === 'horizontal') {
       return 'col-sm-offset-2 col-sm-10';

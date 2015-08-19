@@ -9,14 +9,7 @@ Syntax:
 {{em-text property="property name" rows=4 cols=40}}
  */
 export default FormGroupComponent.extend({
-  controlView: Ember.TextArea.extend(ControlMixin, {
-    placeholder: Ember.computed.alias('mainComponent.placeholder'),
-    model: Ember.computed.alias('mainComponent.model'),
-    propertyName: Ember.computed.alias('mainComponent.propertyName'),
-    rows: Ember.computed.alias('mainComponent.rows'),
-    cols: Ember.computed.alias('mainComponent.cols'),
-    disabled: Ember.computed.alias('mainComponent.disabled')
-  }),
+  htmlComponent: 'ember-rapid-forms/html-text',
   property: null,
   label: null,
   placeholder: null,
