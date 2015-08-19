@@ -8,10 +8,12 @@ export default Ember.Component.extend({
 
   type: "checkbox",
   checked: false,
-  didInitAttrs( /*attrs*/ ) {
+  didReceiveAttrs( /*attrs*/ ) {
     this._super(...arguments);
     // set it to the correct value of the selection
-    this.set('checked', this.get('mainComponent.model.' + this.get('mainComponent.property')));
+    this.checked = Ember.computed('mainComponent.model.' + this.get('mainComponent.property'), function() {
+      return this.get('mainComponent.model.' + this.get('mainComponent.property'));
+    });
   },
   actions: {
     change: function() {
@@ -19,10 +21,9 @@ export default Ember.Component.extend({
       const checked = selectedEl.checked;
       this.set('mainComponent.model.' + this.get('mainComponent.property'), checked);
       const changeAction = this.get('action');
-      if(changeAction){
+      if (changeAction) {
         changeAction(checked);
-      }
-      else{
+      } else {
         // TODO make deprecate here so everyone switches to new action syntax
       }
     },
@@ -34,10 +35,9 @@ export default Ember.Component.extend({
       const checked = selectedEl.checked;
       this.set('mainComponent.model.' + this.get('mainComponent.property'), checked);
       const changeAction = this.get('action');
-      if(changeAction){
+      if (changeAction) {
         changeAction(checked);
-      }
-      else{
+      } else {
         // TODO make deprecate here so everyone switches to new action syntax
       }
     }

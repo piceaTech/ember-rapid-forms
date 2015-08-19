@@ -4,7 +4,7 @@ import layout from '../templates/components/html-select';
 export default Ember.Component.extend({
   layout: layout,
   
-  didInitAttrs(/*attrs*/) {
+  didReceiveAttrs(/*attrs*/) {
     this._super(...arguments);
     var content = this.get('content');
 
@@ -13,7 +13,9 @@ export default Ember.Component.extend({
       // TODO ember warn no content set
     }
     // set it to the correct value of the selection
-    this.set('selectedValue', this.get('mainComponent.model.' + this.get('mainComponent.property')));
+    this.selectedValue = Ember.computed('mainComponent.model.' + this.get('mainComponent.property'), function() {
+      return this.get('mainComponent.model.' + this.get('mainComponent.property'));
+    });
   },
 
   actions: {
