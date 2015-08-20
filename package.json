@@ -23,6 +23,7 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
     "broccoli-funnel": "^0.2.3",
+    "broccoli-merge-trees": "^0.2.3",
     "broccoli-static-compiler": "^0.2.1",
     "ember-cli": "0.2.5",
     "ember-cli-app-version": "0.3.3",
