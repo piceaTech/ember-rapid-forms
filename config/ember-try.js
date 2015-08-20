@@ -23,7 +23,7 @@ module.exports = {
       }
     },
     {
-      name: 'ember-1.13.0',
+      name: 'ember-1.13',
       dependencies: {
         'ember': '1.13.8',
       }
