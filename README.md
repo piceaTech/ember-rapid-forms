@@ -20,6 +20,10 @@ ember install ember-get-helper
 
 Please visit the documentation for installation & usage documentations: http://piceatech.github.io/ember-rapid-forms
 
+### Version Support
+
+The Plugin starting from version 0.8.0 doesn't support ember versions below 1.12. If you need support for this work with a version < 0.8.0
+
 
 ## Plugin Development
 
