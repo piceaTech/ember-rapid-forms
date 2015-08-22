@@ -86,10 +86,8 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       }
     }
   }),
-  hideValidationsOnFormChange: Ember.observer('form', 'form.model', {
-    get: function() {
-      this.set('canShowErrors', false);
-    }
+  hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
+    this.set('canShowErrors', false);
   }),
   shouldShowErrors: Ember.computed('canShowErrors', 'helpText', {
     get: function() {
