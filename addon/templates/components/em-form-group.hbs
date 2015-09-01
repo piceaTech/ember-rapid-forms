@@ -2,9 +2,8 @@
     <div class={{wrapperClass}}>
       {{#unless hasBlock}}
         {{form-group label=label yieldInLabel=yieldInLabel
-          labelWrapperClass=labelWrapperClass labelViewName=labelViewName labelClass=labelClass
-          help=help helpViewName=helpViewName shouldShowErrors=shouldShowErrors
-          controlView=controlView controlViewName=controlViewName controlWrapper=controlWrapper
+          labelWrapperClass=labelWrapperClass labelClass=labelClass
+          help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
           cid=cid validationIcons=validationIcons mainComponent=this form=form}}
       {{else}}
         {{yield}}
@@ -13,9 +12,8 @@
 {{else}}
   {{#unless hasBlock}}
     {{form-group label=label yieldInLabel=yieldInLabel
-      labelWrapperClass=labelWrapperClass labelViewName=labelViewName labelClass=labelClass
-      help=help helpViewName=helpViewName shouldShowErrors=shouldShowErrors
-      controlView=controlView controlViewName=controlViewName controlWrapper=controlWrapper
+      labelWrapperClass=labelWrapperClass labelClass=labelClass
+      help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
       cid=cid validationIcons=validationIcons mainComponent=this form=form}}
   {{else}}
     {{yield}}

@@ -40,15 +40,3 @@ export default Ember.Component.extend({
     }
   }
 });
-/*
-  controlView: Ember.TextField.extend(ControlMixin, {
-    placeholder: Ember.computed.alias('mainComponent.placeholder'),
-    name: Ember.computed.alias('mainComponent.name'),
-    required: Ember.computed.alias('mainComponent.required'),
-    autofocus: Ember.computed.alias('mainComponent.autofocus'),
-    disabled: Ember.computed.alias('mainComponent.disabled'),
-    type: Ember.computed.alias('mainComponent.type'),
-    model: Ember.computed.alias('mainComponent.model'),
-    propertyName: Ember.computed.alias('mainComponent.propertyName')
-  }),
-*/

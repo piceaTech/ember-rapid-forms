@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 /*
-Find the form of the view that merges this mixin
+Find the form of the component that merges this mixin
  */
 export default Ember.Mixin.create({
   form: Ember.computed('parentView', {
