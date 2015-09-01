@@ -17,7 +17,7 @@ Syntax:
 export default FormGroupComponent.extend({
   v_icons: Ember.computed.deprecatingAlias('validationIcons'),
   validationIcons: false,
-  htmlComponent: 'ember-rapid-forms/html-select',
+  htmlComponent: 'erf-html-select',
   propertyIsModel:false,
   property: null,
   content: null,

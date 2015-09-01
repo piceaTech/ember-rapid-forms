@@ -8,7 +8,7 @@ Syntax:
 {{em-input property="property name"}}
  */
 export default FormGroupComponent.extend({
-  htmlComponent: 'ember-rapid-forms/html-input',
+  htmlComponent: 'erf-html-input',
   property: null,
   label: null,
   name: null,

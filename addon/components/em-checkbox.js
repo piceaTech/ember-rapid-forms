@@ -12,7 +12,7 @@ export default FormGroupComponent.extend({
   validationIcons: false,
   validations: false,
   yieldInLabel: true,
-  htmlComponent: 'ember-rapid-forms/html-checkbox',
+  htmlComponent: 'erf-html-checkbox',
   wrapperClass: Ember.computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') === 'horizontal') {
