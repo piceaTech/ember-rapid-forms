@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import FormGroupComponent from './em-form-group';
-import ControlMixin from 'ember-rapid-forms/mixins/control';
 
 /*
 Form Input
