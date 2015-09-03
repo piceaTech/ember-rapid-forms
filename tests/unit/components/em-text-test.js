@@ -6,7 +6,7 @@ import Ember from 'ember';
 
 moduleForComponent('em-text', {
   // Specify the other units that are required for this test
-  needs: ['component:form-group', 'component:form-group-control']
+  needs: ['component:form-group', 'component:form-group-control', 'component:erf-html-text']
 });
 
 test('Textarea renders', function(assert) {

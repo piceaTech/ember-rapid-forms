@@ -3,12 +3,11 @@ import {
   test
   } from 'ember-qunit';
 import Ember from 'ember';
+import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', 'em-form multi models', {
   // Specify the other units that are required for this test
-  needs: ['component:form-group', 'component:form-group-control',
-    'component:control-within-label', 'component:em-form-label',
-    'component:em-input']
+  integration: true
 });
 
 var myHash = Ember.Object.create({
@@ -23,18 +22,16 @@ var myHash = Ember.Object.create({
 test('a form with hashed models works as expected', function(assert) {
   assert.expect(2);
 
-  var component = this.subject({
-    submitButton: false,
-    targetObject: Ember.Controller.create({}),
-    model: myHash,
-    template: Ember.HTMLBars.compile('{{em-input name="a" property="modelA.name" label="modelA name:"}}{{em-input name="b" property="modelB.name" label="modelB name:"}}')
-  });
+  this.set('myHash', myHash);
 
-  this.render();
+  this.render(hbs`{{#em-form model=myHash submitButton=false showErrorsOnFocusIn=false}}
+      {{em-input name="a" property="modelA.name" label="modelA name:"}}
+      {{em-input name="b" property="modelB.name" label="modelB name:"}}
+    {{/em-form}}`);
 
   Ember.run(() => {
-    var inputA = Ember.$(component.element).find('input[name="a"]');
-    var inputB = Ember.$(component.element).find('input[name="b"]');
+    var inputA = this.$().find('input[name="a"]');
+    var inputB = this.$().find('input[name="b"]');
 
     assert.equal(inputA.val(), 'model-a', 'Input A has the correct value');
     assert.equal(inputB.val(), 'model-b', 'Input B has the correct value');
@@ -44,18 +41,16 @@ test('a form with hashed models works as expected', function(assert) {
 test('a form with hashed models updates correct model', function(assert) {
   assert.expect(3);
 
-  var component = this.subject({
-    submitButton: false,
-    targetObject: Ember.Controller.create({}),
-    model: myHash,
-    template: Ember.HTMLBars.compile('{{em-input name="a" property="modelA.name" label="modelA name:"}}{{em-input name="b" property="modelB.name" label="modelB name:"}}')
-  });
+  this.set('myHash', myHash);
 
-  this.render();
+  this.render(hbs`{{#em-form model=myHash submitButton=false showErrorsOnFocusIn=false}}
+      {{em-input name="a" property="modelA.name" label="modelA name:"}}
+      {{em-input name="b" property="modelB.name" label="modelB name:"}}
+    {{/em-form}}`);
 
   Ember.run(() => {
-    var inputA = Ember.$(component.element).find('input[name="a"]');
-    var inputB = Ember.$(component.element).find('input[name="b"]');
+    var inputA = this.$().find('input[name="a"]');
+    var inputB = this.$().find('input[name="b"]');
 
     assert.equal(inputA.val(), 'model-a', 'Input A has the correct value');
     assert.equal(inputB.val(), 'model-b', 'Input B has the correct value');

@@ -11,11 +11,7 @@ moduleForComponent('em-form-group', {
 
 test('it renders', function(assert) {
   // Creates the component instance
-  var component = this.subject({
-    controlView: Ember.View.extend({
-      templateName: 'dummy'
-    })
-  });
+  var component = this.subject();
   assert.equal(component._state, 'preRender');
 
   // Renders the component to the page
@@ -26,11 +22,7 @@ test('it renders', function(assert) {
 
 test('it renders with no label', function(assert) {
   // Creates the component instance
-  var component = this.subject({
-    controlView: Ember.View.extend({
-      templateName: 'dummy'
-    })
-  });
+  var component = this.subject();
 
   this.render();
   assert.ok(!component.get('hasLabel'), 'group has no label');
@@ -45,9 +37,6 @@ test('it renders with no label', function(assert) {
 test('it renders proper error validation icon', function(assert) {
   // Creates the component instance
   var component = this.subject({
-    controlView: Ember.View.extend({
-      templateName: 'dummy'
-    }),
     label: 'my-label',
     form: Ember.Object.extend({}),
     canShowErrors: true,
@@ -65,9 +54,6 @@ test('it renders proper error validation icon', function(assert) {
 test('it renders proper warning validation icon', function(assert) {
   // Creates the component instance
   var component = this.subject({
-    controlView: Ember.View.extend({
-      templateName: 'dummy'
-    }),
     label: 'my-label',
     form: Ember.Object.extend({}),
     canShowErrors: true,
@@ -85,9 +71,6 @@ test('it renders proper warning validation icon', function(assert) {
 test('it renders proper success validation icon', function(assert) {
   // Creates the component instance
   var component = this.subject({
-    controlView: Ember.View.extend({
-      templateName: 'dummy'
-    }),
     label: 'my-label',
     form: Ember.Object.extend({}),
     canShowErrors: true,
