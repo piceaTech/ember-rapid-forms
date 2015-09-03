@@ -6,21 +6,15 @@ moduleForComponent('html-input', 'Integration | Component | html input', {
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{html-input}}`);
+  this.render(hbs`{{erf-html-input}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().find('input').length, 1, 'renders input element');
 
   // Template block usage:
-  this.render(hbs`
-    {{#html-input}}
-      template block text
-    {{/html-input}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  // not applicable
 });

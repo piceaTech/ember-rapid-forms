@@ -6,21 +6,16 @@ moduleForComponent('html-text', 'Integration | Component | html text', {
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{html-text}}`);
+  this.render(hbs`{{erf-html-text}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().find('textarea').length, 1, 'renders textarea element');
+
 
   // Template block usage:
-  this.render(hbs`
-    {{#html-text}}
-      template block text
-    {{/html-text}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  // not applicable
 });
