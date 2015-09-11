@@ -22,15 +22,24 @@ export default Ember.Component.extend({
     change() {
       
       const selectedEl = this.$('select')[0];
-      const selectedIndex = selectedEl.selectedIndex;
+      let selectedIndex = selectedEl.selectedIndex;
+      // check whether we show prompt the the correct to show index is one less
+      // when selecting prompt don't change anything
+      if(this.get('mainComponent.prompt')){
+        if(selectedIndex != 0){
+          selectedIndex--;
+        }
+        else{
+          return;
+        }
+      }
       const content = this.get('mainComponent.content');
       const selectedValue = content[selectedIndex];
       const selectedID = selectedValue[this.get('mainComponent.optionValuePath')];
-      this.set('selectedValue', selectedValue);
       this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedID);
       const changeAction = this.get('action');
       if(changeAction){
-        changeAction(selectedValue);
+        changeAction(selectedID);
       }
       else{
         // TODO make deprecate here so everyone switches to new action syntax
