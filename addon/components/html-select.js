@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       // check whether we show prompt the the correct to show index is one less
       // when selecting prompt don't change anything
       if(this.get('mainComponent.prompt')){
-        if(selectedIndex != 0){
+        if(selectedIndex !== 0){
           selectedIndex--;
         }
         else{
