@@ -3,52 +3,39 @@ import {
   test
 } from 'ember-qunit';
 import Ember from 'ember';
+import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', 'em-form-submit tests', {
   // Specify the other units that are required for this test
-  needs: ['component:em-form-submit']
+  integration: true
 });
 
 test('a form with em-form-submit components renders correctly', function(assert) {
-  var component = this.subject({
-    submitButton: false,
-    template: Ember.HTMLBars.compile('{{em-form-submit text="Submit!"}}')
-  });
+  this.render(hbs`{{#em-form submitButton=false}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
 
-  this.render();
-  assert.equal(component._state, 'inDOM');
-  var elem = Ember.$(component.element);
+
+  var elem = this.$();
 
   assert.equal(elem.find('button').length, 1, '1 button found');
   assert.equal(elem.find('button').text().trim(), 'Submit!', 'submit has correct text');
 });
 
 test('Form submit button is disabled when model isnt valid & enabled when is valid', function(assert) {
+  this.set('someModel', Ember.Object.create({isValid: false}));
 
-  var component = this.subject({
-    submitButton: false,
-    template: Ember.HTMLBars.compile('{{em-form-submit text="Submit!"}}'),
-    model: Ember.Object.create({isValid: false})
-  });
+  this.render(hbs`{{#em-form submitButton=false model=someModel}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
 
-  this.render();
-  assert.ok(Ember.$(component.element).find('button').attr('disabled'), 'Button is disabled');
+  assert.ok(this.$().find('button').attr('disabled'), 'Button is disabled');
 
   Ember.run(() => {
-    component.set('model.isValid', true);
+    this.set('someModel.isValid', true);
   });
 
-  assert.ok(!Ember.$(component.element).find('button').attr('disabled'), 'Button is enabled');
+  assert.ok(!this.$().find('button').attr('disabled'), 'Button is enabled');
 });
 
 test('Submit button has the correct type attribute', function(assert) {
-
-  var component = this.subject({
-    submitButton: false,
-    template: Ember.HTMLBars.compile('{{em-form-submit text="Submit!"}}'),
-  });
-
-  this.render();
-  assert.equal(Ember.$(component.element).find('button').attr('type'), 'submit', 'default type is submit');
-  console.log(Ember.$(component.element).find('button').attr('type'));
+  this.render(hbs`{{#em-form submitButton=false}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
+  
+  assert.equal(this.$().find('button').attr('type'), 'submit', 'default type is submit');
 });

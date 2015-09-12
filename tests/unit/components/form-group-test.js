@@ -1,148 +1,112 @@
 import {
   moduleForComponent,
   test
-  } from 'ember-qunit';
+}
+from 'ember-qunit';
 import Ember from 'ember';
+import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('form-group', {
   // Specify the other units that are required for this test
-  needs: ['component:em-form-label', 'component:form-group-control',
-          'component:control-within-label',
-          'component:em-form-control-help', 'template:dummy']
+  integration: true
+});
+
+var mainComponent = Ember.Component.create({
+  htmlComponent: 'erf-html-input'
 });
 
 test('renders the component', function(assert) {
-  var component = this.subject({
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    })
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
+  this.render(hbs `{{form-group mainComponent=mainComponent}}`);
+  assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 });
 
 test('renders with label', function(assert) {
-  var component = this.subject({
-    label: 'my-label',
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    })
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("my-label")'), 'Has a label');
-  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
+  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label'}}`);
+  assert.equal(this.$().find('label:contains("my-label")').length, 1, 'Has a label');
+  assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 });
 
 test('renders with labelWrapperClass', function(assert) {
-  var component = this.subject({
-    label: 'my-label',
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    }),
-    labelWrapperClass: 'wrapper-class'
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  var wrapper = Ember.$(component.get('parentView').element).find('div.wrapper-class');
+  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class'}}`);
+  var wrapper = this.$().find('div.wrapper-class');
 
   assert.ok(wrapper, 'Wrapper exists');
-  assert.ok(wrapper.find('div:contains("my-label")'), 'Label is inside wrapper');
-  assert.ok(wrapper.find('div:contains("dummy!")'), 'Has controlView rendered');
+  assert.equal(wrapper.find('label:contains("my-label")').length, 1, 'Label is inside wrapper');
+  assert.equal(wrapper.find('input').length, 1, 'Has mainComponent rendered');
 });
 
 test('renders with yieldInLabel', function(assert) {
-  var component = this.subject({
-    label: 'my-label',
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    }),
-    yieldInLabel: true
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  var label = Ember.$(component.get('parentView').element).find('label');
-  assert.ok(label, 'Label is a wrapper tag');
+  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' yieldInLabel=true}}`);
+
+  var label = this.$().find('label');
+  assert.equal(label.length, 1, 'Label is a wrapper tag');
   assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
-  assert.ok(label.find('div:contains("dummy!")'), 'Label has controlView div');
+  assert.equal(label.find('input').length, 1, 'Label has mainComponent input');
 });
 
 test('renders with yieldInLabel with labelWrapperClass', function(assert) {
-  var component = this.subject({
-    label: 'my-label',
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    }),
-    labelWrapperClass: 'wrapper-class',
-    yieldInLabel: true
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  var wrapper = Ember.$(component.get('parentView').element).find('div.wrapper-class');
-  assert.ok(wrapper, 'Wrapper exists');
+  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}`);
+
+  var wrapper = this.$().find('div.wrapper-class');
+  assert.equal(wrapper.length, 1, 'Wrapper exists');
 
   var label = wrapper.find('label');
   assert.ok(label, 'Label is a wrapper tag');
   assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
-  assert.ok(label.find('div:contains("dummy!")'), 'Label has controlView div');
+  assert.equal(label.find('input').length, 1, 'Label has mainComponent input');
 });
 
 test('renders v_icon', function(assert) {
-  var component = this.subject({
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    }),
-    validationIcons: true,
-    mainComponent: Ember.Component.create({
-      validationIcon: 'some-icon-class'
-    })
-  });
-  this.render();
+  mainComponent.set('validationIcon', 'some-icon-class');
+  this.set('mainComponent', mainComponent);
 
-  var icons = Ember.$(component.get('parentView').element).find('span');
-  assert.ok(icons, 'Has icon span');
+  this.render(hbs `{{form-group mainComponent=mainComponent validationIcons=true}}`);
+
+  var icons = this.$().find('span');
+  assert.equal(icons.length, 1, 'Has icon span');
   assert.ok(icons.hasClass('form-control-feedback'), 'Has proper class');
-  assert.ok(icons.find('i'), 'Has icon');
-  assert.ok(Ember.$(icons.find('i')[0]).hasClass('some-icon-class'), 'Icon has proper class');
+  assert.equal(icons.find('i').length, 1, 'Has icon');
+  assert.ok(this.$(icons.find('i')[0]).hasClass('some-icon-class'), 'Icon has proper class');
 });
 
 test('renders error message', function(assert) {
-  var component = this.subject({
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    }),
-    shouldShowErrors: true,
-    help: 'help text here'
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  var parent = Ember.$(component.get('parentView').element);
-  assert.ok(parent.find('div:contains("dummy!")'), 'Has controlView rendered');
+  this.render(hbs `{{form-group mainComponent=mainComponent shouldShowErrors=true help='help text here'}}`);
 
-  var helpSpan = parent.find('span');
-  assert.ok(helpSpan, 'Has help span');
+  assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
+
+  var helpSpan = this.$().find('span');
+  assert.equal(helpSpan.length, 1, 'Has help span');
   assert.ok(helpSpan.hasClass('help-block'), 'span has correct class');
-  assert.ok(helpSpan.text().trim(), 'help text here', 'span has correct help text');
+  assert.equal(helpSpan.text().trim(), 'help text here', 'span has correct help text');
 });
 
 test('does not renders error message when layout is inline', function(assert) {
-  var component = this.subject({
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    }),
-    form: Ember.Object.create({
-      isInline: true
-    }),
-    shouldShowErrors: true,
-    help: 'help text here'
+  var form = Ember.Object.create({
+    isInline: true
   });
-  this.render();
 
-  var parent = Ember.$(component.get('parentView').element);
-  assert.ok(parent.find('div:contains("dummy!")'), 'Has controlView rendered');
+  this.set('form', form);
+  this.set('mainComponent', mainComponent);
 
-  var helpSpan = parent.find('span');
-  assert.equal(helpSpan.length, 0, 'Has help span');
+  this.render(hbs `{{form-group mainComponent=mainComponent form=form shouldShowErrors=true help='help text here'}}`);
+
+  assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
+
+  var helpSpan = this.$().find('span');
+  assert.equal(helpSpan.length, 0, 'Has no help span');
 
 });
+
+// console.log(this.$()[0].outerHTML);

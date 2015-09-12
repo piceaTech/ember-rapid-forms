@@ -4,8 +4,6 @@ import {
   } from 'ember-qunit';
 import Ember from 'ember';
 
-/* globals ok:true */
-
 moduleForComponent('em-form', 'component:em-form layout', {
   // Specify the other units that are required for this test
   needs: ['component:em-form-submit', 'component:form-group', 'component:em-form-control-help', 'component:form-group-control']

@@ -18,8 +18,10 @@ This gives you the freedom to support extra visual effects when neccessary.
     <pre><code class="coffeescript">
         WrappedInputComponent = Em.Component.extend({
             attributeBindings: ['style'],
-            style: Ember.computed(function(){
-                return "border: dotted 2px;"
+            style: Ember.computed({
+                get:function(){
+                    return "border: dotted 2px;"
+                }
             })
         })
 

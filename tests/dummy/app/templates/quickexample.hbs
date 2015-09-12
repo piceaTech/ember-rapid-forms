@@ -30,8 +30,10 @@
             comment: DS.attr('string'),
             active: DS.attr('boolean'),
             gender: DS.attr('string'),
-            nameHasValue: Ember.computed('name', function(){
-                return !!this.get('name').length;
+            nameHasValue: Ember.computed('name', {
+                get:function(){
+                    return !!this.get('name').length;
+                }
             })
         })
             

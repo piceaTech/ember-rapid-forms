@@ -1,34 +1,33 @@
 import {
   moduleForComponent,
   test
-  } from 'ember-qunit';
+}
+from 'ember-qunit';
 import Ember from 'ember';
+import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('form-group-control', {
   // Specify the other units that are required for this test
-  needs: ['template:dummy']
+  integration: true
+});
+
+var mainComponent = Ember.Component.create({
+  htmlComponent: 'erf-html-input'
 });
 
 test('renders the component', function(assert) {
-  var component = this.subject({
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    })
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
+  this.render(hbs`{{form-group-control mainComponent=mainComponent}}`);
+
+  assert.equal(this.$().find('input').length, 1, 'Has htmlComponent rendered');
 });
 
 test('renders the component with wrapper', function(assert) {
-  var component = this.subject({
-    controlView: Ember.View.create({
-      templateName: 'dummy'
-    }),
-    controlWrapper: 'control-wrapper-class'
-  });
-  this.render();
+  this.set('mainComponent', mainComponent);
 
-  assert.ok(Ember.$(component.get('parentView').element).find('div:contains("dummy!")'), 'Has controlView rendered');
-  assert.ok(Ember.$(component.get('parentView').element).find('div.control-wrapper-class'), 'Has wrapper div');
+  this.render(hbs `{{form-group-control mainComponent=mainComponent controlWrapper='control-wrapper-class'}}`);
+
+  assert.equal(this.$().find('input').length, 1, 'Has htmlComponent rendered');
+  assert.ok(this.$().find('div.control-wrapper-class'), 'Has wrapper div');
 });

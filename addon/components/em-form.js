@@ -28,13 +28,15 @@ export default Ember.Component.extend({
   attributeBindings: ['role'],
   role: 'form',
   form_layout_class: Ember.computed.deprecatingAlias('formLayoutClass'),
-  formLayoutClass: Ember.computed('formLayout', function() {
-    switch (this.get('formLayout')) {
-      case 'horizontal':
-      case 'inline':
-        return "form-" + (this.get('formLayout'));
-      default:
-        return 'form';
+  formLayoutClass: Ember.computed('formLayout', {
+    get: function() {
+      switch (this.get('formLayout')) {
+        case 'horizontal':
+        case 'inline':
+          return "form-" + (this.get('formLayout'));
+        default:
+          return 'form';
+      }
     }
   }),
   isDefaultLayout: Utils.createBoundSwitchAccessor('form', 'formLayout', 'form'),

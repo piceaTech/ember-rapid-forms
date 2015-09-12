@@ -15,11 +15,13 @@ export default Ember.Component.extend(InFormMixin, {
   text: 'Submit',
   type: 'submit',
   horiClass: 'col-sm-offset-2 col-sm-10',
-  disabled: Ember.computed('model.isValid', function() {
-    if (!Ember.isNone(this.get('model.isValid'))) {
-      return !this.get('model.isValid');
-    } else {
-      return false;
+  disabled: Ember.computed('model.isValid', {
+    get: function() {
+      if (!Ember.isNone(this.get('model.isValid'))) {
+        return !this.get('model.isValid');
+      } else {
+        return false;
+      }
     }
   })
 });

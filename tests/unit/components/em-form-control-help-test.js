@@ -7,6 +7,7 @@ import Ember from 'ember';
 moduleForComponent('em-form-control-help', {
   // Specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar']
+  unit: true
 });
 
 test('it renders', function(assert) {
