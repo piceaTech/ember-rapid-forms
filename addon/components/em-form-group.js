@@ -34,7 +34,6 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   layout: layout,
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
-  canShowErrors: false,
   hasSuccess: Ember.computed('status', 'canShowErrors', {
     get: function() {
       var success;
