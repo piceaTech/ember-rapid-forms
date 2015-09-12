@@ -61,7 +61,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   }),
   v_icons: Ember.computed.deprecatingAlias('validationIcons'),
   validationIcons: Ember.computed.alias('form.validationIcons'),
-  showAllErrors: Em.computed.alias('form.showAllErrors'),
+  showAllErrors: Ember.computed.alias('form.showAllErrors'),
   v_success_icon: Ember.computed.deprecatingAlias('successIcon'),
   successIcon: 'fa fa-check',
   v_warn_icon: Ember.computed.deprecatingAlias('warningIcon'),
