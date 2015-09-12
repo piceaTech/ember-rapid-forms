@@ -22,7 +22,7 @@ Please visit the documentation for installation & usage documentations: http://p
 
 ### Version Support
 
-The Plugin starting from version 0.8.0 doesn't support ember versions below 1.12. If you need support for this work with a version < 0.8.0
+The Plugin starting from version 1.0.0 doesn't activly support ember versions below 1.13. If you need support for this work with a version < 1.0.0 or alternativly use https://github.com/indexiatech/ember-forms
 
 
 ## Plugin Development
