@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   },
   actions: {
     change: function() {
-      const selectedEl = this.$('input')[0];
+      const selectedEl = this.$('textarea')[0];
       const value = selectedEl.value;
       this.set('mainComponent.model.' + this.get('mainComponent.property'), value);
       const changeAction = this.get('action');
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
       // input is always called when input is altert
       // except in IE9 where when cutting or removing things it doesn't get fired
       // https://developer.mozilla.org/en-US/docs/Web/Events/input#Browser_compatibility
-      const selectedEl = this.$('input')[0];
+      const selectedEl = this.$('textarea')[0];
       const value = selectedEl.value;
       this.set('mainComponent.model.' + this.get('mainComponent.property'), value);
       const changeAction = this.get('action');
