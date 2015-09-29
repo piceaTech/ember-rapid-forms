@@ -27,7 +27,7 @@ export default Ember.Component.extend({
   classNameBindings: ['formLayoutClass'],
   attributeBindings: ['role'],
   role: 'form',
-  form_layout_class: Ember.computed.deprecatingAlias('formLayoutClass'),
+  form_layout_class: Ember.computed.deprecatingAlias('formLayoutClass', {}),
   formLayoutClass: Ember.computed('formLayout', {
     get: function() {
       switch (this.get('formLayout')) {
@@ -44,11 +44,11 @@ export default Ember.Component.extend({
   isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'formLayout', 'form'),
   action: 'submit',
   model: null,
-  form_layout: Ember.computed.deprecatingAlias('formLayout'),
+  form_layout: Ember.computed.deprecatingAlias('formLayout', {}),
   formLayout: 'form',
-  submit_button: Ember.computed.deprecatingAlias('submitButton'),
+  submit_button: Ember.computed.deprecatingAlias('submitButton', {}),
   submitButton: true,
-  v_icons: Ember.computed.deprecatingAlias('validationIcons'),
+  v_icons: Ember.computed.deprecatingAlias('validationIcons', {}),
   validationIcons: true,
   showErrorsOnRender: false,
   showErrorsOnFocusIn: false,

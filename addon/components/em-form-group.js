@@ -57,17 +57,17 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       return error;
     }
   }),
-  v_icons: Ember.computed.deprecatingAlias('validationIcons'),
+  v_icons: Ember.computed.deprecatingAlias('validationIcons', {}),
   validationIcons: Ember.computed.alias('form.validationIcons'),
-  v_success_icon: Ember.computed.deprecatingAlias('successIcon'),
+  v_success_icon: Ember.computed.deprecatingAlias('successIcon', {}),
   successIcon: 'fa fa-check',
-  v_warn_icon: Ember.computed.deprecatingAlias('warningIcon'),
+  v_warn_icon: Ember.computed.deprecatingAlias('warningIcon', {}),
   warningIcon: 'fa fa-exclamation-triangle',
-  v_error_icon: Ember.computed.deprecatingAlias('errorIcon'),
+  v_error_icon: Ember.computed.deprecatingAlias('errorIcon', {}),
   errorIcon: 'fa fa-times',
   validations: true,
   yieldInLabel: false,
-  v_icon: Ember.computed.deprecatingAlias('validationIcon'),
+  v_icon: Ember.computed.deprecatingAlias('validationIcon', {}),
   validationIcon: Ember.computed('status', 'canShowErrors', {
     get: function() {
       if (!this.get('canShowErrors')) {
