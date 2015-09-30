@@ -35,6 +35,7 @@ export default Ember.Component.extend({
       }
       const content = this.get('mainComponent.content');
       var selectedValue;
+      var selectedId;
       if (Ember.typeOf(content) === "instance") {
         selectedValue = content.objectAtContent(selectedIndex);
       } else {
@@ -44,11 +45,14 @@ export default Ember.Component.extend({
       if (this.get('mainComponent.propertyIsModel')) {
         if (Ember.typeOf(content) === "instance") {
           this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedValue);
+          selectedID = selectedValue.get('id');
         }else{
           this.set('mainComponent.model.' + this.get('mainComponent.property'), {id: selectedValue.id});
+          selectedID = selectedValue.id
         }
+        
       } else {
-        const selectedID = selectedValue[this.get('mainComponent.optionValuePath')];
+        selectedID = selectedValue[this.get('mainComponent.optionValuePath')];
         this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedID);
       }
       
