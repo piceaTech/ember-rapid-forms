@@ -35,7 +35,7 @@ export default Ember.Component.extend({
       }
       const content = this.get('mainComponent.content');
       var selectedValue;
-      var selectedId;
+      var selectedID;
       if (Ember.typeOf(content) === "instance") {
         selectedValue = content.objectAtContent(selectedIndex);
       } else {
