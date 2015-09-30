@@ -48,7 +48,7 @@ export default Ember.Component.extend({
           selectedID = selectedValue.get('id');
         }else{
           this.set('mainComponent.model.' + this.get('mainComponent.property'), {id: selectedValue.id});
-          selectedID = selectedValue.id
+          selectedID = selectedValue.id;
         }
         
       } else {
