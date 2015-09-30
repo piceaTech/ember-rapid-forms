@@ -34,11 +34,11 @@ export default Ember.Component.extend({
         }
       }
       const content = this.get('mainComponent.content');
-      
+      var selectedValue;
       if (Ember.typeOf(content) === "instance") {
-        var selectedValue = content.objectAtContent(selectedIndex);
+        selectedValue = content.objectAtContent(selectedIndex);
       } else {
-        var selectedValue = content[selectedIndex];
+        selectedValue = content[selectedIndex];
       }
 
       if (this.get('mainComponent.propertyIsModel')) {
