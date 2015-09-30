@@ -34,9 +34,24 @@ export default Ember.Component.extend({
         }
       }
       const content = this.get('mainComponent.content');
-      const selectedValue = content[selectedIndex];
-      const selectedID = selectedValue[this.get('mainComponent.optionValuePath')];
-      this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedID);
+      
+      if (Ember.typeOf(content) === "instance") {
+        var selectedValue = content.objectAtContent(selectedIndex);
+      } else {
+        var selectedValue = content[selectedIndex];
+      }
+
+      if (this.get('mainComponent.propertyIsModel')) {
+        if (Ember.typeOf(content) === "instance") {
+          this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedValue);
+        }else{
+          this.set('mainComponent.model.' + this.get('mainComponent.property'), {id: selectedValue.id});
+        }
+      } else {
+        const selectedID = selectedValue[this.get('mainComponent.optionValuePath')];
+        this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedID);
+      }
+      
       const changeAction = this.get('action');
       if(changeAction){
         changeAction(selectedID);
