@@ -13,9 +13,17 @@ export default Ember.Component.extend({
       // TODO ember warn no content set
     }
     // set it to the correct value of the selection
-    this.selectedValue = Ember.computed('mainComponent.model.' + this.get('mainComponent.property'), function() {
-      return this.get('mainComponent.model.' + this.get('mainComponent.property'));
-    });
+    this.selectedValue = Ember.computed(
+      'mainComponent.model.' + this.get('mainComponent.property'),
+      'mainComponent.propertyIsModel',
+      function () {
+        if (this.get('mainComponent.propertyIsModel')) {
+          var propertyModel = this.get('mainComponent.model.' + this.get('mainComponent.property'));
+          return propertyModel.get('id');
+        } else {
+          return this.get('mainComponent.model.' + this.get('mainComponent.property'));
+        }
+      });
   },
 
   actions: {
