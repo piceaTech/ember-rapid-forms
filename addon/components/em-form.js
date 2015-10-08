@@ -27,7 +27,7 @@ export default Ember.Component.extend({
   classNameBindings: ['formLayoutClass'],
   attributeBindings: ['role'],
   role: 'form',
-  form_layout_class: Ember.computed.deprecatingAlias('formLayoutClass', {'id': 'em-form-form_layout_class','until':'v2.0'}),
+  form_layout_class: Ember.computed.deprecatingAlias('formLayoutClass', {'id': 'ember-rapid-forms.em-form-form_layout_class','until':'v2.0'}),
   formLayoutClass: Ember.computed('formLayout', {
     get: function() {
       switch (this.get('formLayout')) {
@@ -44,11 +44,11 @@ export default Ember.Component.extend({
   isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'formLayout', 'form'),
   action: 'submit',
   model: null,
-  form_layout: Ember.computed.deprecatingAlias('formLayout', {'id': 'em-form-form_layout','until':'v2.0'}),
+  form_layout: Ember.computed.deprecatingAlias('formLayout', {'id': 'ember-rapid-forms.em-form-form_layout','until':'v2.0'}),
   formLayout: 'form',
-  submit_button: Ember.computed.deprecatingAlias('submitButton', {'id': 'em-form-submit_button','until':'v2.0'}),
+  submit_button: Ember.computed.deprecatingAlias('submitButton', {'id': 'ember-rapid-forms.em-form-submit_button','until':'v2.0'}),
   submitButton: true,
-  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'em-form-v_icons','until':'v2.0'}),
+  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'ember-rapid-forms.em-form-v_icons','until':'v2.0'}),
   validationIcons: true,
   showErrorsOnRender: false,
   showErrorsOnFocusIn: false,

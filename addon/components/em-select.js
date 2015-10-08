@@ -15,7 +15,7 @@ Syntax:
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
 export default FormGroupComponent.extend({
-  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'em-select-v_icons','until':'v2.0'}),
+  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'ember-rapid-forms.em-select-v_icons','until':'v2.0'}),
   validationIcons: false,
   htmlComponent: 'erf-html-select',
   propertyIsModel:false,

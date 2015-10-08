@@ -57,17 +57,17 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       return error;
     }
   }),
-  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'em-form-group-v_icons','until':'v2.0'}),
+  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'ember-rapid-forms.em-form-group-v_icons','until':'v2.0'}),
   validationIcons: Ember.computed.alias('form.validationIcons'),
-  v_success_icon: Ember.computed.deprecatingAlias('successIcon', {'id': 'em-form-group-v_success_icon','until':'v2.0'}),
+  v_success_icon: Ember.computed.deprecatingAlias('successIcon', {'id': 'ember-rapid-forms.em-form-group-v_success_icon','until':'v2.0'}),
   successIcon: 'fa fa-check',
-  v_warn_icon: Ember.computed.deprecatingAlias('warningIcon', {'id': 'em-form-group-v_warn_icon','until':'v2.0'}),
+  v_warn_icon: Ember.computed.deprecatingAlias('warningIcon', {'id': 'ember-rapid-forms.em-form-group-v_warn_icon','until':'v2.0'}),
   warningIcon: 'fa fa-exclamation-triangle',
-  v_error_icon: Ember.computed.deprecatingAlias('errorIcon', {'id': 'em-form-group-v_error_icon','until':'v2.0'}),
+  v_error_icon: Ember.computed.deprecatingAlias('errorIcon', {'id': 'ember-rapid-forms.em-form-group-v_error_icon','until':'v2.0'}),
   errorIcon: 'fa fa-times',
   validations: true,
   yieldInLabel: false,
-  v_icon: Ember.computed.deprecatingAlias('validationIcon', {'id': 'em-form-group-v_icon','until':'v2.0'}),
+  v_icon: Ember.computed.deprecatingAlias('validationIcon', {'id': 'ember-rapid-forms.em-form-group-v_icon','until':'v2.0'}),
   validationIcon: Ember.computed('status', 'canShowErrors', {
     get: function() {
       if (!this.get('canShowErrors')) {
