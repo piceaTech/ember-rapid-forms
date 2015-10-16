@@ -8,6 +8,7 @@ Syntax:
 {{em-text property="property name" rows=4 cols=40}}
  */
 export default FormGroupComponent.extend({
+  elementClass: 'form-control',
   htmlComponent: 'erf-html-text',
   property: null,
   label: null,
