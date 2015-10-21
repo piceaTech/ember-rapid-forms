@@ -21,7 +21,7 @@ export default FormGroupComponent.extend({
   propertyIsModel:false,
   property: null,
   content: null,
-  elementClass: 'form-control',
+  elementClass: null,
   selection: null,
   optionValuePath: 'id',
   optionLabelPath: 'value',
