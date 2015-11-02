@@ -6,31 +6,6 @@ from 'ember-qunit';
 import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
-// TODO: Remove with ember 2.0
-var originalEmberDeprecate = Ember.deprecate; // we know it is deprecated but can't do anything about it
-const ownDeprecate = function(message) {
-  if (message !== 'Using Ember.HTMLBars._registerHelper is deprecated. Helpers (even dashless ones) are automatically resolved.' && message !== 'ember-get-helper has been included in Ember 2.0. Use of this package is deprecated.') {
-    originalEmberDeprecate.apply(this, arguments);
-  } else {
-    console.log('removing deprecation:', message);
-  }
-};
-
-// TODO: remove when upgrading to ember 2.0
-import {
-  registerHelper
-}
-from 'ember-get-helper/utils/register-helper';
-
-// if you are on Ember 1.13
-import getHelper from 'ember-get-helper/helpers/get-glimmer';
-
-// register it before your tests (this could be in the beforeEach, but it doesn't need to be)
-
-registerHelper('get', getHelper);
-// end TODO
-
-
 
 var fruitSalad = null;
 
@@ -38,7 +13,6 @@ moduleForComponent('em-select', {
   // Specify the other units that are required for this test
   integration: true,
   beforeEach() {
-    Ember.deprecate = ownDeprecate;
     fruitSalad = Ember.Object.create({
       favoriteFruit: null,
       fruits: Ember.Object.create(),
@@ -52,7 +26,6 @@ moduleForComponent('em-select', {
     });
   },
   afterEach() {
-    Ember.deprecate = originalEmberDeprecate;
     Ember.run(() => {
       fruitSalad.destroy();
     });

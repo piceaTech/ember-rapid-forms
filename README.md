@@ -13,16 +13,12 @@ With Ember-CLI:
 ember install ember-truth-helpers
 ember install ember-rapid-forms
 ```
-When Using ember < 2.0.0 This is important
-```
-ember install ember-get-helper
-```
 
 Please visit the documentation for installation & usage documentations: http://piceatech.github.io/ember-rapid-forms
 
 ### Version Support
 
-The Plugin starting from version 1.0.0 doesn't activly support ember versions below 1.13. If you need support for this work with a version < 1.0.0 or alternativly use https://github.com/indexiatech/ember-forms
+The Plugin starting from version 1.0.0 doesn't support ember versions below 1.13. If you need support for this work with a version < 1.0.0 or alternativly use https://github.com/indexiatech/ember-forms
 
 
 ## Plugin Development
