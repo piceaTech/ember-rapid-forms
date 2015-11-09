@@ -2,7 +2,7 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import EV from 'ember-validations';
 
-var SimplePerson = DS.Model.extend(EV.Mixin, {
+var SimplePerson = DS.Model.extend(EV, {
   name: DS.attr('string'),
   password: DS.attr('string'),
   comment: DS.attr('string'),
