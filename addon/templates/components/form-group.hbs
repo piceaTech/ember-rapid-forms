@@ -13,11 +13,11 @@
     {{else}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{em-form-label text=label extraClass=labelClass form=form}}
+                {{em-form-label text=label extraClass=labelClass form=form for=cid}}
                 {{form-group-control controlWrapper=controlWrapper cid=cid mainComponent=mainComponent form=form}}
             </div>
         {{else}}
-            {{em-form-label text=label extraClass=labelClass form=form}}
+            {{em-form-label text=label extraClass=labelClass form=form for=cid}}
             {{form-group-control controlWrapper=controlWrapper cid=cid mainComponent=mainComponent form=form}}
         {{/if}}
     {{/if}}
