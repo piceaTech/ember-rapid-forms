@@ -64,13 +64,13 @@ export default Ember.Component.extend({
       e.preventDefault();
     }
     if (Ember.isNone(this.get('model.validate'))) {
-      return this.get('targetObject').send(this.get('action'));
+      return this.sendAction();
     } else {
       promise = this.get('model').validate();
       return promise.then((function(_this) {
         return function() {
           if (_this.get('model.isValid')) {
-            return _this.get('targetObject').send(_this.get('action'));
+            return _this.sendAction();
           }
         };
       })(this));
