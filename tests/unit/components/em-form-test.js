@@ -223,6 +223,8 @@ test('form cannot be submitted if model is invalid', function(assert) {
   this.submit = function() {
     ok(true, 'submit action invoked!');
   };
+  // for versions 2.0, 2.1
+  this.on('submit', this.submit);
   this.set('model', somePerson);
   somePerson.set('isValid', false);
   this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
@@ -238,6 +240,8 @@ test('form can be submitted if model is valid', function(assert) {
   this.submit = function() {
     ok(true, 'submit action invoked!');
   };
+  // for versions 2.0, 2.1
+  this.on('submit', this.submit);
   this.set('model', somePerson);
   somePerson.set('isValid', true);
   this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
@@ -253,6 +257,8 @@ test('form submission with custom action', function(assert) {
   this.submitNow = function() {
     ok(true, 'submit action invoked!');
   };
+  // for versions 2.0, 2.1
+  this.on('submitNow', this.submitNow);
   this.set('model', somePerson);
   somePerson.set('isValid', true);
   this.render(hbs `{{#em-form model=model action="submitNow"}}{{em-input property="name"}}{{/em-form}}`);
@@ -268,6 +274,8 @@ test('form submission with a model that has no validation support and no isValid
   this.submit = function() {
     ok(true, 'submit action invoked!');
   };
+  // for versions 2.0, 2.1
+  this.on('submit', this.submit);
   this.set('model', {});
 
   this.render(hbs `{{#em-form model=model action='submit'}}{{em-input property="name"}}{{/em-form}}`);
