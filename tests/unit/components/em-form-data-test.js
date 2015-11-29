@@ -30,11 +30,9 @@ test('a form display DS.Errors when rendered if showErrorsOnRender is set', func
   assert.expect(1);
 
   this.set('someModel', somePerson);
-  this.submit = function() {
+  this.on('submit', function() {
     ok(true, 'submit action invoked!');
-  };
-  // for versions 2.0, 2.1
-  this.on('submit', this.submit);
+  });
 
   Ember.run(() => {
     var errors = DS.Errors.create();

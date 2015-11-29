@@ -220,11 +220,9 @@ test('a form changes its model and errors are reseted', function(assert) {
 test('form cannot be submitted if model is invalid', function(assert) {
   assert.expect(0);
 
-  this.submit = function() {
+  this.on('submit', function() {
     ok(true, 'submit action invoked!');
-  };
-  // for versions 2.0, 2.1
-  this.on('submit', this.submit);
+  });
   this.set('model', somePerson);
   somePerson.set('isValid', false);
   this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
@@ -237,11 +235,9 @@ test('form cannot be submitted if model is invalid', function(assert) {
 test('form can be submitted if model is valid', function(assert) {
   assert.expect(1);
 
-  this.submit = function() {
+  this.on('submit', function() {
     ok(true, 'submit action invoked!');
-  };
-  // for versions 2.0, 2.1
-  this.on('submit', this.submit);
+  });
   this.set('model', somePerson);
   somePerson.set('isValid', true);
   this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
@@ -254,11 +250,9 @@ test('form can be submitted if model is valid', function(assert) {
 test('form submission with custom action', function(assert) {
   assert.expect(1);
 
-  this.submitNow = function() {
-    ok(true, 'submit action invoked!');
-  };
-  // for versions 2.0, 2.1
-  this.on('submitNow', this.submitNow);
+  this.on('submitNow', function() {
+    ok(true, 'submitNow action invoked!');
+  });
   this.set('model', somePerson);
   somePerson.set('isValid', true);
   this.render(hbs `{{#em-form model=model action="submitNow"}}{{em-input property="name"}}{{/em-form}}`);
@@ -271,11 +265,9 @@ test('form submission with custom action', function(assert) {
 test('form submission with a model that has no validation support and no isValid property should be submitted', function(assert) {
   assert.expect(1);
 
-  this.submit = function() {
+  this.on('submit', function() {
     ok(true, 'submit action invoked!');
-  };
-  // for versions 2.0, 2.1
-  this.on('submit', this.submit);
+  });
   this.set('model', {});
 
   this.render(hbs `{{#em-form model=model action='submit'}}{{em-input property="name"}}{{/em-form}}`);
