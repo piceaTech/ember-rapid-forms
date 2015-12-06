@@ -42,6 +42,9 @@ export default Ember.Controller.extend({
         }, {
             route: 'controls.wrapped-input',
             text: 'Wrapped Input'
+        }, {
+            route: 'controls.custom-styles',
+            text: 'Custom Styles'
         }])
     }])
 });

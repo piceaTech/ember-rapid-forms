@@ -101,6 +101,13 @@ test('em-select can select an item', function(assert) {
 
 });
 
+test('Textarea renders with custom css', function(assert) {
+  this.render(hbs`{{em-select elementClass="col-md-6"}}`);
+
+  assert.ok(this.$().find('select').hasClass('col-md-6'), 'Select has correct class');
+});
+
+
 // test('em-select can select multiple items', function(assert) {
 
 //   this.set('fruitOptions', fruitOptions);

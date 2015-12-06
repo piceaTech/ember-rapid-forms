@@ -32,8 +32,9 @@ test('Input can be disabled', function(assert) {
 });
 
 test('Input renders with custom css', function(assert) {
-  this.render(hbs`{{em-input label='My label' controlWrapper="col-md-6" labelClass="col-md-4"}}`);
-  
+  this.render(hbs`{{em-input label='My label' elementClass="col-md-6" controlWrapper="col-md-6" labelClass="col-md-4"}}`);
+
   assert.ok(this.$().find('label').hasClass('col-md-4'), 'Label has correct class');
   assert.ok(this.$().find('input').parent().parent().hasClass('col-md-6'), 'Input parent has correct class');
+  assert.ok(this.$().find('input').hasClass('col-md-6'), 'Input has correct class');
 });

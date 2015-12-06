@@ -8,6 +8,7 @@ Syntax:
 {{em-input property="property name"}}
  */
 export default FormGroupComponent.extend({
+  elementClass: null,
   htmlComponent: 'erf-html-input',
   property: null,
   label: null,

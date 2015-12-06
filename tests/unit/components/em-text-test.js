@@ -54,3 +54,11 @@ test('Textarea can be disabled', function(assert) {
   assert.ok(Ember.$(component.element).attr('disabled'), 'outer div renders disabled');
   assert.ok(Ember.$(component.element).find('textarea').attr('disabled'), 'textarea renders disabled');
 });
+
+test('Textarea renders with custom css', function(assert) {
+
+  var component = this.subject({elementClass: 'col-md-6'});
+
+  this.render();
+  assert.ok(Ember.$(component.element).find('textarea').hasClass('col-md-6'), 'Textarea has correct class');
+});

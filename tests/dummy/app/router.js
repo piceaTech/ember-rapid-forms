@@ -19,6 +19,7 @@ Router.map( function() {
         this.route( 'select' );
         this.route( 'html5' );
         this.route( 'wrapped-input' );
+        this.route( 'custom-styles' );
     });
 });
 

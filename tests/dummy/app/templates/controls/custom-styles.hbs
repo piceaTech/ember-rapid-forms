@@ -1,0 +1,43 @@
+<h1>Custom Styles</h1>
+
+You can modify the element styles directly by using the elementClass property.
+You simply assign your custom css classes. You can use this on inputs, selects
+and textareas.
+
+<h2>Markup</h2>
+<div class="well line-example">
+    <pre><code class="handlebars">
+        \{{#em-form model=model}}
+          \{{em-input label="Name" property="user" elementClass="fancyLogin"}}
+          \{{em-input label="Password" property="password" elementClass="uglyPassword"}}
+        \{{/em-form}}
+    </code></pre>
+</div>
+
+This will apply those classes directly to the input element, now lets apply some
+obvious css changes.
+
+<h2>CSS</h2>
+<div class="well line-example">
+    <pre><code class="css">
+      .fancyLogin {
+        padding:20px;
+        border:30px solid transparent;
+        border-image: repeating-linear-gradient(-45deg, #b5a560, #d4bc58 5px, white 5px, white 10px) 30 30 round;
+      }
+
+      .uglyPassword {
+        padding:20px;
+        border:30px solid transparent;
+        border-image: repeating-radial-gradient(#8335c9, #a55ee4, 5px, white 5px, white 10px) 1 11 round;
+      }
+    </code></pre>
+</div>
+
+<h2>Result</h2>
+<div class="well line-example">
+    {{#em-form model=model}}
+      {{em-input label="Name" property="user" elementClass="fancyLogin"}}
+      {{em-input label="Password" property="password" elementClass="uglyPassword"}}
+    {{/em-form}}
+</div>
