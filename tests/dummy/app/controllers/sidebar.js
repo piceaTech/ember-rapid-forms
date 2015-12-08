@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     needs: ['application'],
-    model: Ember.A([{
+    menu: Ember.A([{
         route: 'overview',
         text: 'Overview',
         items: []
