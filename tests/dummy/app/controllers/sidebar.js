@@ -11,10 +11,6 @@ export default Ember.Controller.extend({
         text: 'Getting started',
         items: []
     }, {
-        route: 'quickexample',
-        text: '5 Minutes Example',
-        items: []
-    }, {
         route: 'form',
         text: 'Form',
         items: []
