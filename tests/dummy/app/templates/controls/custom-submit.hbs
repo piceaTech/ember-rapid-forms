@@ -7,13 +7,13 @@ It is possible to have a custom submit button by not rendering the default submi
 <h2>Markup</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-        \{{#em-form model=model submitButton=false}}
-        \{{em-input label="Name" property="user"}}
-        \{{em-input label="Password" property="password"}}
-        &lt;div class="form-actions"&gt;
-            &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
-        &lt;/div&gt;
-        \{{/em-form}}
+\{{#em-form model=model submitButton=false}}
+\{{em-input label="Name" property="user"}}
+\{{em-input label="Password" property="password"}}
+&lt;div class="form-actions"&gt;
+    &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
+&lt;/div&gt;
+\{{/em-form}}
     </code></pre>
 </div>
 
@@ -29,41 +29,40 @@ Few things happen here:
 <h2>Controller/Model</h2>
 <div class="well line-example">
     <pre><code class="coffeescript">
-    #Our Model
-    var Credentials = DS.Model.extend(EmberValidations, {
-      user: DS.attr('string'),
-      password: DS.attr('string'),
-      #Opposite if isValid, required to judge whether the submit button should be disabled or not.
-      isntValid: Ember.computed.not('isValid')
-    });
+#Our Model
+var Credentials = DS.Model.extend(EmberValidations, {
+  user: DS.attr('string'),
+  password: DS.attr('string'),
+  #Opposite if isValid, required to judge whether the submit button should be disabled or not.
+  isntValid: Ember.computed.not('isValid')
+});
 
-    Credentials.reopen({
-      validations: {
-        user: {
-          presence: true,
-          length: {
-            minimum: 3
-          }
-        },
-        password: {
-          presence: true,
-          length: {
-            minimum: 4
-          }
-        }
+Credentials.reopen({
+  validations: {
+    user: {
+      presence: true,
+      length: {
+        minimum: 3
       }
-    });
-
-
-    #Our controller
-    export default Em.Controller.extend({
-      actions: {
-        submit: function() {
-          return alert("Logged in!");
-        }
+    },
+    password: {
+      presence: true,
+      length: {
+        minimum: 4
       }
-    });
+    }
+  }
+});
 
+
+#Our controller
+export default Em.Controller.extend({
+  actions: {
+    submit: function() {
+      return alert("Logged in!");
+    }
+  }
+});
     </code></pre>
 </div>
 

@@ -6,36 +6,34 @@ This gives you the freedom to support extra visual effects when neccessary.
 <h2>Template Markup</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-        \{{#em-form model=model formLayout=layout}}
-            \{{em-input label="Name" property="name"}}
-            \{{my-custom-input label="Name" property="name"}}
-        \{{/em-form}}
+\{{#em-form model=model formLayout=layout}}
+    \{{em-input label="Name" property="name"}}
+    \{{my-custom-input label="Name" property="name"}}
+\{{/em-form}}
     </code></pre>
 </div>
 
 <h2>The custom component code</h2>
 <div class="well line-example">
     <pre><code class="coffeescript">
-        WrappedInputComponent = Em.Component.extend({
-            attributeBindings: ['style'],
-            style: Ember.computed({
-                get:function(){
-                    return "border: dotted 2px;"
-                }
-            })
-        })
-
-
+WrappedInputComponent = Em.Component.extend({
+    attributeBindings: ['style'],
+    style: Ember.computed({
+        get:function(){
+            return "border: dotted 2px;"
+        }
+    })
+})
     </code></pre>
 </div>
 
 <h2>The custom component template</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-        \{{em-input error=showError placeholder="Wrapped with ugly border"}}
-        \{{#if showError}}
-            Extra error data !
-        \{{/if}}
+\{{em-input error=showError placeholder="Wrapped with ugly border"}}
+\{{#if showError}}
+    Extra error data !
+\{{/if}}
     </code></pre>
 </div>
 

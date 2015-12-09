@@ -3,30 +3,25 @@
 
 <i>Ember Forms</i> is an Ember CLI module and can be simply installed by:
 
-<ol>
-    <li>
-        <pre><code class="bash">npm install --save-dev ember-rapid-forms</code></pre>
-    </li>
-</ol>
+<pre><code class="bash">npm install --save-dev ember-rapid-forms</code></pre>
 
 <h2>Quick example</h2>
 
 <h3>Given the following controller:</h3>
 <div class="well line-example">
     <pre><code class="coffeescript">
-        MyController = Em.Controller.extend({
-            genderOptions: Ember.A([
-                {id: 'M', name: 'Male'}
-                {id: 'F', name: 'Female'}
-                {id: 'O', name: 'Other'}
-            ]),
-            actions:{
-                submit: function(){
-                    alert ("Submitted!");
-                }
-
-            }
-        })
+MyController = Em.Controller.extend({
+    genderOptions: Ember.A([
+        {id: 'M', name: 'Male'}
+        {id: 'F', name: 'Female'}
+        {id: 'O', name: 'Other'}
+    ]),
+    actions:{
+        submit: function(){
+            alert ("Submitted!");
+        }
+    }
+})
     </code></pre>
 </div>
 
@@ -34,42 +29,42 @@
 <h3>And the following model:</h3>
 <div class="well line-example">
     <pre><code class="coffeescript">
-        User = DS.Model.extend({
-            name: DS.attr('string'),
-            password: DS.attr('string'),
-            comment: DS.attr('string'),
-            active: DS.attr('boolean'),
-            gender: DS.attr('string'),
-            nameHasValue: Ember.computed('name', {
-                get:function(){
-                    return !!this.get('name').length;
-                }
-            })
-        })
+User = DS.Model.extend({
+    name: DS.attr('string'),
+    password: DS.attr('string'),
+    comment: DS.attr('string'),
+    active: DS.attr('boolean'),
+    gender: DS.attr('string'),
+    nameHasValue: Ember.computed('name', {
+        get:function(){
+            return !!this.get('name').length;
+        }
+    })
+})
 
 
-        User.reopen({
-            validations: {
-                name: {
-                    presence: true,
-                    length: {
-                        minimum: 5
-                    }
-                },
-                password: {
-                    presence: true,
-                    length: {
-                        minimum: 6
-                    }
-                },
-                comment: {
-                    presence: true
-                },
-                gender: {
-                    presence: true
-                }
+User.reopen({
+    validations: {
+        name: {
+            presence: true,
+            length: {
+                minimum: 5
             }
-        });
+        },
+        password: {
+            presence: true,
+            length: {
+                minimum: 6
+            }
+        },
+        comment: {
+            presence: true
+        },
+        gender: {
+            presence: true
+        }
+    }
+});
     </code></pre>
 </div>
 
@@ -77,14 +72,14 @@
 
 <h3>With this template:</h3>
 <div class="well line-example">
-    <pre><code class="coffeescript">
-        \{{#em-form model=model}}
-            \{{em-input property="name" label="Full Name" placeholder="Enter a name..."}}
-            \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue}}
-            \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4}}
-            \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="content.id" optionLabelPath="content.name"}}
-            \{{em-checkbox property="active" label="Active?"}}
-        \{{/em-form}}
+    <pre><code class="handlebars">
+\{{#em-form model=model}}
+    \{{em-input property="name" label="Full Name" placeholder="Enter a name..."}}
+    \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue}}
+    \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4}}
+    \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="content.id" optionLabelPath="content.name"}}
+    \{{em-checkbox property="active" label="Active?"}}
+\{{/em-form}}
     </code></pre>
 </div>
 

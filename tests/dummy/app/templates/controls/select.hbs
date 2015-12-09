@@ -5,27 +5,26 @@ Selectbox let a user select one item of a multi pre defined options.
 <h3>Template Markup</h3>
 <div class="well line-example">
     <pre><code class="handlebars">
-        \{{em-select
-            label="Gender"
-            property="gender"
-            content=genderOptions
-            optionValuePath="id"
-            optionLabelPath="name"
-            prompt="--select--"}}
+\{{em-select
+    label="Gender"
+    property="gender"
+    content=genderOptions
+    optionValuePath="id"
+    optionLabelPath="name"
+    prompt="--select--"}}
     </code></pre>
 </div>
 <h3>Controller Code</h3>
 <div class="well line-example">
     <pre><code class="coffeescript">
-        App.ControlsSelectController = Ember.Controller.extend({
-            // Ember.A ist only neccessary when prototype-extensions are turned off
-            genderOptions: Ember.A([
-                {id: 'M', name: 'Male'}
-                {id: 'F', name: 'Female'}
-                {id: 'O', name: 'Other'}
-            ])
-        })
-
+App.ControlsSelectController = Ember.Controller.extend({
+    // Ember.A ist only neccessary when prototype-extensions are turned off
+    genderOptions: Ember.A([
+        {id: 'M', name: 'Male'}
+        {id: 'F', name: 'Female'}
+        {id: 'O', name: 'Other'}
+    ])
+})
     </code></pre>
 </div>
 
