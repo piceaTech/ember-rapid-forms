@@ -8,8 +8,8 @@ It is possible to have a custom submit button by not rendering the default submi
 <div class="well line-example">
     <pre><code class="handlebars">
         \{{#em-form model=model submitButton=false}}
-        {{em-input label="Name" property="user"}}
-        {{em-input label="Password" property="password"}}
+        \{{em-input label="Name" property="user"}}
+        \{{em-input label="Password" property="password"}}
         &lt;div class="form-actions"&gt;
             &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
         &lt;/div&gt;
