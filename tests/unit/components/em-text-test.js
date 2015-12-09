@@ -6,7 +6,12 @@ import Ember from 'ember';
 
 moduleForComponent('em-text', {
   // Specify the other units that are required for this test
-  needs: ['component:form-group', 'component:form-group-control', 'component:erf-html-text']
+  needs: [
+    'component:form-group',
+    'component:form-group-control',
+    'component:erf-html-text',
+    'component:em-form-label'
+  ]
 });
 
 test('Textarea renders', function(assert) {
@@ -61,4 +66,14 @@ test('Textarea renders with custom css', function(assert) {
 
   this.render();
   assert.ok(Ember.$(component.element).find('textarea').hasClass('col-md-6'), 'Textarea has correct class');
+});
+
+test('cid correctly sets the id for the textarea and it\'s label', function(assert) {
+  assert.expect(2);
+  let cid = 'test-cid';
+  let component = this.subject({label: 'some label', cid: cid});
+  this.render();
+
+  assert.equal(component.$('textarea').attr('id'), cid, 'textarea has correct id');
+  assert.equal(component.$('label').attr('for'), cid, 'label has correct \'for\'');
 });

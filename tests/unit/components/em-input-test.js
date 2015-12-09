@@ -38,3 +38,11 @@ test('Input renders with custom css', function(assert) {
   assert.ok(this.$().find('input').parent().parent().hasClass('col-md-6'), 'Input parent has correct class');
   assert.ok(this.$().find('input').hasClass('col-md-6'), 'Input has correct class');
 });
+
+test('cid correctly sets the id for the input and it\'s label', function(assert) {
+  assert.expect(2);
+  this.render(hbs`{{em-input label="some label" cid='test-cid'}}`);
+
+  assert.equal(this.$('input').attr('id'), 'test-cid', 'input has correct id');
+  assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
+});
