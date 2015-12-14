@@ -3,7 +3,7 @@ import layout from '../templates/components/html-select';
 
 export default Ember.Component.extend({
   layout: layout,
-  
+
   didReceiveAttrs(/*attrs*/) {
     this._super(...arguments);
     var content = this.get('content');
@@ -14,13 +14,19 @@ export default Ember.Component.extend({
     }
     // set it to the correct value of the selection
     this.selectedValue = Ember.computed('mainComponent.model.' + this.get('mainComponent.property'), function() {
-      return this.get('mainComponent.model.' + this.get('mainComponent.property'));
+      const propertyIsModel = this.get('mainComponent.propertyIsModel');
+      var value = this.get('mainComponent.model.' + this.get('mainComponent.property'));
+      if(propertyIsModel) {
+        const optionValuePath = this.get('mainComponent.optionValuePath');
+        value = value.get(optionValuePath);
+      }
+      return value;
     });
   },
 
   actions: {
     change() {
-      
+
       const selectedEl = this.$('select')[0];
       let selectedIndex = selectedEl.selectedIndex;
       // check whether we show prompt the the correct to show index is one less
@@ -34,8 +40,17 @@ export default Ember.Component.extend({
         }
       }
       const content = this.get('mainComponent.content');
-      const selectedValue = content[selectedIndex];
-      const selectedID = selectedValue[this.get('mainComponent.optionValuePath')];
+      const selectedValue = content.objectAt(selectedIndex);
+      const optionValuePath = this.get('mainComponent.optionValuePath');
+      const propertyIsModel = this.get('mainComponent.propertyIsModel');
+      var selectedID;
+
+      if(propertyIsModel) {
+        selectedID = selectedValue;
+      } else  {
+        selectedID = selectedValue[optionValuePath];
+      }
+
       this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedID);
       const changeAction = this.get('action');
       if(changeAction){
