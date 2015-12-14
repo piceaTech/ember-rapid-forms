@@ -107,6 +107,13 @@ test('Textarea renders with custom css', function(assert) {
   assert.ok(this.$().find('select').hasClass('col-md-6'), 'Select has correct class');
 });
 
+test('cid correctly sets the id for the select and it\'s label', function(assert) {
+  assert.expect(2);
+  this.render(hbs`{{em-select label="some label" cid='test-cid'}}`);
+
+  assert.equal(this.$('select').attr('id'), 'test-cid', 'select has correct id');
+  assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
+});
 
 // test('em-select can select multiple items', function(assert) {
 
