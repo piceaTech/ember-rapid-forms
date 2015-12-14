@@ -16,9 +16,13 @@ export default Ember.Component.extend({
     this.selectedValue = Ember.computed('mainComponent.model.' + this.get('mainComponent.property'), function() {
       const propertyIsModel = this.get('mainComponent.propertyIsModel');
       var value = this.get('mainComponent.model.' + this.get('mainComponent.property'));
-      if(propertyIsModel) {
+      if(propertyIsModel && value != null) {
         const optionValuePath = this.get('mainComponent.optionValuePath');
-        value = value.get(optionValuePath);
+        if(value.get === undefined) {
+          value = value[optionValuePath];
+        } else {
+          value = value.get(optionValuePath);
+        }
       }
       return value;
     });
