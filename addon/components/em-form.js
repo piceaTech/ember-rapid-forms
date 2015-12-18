@@ -73,7 +73,7 @@ export default Ember.Component.extend({
             return _this.sendAction();
           }
         };
-      })(this));
+      })(this)).catch(function(){});
     }
   }
 });
