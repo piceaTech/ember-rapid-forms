@@ -138,7 +138,7 @@ test('cid correctly sets the id for the select and it\'s label', function(assert
   assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
 });
 
-test('cid it property by default', function(assert) {
+test('cid is property by default', function(assert) {
   assert.expect(2);
   this.render(hbs`{{em-select label="some label" property='test-cid'}}`);
 

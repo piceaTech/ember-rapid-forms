@@ -78,7 +78,7 @@ test('cid correctly sets the id for the textarea and it\'s label', function(asse
   assert.equal(component.$('label').attr('for'), cid, 'label has correct \'for\'');
 });
 
-test('cid it property by default', function(assert) {
+test('cid is property by default', function(assert) {
   assert.expect(2);
   let cid = 'test-cid';
   let component = this.subject({label: 'some label', property: cid});
