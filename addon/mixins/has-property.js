@@ -22,6 +22,15 @@ export default Ember.Mixin.create({
       }
     }
   }),
+  id: Ember.computed('cid', 'property', {
+    get: function() {
+      if (this.get('cid')) {
+        return this.get('cid');
+      } else {
+        return this.get('property');
+      }
+    }
+  }),
   init: function() {
     this._super(...arguments);
     return Ember.Binding.from('model.errors.' + this.get('propertyName')).to('errors').connect(this);

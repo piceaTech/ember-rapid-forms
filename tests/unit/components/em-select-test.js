@@ -138,6 +138,14 @@ test('cid correctly sets the id for the select and it\'s label', function(assert
   assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
 });
 
+test('cid is property by default', function(assert) {
+  assert.expect(2);
+  this.render(hbs`{{em-select label="some label" property='test-cid'}}`);
+
+  assert.equal(this.$('select').attr('id'), 'test-cid', 'select has correct id');
+  assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
+});
+
 // test('em-select can select multiple items', function(assert) {
 
 //   this.set('fruitOptions', fruitOptions);

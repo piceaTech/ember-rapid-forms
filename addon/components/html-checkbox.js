@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   type: "checkbox",
   checked: false,
   init: function() {
-    this.elementId = this.get('mainComponent.cid');
+    this.elementId = this.get('mainComponent.id');
     this._super(...arguments);
   },
   didReceiveAttrs( /*attrs*/ ) {
