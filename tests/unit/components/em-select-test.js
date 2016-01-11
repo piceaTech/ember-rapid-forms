@@ -101,6 +101,29 @@ test('em-select can select an item', function(assert) {
 
 });
 
+test('em-select can select the model itself', function(assert) {
+
+  this.set('fruitOptions', fruitOptions);
+  this.set('fruitSalad', fruitSalad);
+
+  this.render(hbs `{{em-select label="Fruits:" content=fruitOptions propertyIsModel=true optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}`);
+
+  var element = this.$();
+  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+
+  var select = element.find('select')[0];
+  assert.ok(select.options.length > 3, 'select has options');
+
+  Ember.run(() => {
+    this.$(select).val('3');
+    this.$(select).trigger('change');
+  });
+
+  assert.equal(fruitSalad.get('favoriteFruit.id'), 3, 'model favorite fruit is the selection');
+  assert.equal(fruitSalad.get('favoriteFruit.name'), 'Orange', 'model favorite fruit is the selection');
+
+});
+
 test('Textarea renders with custom css', function(assert) {
   this.render(hbs`{{em-select elementClass="col-md-6"}}`);
 
@@ -110,6 +133,14 @@ test('Textarea renders with custom css', function(assert) {
 test('cid correctly sets the id for the select and it\'s label', function(assert) {
   assert.expect(2);
   this.render(hbs`{{em-select label="some label" cid='test-cid'}}`);
+
+  assert.equal(this.$('select').attr('id'), 'test-cid', 'select has correct id');
+  assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
+});
+
+test('cid is property by default', function(assert) {
+  assert.expect(2);
+  this.render(hbs`{{em-select label="some label" property='test-cid'}}`);
 
   assert.equal(this.$('select').attr('id'), 'test-cid', 'select has correct id');
   assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');

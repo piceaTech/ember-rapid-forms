@@ -30,3 +30,11 @@ test('cid correctly sets the id for the checkbox and it\'s label', function(asse
   assert.equal(this.$(':checkbox').attr('id'), 'test-cid', 'checkbox has correct id');
   assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
 });
+
+test('cid is property by default', function(assert) {
+  assert.expect(2);
+  this.render(hbs`{{em-checkbox label="some label" property='test-cid'}}`);
+
+  assert.equal(this.$(':checkbox').attr('id'), 'test-cid', 'checkbox has correct id');
+  assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
+});

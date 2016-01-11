@@ -1,6 +1,6 @@
 <div class="well sidebar">
     <ul class="nav">
-        {{#each model as |link|}}
+        {{#each menu as |link|}}
             <li>{{#link-to link.route}}{{link.text}}{{/link-to}}</li>
             {{#if link.items}}
                 <ul class="nav">
