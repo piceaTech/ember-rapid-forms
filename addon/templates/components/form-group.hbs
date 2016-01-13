@@ -3,26 +3,24 @@
     {{#if yieldInLabel}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{control-within-label label=label extraClass=labelClass
-                  controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                {{control-within-label label=label extraClass=labelClass mainComponent=mainComponent form=form}}
             </div>
         {{else}}
-            {{control-within-label label=label extraClass=labelClass
-              controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+            {{control-within-label label=label extraClass=labelClass mainComponent=mainComponent form=form}}
         {{/if}}
     {{else}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
                 {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
-                {{form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                {{form-group-control mainComponent=mainComponent form=form}}
             </div>
         {{else}}
             {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
-            {{form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+            {{form-group-control mainComponent=mainComponent form=form}}
         {{/if}}
     {{/if}}
 {{else}}
-  {{form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+  {{form-group-control mainComponent=mainComponent form=form}}
 {{/if}}
 
 {{#if validationIcons}}

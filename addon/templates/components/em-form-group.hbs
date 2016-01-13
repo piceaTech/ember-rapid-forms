@@ -3,7 +3,7 @@
       {{#unless hasBlock}}
         {{form-group label=label yieldInLabel=yieldInLabel
           labelWrapperClass=labelWrapperClass labelClass=labelClass
-          help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
+          help=help shouldShowErrors=shouldShowErrors
           cid=cid validationIcons=validationIcons mainComponent=this form=form}}
       {{else}}
         {{yield}}
@@ -13,7 +13,7 @@
   {{#unless hasBlock}}
     {{form-group label=label yieldInLabel=yieldInLabel
       labelWrapperClass=labelWrapperClass labelClass=labelClass
-      help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
+      help=help shouldShowErrors=shouldShowErrors
       cid=cid validationIcons=validationIcons mainComponent=this form=form}}
   {{else}}
     {{yield}}
