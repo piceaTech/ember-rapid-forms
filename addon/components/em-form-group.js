@@ -58,7 +58,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
     }
   }),
   v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'ember-rapid-forms.em-form-group-v_icons','until':'v2.0'}),
-  validationIcons: Ember.computed.alias('form.validationIcons'),
+  validationIcons: Ember.computed.alias('mainComponent.form.validationIcons'),
   v_success_icon: Ember.computed.deprecatingAlias('successIcon', {'id': 'ember-rapid-forms.em-form-group-v_success_icon','until':'v2.0'}),
   successIcon: 'fa fa-check',
   v_warn_icon: Ember.computed.deprecatingAlias('warningIcon', {'id': 'ember-rapid-forms.em-form-group-v_warn_icon','until':'v2.0'}),
@@ -86,7 +86,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       }
     }
   }),
-  hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
+  hideValidationsOnFormChange: Ember.observer('mainComponent.form', 'mainComponent.form.model', function() {
     this.set('canShowErrors', false);
   }),
   shouldShowErrors: Ember.computed('canShowErrors', 'helpText', {
@@ -109,7 +109,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
    */
 
   focusIn() {
-    if (this.get('form.showErrorsOnFocusIn')) {
+    if (this.get('mainComponent.form.showErrorsOnFocusIn')) {
       return this.set('canShowErrors', true);
     }
   },

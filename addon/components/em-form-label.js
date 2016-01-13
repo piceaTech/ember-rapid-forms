@@ -26,17 +26,17 @@ export default Ember.Component.extend(InFormMixin, {
   classNameBindings: ['extraClass', 'inlineClassCalc', 'horiClassCalc'],
   attributeBindings: ['for'],
   horiClass: 'col-sm-2',
-  horiClassCalc: Ember.computed('form.isHorizontal', {
+  horiClassCalc: Ember.computed('mainComponent.form.isHorizontal', {
     get: function() {
-      if (this.get('form.isHorizontal') && this.get('horiClass')) {
+      if (this.get('mainComponent.form.isHorizontal') && this.get('horiClass')) {
         return this.get('horiClass');
       }
     }
   }),
   inlineClass: 'sr-only',
-  inlineClassCalc: Ember.computed('form.formLayout', {
+  inlineClassCalc: Ember.computed('mainComponent.form.formLayout', {
     get: function() {
-      if (this.get('form.isInline') && this.get('inlineClass')) {
+      if (this.get('mainComponent.form.isInline') && this.get('inlineClass')) {
         return this.get('inlineClass');
       }
     }
