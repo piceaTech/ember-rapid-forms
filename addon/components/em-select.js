@@ -9,8 +9,8 @@ Syntax:
     content=array_of_options
     optionValuePath=keyForValue
     optionLabelPath=keyForLabel
-    prompt="Optional default prompt"}}
     optionDisabledPath=keyForDisabled
+    prompt="Optional default prompt"}}
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
@@ -25,6 +25,7 @@ export default FormGroupComponent.extend({
   selection: null,
   optionValuePath: 'id',
   optionLabelPath: 'value',
+  optionDisabledPath: null,
   prompt: null,
   controlWrapper: Ember.computed('form.formLayout', {
     get: function() {
