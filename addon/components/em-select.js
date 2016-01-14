@@ -10,7 +10,7 @@ Syntax:
     optionValuePath=keyForValue
     optionLabelPath=keyForLabel
     prompt="Optional default prompt"}}
-
+    optionDisabledPath=keyForDisabled
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
