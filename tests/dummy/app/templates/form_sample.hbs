@@ -6,9 +6,13 @@
 <hr/>
 
 {{#em-form model=model formLayout=layout}}
-    {{em-input property="name" label="Full Name" placeholder="Enter a name..."}}
-    {{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue}}
-    {{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4}}
-    {{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name"}}
-    {{em-checkbox property="active" label="Active?"}}
+    {{em-input property="name" label="Full Name" placeholder="Enter a name..." canShowErrors=model.visibleErrors.name}}
+    {{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
+    {{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4 canShowErrors=model.visibleErrors.comment}}
+    {{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name" canShowErrors=model.visibleErrors.gender}}
+    {{em-checkbox property="active" label="Active?" canShowErrors=model.visibleErrors.active}}
+    <div class="form-group">
+        <button class="btn btn-default" {{ action "validate" }}>Run Validations</button>
+        <button class="btn btn-default" {{ action "clearValidations" }}>Clear Validations</button>
+    </div>
 {{/em-form}}
