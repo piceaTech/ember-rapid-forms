@@ -9,6 +9,9 @@ This gives you the freedom to support extra visual effects when neccessary.
 \{{#em-form model=model formLayout=layout}}
     \{{em-input label="Name" property="name"}}
     \{{my-custom-input label="Name" property="name"}}
+    \{{#em-custom-input label="Password" property="password"}}
+        \{{input value=model.password type="password"}}
+    \{{/em-custom-input}}
 \{{/em-form}}
     </code></pre>
 </div>
@@ -42,5 +45,8 @@ WrappedInputComponent = Em.Component.extend({
 {{#em-form model=model formLayout=layout}}
     {{em-input label="Name" property="name"}}
     {{my-custom-input label="Name" property="name"}}
+    {{#em-custom-input label="Password" property="password"}}
+        {{input value=model.password type="password"}}
+    {{/em-custom-input}}
 {{/em-form}}
 </div>
