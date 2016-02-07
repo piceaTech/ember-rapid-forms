@@ -1,4 +1,3 @@
-
 {{#if label}}
     {{#if yieldInLabel}}
         {{#if labelWrapperClass}}
@@ -14,15 +13,21 @@
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
                 {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
-                {{form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                    {{yield}}
+                {{/form-group-control}}
             </div>
         {{else}}
             {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
-            {{form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+            {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                {{yield}}
+            {{/form-group-control}}
         {{/if}}
     {{/if}}
 {{else}}
-  {{form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+    {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+        {{yield}}
+    {{/form-group-control}}
 {{/if}}
 
 {{#if validationIcons}}

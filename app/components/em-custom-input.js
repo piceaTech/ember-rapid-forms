@@ -1,3 +1,3 @@
-import InputComponent from 'ember-rapid-forms/components/em-custom-input';
+import CustomInputComponent from 'ember-rapid-forms/components/em-custom-input';
 
-export default InputComponent;
+export default CustomInputComponent;

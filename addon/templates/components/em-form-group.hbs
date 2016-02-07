@@ -1,13 +1,17 @@
 {{#if wrapperClass}}
     <div class={{wrapperClass}}>
-        {{form-group label=label yieldInLabel=yieldInLabel
-          labelWrapperClass=labelWrapperClass labelClass=labelClass
-          help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
-          cid=cid validationIcons=validationIcons mainComponent=this form=form}}
+        {{#form-group label=label yieldInLabel=yieldInLabel
+            labelWrapperClass=labelWrapperClass labelClass=labelClass
+            help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
+            cid=cid validationIcons=validationIcons mainComponent=this form=form}}
+            {{yield this}}
+        {{/form-group}}
     </div>
 {{else}}
-    {{form-group label=label yieldInLabel=yieldInLabel
-      labelWrapperClass=labelWrapperClass labelClass=labelClass
-      help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
-      cid=cid validationIcons=validationIcons mainComponent=this form=form}}
+    {{#form-group label=label yieldInLabel=yieldInLabel
+        labelWrapperClass=labelWrapperClass labelClass=labelClass
+        help=help shouldShowErrors=shouldShowErrors controlWrapper=controlWrapper
+        cid=cid validationIcons=validationIcons mainComponent=this form=form}}
+        {{yield this}}
+    {{/form-group}}
 {{/if}}
