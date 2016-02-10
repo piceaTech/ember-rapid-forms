@@ -47,10 +47,8 @@ test('cid correctly sets the id for the input and it\'s label', function(assert)
   assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
 });
 
-test('cid is property by default', function(assert) {
-  assert.expect(2);
+test('the "for" of the label is the "id" of the input', function(assert) {
   this.render(hbs`{{em-input label="some label" property='test-cid'}}`);
 
-  assert.equal(this.$('input').attr('id'), 'test-cid', 'input has correct id');
-  assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
+  assert.equal(this.$('input').attr('id'), this.$('label').attr('for'), 'the "for" of the label is not the "id" of the input');
 });
