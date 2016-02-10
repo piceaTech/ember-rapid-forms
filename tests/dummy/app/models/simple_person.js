@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import EV from 'ember-validations';
+import InputErrors from 'ember-rapid-forms/mixins/input-errors';
 
-var SimplePerson = DS.Model.extend(EV, {
+var SimplePerson = DS.Model.extend(EV, InputErrors, {
   name: DS.attr('string'),
   password: DS.attr('string'),
   comment: DS.attr('string'),

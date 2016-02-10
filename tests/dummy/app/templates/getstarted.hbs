@@ -29,7 +29,12 @@ MyController = Em.Controller.extend({
 <h3>And the following model:</h3>
 <div class="well line-example">
     <pre><code class="coffeescript">
-User = DS.Model.extend({
+import Ember from 'ember';
+import DS from 'ember-data';
+import EV from 'ember-validations';
+import InputErrors from 'ember-rapid-forms/mixins/input-errors';
+
+var User = DS.Model.extend(EV, InputErrors, {
     name: DS.attr('string'),
     password: DS.attr('string'),
     comment: DS.attr('string'),
@@ -73,12 +78,16 @@ User.reopen({
 <h3>With this template:</h3>
 <div class="well line-example">
     <pre><code class="handlebars">
-\{{#em-form model=model}}
-    \{{em-input property="name" label="Full Name" placeholder="Enter a name..."}}
-    \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue}}
-    \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4}}
-    \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="content.id" optionLabelPath="content.name"}}
-    \{{em-checkbox property="active" label="Active?"}}
+\{{#em-form model=model formLayout=layout}}
+    \{{em-input property="name" label="Full Name" placeholder="Enter a name..." canShowErrors=model.visibleErrors.name}}
+    \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
+    \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4 canShowErrors=model.visibleErrors.comment}}
+    \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name" canShowErrors=model.visibleErrors.gender}}
+    \{{em-checkbox property="active" label="Active?" canShowErrors=model.visibleErrors.active}}
+    &lt;div class="form-group"&gt;
+        &lt;button class="btn btn-default" \{{ action "validate" }}&gt;Run Validations&lt;/button&gt;
+        &lt;button class="btn btn-default" \{{ action "clearValidations" }}&gt;Clear Validations&lt;/button&gt;
+    &lt;/div&gt;
 \{{/em-form}}
     </code></pre>
 </div>
