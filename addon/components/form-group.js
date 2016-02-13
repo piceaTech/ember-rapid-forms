@@ -10,7 +10,7 @@ export default Ember.Component.extend({
       if (this.get('cid')) {
         return this.get('cid');
       } else {
-        return this.get('property');
+        return `${this.get('property')}-${this.elementId}`;
       }
     }
   }),
