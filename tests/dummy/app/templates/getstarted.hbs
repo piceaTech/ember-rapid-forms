@@ -35,7 +35,8 @@ import EV from 'ember-validations';
 import InputErrors from 'ember-rapid-forms/mixins/input-errors';
 
 var User = DS.Model.extend(EV, InputErrors, {
-    name: DS.attr('string'),
+    firstName: DS.attr('string', { defaultValue: null }),
+    lastName: DS.attr('string', { defaultValue: null }),
     password: DS.attr('string'),
     comment: DS.attr('string'),
     active: DS.attr('boolean'),
@@ -44,16 +45,33 @@ var User = DS.Model.extend(EV, InputErrors, {
         get:function(){
             return !!this.get('name').length;
         }
+    }),
+    fullName: Ember.computed('firstName', 'lastName', {
+        get: function() {
+            if (this.get('firstName')) {
+                return `${this.get('firstName')} ${this.get('lastName')}`;
+            }
+            else {
+                return null;
+            }
+        },
+        set: function(key, value) {
+            let [firstName, lastName] = value.split(/\s+/);
+            firstName = firstName ? firstName : null;
+            lastName = lastName ? lastName : null;
+            this.setProperties({ firstName, lastName });
+            return value;
+        }
     })
 })
 
 
 User.reopen({
     validations: {
-        name: {
-            presence: true,
-            length: {
-                minimum: 5
+        fullName: {
+            format: {
+                with: /^[^\s]+(\s[^\s]+)+$/,
+                message: "enter a first and last name"
             }
         },
         password: {
@@ -79,7 +97,7 @@ User.reopen({
 <div class="well line-example">
     <pre><code class="handlebars">
 \{{#em-form model=model formLayout=layout}}
-    \{{em-input property="name" label="Full Name" placeholder="Enter a name..." canShowErrors=model.visibleErrors.name}}
+    \{{em-input property="fullName" label="Full Name" placeholder="Enter a full name..." canShowErrors=model.visibleErrors.fullName}}
     \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
     \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4 canShowErrors=model.visibleErrors.comment}}
     \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name" canShowErrors=model.visibleErrors.gender}}
