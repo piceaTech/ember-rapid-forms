@@ -30,7 +30,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   tagName: 'div',
   "class": 'form-group',
   layout: layout,
-  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
+  classNameBindings: ['hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
   hasSuccess: Ember.computed('status', 'canShowErrors', {
