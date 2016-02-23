@@ -52,3 +52,17 @@ test('the "for" of the label is the "id" of the input', function(assert) {
 
   assert.equal(this.$('input').attr('id'), this.$('label').attr('for'), 'the "for" of the label is not the "id" of the input');
 });
+
+test('Input can be a required field', function(assert) {
+
+  this.render(hbs`{{em-input required=true}}`);
+
+  assert.ok(this.$().find('input').attr('required'), 'input becomes a required field');
+});
+
+test('Input can be autofocused', function(assert) {
+
+  this.render(hbs`{{em-input autofocus=true}}`);
+
+  assert.ok(this.$().find('input').attr('autofocus'), 'input has autofocus');
+});
