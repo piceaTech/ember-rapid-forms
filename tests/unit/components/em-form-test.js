@@ -247,6 +247,26 @@ test('form can be submitted if model is valid', function(assert) {
   });
 });
 
+test('model in an argument of the form submission', function(assert) {
+  assert.expect(1);
+
+  this.on('submit', function(model) {
+    model.set('name', 'other-name');
+  });
+
+  this.set('model', somePerson);
+  somePerson.set('isValid', true);
+  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+
+  Ember.run(() => {
+    this.$().find('button').click();
+  });
+
+  Ember.run(() => {
+    assert.equal(somePerson.get('name'), 'other-name', 'Model is an argument of the form submission');
+  });
+});
+
 test('form submission with custom action', function(assert) {
   assert.expect(1);
 
