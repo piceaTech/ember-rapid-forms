@@ -33,6 +33,6 @@ export default Ember.Mixin.create({
   }),
   init: function() {
     this._super(...arguments);
-    return Ember.Binding.from('model.errors.' + this.get('propertyName')).to('errors').connect(this);
+    Ember.defineProperty(this, 'errors', Ember.computed.alias((`model.errors.${this.get('propertyName')}`)));
   }
 });
