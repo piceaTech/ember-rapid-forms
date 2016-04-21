@@ -1,1 +1,12 @@
-<textarea placeholder={{mainComponent.placeholder}} value={{selectedValue}}  rows={{mainComponent.rows}} cols={{mainComponent.cols}} disabled={{mainComponent.disabled}} class="form-control {{mainComponent.elementClass}}" {{action 'change' on='change'}} {{action 'input' on='input'}} id={{mainComponent.id}}></textarea>
+{{textarea
+  rows=mainComponent.rows
+  cols=mainComponent.cols
+  placeholder=mainComponent.placeholder
+  value=selectedValue
+  name=mainComponent.name
+  disabled=mainComponent.disabled
+  class=(concat "form-control " mainComponent.elementClass)
+  id=mainComponent.id
+  required=mainComponent.required
+  autofocus=mainComponent.autofocus
+}}
