@@ -19,6 +19,7 @@ export default FormGroupComponent.extend({
   required: null,
   autofocus: null,
   readonly: null,
+  autoresize: null,
   disabled: null,
   controlWrapper: Ember.computed('form.formLayout', function() {
     if (this.get('form.formLayout') === 'horizontal') {
