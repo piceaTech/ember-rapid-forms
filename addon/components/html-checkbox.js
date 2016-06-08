@@ -26,8 +26,6 @@ export default Ember.Component.extend({
     const changeAction = this.get('action');
     if (changeAction) {
       changeAction(checked);
-    } else {
-      // TODO make deprecate here so everyone switches to new action syntax
     }
   },
   input: function() {
@@ -40,9 +38,6 @@ export default Ember.Component.extend({
     const changeAction = this.get('action');
     if (changeAction) {
       changeAction(checked);
-    } else {
-      // TODO make deprecate here so everyone switches to new action syntax
     }
   }
-
 });
