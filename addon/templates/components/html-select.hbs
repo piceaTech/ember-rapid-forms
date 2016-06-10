@@ -1,12 +1,26 @@
 <select {{action 'change' on='change'}} class="form-control {{mainComponent.elementClass}}" id={{mainComponent.id}}>
-{{#if mainComponent.prompt}}
-  <option value="null" selected={{eq null selectedValue}}>
-    {{mainComponent.prompt}}
-  </option>
-{{/if}}
-{{#each (get mainComponent "content") key="@index" as |item|}}
-  <option value="{{get item mainComponent.optionValuePath}}" selected={{eq (get item mainComponent.optionValuePath) selectedValue}}>
-    {{get item mainComponent.optionLabelPath}}
-  </option>
-  {{/each}}
+    {{#if mainComponent.prompt}}
+        <option value="null" selected={{eq null selectedValue}}>
+            {{mainComponent.prompt}}
+        </option>
+    {{/if}}
+    {{#if mainComponent.optionGroupContentPath}}
+        {{#each (get mainComponent "content") key="@index" as |group|}}
+            <optgroup label="{{get group mainComponent.optionGroupLabelPath}}">
+                {{#each (get group mainComponent.optionGroupContentPath) key="@index" as |item|}}
+                    <option value="{{get item mainComponent.optionValuePath}}"
+                            selected={{eq (get item mainComponent.optionValuePath) selectedValue}}>
+                        {{get item mainComponent.optionLabelPath}}
+                    </option>
+                {{/each}}
+            </optgroup>
+        {{/each}}
+    {{else}}
+        {{#each (get mainComponent "content") key="@index" as |item|}}
+            <option value="{{get item mainComponent.optionValuePath}}"
+                    selected={{eq (get item mainComponent.optionValuePath) selectedValue}}>
+                {{get item mainComponent.optionLabelPath}}
+            </option>
+        {{/each}}
+    {{/if}}
 </select>
