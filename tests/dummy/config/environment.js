@@ -4,8 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'dummy',
     environment: environment,
-    baseURL: '/ember-rapid-forms',
-    locationType: 'hash',
+    baseURL: '/',
+    locationType: 'auto',
     contentSecurityPolicy: {
       'frame-src': "http://ghbtns.com/"
     },
