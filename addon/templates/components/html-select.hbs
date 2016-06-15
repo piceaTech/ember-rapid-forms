@@ -1,6 +1,6 @@
-<select {{action 'change' on='change'}} class="form-control {{mainComponent.elementClass}}" id={{mainComponent.id}}>
+<select {{action 'change' on='change'}} class="form-control {{mainComponent.elementClass}}" id={{mainComponent.id}} required=mainComponent.required>
 {{#if mainComponent.prompt}}
-  <option value="null" selected={{eq null selectedValue}}>
+  <option value="" selected={{eq "" selectedValue}}>
     {{mainComponent.prompt}}
   </option>
 {{/if}}
