@@ -20,9 +20,9 @@ export default Ember.Component.extend(InFormMixin, {
   text: null,
   extraClass: null,
   horiClass: 'col-sm-offset-2 col-sm-10',
-  horiClassCalc: Ember.computed('form.isHorizontal', {
+  horiClassCalc: Ember.computed('mainComponent.form.isHorizontal', {
     get: function() {
-      if (this.get('form.isHorizontal') && this.get('horiClass')) {
+      if (this.get('mainComponent.form.isHorizontal') && this.get('horiClass')) {
         return this.get('horiClass');
       }
     }

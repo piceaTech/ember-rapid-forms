@@ -21,9 +21,9 @@ export default FormGroupComponent.extend({
   readonly: null,
   autoresize: null,
   disabled: null,
-  controlWrapper: Ember.computed('form.formLayout', {
+  controlWrapper: Ember.computed('mainComponent.form.formLayout', {
     get: function() {
-      if (this.get('form.formLayout') === 'horizontal') {
+      if (this.get('mainComponent.form.formLayout') === 'horizontal') {
         return 'col-sm-10';
       }
       return null;

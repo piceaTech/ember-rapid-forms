@@ -58,7 +58,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       return error;
     }
   }),
-  validationIcons: Ember.computed.alias('form.validationIcons'),
+  validationIcons: Ember.computed.alias('mainComponent.form.validationIcons'),
   successIcon: 'fa fa-check',
   warningIcon: 'fa fa-exclamation-triangle',
   errorIcon: 'fa fa-times',
@@ -82,7 +82,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       }
     }
   }),
-  hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
+  hideValidationsOnFormChange: Ember.observer('mainComponent.form', 'mainComponent.form.model', function() {
     this.set('canShowErrors', false);
   }),
   shouldShowErrors: Ember.computed('canShowErrors', 'helpText', {
@@ -105,7 +105,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
    */
 
   focusIn() {
-    if (this.get('form.showErrorsOnFocusIn')) {
+    if (this.get('mainComponent.form.showErrorsOnFocusIn')) {
       return this.set('canShowErrors', true);
     }
   },

@@ -2,30 +2,28 @@
     {{#if yieldInLabel}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{control-within-label label=label extraClass=labelClass
-                  controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                {{control-within-label label=label extraClass=labelClass mainComponent=mainComponent}}
             </div>
         {{else}}
-            {{control-within-label label=label extraClass=labelClass
-              controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+            {{control-within-label label=label extraClass=labelClass mainComponent=mainComponent}}
         {{/if}}
     {{else}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
-                {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                {{em-form-label text=label extraClass=labelClass mainComponent=mainComponent for=mainComponent.id}}
+                {{#form-group-control mainComponent=mainComponent}}
                     {{yield}}
                 {{/form-group-control}}
             </div>
         {{else}}
-            {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
-            {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+            {{em-form-label text=label extraClass=labelClass for=mainComponent.id}}
+            {{#form-group-control mainComponent=mainComponent}}
                 {{yield}}
             {{/form-group-control}}
         {{/if}}
     {{/if}}
 {{else}}
-    {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+    {{#form-group-control mainComponent=mainComponent}}
         {{yield}}
     {{/form-group-control}}
 {{/if}}
@@ -37,6 +35,6 @@
 {{!Currently no errors when layout is inline}}
 {{#unless form.isInline}}
     {{#if shouldShowErrors}}
-        {{em-form-control-help text=help mainComponent=mainComponent form=form}}
+        {{em-form-control-help text=help mainComponent=mainComponent}}
     {{/if}}
 {{/unless}}
