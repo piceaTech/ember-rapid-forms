@@ -29,8 +29,14 @@ MyController = Em.Controller.extend({
 <h3>And the following model:</h3>
 <div class="well line-example">
     <pre><code class="coffeescript">
-User = DS.Model.extend({
-    name: DS.attr('string'),
+import Ember from 'ember';
+import DS from 'ember-data';
+import EV from 'ember-validations';
+import InputErrors from 'ember-rapid-forms/mixins/input-errors';
+
+var User = DS.Model.extend(EV, InputErrors, {
+    firstName: DS.attr('string', { defaultValue: null }),
+    lastName: DS.attr('string', { defaultValue: null }),
     password: DS.attr('string'),
     comment: DS.attr('string'),
     active: DS.attr('boolean'),
@@ -39,16 +45,33 @@ User = DS.Model.extend({
         get:function(){
             return !!this.get('name').length;
         }
+    }),
+    fullName: Ember.computed('firstName', 'lastName', {
+        get: function() {
+            if (this.get('firstName')) {
+                return `${this.get('firstName')} ${this.get('lastName')}`;
+            }
+            else {
+                return null;
+            }
+        },
+        set: function(key, value) {
+            let [firstName, lastName] = value.split(/\s+/);
+            firstName = firstName ? firstName : null;
+            lastName = lastName ? lastName : null;
+            this.setProperties({ firstName, lastName });
+            return value;
+        }
     })
 })
 
 
 User.reopen({
     validations: {
-        name: {
-            presence: true,
-            length: {
-                minimum: 5
+        fullName: {
+            format: {
+                with: /^[^\s]+(\s[^\s]+)+$/,
+                message: "enter a first and last name"
             }
         },
         password: {
@@ -73,12 +96,16 @@ User.reopen({
 <h3>With this template:</h3>
 <div class="well line-example">
     <pre><code class="handlebars">
-\{{#em-form model=model}}
-    \{{em-input property="name" label="Full Name" placeholder="Enter a name..."}}
-    \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue}}
-    \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4}}
-    \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="content.id" optionLabelPath="content.name"}}
-    \{{em-checkbox property="active" label="Active?"}}
+\{{#em-form model=model formLayout=layout}}
+    \{{em-input property="fullName" label="Full Name" placeholder="Enter a full name..." canShowErrors=model.visibleErrors.fullName}}
+    \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
+    \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4 canShowErrors=model.visibleErrors.comment}}
+    \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name" canShowErrors=model.visibleErrors.gender}}
+    \{{em-checkbox property="active" label="Active?" canShowErrors=model.visibleErrors.active}}
+    &lt;div class="form-group"&gt;
+        &lt;button class="btn btn-default" \{{ action "validate" }}&gt;Run Validations&lt;/button&gt;
+        &lt;button class="btn btn-default" \{{ action "clearValidations" }}&gt;Clear Validations&lt;/button&gt;
+    &lt;/div&gt;
 \{{/em-form}}
     </code></pre>
 </div>
@@ -87,5 +114,5 @@ User.reopen({
 
 <a href="http://jsbin.com/pexolude/201" target="_blank" class="btn btn-warning jsbin pull-right">jsBin</a>
 <div class="well line-example">
-    {{render 'form_sample' model}}
+    {{form_sample model=model}}
 </div>

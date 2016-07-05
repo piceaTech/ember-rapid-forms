@@ -33,16 +33,18 @@ export default Ember.Component.extend({
 
       const selectedEl = this.$('select')[0];
       let selectedIndex = selectedEl.selectedIndex;
-      // check whether we show prompt the the correct to show index is one less
+
+      // check whether we show prompt the correct to show index is one less
       // when selecting prompt don't change anything
       if(this.get('mainComponent.prompt')){
         if(selectedIndex !== 0){
           selectedIndex--;
-        }
-        else{
+        } else {
+          this.set('mainComponent.model.' + this.get('mainComponent.property'), null);
           return;
         }
       }
+
       const content = this.get('mainComponent.content');
       const selectedValue = content.objectAt(selectedIndex);
       const optionValuePath = this.get('mainComponent.optionValuePath');
@@ -51,7 +53,7 @@ export default Ember.Component.extend({
 
       if(propertyIsModel) {
         selectedID = selectedValue;
-      } else  {
+      } else {
         selectedID = selectedValue[optionValuePath];
       }
 
@@ -59,9 +61,6 @@ export default Ember.Component.extend({
       const changeAction = this.get('action');
       if(changeAction){
         changeAction(selectedID);
-      }
-      else{
-        // TODO make deprecate here so everyone switches to new action syntax
       }
     }
   }

@@ -23,6 +23,14 @@ Standard <i>&lt;textarea&gt;</i> tag which is a multi-line text input control.
     <tr><td>property</td><td>The property name in the model instance bound to the form</td><td>none, value is required.</td></tr>
     <tr><td>rows</td><td>Specifies the height of the text area (in lines)</td><td>Browser specific, usually 2</td></tr>
     <tr><td>cols</td><td>Specifies the width of the text area (in columns)</td><td>Browser specific, usually 20</td></tr>
-    <tr><td>disabled</td><td>boolean, disables the input</td><td>false</td></tr>
+    <tr><td>cid</td><td>If set, the specified identifier will be set as the <i>id</i> attribute of the <i>input</i> tag.</td><td>Ember's default ID</td></tr>
+    <tr><td>name</td><td>The name of the input element.</td><td>null</td></tr>
+    <tr><td>placeholder</td><td>The standard input placeholder.</td><td>null</td></tr>
+    <tr><td>elementClass</td><td>The class of the input element concatenated with the default 'form-control' class.</td><td>form-control</td></tr>
+    <tr><td>autoresize</td><td>If true, will activate automatic resizing from <a href="https://github.com/tim-evans/ember-autoresize" target="_blank">ember-autoresize addon</a>.</td><td>null</td></tr>
+    <tr><td>disabled</td><td>Standard HTML5 disabled attribute.</td><td>null</td></tr>
+    <tr><td>required</td><td>Standard HTML5 required attribute.</td><td>null</td></tr>
+    <tr><td>autofocus</td><td>Standard HTML5 autofocus attribute.</td><td>null</td></tr>
+    <tr><td>readonly</td><td>Standard HTML5 readonly attribute.</td><td>null</td></tr>
     <tr><td>onKeyUp</td><td>If true, errors will show as soon as the user types in the field.</td><td>false</td></tr>
 </table>

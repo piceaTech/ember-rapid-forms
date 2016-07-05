@@ -5,25 +5,21 @@ import FormGroupComponent from './em-form-group';
 Form Input
 
 Syntax:
-{{em-input property="property name"}}
+{{#em-custom-input property="property name"}}Something{{/em-custom-input}}
  */
 export default FormGroupComponent.extend({
   elementClass: null,
-  htmlComponent: 'erf-html-input',
+  htmlComponent: 'erf-html-custom-input',
   property: null,
   label: null,
   name: null,
   placeholder: null,
   required: null,
-  title: null,
-  pattern: null,
   autofocus: null,
-  readonly: null,
-  autoresize: null,
   disabled: null,
-  controlWrapper: Ember.computed('mainComponent.form.formLayout', {
+  controlWrapper: Ember.computed('form.formLayout', {
     get: function() {
-      if (this.get('mainComponent.form.formLayout') === 'horizontal') {
+      if (this.get('form.formLayout') === 'horizontal') {
         return 'col-sm-10';
       }
       return null;

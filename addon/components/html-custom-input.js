@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/html-text';
+import layout from '../templates/components/html-custom-input';
 
 export default Ember.Component.extend({
   layout: layout,

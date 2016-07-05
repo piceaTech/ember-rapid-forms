@@ -1,7 +1,11 @@
 {{#if mainComponent.controlWrapper}}
     <div class={{mainComponent.controlWrapper}}>
-        {{component mainComponent.htmlComponent mainComponent=mainComponent}}
+        {{#component mainComponent.htmlComponent mainComponent=mainComponent}}
+            {{yield}}
+        {{/component}}
     </div>
 {{else}}
-    {{component mainComponent.htmlComponent mainComponent=mainComponent}}
+    {{#component mainComponent.htmlComponent mainComponent=mainComponent}}
+        {{yield}}
+    {{/component}}
 {{/if}}

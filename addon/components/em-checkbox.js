@@ -8,7 +8,6 @@ Syntax:
 {{em-checkbox property="property name"}}
  */
 export default FormGroupComponent.extend({
-  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'ember-rapid-forms.em-checkbox-v_icons','until':'v2.0'}),
   validationIcons: false,
   validations: false,
   yieldInLabel: true,

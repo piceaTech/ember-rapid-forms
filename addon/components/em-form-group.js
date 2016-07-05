@@ -29,6 +29,7 @@ Syntax:
 export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasPropertyValidationMixin, {
   tagName: 'div',
   "class": 'form-group',
+  htmlComponent: 'em-custom-input',
   layout: layout,
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
@@ -57,17 +58,12 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       return error;
     }
   }),
-  v_icons: Ember.computed.deprecatingAlias('validationIcons', {'id': 'ember-rapid-forms.em-form-group-v_icons','until':'v2.0'}),
   validationIcons: Ember.computed.alias('mainComponent.form.validationIcons'),
-  v_success_icon: Ember.computed.deprecatingAlias('successIcon', {'id': 'ember-rapid-forms.em-form-group-v_success_icon','until':'v2.0'}),
   successIcon: 'fa fa-check',
-  v_warn_icon: Ember.computed.deprecatingAlias('warningIcon', {'id': 'ember-rapid-forms.em-form-group-v_warn_icon','until':'v2.0'}),
   warningIcon: 'fa fa-exclamation-triangle',
-  v_error_icon: Ember.computed.deprecatingAlias('errorIcon', {'id': 'ember-rapid-forms.em-form-group-v_error_icon','until':'v2.0'}),
   errorIcon: 'fa fa-times',
   validations: true,
   yieldInLabel: false,
-  v_icon: Ember.computed.deprecatingAlias('validationIcon', {'id': 'ember-rapid-forms.em-form-group-v_icon','until':'v2.0'}),
   validationIcon: Ember.computed('status', 'canShowErrors', {
     get: function() {
       if (!this.get('canShowErrors')) {

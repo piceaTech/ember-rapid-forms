@@ -27,12 +27,12 @@ export default Ember.Mixin.create({
       if (this.get('cid')) {
         return this.get('cid');
       } else {
-        return this.get('property');
+        return `${this.get('property')}-${this.elementId}`;
       }
     }
   }),
   init: function() {
     this._super(...arguments);
-    return Ember.Binding.from('model.errors.' + this.get('propertyName')).to('errors').connect(this);
+    Ember.defineProperty(this, 'errors', Ember.computed.alias((`model.errors.${this.get('propertyName')}`)));
   }
 });

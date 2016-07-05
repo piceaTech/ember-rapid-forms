@@ -12,9 +12,14 @@ export default FormGroupComponent.extend({
   htmlComponent: 'erf-html-text',
   property: null,
   label: null,
+  name: null,
   placeholder: null,
   rows: null,
   cols: null,
+  required: null,
+  autofocus: null,
+  readonly: null,
+  autoresize: null,
   disabled: null,
   controlWrapper: Ember.computed('mainComponent.form.formLayout', function() {
     if (this.get('mainComponent.form.formLayout') === 'horizontal') {
