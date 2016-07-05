@@ -23,7 +23,7 @@ test('a form with em-form-submit components renders correctly', function(assert)
 test('Form submit button is disabled when model isnt valid & enabled when is valid', function(assert) {
   this.set('someModel', Ember.Object.create({isValid: false}));
 
-  this.render(hbs`{{#em-form submitButton=false model=someModel}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
+  this.render(hbs`{{#em-form submitButton=false model=someModel showErrorsOnSubmit=false}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
 
   assert.ok(this.$().find('button').attr('disabled'), 'Button is disabled');
 

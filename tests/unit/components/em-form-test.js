@@ -99,6 +99,24 @@ test('a form display errors on key up events when field has showOnKeyUp is set',
 
 });
 
+test('a form display errors when form is submitted and field is invalid', function(assert) {
+  assert.expect(2);
+
+  somePerson.set('isValid', false);
+  somePerson.set('errors.name', Ember.A(['name!']));
+  this.set('model', somePerson);
+
+  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+
+  assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before submit");
+
+  Ember.run(() => {
+    this.$().find('button').click();
+  });
+
+  assert.equal(this.$().find('div:contains("name!")').length, 1, "Found help text on form");
+});
+
 test('a form update inputs on model change', function(assert) {
   this.set('model', somePerson);
 
