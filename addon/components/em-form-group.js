@@ -29,6 +29,7 @@ Syntax:
 export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasPropertyValidationMixin, {
   tagName: 'div',
   "class": 'form-group',
+  htmlComponent: 'em-custom-input',
   layout: layout,
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
