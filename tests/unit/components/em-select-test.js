@@ -144,6 +144,12 @@ test('the "for" of the label is the "id" of the select', function(assert) {
   assert.equal(this.$('select').attr('id'), this.$('label').attr('for'), 'the "for" of the label is not the "id" of the select');
 });
 
+test('Input can be a required field', function(assert) {
+  this.render(hbs`{{em-select required=true}}`);
+
+  assert.ok(this.$().find('select').attr('required'), 'select becomes a required field');
+});
+
 // test('em-select can select multiple items', function(assert) {
 
 //   this.set('fruitOptions', fruitOptions);
