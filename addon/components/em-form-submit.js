@@ -17,6 +17,10 @@ export default Ember.Component.extend(InFormMixin, {
   horiClass: 'col-sm-offset-2 col-sm-10',
   disabled: Ember.computed('model.isValid', {
     get: function() {
+      if (this.get('form.showErrorsOnSubmit') && !this.get('form.isSubmitted')) {
+        return false;
+      }
+
       if (!Ember.isNone(this.get('model.isValid'))) {
         return !this.get('model.isValid');
       } else {

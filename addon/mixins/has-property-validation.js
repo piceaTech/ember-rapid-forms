@@ -13,10 +13,13 @@ export default Ember.Mixin.create({
     Ember.assert(!Ember.isNone(this.get('propertyName')), 'propertyName is required.');
     Ember.defineProperty(this, 'errors', Ember.computed.alias((`model.errors.${this.get('propertyName')}`)));
   },
-  status: Ember.computed('errors.length', {
+  status: Ember.computed('errors.length', 'form.isSubmitted', {
     get: function() {
       if (this.get('errors.length')) {
         if (this.get('form.showErrorsOnRender')) {
+          this.set('canShowErrors', true);
+        }
+        if (this.get('form.showErrorsOnSubmit') && this.get('form.isSubmitted')) {
           this.set('canShowErrors', true);
         }
         return 'error';

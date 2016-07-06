@@ -48,6 +48,7 @@ export default Ember.Component.extend({
   validationIcons: true,
   showErrorsOnRender: false,
   showErrorsOnFocusIn: false,
+  showErrorsOnSubmit: true,
 
   /*
   Form submit
@@ -64,6 +65,7 @@ export default Ember.Component.extend({
     } else {
       promise = this.get('model').validate();
       return promise.then((function(_this) {
+        _this.set('isSubmitted', true);
         return function() {
           if (_this.get('model.isValid')) {
             return _this.sendAction('action', _this.get('model'));
