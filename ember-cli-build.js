@@ -28,6 +28,4 @@ module.exports = function(defaults) {
   });
   
   return  mergeTrees([app.toTree(), extraAssets]);
-
-  return app.toTree();
 };
