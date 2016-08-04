@@ -25,6 +25,11 @@ export default FormGroupComponent.extend({
   optionValuePath: 'id',
   optionLabelPath: 'value',
   prompt: null,
+  required: null,
+  disabled: null,
+  autofocus: null,
+  size: 0,
+
   controlWrapper: Ember.computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') === 'horizontal') {

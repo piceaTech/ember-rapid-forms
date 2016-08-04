@@ -150,6 +150,24 @@ test('Input can be a required field', function(assert) {
   assert.ok(this.$().find('select').attr('required'), 'select becomes a required field');
 });
 
+test('Input can be a disabled field', function(assert) {
+  this.render(hbs`{{em-select disabled=true}}`);
+
+  assert.ok(this.$().find('select').attr('disabled'), 'select becomes a disabled field');
+});
+
+test('Input can be a autofocus field', function(assert) {
+  this.render(hbs`{{em-select autofocus=true}}`);
+
+  assert.ok(this.$().find('select').attr('autofocus'), 'select becomes a autofocus field');
+});
+
+test('Input can have a size', function(assert) {
+  this.render(hbs`{{em-select size=3}}`);
+
+  assert.equal(this.$().find('select').attr('size'), 3, 'select has a size field');
+});
+
 // test('em-select can select multiple items', function(assert) {
 
 //   this.set('fruitOptions', fruitOptions);
