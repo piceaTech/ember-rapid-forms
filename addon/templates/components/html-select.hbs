@@ -1,4 +1,4 @@
-<select {{action 'change' on='change'}} class="form-control {{mainComponent.elementClass}}" id={{mainComponent.id}} required={{mainComponent.required}}>
+<select {{action 'change' on='change'}} class="form-control {{mainComponent.elementClass}}" id={{mainComponent.id}} required={{mainComponent.required}} size={{mainComponent.size}} autofocus={{mainComponent.autofocus}} disabled={{mainComponent.disabled}}>
 {{#if mainComponent.prompt}}
   <option value="" selected={{eq "" selectedValue}}>
     {{mainComponent.prompt}}
