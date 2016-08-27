@@ -4,7 +4,10 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'dummy',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/ember-rapid-forms/',
+    fingerprint: {
+      prepend: 'http://piceatech.github.io/ember-rapid-forms/'
+    },
     locationType: 'auto',
     contentSecurityPolicy: {
       'frame-src': "http://ghbtns.com/"
