@@ -1,7 +1,7 @@
 import Ember from 'ember';
 /*global alert*/
 
-export default Ember.Controller.extend({
+export default Ember.Component.extend({
     layout: 'default',
     genderOptions: Ember.A([
         {

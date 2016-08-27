@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+export default Ember.Component.extend({
     needs: ['application'],
     menu: Ember.A([{
         route: 'overview',

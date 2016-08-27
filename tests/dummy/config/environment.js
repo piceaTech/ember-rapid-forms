@@ -8,7 +8,7 @@ module.exports = function(environment) {
     fingerprint: {
       prepend: 'http://piceatech.github.io/ember-rapid-forms/'
     },
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -40,6 +40,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.EmberENV.RAISE_ON_DEPRECATION = !process.env['ALLOW_DEPRECATIONS'];
   }
 
   if (environment === 'production') {
