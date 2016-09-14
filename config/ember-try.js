@@ -35,6 +35,24 @@ module.exports = {
       }
     },
     {
+      name: 'ember-2.6',
+      dependencies: {
+        'ember': '2.6.2',
+      }
+    },
+    {
+      name: 'ember-2.7',
+      dependencies: {
+        'ember': '2.7.3',
+      }
+    },
+    {
+      name: 'ember-2.8',
+      dependencies: {
+        'ember': '2.8.0',
+      }
+    },
+    {
       name: 'ember-2.5',
       dependencies: {
         'ember': '2.5.1',
