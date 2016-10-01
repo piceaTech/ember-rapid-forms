@@ -8,31 +8,29 @@ import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('form-group', {
   // Specify the other units that are required for this test
-  integration: true
-});
+  integration: true,
 
-var mainComponent = Ember.Component.create({
-  htmlComponent: 'erf-html-input'
+  beforeEach() {
+    const mainComponent = this.container.lookupFactory('component:em-form-group').create({
+      htmlComponent: 'erf-html-input',
+      validationIcon: 'some-icon-class'
+    });
+    this.set('mainComponent', mainComponent);
+  }
 });
 
 test('renders the component', function(assert) {
-  this.set('mainComponent', mainComponent);
-
   this.render(hbs `{{form-group mainComponent=mainComponent}}`);
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 });
 
 test('renders with label', function(assert) {
-  this.set('mainComponent', mainComponent);
-
   this.render(hbs `{{form-group mainComponent=mainComponent label='my-label'}}`);
   assert.equal(this.$().find('label:contains("my-label")').length, 1, 'Has a label');
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 });
 
 test('renders with labelWrapperClass', function(assert) {
-  this.set('mainComponent', mainComponent);
-
   this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class'}}`);
   var wrapper = this.$().find('div.wrapper-class');
 
@@ -42,8 +40,6 @@ test('renders with labelWrapperClass', function(assert) {
 });
 
 test('renders with yieldInLabel', function(assert) {
-  this.set('mainComponent', mainComponent);
-
   this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' yieldInLabel=true}}`);
 
   var label = this.$().find('label');
@@ -53,8 +49,6 @@ test('renders with yieldInLabel', function(assert) {
 });
 
 test('renders with yieldInLabel with labelWrapperClass', function(assert) {
-  this.set('mainComponent', mainComponent);
-
   this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}`);
 
   var wrapper = this.$().find('div.wrapper-class');
@@ -67,9 +61,6 @@ test('renders with yieldInLabel with labelWrapperClass', function(assert) {
 });
 
 test('renders v_icon', function(assert) {
-  mainComponent.set('validationIcon', 'some-icon-class');
-  this.set('mainComponent', mainComponent);
-
   this.render(hbs `{{form-group mainComponent=mainComponent validationIcons=true}}`);
 
   var icons = this.$().find('span');
@@ -80,8 +71,6 @@ test('renders v_icon', function(assert) {
 });
 
 test('renders error message', function(assert) {
-  this.set('mainComponent', mainComponent);
-
   this.render(hbs `{{form-group mainComponent=mainComponent shouldShowErrors=true help='help text here'}}`);
 
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
@@ -98,7 +87,6 @@ test('does not renders error message when layout is inline', function(assert) {
   });
 
   this.set('form', form);
-  this.set('mainComponent', mainComponent);
 
   this.render(hbs `{{form-group mainComponent=mainComponent form=form shouldShowErrors=true help='help text here'}}`);
 

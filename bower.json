@@ -1,7 +1,7 @@
 {
   "name": "ember-rapid-forms",
   "dependencies": {
-    "ember": "~2.7.0",
+    "ember": "~2.8.0",
     "ember-load-initializers": "ember-cli/ember-load-initializers#0.1.7",
     "ember-qunit": "0.4.16",
     "ember-qunit-notifications": "0.1.0",
