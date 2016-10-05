@@ -1,0 +1,21 @@
+app:
+  build: .
+  command: ember s
+  working_dir: /app
+  volumes:
+    - .:/app
+  ports:
+    - "9000:9000"
+    - "4200:4200"
+    - "35729:35729"
+    - "49152:49152"
+
+test:
+  build: .
+  command: ember test -s -h 0.0.0.0
+  working_dir: /app
+  volumes:
+    - .:/app
+  ports:
+    - "7357:7357"
+    - "4201:4201"

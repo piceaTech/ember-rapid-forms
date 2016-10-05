@@ -1,18 +1,9 @@
 {{yield (hash
-  input=(component 'em-input' form=this model=model)
-  checkbox=(component 'em-checkbox' form=this model=model)
-  select=(component 'em-select' form=this model=model)
-  text=(component 'em-text' form=this model=model)
-  custom-input=(component 'em-custom-input' form=this model=model)
-
-  submit=(component 'em-form-submit' form=this model=model)
-
-  group-control=(component 'form-group-control' form=this model=model)
-  group=(component 'form-group' form=this model=model)
-
-  formGroup=(component 'em-form-group' form=this model=model)
-
-
+  input=(component 'em-input' form=this)
+  checkbox=(component 'em-checkbox' form=this)
+  select=(component 'em-select' form=this)
+  text=(component 'em-text' form=this)
+  custom-input=(component 'em-custom-input' form=this)
 )}}
 {{#if submitButton}}
     {{em-form-submit form=this}}
