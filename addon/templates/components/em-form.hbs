@@ -1,4 +1,12 @@
-{{yield this}}
+{{yield (hash
+  input=(component 'em-input' form=this)
+  checkbox=(component 'em-checkbox' form=this)
+  select=(component 'em-select' form=this)
+  text=(component 'em-text' form=this)
+  custom-input=(component 'em-custom-input' form=this)
+
+
+)}}
 {{#if submitButton}}
-    {{em-form-submit mainComponent=mainComponent}}
+    {{em-form-submit form=this}}
 {{/if}}

@@ -98,8 +98,14 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
     }
   }),
-  init() {
-    return this._super(...arguments);
+  hasSetForm: false,
+  didReceiveAttrs(arg) {
+    Ember.deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
+    if(!arg.newAttrs.form && !this.get('hasSetForm')){
+      Ember.defineProperty(this, 'form', Ember.computed.alias('formFromPartentView'));
+      this.set('hasSetForm', true);
+    }
+    this._super(...arguments);
   },
 
   /*
