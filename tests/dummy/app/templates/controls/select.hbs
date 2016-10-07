@@ -30,27 +30,38 @@ App.ControlsSelectController = Ember.Controller.extend({
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form model=model submitButton=false}}
-        {{em-select
+    {{#em-form model=model submitButton=false as |form|}}
+        {{form.select
             label="Gender"
             content=genderOptions
             optionValuePath="id"
             optionLabelPath="name"
             prompt="--select--"
+            property='single'
         }}
     {{/em-form}}
 </div>
+<div class="well line-example">
+    Single: {{model.single}}
+</div>
 
 <h2>Result with multiple=true</h2>
-{{#em-form model=model submitButton=false}}
-    {{em-select
+<div class="well line-example">
+{{#em-form model=model submitButton=false as |form|}}
+    {{form.select
         label="Gender"
         content=genderOptions
         optionValuePath="id"
         optionLabelPath="name"
         multiple=true
+        prompt="--select--"
+        property='multi'
     }}
 {{/em-form}}
+</div>
+<div class="well line-example">
+    Multi: {{model.multi}}
+</div>
 
 <h2>Parameters</h2>
 <table class="table table-striped">

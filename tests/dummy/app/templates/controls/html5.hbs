@@ -6,25 +6,30 @@
 <h2>Markup</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-\{{em-input label="Email" property="email" type="email"}}
-\{{em-input label="Telephone" property="tel" type="tel"}}
-\{{em-input label="Range" property="range" type="range"}}
-\{{em-input label="Date" property="date" type="date"}}
-\{{em-input label="Time" property="time" type="time"}}
-\{{em-input label="Month" property="month" type="month"}}
-\{{em-input label="Week" property="week" type="week"}}
+\{{#em-form model=model as |form|}}
+    \{{form.input label="Email" property="email" type="email"}}
+    \{{form.input label="Telephone" property="tel" type="tel"}}
+    \{{form.input label="Range" property="range" type="range"}}
+    \{{form.input label="Date" property="date" type="date"}}
+    \{{form.input label="Time" property="time" type="time"}}
+    \{{form.input label="Month" property="month" type="month"}}
+    \{{form.input label="Week" property="week" type="week"}}
+\{{/em-form}}
     </code></pre>
 </div>
 
 <h2>Result</h2>
 <div class="well line-example">
-{{#em-form model=model submitButton=false formLayout="horizontal"}}
-    {{em-input label="Email" property="email" type="email"}}
-    {{em-input label="Telephone" property="tel" type="tel"}}
-    {{em-input label="Range" property="range" type="range"}}
-    {{em-input label="Date" property="date" type="date"}}
-    {{em-input label="Time" property="time" type="time"}}
-    {{em-input label="Month" property="month" type="month"}}
-    {{em-input label="Week" property="week" type="week"}}
+{{#em-form model=model submitButton=false formLayout="horizontal" as |form|}}
+    {{form.input label="Email" property="email" type="email"}}
+    {{form.input label="Telephone" property="tel" type="tel"}}
+    {{form.input label="Range" property="range" type="range"}}
+    {{form.input label="Date" property="date" type="date"}}
+    {{form.input label="Time" property="time" type="time"}}
+    {{form.input label="Month" property="month" type="month"}}
+    {{form.input label="Week" property="week" type="week"}}
 {{/em-form}}
+</div>
+<div class="well line-example">
+    Email: {{model.email}}, Telephone: {{model.tel}}, Range: {{model.range}}, Date: {{model.date}}, Time: {{model.time}}, Month: {{model.month}}, Week: {{model.week}}
 </div>

@@ -27,13 +27,18 @@ export default Ember.Component.extend({
       return value;
     });
   },
+  _findSingle (){
 
+  },
+  _findMultiple(){
+
+  },
   actions: {
-    change() {
+    change(event) {
 
       const selectedEl = this.$('select')[0];
       let selectedIndex = selectedEl.selectedIndex;
-
+      console.log(Ember.$(event.target).val());
       // check whether we show prompt the correct to show index is one less
       // when selecting prompt don't change anything
       if(this.get('mainComponent.prompt')){
