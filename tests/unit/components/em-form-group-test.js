@@ -2,88 +2,83 @@ import {
   moduleForComponent,
   test
 } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
 moduleForComponent('em-form-group', {
   // Specify the other units that are required for this test
-  needs: ['component:form-group', 'component:form-group-control',
-    'component:em-form-label', 'component:em-form-control-help',
-    'template:dummy', 'component:em-custom-input',
-    'component:erf-html-custom-input']
+  integration: true
 });
 
 test('it renders', function(assert) {
-  // Creates the component instance
-  var component = this.subject();
-  assert.equal(component._state, 'preRender');
-
-  // Renders the component to the page
-  this.render();
-  assert.equal(component._state, 'inDOM');
-  assert.ok(Ember.$(component.element).hasClass('form-group'), 'group has default css class');
+  this.render(hbs `{{em-form-group}}`);
+  assert.ok(this.$('.form-group').length, 'group has default css class');
 });
 
 test('it renders with no label', function(assert) {
-  // Creates the component instance
-  var component = this.subject();
+  this.render(hbs `{{em-form-group}}`);
+  assert.ok(this.$('label').length === 0, 'group has no label');
 
-  this.render();
-  assert.ok(!component.get('hasLabel'), 'group has no label');
+  this.render(hbs `{{em-form-group label='hello'}}`);
 
-  Ember.run(() => {
-    component.set('label', 'hello');
-  });
-
-  assert.equal(component.get('label'), 'hello', 'group has label after it being set');
+  assert.ok(this.$('label').text().includes('hello'), 'group has label after it being set');
 });
 
 test('it renders proper error validation icon', function(assert) {
-  // Creates the component instance
-  var component = this.subject({
-    label: 'my-label',
-    form: Ember.Object.extend({}),
-    canShowErrors: true,
-    validationIcons: true,
-    status: 'error'
-  });
+  const form = Ember.Object.extend();
+  this.set('form', form);
 
-  // Renders the component to the page
-  this.render();
-  var icons = Ember.$(component.element).find('span i');
+  this.render(hbs `{{em-form-group form=form canShowErrors=true validationIcons=true status='error' errorIcon='error'}}`);
+
+  let icons = this.$('span i');
+
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(Ember.$(icons[0]).hasClass(component.get('errorIcon')));
+  assert.ok(icons.hasClass('error'));
 });
 
 test('it renders proper warning validation icon', function(assert) {
-  // Creates the component instance
-  var component = this.subject({
-    label: 'my-label',
-    form: Ember.Object.extend({}),
-    canShowErrors: true,
-    validationIcons: true,
-    status: 'warning'
-  });
+  const form = Ember.Object.extend();
+  this.set('form', form);
 
-  // Renders the component to the page
-  this.render();
-  var icons = Ember.$(component.element).find('span i');
+  this.render(hbs `{{em-form-group form=form canShowErrors=true validationIcons=true status='warning' warningIcon='warning'}}`);
+
+  let icons = this.$('span i');
+
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(Ember.$(icons[0]).hasClass(component.get('warningIcon')));
+  assert.ok(icons.hasClass('warning'));
 });
 
 test('it renders proper success validation icon', function(assert) {
-  // Creates the component instance
-  var component = this.subject({
-    label: 'my-label',
-    form: Ember.Object.extend({}),
-    canShowErrors: true,
-    validationIcons: true,
-    status: 'success'
-  });
+  const form = Ember.Object.extend();
+  this.set('form', form);
 
-  // Renders the component to the page
-  this.render();
-  var icons = Ember.$(component.element).find('span i');
+  this.render(hbs `{{em-form-group form=form canShowErrors=true validationIcons=true status='success' validationIcon='success'}}`);
+
+  let icons = this.$('span i');
+
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(Ember.$(icons[0]).hasClass(component.get('successIcon')));
+  assert.ok(icons.hasClass('success'));
+});
+
+test('Find the label if i18n is set', function(assert) {
+  const fruit = Ember.Object.create();
+  const i18n = this.container.lookup('service:i18n');
+
+  fruit.constructor.modelName = 'fruit';
+  i18n.addTranslations('en', { 'fruit.name': 'Name' });
+
+  this.set('fruit', fruit);
+  this.render(hbs`{{em-form-group model=fruit property='name'}}`);
+
+  assert.ok(this.$('label').text().includes('Name'), 'the id is not found from i18n');
+});
+
+test('I18n label is overrided by a given value', function(assert) {
+  const i18n = this.container.lookup('service:i18n');
+  i18n.addTranslations('en', { 'fruit.name': 'Name' });
+
+  this.set('model', Ember.Object.create());
+  this.render(hbs`{{em-form-group model=model label='Custom Label'}}`);
+
+  assert.ok(this.$('label').text().includes('Custom Label'), 'Doesn\t use custom labels');
 });

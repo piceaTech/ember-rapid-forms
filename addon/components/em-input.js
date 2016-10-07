@@ -11,7 +11,6 @@ export default FormGroupComponent.extend({
   elementClass: null,
   htmlComponent: 'erf-html-input',
   property: null,
-  label: null,
   name: null,
   placeholder: null,
   required: null,

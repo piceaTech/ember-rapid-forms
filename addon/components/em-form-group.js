@@ -34,6 +34,8 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
+  i18n: Ember.inject.service(),
+
   hasSuccess: Ember.computed('status', 'canShowErrors', {
     get: function() {
       var success;
@@ -124,5 +126,25 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
     if (this.get('showOnKeyUp')) {
       return this.set('canShowErrors', true);
     }
-  }
+  },
+
+  label: Ember.computed(function () {
+    const i18n = this.get('i18n');
+
+    if(Ember.isPresent(i18n)) {
+      const property = this.get('property');
+      const modelName = this.get('model.constructor.modelName');
+      let key;
+
+      if(modelName) {
+        key = `${modelName}.${property}`;
+      } else {
+        key = property;
+      }
+
+      if(i18n.exists(key)) {
+        return i18n.t(key);
+      }
+    }
+  })
 });
