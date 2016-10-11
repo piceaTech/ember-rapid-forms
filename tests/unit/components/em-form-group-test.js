@@ -4,6 +4,7 @@ import {
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import stubI18n from '../../helpers/stub-i18n';
 
 moduleForComponent('em-form-group', {
   // Specify the other units that are required for this test
@@ -61,11 +62,13 @@ test('it renders proper success validation icon', function(assert) {
 });
 
 test('Find the label if i18n is set', function(assert) {
-  const fruit = Ember.Object.create();
+  const i18nService = stubI18n();
+  this.registry.register('service:i18n', i18nService);
   const i18n = this.container.lookup('service:i18n');
-
-  fruit.constructor.modelName = 'fruit';
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
+
+  const fruit = Ember.Object.create();
+  fruit.constructor.modelName = 'fruit';
 
   this.set('fruit', fruit);
   this.render(hbs`{{em-form-group model=fruit property='name'}}`);
@@ -74,6 +77,8 @@ test('Find the label if i18n is set', function(assert) {
 });
 
 test('I18n label is overrided by a given value', function(assert) {
+  const i18nService = stubI18n();
+  this.registry.register('service:i18n', i18nService);
   const i18n = this.container.lookup('service:i18n');
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
 
