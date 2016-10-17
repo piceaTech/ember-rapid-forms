@@ -27,7 +27,7 @@ var somePerson = Ember.Object.create({
 test('form model is set', function(assert) {
   this.set('model', somePerson);
 
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
   assert.equal(this.$('input').val(), 'my-name', 'Model was set.');
 });
 
@@ -39,7 +39,7 @@ test('a form display errors when rendered if showErrorsOnRender is set', functio
 
   this.set('model', somePerson);
 
-  this.render(hbs `{{#em-form model=model showErrorsOnRender=true}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model showErrorsOnRender=true as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
 
   Ember.run(() => {
@@ -55,7 +55,7 @@ test('a form display errors when field is focused in', function(assert) {
 
   this.set('model', somePerson);
 
-  this.render(hbs `{{#em-form model=model showErrorsOnFocusIn=true}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model showErrorsOnFocusIn=true as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before focusin");
 
@@ -72,7 +72,7 @@ test('a form display errors when field is focused out', function(assert) {
 
   this.set('model', somePerson);
 
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before focusout");
   this.$().find('input').focusout();
@@ -90,7 +90,7 @@ test('a form display errors on key up events when field has showOnKeyUp is set',
   somePerson.set('errors.name', Ember.A(['name!']));
 
 
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name" showOnKeyUp=true}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name" showOnKeyUp=true}}{{/em-form}}`);
 
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before keyup");
 
@@ -106,7 +106,7 @@ test('a form display errors when form is submitted and field is invalid', functi
   somePerson.set('errors.name', Ember.A(['name!']));
   this.set('model', somePerson);
 
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before submit");
 
@@ -120,7 +120,7 @@ test('a form display errors when form is submitted and field is invalid', functi
 test('a form update inputs on model change', function(assert) {
   this.set('model', somePerson);
 
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   var input = this.$().find('input');
   assert.equal(input.length, 1, "Found input");
@@ -166,7 +166,7 @@ test('a form changes its model and fields are updated', function(assert) {
 
   this.set('model', modelA);
 
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   var input = this.$().find('input');
   assert.equal(input.length, 1, "Found input");
@@ -211,7 +211,7 @@ test('a form changes its model and errors are reseted', function(assert) {
 
   this.set('model', modelA);
 
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   var input = this.$().find('input');
   assert.equal(input.length, 1, "Found input");
@@ -243,7 +243,7 @@ test('form cannot be submitted if model is invalid', function(assert) {
   });
   this.set('model', somePerson);
   somePerson.set('isValid', false);
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   Ember.run(() => {
     this.$().find('button').click();
@@ -258,7 +258,7 @@ test('form can be submitted if model is valid', function(assert) {
   });
   this.set('model', somePerson);
   somePerson.set('isValid', true);
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   Ember.run(() => {
     this.$().find('button').click();
@@ -274,7 +274,7 @@ test('model in an argument of the form submission', function(assert) {
 
   this.set('model', somePerson);
   somePerson.set('isValid', true);
-  this.render(hbs `{{#em-form model=model}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   Ember.run(() => {
     this.$().find('button').click();
@@ -293,7 +293,7 @@ test('form submission with custom action', function(assert) {
   });
   this.set('model', somePerson);
   somePerson.set('isValid', true);
-  this.render(hbs `{{#em-form model=model action="submitNow"}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model action="submitNow" as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   Ember.run(() => {
     this.$().find('button').click();
@@ -308,7 +308,7 @@ test('form submission with a model that has no validation support and no isValid
   });
   this.set('model', {});
 
-  this.render(hbs `{{#em-form model=model action='submit'}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=model action='submit' as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   Ember.run(() => {
     this.$().find('button').click();

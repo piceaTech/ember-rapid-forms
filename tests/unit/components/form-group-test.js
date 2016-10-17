@@ -20,18 +20,18 @@ moduleForComponent('form-group', {
 });
 
 test('renders the component', function(assert) {
-  this.render(hbs `{{form-group mainComponent=mainComponent}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent}}{{/em-form`);
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 });
 
 test('renders with label', function(assert) {
-  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent label='my-label'}}{{/em-form`);
   assert.equal(this.$().find('label:contains("my-label")').length, 1, 'Has a label');
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 });
 
 test('renders with labelWrapperClass', function(assert) {
-  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form`);
   var wrapper = this.$().find('div.wrapper-class');
 
   assert.ok(wrapper, 'Wrapper exists');
@@ -40,7 +40,7 @@ test('renders with labelWrapperClass', function(assert) {
 });
 
 test('renders with yieldInLabel', function(assert) {
-  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' yieldInLabel=true}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent label='my-label' yieldInLabel=true}}{{/em-form`);
 
   var label = this.$().find('label');
   assert.equal(label.length, 1, 'Label is a wrapper tag');
@@ -49,7 +49,7 @@ test('renders with yieldInLabel', function(assert) {
 });
 
 test('renders with yieldInLabel with labelWrapperClass', function(assert) {
-  this.render(hbs `{{form-group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form`);
 
   var wrapper = this.$().find('div.wrapper-class');
   assert.equal(wrapper.length, 1, 'Wrapper exists');
@@ -61,7 +61,7 @@ test('renders with yieldInLabel with labelWrapperClass', function(assert) {
 });
 
 test('renders v_icon', function(assert) {
-  this.render(hbs `{{form-group mainComponent=mainComponent validationIcons=true}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent validationIcons=true}}{{/em-form`);
 
   var icons = this.$().find('span');
   assert.equal(icons.length, 1, 'Has icon span');
@@ -71,7 +71,7 @@ test('renders v_icon', function(assert) {
 });
 
 test('renders error message', function(assert) {
-  this.render(hbs `{{form-group mainComponent=mainComponent shouldShowErrors=true help='help text here'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent shouldShowErrors=true help='help text here'}}{{/em-form`);
 
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 
@@ -88,7 +88,7 @@ test('does not renders error message when layout is inline', function(assert) {
 
   this.set('form', form);
 
-  this.render(hbs `{{form-group mainComponent=mainComponent form=form shouldShowErrors=true help='help text here'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent form=form shouldShowErrors=true help='help text here'}}{{/em-form`);
 
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 

@@ -24,9 +24,9 @@ test('a form with hashed models works as expected', function(assert) {
 
   this.set('myHash', myHash);
 
-  this.render(hbs`{{#em-form model=myHash submitButton=false showErrorsOnFocusIn=false}}
-      {{em-input name="a" property="modelA.name" label="modelA name:"}}
-      {{em-input name="b" property="modelB.name" label="modelB name:"}}
+  this.render(hbs`{{#em-form model=myHash submitButton=false showErrorsOnFocusIn=false as |form|}}
+      {{form.input name="a" property="modelA.name" label="modelA name:"}}
+      {{form.input name="b" property="modelB.name" label="modelB name:"}}
     {{/em-form}}`);
 
   Ember.run(() => {
@@ -43,9 +43,9 @@ test('a form with hashed models updates correct model', function(assert) {
 
   this.set('myHash', myHash);
 
-  this.render(hbs`{{#em-form model=myHash submitButton=false showErrorsOnFocusIn=false}}
-      {{em-input name="a" property="modelA.name" label="modelA name:"}}
-      {{em-input name="b" property="modelB.name" label="modelB name:"}}
+  this.render(hbs`{{#em-form model=myHash submitButton=false showErrorsOnFocusIn=false as |form|}}
+      {{form.input name="a" property="modelA.name" label="modelA name:"}}
+      {{form.input name="b" property="modelB.name" label="modelB name:"}}
     {{/em-form}}`);
 
   Ember.run(() => {

@@ -11,7 +11,7 @@ moduleForComponent('em-form', 'em-form-submit tests', {
 });
 
 test('a form with em-form-submit components renders correctly', function(assert) {
-  this.render(hbs`{{#em-form submitButton=false}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
+  this.render(hbs`{{#em-form submitButton=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`);
 
 
   var elem = this.$();
@@ -23,7 +23,7 @@ test('a form with em-form-submit components renders correctly', function(assert)
 test('Form submit button is disabled when model isnt valid & enabled when is valid', function(assert) {
   this.set('someModel', Ember.Object.create({isValid: false}));
 
-  this.render(hbs`{{#em-form submitButton=false model=someModel showErrorsOnSubmit=false}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
+  this.render(hbs`{{#em-form submitButton=false model=someModel showErrorsOnSubmit=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`);
 
   assert.ok(this.$().find('button').attr('disabled'), 'Button is disabled');
 
@@ -35,7 +35,7 @@ test('Form submit button is disabled when model isnt valid & enabled when is val
 });
 
 test('Submit button has the correct type attribute', function(assert) {
-  this.render(hbs`{{#em-form submitButton=false}}{{em-form-submit text="Submit!"}}{{/em-form}}`);
+  this.render(hbs`{{#em-form submitButton=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`);
   
   assert.equal(this.$().find('button').attr('type'), 'submit', 'default type is submit');
 });
