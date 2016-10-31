@@ -19,10 +19,12 @@ test('it renders', function(assert) {
 test('it renders with no label', function(assert) {
   this.render(hbs `{{em-form-group}}`);
   assert.ok(this.$('label').length === 0, 'group has no label');
+});
 
+test('it renders with label', function(assert) {
   this.render(hbs `{{em-form-group label='hello'}}`);
 
-  assert.ok(this.$('label').text().includes('hello'), 'group has label after it being set');
+  assert.equal(this.$('label').text().trim(), 'hello', 'group has label after it being set');
 });
 
 test('it renders proper error validation icon', function(assert) {
@@ -73,7 +75,7 @@ test('Find the label if i18n is set', function(assert) {
   this.set('fruit', fruit);
   this.render(hbs`{{em-form-group model=fruit property='name'}}`);
 
-  assert.ok(this.$('label').text().includes('Name'), 'the id is not found from i18n');
+  assert.equal(this.$('label').text().trim(), 'Name', 'the id is not found from i18n');
 });
 
 test('I18n label is overrided by a given value', function(assert) {
@@ -85,5 +87,5 @@ test('I18n label is overrided by a given value', function(assert) {
   this.set('model', Ember.Object.create());
   this.render(hbs`{{em-form-group model=model label='Custom Label'}}`);
 
-  assert.ok(this.$('label').text().includes('Custom Label'), 'Doesn\t use custom labels');
+  assert.equal(this.$('label').text().trim(), 'Custom Label', 'Doesn\t use custom labels');
 });
