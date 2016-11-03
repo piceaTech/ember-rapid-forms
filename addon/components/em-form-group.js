@@ -116,7 +116,9 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   Listen to the focus out of the form group and display the errors
    */
   focusOut() {
-    return this.set('canShowErrors', true);
+    if (!Ember.isEmpty(this.get('model.' + this.get('property')))) {
+      return this.set('canShowErrors', true);
+    }
   },
 
   /*
