@@ -25,6 +25,7 @@ Router.map(function() {
     this.route('wrapped-input');
     this.route('custom-styles');
   });
+  this.route('ember-cp-validations');
 });
 
 export default Router;
