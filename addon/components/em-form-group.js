@@ -31,7 +31,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   "class": 'form-group',
   htmlComponent: 'em-custom-input',
   layout: layout,
-  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
+  classNameBindings: ['hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
   i18n: Ember.inject.service(),
