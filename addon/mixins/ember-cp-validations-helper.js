@@ -9,32 +9,24 @@ export default Ember.Mixin.create({
   init() {
     this._super(...arguments);
 
-    this.eachAttribute(attribute=> {
-      this.addObserver(attribute, function () {
-        this._copyErrors(this, attribute);
-      });
-    });
-
-    this.eachRelationship(attribute=> {
-      this.addObserver(attribute, function () {
-        this._copyErrors(this, attribute);
+    this.get('validations.validatableAttributes').forEach((va) =>{
+      this.addObserver(va, `validations.attrs.${va}.messages`, () => {
+        this._copyErrors(this, va);
       });
     });
   },
 
   validate() {
     return this.get('validations').validate(...arguments)
-      .then(()=> {
+      .then((validations)=> {
         const modelErrors = this.get('errors');
 
         if (this instanceof DS.Model && !Ember.isNone(modelErrors) && Ember.canInvoke(modelErrors, 'add')) {
-          this.eachAttribute(attribute=> {
-            this._copyErrors(this, attribute);
-          });
-          this.eachRelationship(attribute=> {
-            this._copyErrors(this, attribute);
+          this.get('validations.validatableAttributes').forEach((va) =>{
+            this._copyErrors(this, va);
           });
         }
+        return validations;
       });
   },
 
