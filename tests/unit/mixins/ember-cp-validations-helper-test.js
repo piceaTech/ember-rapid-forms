@@ -1,12 +1,25 @@
 import Ember from 'ember';
-import ECpValidationsHelperMixin from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
-import { module, test } from 'qunit';
+import EmberCpValidationsHelperMixin from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
+import { moduleFor, test } from 'ember-qunit';
 
-module('Unit | Mixin | ember cp validations helper');
+moduleFor('mixin:ember-cp-validations-helper', 'Unit | Mixin | ember cp validations helper');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let EmberCpValidationsHelperObject = Ember.Object.extend(EmberCpValidationsHelperMixin);
+  let ValidationsMixin = Ember.Mixin.create({
+    validate() {
+      var promise = new Ember.RSVP.Promise((resolve) => {
+        resolve('ok!');
+      });
+      return promise;
+    },
+    validations: {
+      validatableAttributes: []
+    }
+  });
+
+  let EmberCpValidationsHelperObject = Ember.Object.extend(ValidationsMixin, EmberCpValidationsHelperMixin);
+  assert.ok(EmberCpValidationsHelperObject);
   let subject = EmberCpValidationsHelperObject.create();
   assert.ok(subject);
 });
