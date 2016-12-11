@@ -4,7 +4,6 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('mixin:ember-cp-validations-helper', 'Unit | Mixin | ember cp validations helper');
 
-// Replace this with your real tests.
 test('it works', function(assert) {
   let ValidationsMixin = Ember.Mixin.create({
     validate() {

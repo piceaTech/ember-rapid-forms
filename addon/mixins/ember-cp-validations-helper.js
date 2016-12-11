@@ -9,6 +9,7 @@ export default Ember.Mixin.create({
   init() {
     this._super(...arguments);
 
+    // when there is a validation error copy its message into the format we currently understand
     this.get('validations.validatableAttributes').forEach((va) =>{
       this.addObserver(va, `validations.attrs.${va}.messages`, () => {
         this._copyErrors(this, va);
@@ -29,7 +30,7 @@ export default Ember.Mixin.create({
         return validations;
       });
   },
-
+  // gets called when a message is added (that means there is a validation-error)
   _copyErrors(model, attribute) {
     if (model.currentState.stateName === 'root.loaded.saved' || model.currentState.stateName === 'root.deleted.saved') {
       return;
@@ -44,6 +45,7 @@ export default Ember.Mixin.create({
 
     const messages = this.get(`validations.attrs.${attribute}.messages`);
 
+    // manually add them to the errorObject
     if (messages && messages.length > 0) {
       messages.forEach(m=> {
         modelErrors._add(attribute, m);
@@ -52,6 +54,7 @@ export default Ember.Mixin.create({
 
     const isEmpty = modelErrors.get('isEmpty');
 
+    // trigger the method whether a model is now valid or not
     if (wasEmpty && !isEmpty) {
       modelErrors.trigger('becameInvalid');
     } else if (!wasEmpty && isEmpty) {

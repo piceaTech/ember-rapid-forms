@@ -22,8 +22,6 @@ const Validations = buildValidations({
   gender: validator('presence', true),
 });
 
-
-
 const person = DS.Model.extend(Validations, InputErrors, helper, {
   firstName: DS.attr('string', { defaultValue: null }),
   lastName: DS.attr('string', { defaultValue: null }),
