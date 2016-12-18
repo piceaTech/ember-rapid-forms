@@ -1,3 +1,4 @@
+/*global expect*/
 import Ember from 'ember';
 import EmberCpValidationsHelperMixin from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
 import { moduleFor, test } from 'ember-qunit';
@@ -21,4 +22,47 @@ test('it works', function(assert) {
   assert.ok(EmberCpValidationsHelperObject);
   let subject = EmberCpValidationsHelperObject.create();
   assert.ok(subject);
+});
+
+test('it works on Object', function(assert) {
+  expect(4);
+  let ValidationsMixin = Ember.Mixin.create({
+    validations: {
+      validatableAttributes: ['username'],
+      attrs:{
+        username: {
+          messages: ['Can\'t be blank']
+        }
+      },
+      validate() {
+        var promise = new Ember.RSVP.Promise((resolve) => {
+          resolve('ok!');
+        });
+        return promise;
+      },
+    },
+    currentState:{
+      stateName: 'notDeleted:P'
+    }
+  });
+
+  let EmberCpValidationsHelperObject = Ember.Object.extend(ValidationsMixin, EmberCpValidationsHelperMixin, {
+    username: "",
+    errors: Ember.Object.create({
+      add(/*attribute, messages*/) {
+        // we need it currently for testing
+      },
+      _add(attribute, message) {
+        this.set(attribute, message);
+      },
+    })
+  });
+
+  assert.ok(EmberCpValidationsHelperObject);
+  let subject = EmberCpValidationsHelperObject.create();
+  assert.ok(subject);
+  assert.notOk(subject.get('errors.username'));
+  subject.validate().then(function(){
+    assert.ok(subject);
+  });
 });

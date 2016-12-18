@@ -3,7 +3,6 @@ Copied from GCorbel from https://github.com/piceaTech/ember-rapid-forms/issues/1
 */
 
 import Ember from 'ember';
-import DS from 'ember-data';
 
 export default Ember.Mixin.create({
   init() {
@@ -21,8 +20,7 @@ export default Ember.Mixin.create({
     return this.get('validations').validate(...arguments)
       .then((validations)=> {
         const modelErrors = this.get('errors');
-
-        if (this instanceof DS.Model && !Ember.isNone(modelErrors) && Ember.canInvoke(modelErrors, 'add')) {
+        if (!Ember.isNone(modelErrors) && Ember.canInvoke(modelErrors, 'add')) {
           this.get('validations.validatableAttributes').forEach((va) =>{
             this._copyErrors(this, va);
           });
