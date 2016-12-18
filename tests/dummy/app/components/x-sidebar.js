@@ -42,8 +42,5 @@ export default Ember.Component.extend({
             route: 'controls.custom-styles',
             text: 'Custom Styles'
         }])
-    }, {
-        route: 'ember-cp-validations',
-        text: 'ember-cp-validations'
     }])
 });
