@@ -19,13 +19,14 @@ test('it works', function(assert) {
   });
 
   let EmberCpValidationsHelperObject = Ember.Object.extend(ValidationsMixin, EmberCpValidationsHelperMixin);
-  assert.ok(EmberCpValidationsHelperObject);
   let subject = EmberCpValidationsHelperObject.create();
+
+  assert.ok(EmberCpValidationsHelperObject);
   assert.ok(subject);
 });
 
 test('it works on Object', function(assert) {
-  expect(4);
+  expect(5);
   let ValidationsMixin = Ember.Mixin.create({
     validations: {
       validatableAttributes: ['username'],
@@ -58,11 +59,14 @@ test('it works on Object', function(assert) {
     })
   });
 
-  assert.ok(EmberCpValidationsHelperObject);
   let subject = EmberCpValidationsHelperObject.create();
+
+  assert.ok(EmberCpValidationsHelperObject);
   assert.ok(subject);
   assert.notOk(subject.get('errors.username'));
-  subject.validate().then(function(){
+
+  subject.validate().then(function() {
     assert.ok(subject);
+    assert.equal(subject.get('errors.username'), 'Can\'t be blank');
   });
 });
