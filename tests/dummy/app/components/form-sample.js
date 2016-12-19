@@ -17,8 +17,7 @@ export default Ember.Component.extend({
     ]),
     actions: {
         validate: function() {
-            this.model.validate().then(function() {
-            }, () => {
+            this.model.validate().then(()=> {
                 this.model.showErrors();
             });
         },

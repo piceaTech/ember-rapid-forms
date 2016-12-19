@@ -31,22 +31,43 @@ MyController = Em.Controller.extend({
     <pre><code class="coffeescript">
 import Ember from 'ember';
 import DS from 'ember-data';
-import EV from 'ember-validations';
+import { validator, buildValidations } from 'ember-cp-validations';
 import InputErrors from 'ember-rapid-forms/mixins/input-errors';
+import helper from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
 
-var User = DS.Model.extend(EV, InputErrors, {
+const Validations = buildValidations({
+    fullName: [
+        validator('format', {
+            regex: /^[^\s]+(\s[^\s]+)+$/,
+            message: 'enter a first and last name'
+        }),
+        validator('presence', true)
+    ],
+    password: [
+        validator('presence', true),
+        validator('length', {
+            min: 6
+        })
+    ],
+    comment: validator('presence', true),
+    gender: validator('presence', true)
+});
+
+const person = DS.Model.extend(Validations, InputErrors, helper, {
     firstName: DS.attr('string', { defaultValue: null }),
     lastName: DS.attr('string', { defaultValue: null }),
     password: DS.attr('string'),
     comment: DS.attr('string'),
     active: DS.attr('boolean'),
     gender: DS.attr('string'),
-    nameHasValue: Ember.computed('name', {
-        get:function(){
-            return !!this.get('name').length;
+    nameHasValue: Ember.computed('fullName', {
+        get: function() {
+            return !!this.get('fullName');
         }
     }),
+
     fullName: Ember.computed('firstName', 'lastName', {
+        //jshint unused:false
         get: function() {
             if (this.get('firstName')) {
                 return `${this.get('firstName')} ${this.get('lastName')}`;
@@ -62,36 +83,16 @@ var User = DS.Model.extend(EV, InputErrors, {
             this.setProperties({ firstName, lastName });
             return value;
         }
+    }),
+
+    asjson: Ember.computed('fullName', 'firstName', 'lastName', 'password', 'comment', 'active', 'gender', function() {
+        return "fullName: " + (this.get('fullName')) + ", firstName: " + (this.get('firstName')) + ", lastName: " + (this.get('lastName')) + ", password: " + (this.get('password')) + ", comment: " + (this.get('comment')) + ", active: " + (this.get('active')) + ", gender: " + (this.get('gender'));
     })
-})
-
-
-User.reopen({
-    validations: {
-        fullName: {
-            format: {
-                with: /^[^\s]+(\s[^\s]+)+$/,
-                message: "enter a first and last name"
-            }
-        },
-        password: {
-            presence: true,
-            length: {
-                minimum: 6
-            }
-        },
-        comment: {
-            presence: true
-        },
-        gender: {
-            presence: true
-        }
-    }
 });
     </code></pre>
 </div>
 
-<i>Note: for validation support you need: https://github.com/dockyard/ember-validations project</i>
+<i>Note: for validation support you need: https://github.com/offirgolan/ember-cp-validations</i>
 
 <h3>With this template:</h3>
 <div class="well line-example">
@@ -113,7 +114,7 @@ User.reopen({
 <h3>I18n:</h3>
 <p>Ember Rapid Forms is compatible with Ember-i18n: https://github.com/jamesarosen/ember-i18n</p>
 <p>The key "modelName.property" is searched and used if defined.</p>
-<p>For example "user.firstName" will be used if the corresponding key is defined.</p>
+<p>For example "person.firstName" will be used if the corresponding key is defined.</p>
 
 
 <h3>The result would be:</h3>

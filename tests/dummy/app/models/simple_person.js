@@ -1,9 +1,28 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import EV from 'ember-validations';
+import { validator, buildValidations } from 'ember-cp-validations';
 import InputErrors from 'ember-rapid-forms/mixins/input-errors';
+import helper from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
 
-var SimplePerson = DS.Model.extend(EV, InputErrors, {
+const Validations = buildValidations({
+  fullName: [
+    validator('format', {
+      regex: /^[^\s]+(\s[^\s]+)+$/,
+      message: 'enter a first and last name'
+    }),
+    validator('presence', true)
+  ],
+  password: [
+    validator('presence', true),
+    validator('length', {
+      min: 6
+    })
+  ],
+  comment: validator('presence', true),
+  gender: validator('presence', true)
+});
+
+const person = DS.Model.extend(Validations, InputErrors, helper, {
   firstName: DS.attr('string', { defaultValue: null }),
   lastName: DS.attr('string', { defaultValue: null }),
   password: DS.attr('string'),
@@ -40,27 +59,5 @@ var SimplePerson = DS.Model.extend(EV, InputErrors, {
   })
 });
 
-SimplePerson.reopen({
-  validations: {
-    fullName: {
-      format: {
-        with: /^[^\s]+(\s[^\s]+)+$/,
-        message: "enter a first and last name"
-      }
-    },
-    password: {
-      presence: true,
-      length: {
-        minimum: 6
-      }
-    },
-    comment: {
-      presence: true
-    },
-    gender: {
-      presence: true
-    }
-  }
-});
 
-export default SimplePerson;
+export default person;

@@ -1,28 +1,28 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import EV from 'ember-validations';
+import { validator, buildValidations } from 'ember-cp-validations';
+import InputErrors from 'ember-rapid-forms/mixins/input-errors';
+import helper from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
 
-var Credentials = DS.Model.extend(EV, {
+const Validations = buildValidations({
+  user: [
+    validator('presence', true),
+    validator('length', {
+      min: 3
+    })
+  ],
+  password: [
+    validator('presence', true),
+    validator('length', {
+      min: 4
+    })
+  ]
+});
+
+const Credentials = DS.Model.extend(Validations, InputErrors, helper, {
   user: DS.attr('string'),
   password: DS.attr('string'),
   isntValid: Ember.computed.not('isValid')
-});
-
-Credentials.reopen({
-  validations: {
-    user: {
-      presence: true,
-      length: {
-        minimum: 3
-      }
-    },
-    password: {
-      presence: true,
-      length: {
-        minimum: 4
-      }
-    }
-  }
 });
 
 export default Credentials;
