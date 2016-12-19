@@ -89,3 +89,10 @@ test('I18n label is overrided by a given value', function(assert) {
 
   assert.equal(this.$('label').text().trim(), 'Custom Label', 'Doesn\t use custom labels');
 });
+
+test('Add required class if the field is required', function(assert) {
+  this.set('model', Ember.Object.create());
+  this.render(hbs`{{em-form-group model=model required=true}}`);
+
+  assert.ok(this.$('.form-group').hasClass('required'));
+});
