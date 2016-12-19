@@ -146,5 +146,11 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
         return i18n.t(key);
       }
     }
+  }),
+
+  required: Ember.computed('property', 'validations.attrs.@each.options.presence.presence', function () {
+    const property = this.get('property');
+
+    return this.get(`model.validations.attrs.${property}.options.presence.presence`) || false;
   })
 });

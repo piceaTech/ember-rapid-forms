@@ -25,7 +25,6 @@ export default FormGroupComponent.extend({
   optionValuePath: 'id',
   optionLabelPath: 'value',
   prompt: null,
-  required: null,
   disabled: null,
   autofocus: null,
   size: 0,

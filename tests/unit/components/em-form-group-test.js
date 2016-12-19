@@ -96,3 +96,25 @@ test('Add required class if the field is required', function(assert) {
 
   assert.ok(this.$('.form-group').hasClass('required'));
 });
+
+test('When there a presence validator', function(assert) {
+  // Stub ember-cp-validation
+  const Model = Ember.Object.extend({
+    validations: {
+      attrs: {
+        fullName: {
+          options: {
+            presence: {
+              presence: true
+            }
+          }
+        }
+      }
+    }
+  });
+
+  this.set('model', Model.create());
+  this.render(hbs`{{em-form-group property='fullName' model=model}}`);
+
+  assert.ok(this.$('.form-group').hasClass('required'));
+});
