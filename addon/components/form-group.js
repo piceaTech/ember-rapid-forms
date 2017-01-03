@@ -13,5 +13,5 @@ export default Ember.Component.extend({
         return `${this.get('property')}-${this.elementId}`;
       }
     }
-  }),
+  })
 });

@@ -16,7 +16,6 @@ export default FormGroupComponent.extend({
   placeholder: null,
   rows: null,
   cols: null,
-  required: null,
   autofocus: null,
   readonly: null,
   autoresize: null,

@@ -14,7 +14,6 @@ export default FormGroupComponent.extend({
   label: null,
   name: null,
   placeholder: null,
-  required: null,
   autofocus: null,
   disabled: null,
   controlWrapper: Ember.computed('form.formLayout', {

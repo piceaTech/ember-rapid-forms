@@ -31,7 +31,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   "class": 'form-group',
   htmlComponent: 'em-custom-input',
   layout: layout,
-  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback'],
+  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
   i18n: Ember.inject.service(),
@@ -146,5 +146,11 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
         return i18n.t(key);
       }
     }
+  }),
+
+  required: Ember.computed('property', 'validations.attrs.@each.options.presence.presence', function () {
+    const property = this.get('property');
+
+    return this.get(`model.validations.attrs.${property}.options.presence.presence`) || false;
   })
 });

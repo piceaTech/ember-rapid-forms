@@ -13,7 +13,6 @@ export default FormGroupComponent.extend({
   property: null,
   name: null,
   placeholder: null,
-  required: null,
   title: null,
   pattern: null,
   autofocus: null,
