@@ -100,12 +100,17 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   }),
   hasSetForm: false,
   didReceiveAttrs(arg) {
-    Ember.deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
-    if(!arg.newAttrs.form && !this.get('hasSetForm')){
+    this._super(...arguments);
+    if(!!arg.newAttrs.form && !this.get('hasSetForm')){
+      this.set('form', arg.newAttrs.form.value);
+      this.set('hasSetForm', true);
+    }
+    else if(!arg.newAttrs.form && !this.get('hasSetForm')){
+      Ember.deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
       Ember.defineProperty(this, 'form', Ember.computed.alias('formFromPartentView'));
       this.set('hasSetForm', true);
     }
-    this._super(...arguments);
+    
   },
 
   /*
