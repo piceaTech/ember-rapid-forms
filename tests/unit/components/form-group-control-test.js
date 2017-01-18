@@ -3,6 +3,7 @@ import {
   test
 }
 from 'ember-qunit';
+import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('form-group-control', {
@@ -10,7 +11,7 @@ moduleForComponent('form-group-control', {
   integration: true,
 
   beforeEach() {
-    const mainComponent = this.container.lookupFactory('component:em-form-group').create({
+    const mainComponent = Ember.Object.create({
       htmlComponent: 'erf-html-input'
     });
     this.set('mainComponent', mainComponent);

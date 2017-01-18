@@ -33,10 +33,8 @@ test('it renders proper error validation icon', function(assert) {
 
   this.render(hbs `{{#em-form as |form|}}{{form.formGroup form=form canShowErrors=true validationIcons=true status='error' errorIcon='error'}}{{/em-form}}`);
 
-  let icons = this.$('span i');
-
+  let icons = this.$('span i.error');
   assert.equal(icons.length, 1, 'found validation icon');
-  debugger;
   assert.ok(icons.hasClass('error'));
 });
 
@@ -46,7 +44,7 @@ test('it renders proper warning validation icon', function(assert) {
 
   this.render(hbs `{{#em-form as |form|}}{{form.formGroup form=form canShowErrors=true validationIcons=true status='warning' warningIcon='warning'}}{{/em-form}}`);
 
-  let icons = this.$('span i');
+  let icons = this.$('span i.warning');
 
   assert.equal(icons.length, 1, 'found validation icon');
   assert.ok(icons.hasClass('warning'));
@@ -58,7 +56,7 @@ test('it renders proper success validation icon', function(assert) {
 
   this.render(hbs `{{#em-form as |form|}}{{form.formGroup form=form canShowErrors=true validationIcons=true status='success' validationIcon='success'}}{{/em-form}}`);
 
-  let icons = this.$('span i');
+  let icons = this.$('span i.success');
 
   assert.equal(icons.length, 1, 'found validation icon');
   assert.ok(icons.hasClass('success'));
