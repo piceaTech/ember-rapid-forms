@@ -11,7 +11,7 @@ moduleForComponent('form-group', {
   integration: true,
 
   beforeEach() {
-    const mainComponent = Ember.Object.create({
+    const mainComponent = this.container.lookupFactory('component:em-form-group').create({
       htmlComponent: 'erf-html-input',
       validationIcon: 'some-icon-class'
     });
@@ -82,7 +82,13 @@ test('renders error message', function(assert) {
 });
 
 test('does not renders error message when layout is inline', function(assert) {
-  this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group mainComponent=mainComponent shouldShowErrors=true help='help text here'}}{{/em-form}}`);
+  var form = Ember.Object.create({
+    isInline: true
+  });
+
+  this.set('form', form);
+
+  this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent form=form shouldShowErrors=true help='help text here'}}{{/em-form}}`);
 
   assert.equal(this.$().find('input').length, 1, 'Has mainComponent rendered');
 
