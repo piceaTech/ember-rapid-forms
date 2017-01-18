@@ -3,84 +3,88 @@ import {
   test
   } from 'ember-qunit';
 import Ember from 'ember';
+import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-text', {
   // Specify the other units that are required for this test
-  needs: [
-    'component:form-group',
-    'component:form-group-control',
-    'component:erf-html-text',
-    'component:em-form-label'
-  ]
+  integration:true
 });
 
 test('Textarea renders', function(assert) {
 
-  var component = this.subject();
+  this.render(hbs`{{#em-form as |form|}}{{form.text}}{{/em-form}}`);
 
-  this.render();
-  assert.equal(Ember.$(component.element).find('textarea').length, 1, 'label has for property');
+  var element = this.$();
+  assert.equal(element.find('textarea').length, 1, 'label has for property');
 });
 
 test('Textarea renders with rows', function(assert) {
+  this.set('rows', 3);
 
-  var component = this.subject({rows: 3});
 
-  this.render();
+  this.render(hbs`{{#em-form as |form|}}{{form.text rows=rows}}{{/em-form}}`);
 
-  assert.equal(Ember.$(component.element).find('textarea').attr('rows'), '3', 'label has rows attr');
+
+  var element = this.$();
+  assert.equal(element.find('textarea').attr('rows'), '3', 'label has rows attr');
 
   Ember.run(() => {
-    component.set('rows', 4);
+    this.set('rows', 4);
   });
 
-  assert.equal(Ember.$(component.element).find('textarea').attr('rows'), '4', 'label has rows attr');
+
+  assert.equal(element.find('textarea').attr('rows'), '4', 'label has rows attr');
 });
 
 test('Textarea renders with cols', function(assert) {
+  this.set('cols', 30);
 
-  var component = this.subject({cols: 30});
+  this.render(hbs`{{#em-form as |form|}}{{form.text cols=cols}}{{/em-form}}`);
 
-  this.render();
-  assert.equal(Ember.$(component.element).find('textarea').attr('cols'), '30', 'label has cols attr');
+  var element = this.$();
+  assert.equal(element.find('textarea').attr('cols'), '30', 'label has cols attr');
 
   Ember.run(() => {
-    component.set('cols', 40);
+    this.set('cols', 40);
   });
 
-  assert.equal(Ember.$(component.element).find('textarea').attr('cols'), '40', 'label has cols attr');
+
+  assert.equal(element.find('textarea').attr('cols'), '40', 'label has cols attr');
 });
 
 test('Textarea can be disabled', function(assert) {
 
-  var component = this.subject({disabled: true});
+  this.render(hbs`{{#em-form as |form|}}{{form.text disabled=true}}{{/em-form}}`);
 
-  this.render();
-  assert.ok(Ember.$(component.element).attr('disabled'), 'outer div renders disabled');
-  assert.ok(Ember.$(component.element).find('textarea').attr('disabled'), 'textarea renders disabled');
+
+  var element = this.$();
+  assert.ok(element.find('form div').attr('disabled'), 'outer div renders disabled');
+  assert.ok(element.find('textarea').attr('disabled'), 'textarea renders disabled');
 });
 
 test('Textarea renders with custom css', function(assert) {
 
-  var component = this.subject({elementClass: 'col-md-6'});
+  this.render(hbs`{{#em-form as |form|}}{{form.text elementClass='col-md-6'}}{{/em-form}}`);
 
-  this.render();
-  assert.ok(Ember.$(component.element).find('textarea').hasClass('col-md-6'), 'Textarea has correct class');
+  var element = this.$();
+  assert.ok(element.find('textarea').hasClass('col-md-6'), 'Textarea has correct class');
 });
 
 test('cid correctly sets the id for the textarea and it\'s label', function(assert) {
   assert.expect(2);
-  let cid = 'test-cid';
-  let component = this.subject({label: 'some label', cid: cid});
-  this.render();
+  this.set('cid', 'test-cid');
 
-  assert.equal(component.$('textarea').attr('id'), cid, 'textarea has correct id');
-  assert.equal(component.$('label').attr('for'), cid, 'label has correct \'for\'');
+  this.render(hbs`{{#em-form as |form|}}{{form.text label='some label' cid=cid}}{{/em-form}}`);
+
+  var element = this.$();
+  assert.equal(element.find('textarea').attr('id'), this.get('cid'), 'textarea has correct id');
+  assert.equal(element.find('label').attr('for'), this.get('cid'), 'label has correct \'for\'');
 });
 
 test('cid is property by default', function(assert) {
-  let component = this.subject({label: 'some label', property: 'test-id'});
-  this.render();
+  this.set('property', 'test-cid');
+  this.render(hbs`{{#em-form as |form|}}{{form.text label='some label' property=property}}{{/em-form}}`);
 
-  assert.equal(component.$('textarea').attr('id'), component.$('label').attr('for'), 'the "for" of the label is not the "id" of the input');
+  var element = this.$();
+  assert.equal(element.find('textarea').attr('id'), element.find('label').attr('for'), 'the "for" of the label is not the "id" of the input');
 });
