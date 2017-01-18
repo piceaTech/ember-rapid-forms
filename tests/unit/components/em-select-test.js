@@ -50,7 +50,7 @@ var fruitOptions = Ember.A([{
 test('em-select renders', function(assert) {
   this.set('fruitOptions', fruitOptions);
 
-  this.render(hbs`{{#em-form as |form|}}{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
 
   var element = this.$();
 
@@ -69,7 +69,7 @@ test('em-select renders with a prompt', function(assert) {
 
   this.set('fruitOptions', fruitOptions);
 
-  this.render(hbs`{{#em-form as |form|}}{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
 
   var element = this.$();
 
@@ -85,7 +85,7 @@ test('em-select can select an item', function(assert) {
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
-  this.render(hbs`{{#em-form as |form|}}{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
 
   var element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
@@ -106,7 +106,7 @@ test('em-select can select the model itself', function(assert) {
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
-  this.render(hbs`{{#em-form as |form|}}{form.select label="Fruits:" content=fruitOptions propertyIsModel=true optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions propertyIsModel=true optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
 
   var element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
@@ -173,7 +173,7 @@ test('Input can have a size', function(assert) {
 //   this.set('fruitOptions', fruitOptions);
 //   this.set('fruitSalad', fruitSalad);
 
-//   this.render(hbs`{{#em-form as |form|}}{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='fruits' model=fruitSalad propertyIsModel=true multiple=true}}{{/em-form}}`);
+//   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='fruits' model=fruitSalad propertyIsModel=true multiple=true}}{{/em-form}}`);
 
 //   var element = this.$();
 //   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');

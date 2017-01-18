@@ -12,17 +12,17 @@ moduleForComponent('em-form-group', {
 });
 
 test('it renders', function(assert) {
-  this.render(hbs `{{em-form-group}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.formGroup}}{{/em-form}}`);
   assert.ok(this.$('.form-group').length, 'group has default css class');
 });
 
 test('it renders with no label', function(assert) {
-  this.render(hbs `{{em-form-group}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.formGroup}}{{/em-form}}`);
   assert.ok(this.$('label').length === 0, 'group has no label');
 });
 
 test('it renders with label', function(assert) {
-  this.render(hbs `{{em-form-group label='hello'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.formGroup label='hello'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'hello', 'group has label after it being set');
 });
@@ -31,11 +31,12 @@ test('it renders proper error validation icon', function(assert) {
   const form = Ember.Object.extend();
   this.set('form', form);
 
-  this.render(hbs `{{em-form-group form=form canShowErrors=true validationIcons=true status='error' errorIcon='error'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.formGroup form=form canShowErrors=true validationIcons=true status='error' errorIcon='error'}}{{/em-form}}`);
 
   let icons = this.$('span i');
 
   assert.equal(icons.length, 1, 'found validation icon');
+  debugger;
   assert.ok(icons.hasClass('error'));
 });
 
@@ -43,7 +44,7 @@ test('it renders proper warning validation icon', function(assert) {
   const form = Ember.Object.extend();
   this.set('form', form);
 
-  this.render(hbs `{{em-form-group form=form canShowErrors=true validationIcons=true status='warning' warningIcon='warning'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.formGroup form=form canShowErrors=true validationIcons=true status='warning' warningIcon='warning'}}{{/em-form}}`);
 
   let icons = this.$('span i');
 
@@ -55,7 +56,7 @@ test('it renders proper success validation icon', function(assert) {
   const form = Ember.Object.extend();
   this.set('form', form);
 
-  this.render(hbs `{{em-form-group form=form canShowErrors=true validationIcons=true status='success' validationIcon='success'}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.formGroup form=form canShowErrors=true validationIcons=true status='success' validationIcon='success'}}{{/em-form}}`);
 
   let icons = this.$('span i');
 
@@ -73,7 +74,7 @@ test('Find the label if i18n is set', function(assert) {
   fruit.constructor.modelName = 'fruit';
 
   this.set('fruit', fruit);
-  this.render(hbs`{{em-form-group model=fruit property='name'}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.formGroup model=fruit property='name'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'Name', 'the id is not found from i18n');
 });
@@ -85,14 +86,14 @@ test('I18n label is overrided by a given value', function(assert) {
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
 
   this.set('model', Ember.Object.create());
-  this.render(hbs`{{em-form-group model=model label='Custom Label'}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.formGroup model=model label='Custom Label'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'Custom Label', 'Doesn\t use custom labels');
 });
 
 test('Add required class if the field is required', function(assert) {
   this.set('model', Ember.Object.create());
-  this.render(hbs`{{em-form-group model=model required=true}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.formGroup model=model required=true}}{{/em-form}}`);
 
   assert.ok(this.$('.form-group').hasClass('required'));
 });
@@ -114,7 +115,7 @@ test('When there a presence validator', function(assert) {
   });
 
   this.set('model', Model.create());
-  this.render(hbs`{{em-form-group property='fullName' model=model}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.formGroup property='fullName' model=model}}{{/em-form}}`);
 
   assert.ok(this.$('.form-group').hasClass('required'));
 });
