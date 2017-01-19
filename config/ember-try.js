@@ -5,24 +5,6 @@ module.exports = {
       dependencies: { }
     },
     {
-      name: 'ember-2.0',
-      dependencies: {
-        'ember': '2.0.3',
-      }
-    },
-    {
-      name: 'ember-2.1',
-      dependencies: {
-        'ember': '2.1.2',
-      }
-    },
-    {
-      name: 'ember-2.2',
-      dependencies: {
-        'ember': '2.2.2',
-      }
-    },
-    {
       name: 'ember-2.3',
       dependencies: {
         'ember': '2.3.2',
@@ -84,6 +66,7 @@ module.exports = {
     },
     {
       name: 'ember-canary',
+      allowedToFail: true,
       dependencies: {
         'ember': 'components/ember#canary'
       },
