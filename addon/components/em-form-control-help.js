@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import InFormMixin from 'ember-rapid-forms/mixins/in-form';
 import layout from '../templates/components/em-form-control-help';
 
 /*
@@ -12,7 +11,7 @@ Note: currently must be a direct descendant of a form-group or 'property' must b
 Syntax:
 {{em-form-control-help}}
  */
-export default Ember.Component.extend(InFormMixin, {
+export default Ember.Component.extend({
   layout: layout,
   tagName: 'span',
   classNames: ['help-block'],

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import InFormMixin from 'ember-rapid-forms/mixins/in-form';
 import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
@@ -26,7 +25,7 @@ Syntax:
     label="Some label"
 }}
  */
-export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasPropertyValidationMixin, {
+export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMixin, {
   tagName: 'div',
   "class": 'form-group',
   htmlComponent: 'em-custom-input',
@@ -102,7 +101,6 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
   didReceiveAttrs(arg) {
     this._super(...arguments);
     if(!!arg.newAttrs.form && !this.get('hasSetForm')){
-      this.set('form', arg.newAttrs.form.value);
       this.set('hasSetForm', true);
     }
     else if(!arg.newAttrs.form && !this.get('hasSetForm')){
@@ -110,7 +108,7 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       Ember.defineProperty(this, 'form', Ember.computed.alias('formFromPartentView'));
       this.set('hasSetForm', true);
     }
-    
+
   },
 
   /*
