@@ -103,7 +103,6 @@ export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMix
   didReceiveAttrs(arg) {
     this._super(...arguments);
     if(!!arg.newAttrs.form && !this.get('hasSetForm')){
-      this.set('form', arg.newAttrs.form.value);
       this.set('hasSetForm', true);
     }
     else if(!arg.newAttrs.form && !this.get('hasSetForm')){
@@ -111,7 +110,7 @@ export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMix
       Ember.defineProperty(this, 'form', Ember.computed.alias('formFromPartentView'));
       this.set('hasSetForm', true);
     }
-    
+
   },
 
   /*
