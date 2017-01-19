@@ -34,7 +34,7 @@ export default Ember.Component.extend({
 
   },
   actions: {
-    change(event) {
+    change() {
 
       const selectedEl = this.$('select')[0];
       let selectedIndex = selectedEl.selectedIndex;
