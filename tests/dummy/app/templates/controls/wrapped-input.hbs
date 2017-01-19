@@ -42,11 +42,11 @@ WrappedInputComponent = Em.Component.extend({
 
 <h2>Result</h2>
 <div class="well line-example">
-{{#em-form model=model formLayout=layout}}
-    {{em-input label="Name" property="name"}}
-    {{my-custom-input label="Name" property="name"}}
-    {{#em-custom-input label="Password" property="password" name="property" as |customInput|}}
+{{#em-form model=model formLayout=layout as |form|}}
+    {{form.input label="Name" property="name"}}
+    {{my-custom-input label="Name" property="name" form=form}}
+    {{#form.custom-input label="Password" property="password" name="property" as |customInput|}}
         {{input value=model.password type="password" name=customInput.name}}
-    {{/em-custom-input}}
+    {{/form.custom-input}}
 {{/em-form}}
 </div>

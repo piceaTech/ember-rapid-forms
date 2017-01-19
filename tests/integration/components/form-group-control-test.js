@@ -3,6 +3,7 @@ import {
   test
 }
 from 'ember-qunit';
+import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('form-group-control', {
@@ -10,7 +11,7 @@ moduleForComponent('form-group-control', {
   integration: true,
 
   beforeEach() {
-    const mainComponent = this.container.lookupFactory('component:em-form-group').create({
+    const mainComponent = Ember.Object.create({
       htmlComponent: 'erf-html-input'
     });
     this.set('mainComponent', mainComponent);
@@ -18,13 +19,13 @@ moduleForComponent('form-group-control', {
 });
 
 test('renders the component', function(assert) {
-  this.render(hbs`{{form-group-control mainComponent=mainComponent}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.group-control mainComponent=mainComponent}}{{/em-form}}`);
 
   assert.equal(this.$().find('input').length, 1, 'Has htmlComponent rendered');
 });
 
 test('renders the component with wrapper', function(assert) {
-  this.render(hbs `{{form-group-control mainComponent=mainComponent controlWrapper='control-wrapper-class'}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.group-control mainComponent=mainComponent controlWrapper='control-wrapper-class'}}{{/em-form}}`);
 
   assert.equal(this.$().find('input').length, 1, 'Has htmlComponent rendered');
   assert.ok(this.$().find('div.control-wrapper-class'), 'Has wrapper div');

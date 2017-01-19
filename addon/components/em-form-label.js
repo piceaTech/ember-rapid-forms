@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import InFormMixin from 'ember-rapid-forms/mixins/in-form';
 import layout from '../templates/components/em-form-label';
 
 /*
@@ -19,7 +18,7 @@ Or can serve as a block helper for elements that needs to be wrapped within labe
     {{em-checkbox}}
 {{/em-form-label}}
  */
-export default Ember.Component.extend(InFormMixin, {
+export default Ember.Component.extend({
   layout: layout,
   tagName: 'label',
   classNames: ['control-label'],

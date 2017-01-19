@@ -7,10 +7,10 @@ and textareas.
 <h2>Markup</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-        \{{#em-form model=model}}
-          \{{em-input label="Name" property="user" elementClass="fancyLogin"}}
-          \{{em-input label="Password" property="password" elementClass="uglyPassword"}}
-        \{{/em-form}}
+\{{#em-form model=model as |form|}}
+    \{{form.input label="Name" property="user" elementClass="fancyLogin"}}
+    \{{form.input label="Password" property="password" elementClass="uglyPassword"}}
+\{{/em-form}}
     </code></pre>
 </div>
 
@@ -36,8 +36,8 @@ obvious css changes.
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form model=model}}
-      {{em-input label="Name" property="user" elementClass="fancyLogin"}}
-      {{em-input label="Password" property="password" elementClass="uglyPassword"}}
+    {{#em-form model=model as |form|}}
+      {{form.input label="Name" property="user" elementClass="fancyLogin"}}
+      {{form.input label="Password" property="password" elementClass="uglyPassword"}}
     {{/em-form}}
 </div>

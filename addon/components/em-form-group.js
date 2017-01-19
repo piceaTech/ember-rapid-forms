@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import InFormMixin from 'ember-rapid-forms/mixins/in-form';
 import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
@@ -26,7 +25,7 @@ Syntax:
     label="Some label"
 }}
  */
-export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasPropertyValidationMixin, {
+export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMixin, {
   tagName: 'div',
   "class": 'form-group',
   htmlComponent: 'em-custom-input',
@@ -98,8 +97,18 @@ export default Ember.Component.extend(InFormMixin, HasPropertyMixin, HasProperty
       return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
     }
   }),
-  init() {
-    return this._super(...arguments);
+  hasSetForm: false,
+  didReceiveAttrs(arg) {
+    this._super(...arguments);
+    if(!!arg.newAttrs.form && !this.get('hasSetForm')){
+      this.set('hasSetForm', true);
+    }
+    else if(!arg.newAttrs.form && !this.get('hasSetForm')){
+      Ember.deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
+      Ember.defineProperty(this, 'form', Ember.computed.alias('formFromPartentView'));
+      this.set('hasSetForm', true);
+    }
+
   },
 
   /*

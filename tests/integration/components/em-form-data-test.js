@@ -41,7 +41,7 @@ test('a form display DS.Errors when rendered if showErrorsOnRender is set', func
     this.get('someModel').set('errors', errors);
   });
 
-  this.render(hbs `{{#em-form model=someModel showErrorsOnRender=true}}{{em-input property="name"}}{{/em-form}}`);
+  this.render(hbs `{{#em-form model=someModel showErrorsOnRender=true as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   Ember.run(() => {
     assert.equal(this.$().find('span:contains("name!")').length, 1, "Found help text on form");

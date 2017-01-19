@@ -7,12 +7,12 @@ It is possible to have a custom submit button by not rendering the default submi
 <h2>Markup</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-\{{#em-form model=model submitButton=false}}
-\{{em-input label="Name" property="user"}}
-\{{em-input label="Password" property="password"}}
-&lt;div class="form-actions"&gt;
-    &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
-&lt;/div&gt;
+\{{#em-form model=model as |form|}}
+    \{{form.input label="Name" property="user"}}
+    \{{form.input label="Password" property="password"}}
+    &lt;div class="form-actions"&gt;
+        &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
+    &lt;/div&gt;
 \{{/em-form}}
     </code></pre>
 </div>
@@ -68,11 +68,15 @@ export default Em.Controller.extend({
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form model=model submitButton=false}}
-        {{em-input label="Name" property="user"}}
-        {{em-input label="Password" property="password"}}
+    {{#em-form model=model submitButton=false as |form|}}
+        {{form.input label="Name" property="user"}}
+        {{form.input label="Password" property="password"}}
         <div class="form-actions">
             <input disabled={{model.isntValid}} type="submit" class="btn btn-primary" value="Login">
         </div>
     {{/em-form}}
+</div>
+
+<div class="well line-example">
+    name: {{model.user}}, password: {{model.password}}
 </div>
