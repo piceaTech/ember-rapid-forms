@@ -18,6 +18,7 @@
                 {{/form-group-control}}
             </div>
         {{else}}
+          {{mainComponent.id}}
             {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
             {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
                 {{yield}}

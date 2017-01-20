@@ -12,7 +12,7 @@ moduleForComponent('form-group', {
 
   beforeEach() {
     const mainComponent = Ember.Object.create({
-      htmlComponent: 'erf-html-input',
+      htmlComponent: 'erf-html-checkbox',
       validationIcon: 'some-icon-class'
     });
     this.set('mainComponent', mainComponent);

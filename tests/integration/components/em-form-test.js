@@ -43,7 +43,7 @@ test('a form display errors when rendered if showErrorsOnRender is set', functio
 
 
   Ember.run(() => {
-    assert.equal(this.$().find('div:contains("name!")').length, 1, "Found help text on form");
+    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
   });
 });
 
@@ -60,7 +60,7 @@ test('a form display errors when field is focused in', function(assert) {
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before focusin");
 
   this.$().find('input').focusin();
-  assert.equal(this.$().find('div:contains("name!")').length, 1, "Found help text on form");
+  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
 
 });
 
@@ -77,7 +77,7 @@ test('a form display errors when field is focused out', function(assert) {
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before focusout");
   this.$().find('input').focusout();
 
-  assert.equal(this.$().find('div:contains("name!")').length, 1, "Found help text on form");
+  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
 
 });
 
@@ -95,7 +95,7 @@ test('a form display errors on key up events when field has showOnKeyUp is set',
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before keyup");
 
   this.$().find('input').keyup();
-  assert.equal(this.$().find('div:contains("name!")').length, 1, "Found help text on form");
+  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
 
 });
 
@@ -114,7 +114,7 @@ test('a form display errors when form is submitted and field is invalid', functi
     this.$().find('button').click();
   });
 
-  assert.equal(this.$().find('div:contains("name!")').length, 1, "Found help text on form");
+  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
 });
 
 test('a form update inputs on model change', function(assert) {
@@ -223,7 +223,7 @@ test('a form changes its model and errors are reseted', function(assert) {
   });
 
   Ember.run(() => {
-    assert.equal(this.$().find('div:contains("name!")').length, 1, "Found help text on form");
+    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
   });
 
   Ember.run(() => {
