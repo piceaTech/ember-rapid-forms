@@ -163,15 +163,5 @@ export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMix
     const property = this.get('property');
 
     return this.get(`model.validations.attrs.${property}.options.presence.presence`) || false;
-  }),
-
-  id: Ember.computed('inputId', 'cid', 'property', {
-    get: function() {
-      if (this.get('cid')) {
-        return this.get('cid');
-      } else {
-        return `${this.get('property')}-${this.elementId}`;
-      }
-    }
   })
 });

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-input';
+import hasId from '../mixins/has-id';
 
 /*
 Form Input
@@ -7,7 +8,7 @@ Form Input
 Syntax:
 {{em-input property="property name"}}
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(hasId, {
   layout: layout,
   elementClass: null,
   htmlComponent: 'erf-html-input',
@@ -62,15 +63,5 @@ export default Ember.Component.extend({
 
   hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
     this.set('canShowErrors', false);
-  }),
-
-  id: Ember.computed('cid', 'property', {
-    get: function() {
-      if (this.get('cid')) {
-        return this.get('cid');
-      } else {
-        return `${this.get('property')}-${this.elementId}`;
-      }
-    }
   })
 });

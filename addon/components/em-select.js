@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-select';
+import hasId from '../mixins/has-id';
 
 /*
 Form Select
@@ -14,7 +15,7 @@ Syntax:
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(hasId, {
   layout: layout,
   validationIcons: false,
   htmlComponent: 'erf-html-select',
@@ -36,16 +37,6 @@ export default Ember.Component.extend({
         return 'col-sm-10';
       }
       return null;
-    }
-  }),
-
-  id: Ember.computed('cid', 'property', {
-    get: function() {
-      if (this.get('cid')) {
-        return this.get('cid');
-      } else {
-        return `${this.get('property')}-${this.elementId}`;
-      }
     }
   })
 });

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import hasId from '../mixins/has-id';
 
 /*
 A mixin that enriches a component that is attached to a model property.
@@ -9,8 +10,9 @@ The property name by default is taken from the mainComponent unless explictly
 This mixin also binds a property named `errors` to the model's `model.errors.@propertyName` array
  */
 
-export default Ember.Mixin.create({
+export default Ember.Mixin.create(hasId, {
   property: undefined,
+
   propertyName: Ember.computed('property', 'mainComponent.property', {
     get: function() {
       if (this.get('property')) {
@@ -22,15 +24,7 @@ export default Ember.Mixin.create({
       }
     }
   }),
-  id: Ember.computed('cid', 'property', {
-    get: function() {
-      if (this.get('cid')) {
-        return this.get('cid');
-      } else {
-        return `${this.get('property')}-${this.elementId}`;
-      }
-    }
-  }),
+
   init: function() {
     this._super(...arguments);
     Ember.defineProperty(this, 'errors', Ember.computed.alias((`model.errors.${this.get('propertyName')}`)));

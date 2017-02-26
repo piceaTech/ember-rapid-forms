@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-checkbox';
+import hasId from '../mixins/has-id';
 
 /*
 Form Input
@@ -7,12 +8,13 @@ Form Input
 Syntax:
 {{em-checkbox property="property name"}}
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(hasId, {
   layout: layout,
   validationIcons: false,
   validations: false,
   yieldInLabel: true,
   htmlComponent: 'erf-html-checkbox',
+
   wrapperClass: Ember.computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') === 'horizontal') {
@@ -20,6 +22,7 @@ export default Ember.Component.extend({
       }
     }
   }),
+
   labelWrapperClass: Ember.computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') === 'horizontal') {
@@ -35,16 +38,6 @@ export default Ember.Component.extend({
         return 'checkbox';
       }
       return 'form-group';
-    }
-  }),
-
-  id: Ember.computed('cid', 'property', {
-    get: function() {
-      if (this.get('cid')) {
-        return this.get('cid');
-      } else {
-        return `${this.get('property')}-${this.elementId}`;
-      }
     }
   })
 });
