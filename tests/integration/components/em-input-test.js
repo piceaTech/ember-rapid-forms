@@ -26,7 +26,6 @@ test('Input has name attribute', function(assert) {
 
 
 test('Input can be disabled', function(assert) {
-
   this.render(hbs`{{#em-form as |form|}}{{form.input disabled=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('input').attr('disabled'), 'input renders disabled');

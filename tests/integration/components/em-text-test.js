@@ -53,13 +53,8 @@ test('Textarea renders with cols', function(assert) {
 });
 
 test('Textarea can be disabled', function(assert) {
-
   this.render(hbs`{{#em-form as |form|}}{{form.text disabled=true}}{{/em-form}}`);
-
-
-  var element = this.$();
-  assert.ok(element.find('form div').attr('disabled'), 'outer div renders disabled');
-  assert.ok(element.find('textarea').attr('disabled'), 'textarea renders disabled');
+  assert.ok(this.$().find('textarea').attr('disabled'), 'input renders disabled');
 });
 
 test('Textarea renders with custom css', function(assert) {
@@ -72,13 +67,10 @@ test('Textarea renders with custom css', function(assert) {
 
 test('cid correctly sets the id for the textarea and it\'s label', function(assert) {
   assert.expect(2);
-  this.set('cid', 'test-cid');
+  this.render(hbs`{{#em-form as |form|}}{{form.text label='some label' cid='test-cid'}}{{/em-form}}`);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.text label='some label' cid=cid}}{{/em-form}}`);
-
-  var element = this.$();
-  assert.equal(element.find('textarea').attr('id'), this.get('cid'), 'textarea has correct id');
-  assert.equal(element.find('label').attr('for'), this.get('cid'), 'label has correct \'for\'');
+  assert.equal(this.$().find('textarea').attr('id'), 'test-cid', 'textarea has correct id');
+  assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
 });
 
 test('cid is property by default', function(assert) {

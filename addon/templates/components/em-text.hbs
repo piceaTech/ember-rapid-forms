@@ -1,0 +1,25 @@
+{{#em-form-group model=model property=property label=label form=form
+  elementClass=elementClass controlWrapper=controlWrapper labelClass=labelClass
+  label=label yieldInLabel=yieldInLabel
+  labelWrapperClass=labelWrapperClass labelClass=labelClass
+  help=help controlWrapper=controlWrapper
+  cid=id validationIcons=validationIcons canShowErrors=canShowErrors inputComponent=this}}
+  {{textarea
+    type=type
+
+    rows=rows
+    cols=cols
+    placeholder=placeholder
+    value=(get model property)
+    name=name
+    disabled=disabled
+    class=(concat "form-control " elementClass)
+    id=id
+    required=required
+    title=title
+    pattern=pattern
+    autofocus=autofocus
+    readonly=readonly
+    autoresize=autoresize
+  }}
+{{/em-form-group}}
