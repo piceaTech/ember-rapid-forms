@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import FormGroupComponent from './em-form-group';
+import layout from '../templates/components/em-select';
 
 /*
 Form Select
@@ -14,7 +14,8 @@ Syntax:
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
-export default FormGroupComponent.extend({
+export default Ember.Component.extend({
+  layout: layout,
   validationIcons: false,
   htmlComponent: 'erf-html-select',
   propertyIsModel:false,
@@ -35,6 +36,16 @@ export default FormGroupComponent.extend({
         return 'col-sm-10';
       }
       return null;
+    }
+  }),
+
+  id: Ember.computed('cid', 'property', {
+    get: function() {
+      if (this.get('cid')) {
+        return this.get('cid');
+      } else {
+        return `${this.get('property')}-${this.elementId}`;
+      }
     }
   })
 });

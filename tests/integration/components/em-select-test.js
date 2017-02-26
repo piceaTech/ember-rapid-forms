@@ -124,7 +124,7 @@ test('em-select can select the model itself', function(assert) {
 
 });
 
-test('Textarea renders with custom css', function(assert) {
+test('Select renders with custom css', function(assert) {
   this.render(hbs`{{#em-form as |form|}}{{form.select elementClass="col-md-6"}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').hasClass('col-md-6'), 'Select has correct class');

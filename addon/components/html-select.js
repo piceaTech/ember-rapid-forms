@@ -13,11 +13,11 @@ export default Ember.Component.extend({
       // TODO ember warn no content set
     }
     // set it to the correct value of the selection
-    this.selectedValue = Ember.computed('mainComponent.model.' + this.get('mainComponent.property'), function() {
-      const propertyIsModel = this.get('mainComponent.propertyIsModel');
-      var value = this.get('mainComponent.model.' + this.get('mainComponent.property'));
+    this.selectedValue = Ember.computed('model.' + this.get('property'), function() {
+      const propertyIsModel = this.get('propertyIsModel');
+      var value = this.get('model.' + this.get('property'));
       if(propertyIsModel && value != null) {
-        const optionValuePath = this.get('mainComponent.optionValuePath');
+        const optionValuePath = this.get('optionValuePath');
         if(value.get === undefined) {
           value = value[optionValuePath];
         } else {
@@ -40,19 +40,19 @@ export default Ember.Component.extend({
       let selectedIndex = selectedEl.selectedIndex;
       // check whether we show prompt the correct to show index is one less
       // when selecting prompt don't change anything
-      if(this.get('mainComponent.prompt')){
+      if(this.get('prompt')){
         if(selectedIndex !== 0){
           selectedIndex--;
         } else {
-          this.set('mainComponent.model.' + this.get('mainComponent.property'), null);
+          this.set('model.' + this.get('property'), null);
           return;
         }
       }
 
-      const content = this.get('mainComponent.content');
+      const content = this.get('content');
       const selectedValue = content.objectAt(selectedIndex);
-      const optionValuePath = this.get('mainComponent.optionValuePath');
-      const propertyIsModel = this.get('mainComponent.propertyIsModel');
+      const optionValuePath = this.get('optionValuePath');
+      const propertyIsModel = this.get('propertyIsModel');
       var selectedID;
 
       if(propertyIsModel) {
@@ -61,7 +61,7 @@ export default Ember.Component.extend({
         selectedID = selectedValue[optionValuePath];
       }
 
-      this.set('mainComponent.model.' + this.get('mainComponent.property'), selectedID);
+      this.set('model.' + this.get('property'), selectedID);
       const changeAction = this.get('action');
       if(changeAction){
         changeAction(selectedID);
