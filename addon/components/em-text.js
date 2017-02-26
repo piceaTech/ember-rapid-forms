@@ -22,11 +22,5 @@ export default Ember.Component.extend(hasId, {
   readonly: null,
   autoresize: null,
   disabled: null,
-  form: null,
-  controlWrapper: Ember.computed('form.formLayout', function() {
-    if (this.get('form.formLayout') === 'horizontal') {
-      return 'col-sm-10';
-    }
-    return null;
-  })
+  form: null
 });

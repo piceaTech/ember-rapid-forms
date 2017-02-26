@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import FormGroupComponent from './em-form-group';
 
 /*
@@ -15,13 +14,5 @@ export default FormGroupComponent.extend({
   name: null,
   placeholder: null,
   autofocus: null,
-  disabled: null,
-  controlWrapper: Ember.computed('form.formLayout', {
-    get: function() {
-      if (this.get('form.formLayout') === 'horizontal') {
-        return 'col-sm-10';
-      }
-      return null;
-    }
-  })
+  disabled: null
 });

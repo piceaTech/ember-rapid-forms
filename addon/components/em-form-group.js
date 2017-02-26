@@ -163,5 +163,14 @@ export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMix
     const property = this.get('property');
 
     return this.get(`model.validations.attrs.${property}.options.presence.presence`) || false;
+  }),
+
+  controlWrapper: Ember.computed('form.formLayout', {
+    get: function() {
+      if (this.get('form.formLayout') === 'horizontal') {
+        return 'col-sm-10';
+      }
+      return null;
+    }
   })
 });

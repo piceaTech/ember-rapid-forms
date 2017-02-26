@@ -59,7 +59,7 @@ test('Checkbox renders with custom css', function(assert) {
   this.render(hbs`{{#em-form as |form|}}{{form.checkbox label='My label' elementClass="col-md-6" controlWrapper="col-md-8" labelClass="col-md-4"}}{{/em-form}}`);
 
   assert.ok(this.$().find('label').hasClass('col-md-4'), 'Label has correct class');
-  assert.ok(this.$().find('label').find('.col-md-8'), 'Checkbox parent has correct class');
+  assert.ok(this.$().find('label').find('.col-md-8').length, 'Checkbox parent has correct class');
   assert.ok(this.$().find('input').hasClass('col-md-6'), 'Checkbox input has correct class');
 });
 

@@ -22,14 +22,6 @@ export default Ember.Component.extend(hasId, {
   autoresize: null,
   disabled: null,
   canShowErrors: false,
-  controlWrapper: Ember.computed('form.formLayout', {
-    get: function() {
-      if (this.get('form.formLayout') === 'horizontal') {
-        return 'col-sm-10';
-      }
-      return null;
-    }
-  }),
   didReceiveAttrs( /*attrs*/ ) {
     this._super(...arguments);
     // set it to the correct value of the selection

@@ -29,14 +29,5 @@ export default Ember.Component.extend(hasId, {
   prompt: null,
   disabled: null,
   autofocus: null,
-  size: 0,
-
-  controlWrapper: Ember.computed('form.formLayout', {
-    get: function() {
-      if (this.get('form.formLayout') === 'horizontal') {
-        return 'col-sm-10';
-      }
-      return null;
-    }
-  })
+  size: 0
 });
