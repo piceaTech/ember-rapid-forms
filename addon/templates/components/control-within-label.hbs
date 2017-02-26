@@ -1,4 +1,6 @@
 {{#em-form-label text=label horiClass='' inlineClass='' form=form for=mainComponent.id extraClass=extraClass}}
-    {{form-group-control controlWrapper=controlWrapper
+    {{#form-group-control controlWrapper=controlWrapper
       mainComponent=mainComponent form=form}}
+        {{yield}}
+    {{/form-group-control}}
 {{/em-form-label}}

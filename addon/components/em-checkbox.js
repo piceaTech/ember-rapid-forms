@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import FormGroupComponent from './em-form-group';
+import layout from '../templates/components/em-checkbox';
 
 /*
 Form Input
@@ -7,7 +7,8 @@ Form Input
 Syntax:
 {{em-checkbox property="property name"}}
  */
-export default FormGroupComponent.extend({
+export default Ember.Component.extend({
+  layout: layout,
   validationIcons: false,
   validations: false,
   yieldInLabel: true,
@@ -27,12 +28,23 @@ export default FormGroupComponent.extend({
       return null;
     }
   }),
-  "class": Ember.computed('form.formLayout', {
+
+  class: Ember.computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') !== 'horizontal') {
         return 'checkbox';
       }
       return 'form-group';
+    }
+  }),
+
+  id: Ember.computed('cid', 'property', {
+    get: function() {
+      if (this.get('cid')) {
+        return this.get('cid');
+      } else {
+        return `${this.get('property')}-${this.elementId}`;
+      }
     }
   })
 });

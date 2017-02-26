@@ -2,15 +2,18 @@
   label=label yieldInLabel=yieldInLabel
   labelWrapperClass=labelWrapperClass labelClass=labelClass
   help=help controlWrapper=controlWrapper
-  cid=cid validationIcons=validationIcons canShowErrors=canShowErrors inputComponent=this}}
+  cid=id validationIcons=validationIcons canShowErrors=canShowErrors inputComponent=this}}
   {{erf-html-checkbox
+
+    model=model
+    property=property
 
     placeholder=placeholder
     value=selectedValue
     name=name
     disabled=disabled
     class=(concat "form-control " elementClass)
-    id=cid
+    id=id
     required=required
     title=title
     pattern=pattern

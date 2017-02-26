@@ -2,12 +2,16 @@
     {{#if yieldInLabel}}
         {{#if labelWrapperClass}}
             <div class={{labelWrapperClass}}>
-                {{control-within-label label=label extraClass=labelClass
+                {{#control-within-label label=label extraClass=labelClass
                   controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+                  {{yield}}
+                {{/control-within-label}}
             </div>
         {{else}}
-            {{control-within-label label=label extraClass=labelClass
+            {{#control-within-label label=label extraClass=labelClass
               controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+              {{yield}}
+            {{/control-within-label}}
         {{/if}}
     {{else}}
         {{#if labelWrapperClass}}
@@ -18,7 +22,6 @@
                 {{/form-group-control}}
             </div>
         {{else}}
-          {{mainComponent.id}}
             {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.id}}
             {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
                 {{yield}}
