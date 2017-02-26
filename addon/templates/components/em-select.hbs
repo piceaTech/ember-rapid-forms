@@ -3,28 +3,17 @@
   yieldInLabel=yieldInLabel labelWrapperClass=labelWrapperClass
   help=help cid=id validationIcons=validationIcons canShowErrors=canShowErrors
   inputComponent=this}}
-  {{erf-html-select
-    type=type
 
-    model=model
-    property=property
-    optionValuePath=optionValuePath
-    optionLabelPath=optionLabelPath
-    content=content
-    prompt=prompt
-    propertyIsModel=propertyIsModel
-    size=size
-
-    placeholder=placeholder
-    name=name
-    disabled=disabled
-    class=(concat "form-control " elementClass)
-    id=id
-    required=required
-    title=title
-    pattern=pattern
-    autofocus=autofocus
-    readonly=readonly
-    autoresize=autoresize
-  }}
+  <select onchange={{action "change"}} class="form-control {{elementClass}}" id={{id}} required={{required}} size={{size}} autofocus={{autofocus}} disabled={{disabled}} multiple={{multiple}}>
+    {{#if prompt}}
+      <option value="" selected={{eq "" selectedValue}}>
+      {{prompt}}
+      </option>
+    {{/if}}
+    {{#each content key="@index" as |item|}}
+      <option value="{{get item optionValuePath}}" selected={{eq (get item optionValuePath) selectedValue}}>
+      {{get item optionLabelPath}}
+      </option>
+    {{/each}}
+  </select>
 {{/em-form-group}}
