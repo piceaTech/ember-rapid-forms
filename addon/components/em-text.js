@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-text';
-import hasId from '../mixins/has-id';
+import HasIdMixin from '../mixins/has-id';
 
 /*
 Form Text Area
@@ -8,7 +8,7 @@ Form Text Area
 Syntax:
 {{em-text property="property name" rows=4 cols=40}}
  */
-export default Ember.Component.extend(hasId, {
+export default Ember.Component.extend(HasIdMixin, {
   layout: layout,
   elementClass: null,
   htmlComponent: 'erf-html-text',

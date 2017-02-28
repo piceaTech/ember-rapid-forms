@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-select';
-import hasId from '../mixins/has-id';
+import HasIdMixin from '../mixins/has-id';
 
 /*
 Form Select
@@ -15,7 +15,7 @@ Syntax:
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
-export default Ember.Component.extend(hasId, {
+export default Ember.Component.extend(HasIdMixin, {
   layout: layout,
   validationIcons: false,
   htmlComponent: 'erf-html-select',
