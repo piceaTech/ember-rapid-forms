@@ -13,7 +13,6 @@ export default Ember.Component.extend(hasId, {
   validationIcons: false,
   validations: false,
   yieldInLabel: true,
-  htmlComponent: 'erf-html-checkbox',
 
   wrapperClass: Ember.computed('form.formLayout', {
     get: function() {

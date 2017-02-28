@@ -2,23 +2,19 @@
   label=label yieldInLabel=yieldInLabel
   labelWrapperClass=labelWrapperClass labelClass=labelClass
   help=help controlWrapper=controlWrapper
-  cid=id validationIcons=validationIcons canShowErrors=canShowErrors inputComponent=this}}
-  {{erf-html-checkbox
-
-    model=model
-    property=property
-
-    placeholder=placeholder
-    value=selectedValue
-    name=name
+  inputId=inputId validationIcons=validationIcons canShowErrors=canShowErrors inputComponent=this}}
+  {{input
+    id=inputId
+    type='checkbox'
+    checked=model.userAgree
     disabled=disabled
-    class=(concat "form-control " elementClass)
-    id=id
     required=required
-    title=title
-    pattern=pattern
     autofocus=autofocus
     readonly=readonly
-    autoresize=autoresize
-  }}
+    title=title
+    class=(concat "form-control " elementClass)
+    name=name}}
+    {{checked}}
+    {{property}}
+    {{model.userAgree}}
 {{/em-form-group}}

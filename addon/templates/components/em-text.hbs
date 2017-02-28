@@ -1,7 +1,7 @@
 {{#em-form-group model=model property=property label=label form=form
   elementClass=elementClass labelClass=labelClass label=label
   yieldInLabel=yieldInLabel labelWrapperClass=labelWrapperClass help=help
-  cid=id validationIcons=validationIcons canShowErrors=canShowErrors inputComponent=this}}
+  inputId=inputId validationIcons=validationIcons canShowErrors=canShowErrors inputComponent=this}}
   {{textarea
     type=type
 
@@ -12,7 +12,7 @@
     name=name
     disabled=disabled
     class=(concat "form-control " elementClass)
-    id=id
+    id=inputId
     required=required
     title=title
     pattern=pattern

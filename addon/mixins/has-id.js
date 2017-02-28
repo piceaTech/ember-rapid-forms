@@ -10,12 +10,12 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
  */
 
 export default Ember.Mixin.create({
-  id: Ember.computed('cid', 'property', {
+  inputId: Ember.computed('cid', 'property', 'id', {
     get: function() {
       if (this.get('cid')) {
         return this.get('cid');
       } else {
-        return `${this.get('property')}-${this.elementId}`;
+        return `${this.get('property')}-${this.get('id')}`;
       }
     }
   })
