@@ -1,5 +1,6 @@
-import FormGroupComponent from './em-form-group';
+import Ember from 'ember';
 import hasId from '../mixins/has-id';
+import layout from '../templates/components/em-custom-input';
 
 /*
 Form Input
@@ -7,9 +8,9 @@ Form Input
 Syntax:
 {{#em-custom-input property="property name"}}Something{{/em-custom-input}}
  */
-export default FormGroupComponent.extend(hasId, {
+export default Ember.Component.extend(hasId, {
+  layout: layout,
   elementClass: null,
-  htmlComponent: 'erf-html-custom-input',
   property: null,
   label: null,
   name: null,
@@ -21,5 +22,6 @@ export default FormGroupComponent.extend(hasId, {
     this._super(...arguments);
 
     this.set('id', this.get('inputId'));
+    this.set('class', this.get('elementClass'));
   }
 });
