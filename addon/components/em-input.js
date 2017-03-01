@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/em-input';
 import HasIdMixin from '../mixins/has-id';
 
-const { Component, computed, observer } = Ember;
+const { Component, observer } = Ember;
 
 /*
 Form Input
@@ -13,7 +13,6 @@ Syntax:
 export default Component.extend(HasIdMixin, {
   layout: layout,
   elementClass: null,
-  htmlComponent: 'erf-html-input',
   property: null,
   name: null,
   placeholder: null,
@@ -28,12 +27,6 @@ export default Component.extend(HasIdMixin, {
   hideValidationsOnFormChange: observer('form', 'form.model', function() {
     this.set('canShowErrors', false);
   }),
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    // set it to the correct value of the selection
-    this.selectedValue = computed.alias('model.' + this.get('property'));
-  },
 
   /*
   Observes the helpHasErrors of the help control and modify the 'status' property accordingly.

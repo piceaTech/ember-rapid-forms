@@ -21,8 +21,8 @@ The form component can be bound to a <i>model</i> to support better bindings &am
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form formLayout="horizontal" model=someModel action="some-action"}}
-        {{em-input label="Name" property="name"}}
+    {{#em-form formLayout="horizontal" model=someModel as |f|}}
+        {{f.input label="Name" property="name"}}
     {{/em-form}}
 </div>
 

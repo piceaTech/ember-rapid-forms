@@ -20,7 +20,6 @@ Syntax:
 export default Component.extend(HasIdMixin, {
   layout: layout,
   validationIcons: false,
-  htmlComponent: 'erf-html-select',
   propertyIsModel:false,
   property: null,
   content: null,

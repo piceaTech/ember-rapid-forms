@@ -13,7 +13,6 @@ Syntax:
 export default Component.extend(HasIdMixin, {
   layout: layout,
   elementClass: null,
-  htmlComponent: 'erf-html-text',
   property: null,
   label: null,
   name: null,
