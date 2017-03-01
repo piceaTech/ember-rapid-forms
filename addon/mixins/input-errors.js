@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.Mixin.create({
+const { Mixin } = Ember;
+
+export default Mixin.create({
   init: function () {
     this._super();
     this.set('visibleErrors', {});

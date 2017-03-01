@@ -2,13 +2,15 @@ import Ember from 'ember';
 import layout from '../templates/components/em-input';
 import HasIdMixin from '../mixins/has-id';
 
+const { Component, computed, observer } = Ember;
+
 /*
 Form Input
 
 Syntax:
 {{em-input property="property name"}}
  */
-export default Ember.Component.extend(HasIdMixin, {
+export default Component.extend(HasIdMixin, {
   layout: layout,
   elementClass: null,
   htmlComponent: 'erf-html-input',
@@ -22,10 +24,15 @@ export default Ember.Component.extend(HasIdMixin, {
   autoresize: null,
   disabled: null,
   canShowErrors: false,
-  didReceiveAttrs( /*attrs*/ ) {
+
+  hideValidationsOnFormChange: observer('form', 'form.model', function() {
+    this.set('canShowErrors', false);
+  }),
+
+  didReceiveAttrs() {
     this._super(...arguments);
     // set it to the correct value of the selection
-    this.selectedValue = Ember.computed.alias('model.' + this.get('property'));
+    this.selectedValue = computed.alias('model.' + this.get('property'));
   },
 
   /*
@@ -51,9 +58,5 @@ export default Ember.Component.extend(HasIdMixin, {
     if (this.get('showOnKeyUp')) {
       return this.set('canShowErrors', true);
     }
-  },
-
-  hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
-    this.set('canShowErrors', false);
-  })
+  }
 });

@@ -2,13 +2,15 @@ import Ember from 'ember';
 import HasIdMixin from '../mixins/has-id';
 import layout from '../templates/components/em-custom-input';
 
+const { Component } = Ember;
+
 /*
 Form Input
 
 Syntax:
 {{#em-custom-input property="property name"}}Something{{/em-custom-input}}
  */
-export default Ember.Component.extend(HasIdMixin, {
+export default Component.extend(HasIdMixin, {
   layout: layout,
   elementClass: null,
   property: null,

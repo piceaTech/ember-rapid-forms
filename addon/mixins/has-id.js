@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { computed, Mixin } = Ember;
+
 /*
 A mixin that enriches a component that is attached to a model property.
 
@@ -9,8 +11,8 @@ The property name by default is taken from the mainComponent unless explictly
 This mixin also binds a property named `errors` to the model's `model.errors.@propertyName` array
  */
 
-export default Ember.Mixin.create({
-  inputId: Ember.computed('cid', 'property', 'id', {
+export default Mixin.create({
+  inputId: computed('cid', 'property', 'id', {
     get: function() {
       if (this.get('cid')) {
         return this.get('cid');

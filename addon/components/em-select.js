@@ -2,6 +2,8 @@ import Ember from 'ember';
 import layout from '../templates/components/em-select';
 import HasIdMixin from '../mixins/has-id';
 
+const { Component, computed } = Ember;
+
 /*
 Form Select
 
@@ -15,7 +17,7 @@ Syntax:
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
-export default Ember.Component.extend(HasIdMixin, {
+export default Component.extend(HasIdMixin, {
   layout: layout,
   validationIcons: false,
   htmlComponent: 'erf-html-select',
@@ -40,7 +42,7 @@ export default Ember.Component.extend(HasIdMixin, {
       // TODO ember warn no content set
     }
     // set it to the correct value of the selection
-    this.selectedValue = Ember.computed('model.' + this.get('property'), function() {
+    this.selectedValue = computed('model.' + this.get('property'), function() {
       const propertyIsModel = this.get('propertyIsModel');
       var value = this.get('model.' + this.get('property'));
       if(propertyIsModel && value != null) {

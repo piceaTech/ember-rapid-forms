@@ -2,19 +2,21 @@ import Ember from 'ember';
 import layout from '../templates/components/em-checkbox';
 import HasIdMixin from '../mixins/has-id';
 
+const { Component, computed } = Ember;
+
 /*
 Form Input
 
 Syntax:
 {{em-checkbox property="property name"}}
  */
-export default Ember.Component.extend(HasIdMixin, {
+export default Component.extend(HasIdMixin, {
   layout: layout,
   validationIcons: false,
   validations: false,
   yieldInLabel: true,
 
-  wrapperClass: Ember.computed('form.formLayout', {
+  wrapperClass: computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') === 'horizontal') {
         return 'col-sm-offset-2 col-sm-10';
@@ -22,7 +24,7 @@ export default Ember.Component.extend(HasIdMixin, {
     }
   }),
 
-  labelWrapperClass: Ember.computed('form.formLayout', {
+  labelWrapperClass: computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') === 'horizontal') {
         return 'checkbox';
@@ -31,7 +33,7 @@ export default Ember.Component.extend(HasIdMixin, {
     }
   }),
 
-  class: Ember.computed('form.formLayout', {
+  class: computed('form.formLayout', {
     get: function() {
       if (this.get('form.formLayout') !== 'horizontal') {
         return 'checkbox';

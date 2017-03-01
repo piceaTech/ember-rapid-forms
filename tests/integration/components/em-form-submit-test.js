@@ -36,6 +36,6 @@ test('Form submit button is disabled when model isnt valid & enabled when is val
 
 test('Submit button has the correct type attribute', function(assert) {
   this.render(hbs`{{#em-form submitButton=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`);
-  
+
   assert.equal(this.$().find('button').attr('type'), 'submit', 'default type is submit');
 });

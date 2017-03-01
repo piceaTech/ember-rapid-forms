@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-form-control-help';
 
+const { Component, computed, defineProperty } = Ember;
+
 /*
 Form Control Help
 
@@ -11,7 +13,7 @@ Note: currently must be a direct descendant of a form-group or 'property' must b
 Syntax:
 {{em-form-control-help}}
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
   tagName: 'span',
   classNames: ['help-block'],
@@ -19,23 +21,22 @@ export default Ember.Component.extend({
   text: null,
   extraClass: null,
   horiClass: 'col-sm-offset-2 col-sm-10',
-  horiClassCalc: Ember.computed('form.isHorizontal', {
+
+  horiClassCalc: computed('form.isHorizontal', {
     get: function() {
       if (this.get('form.isHorizontal') && this.get('horiClass')) {
         return this.get('horiClass');
       }
     }
   }),
-  init() {
-    this._super(...arguments);
-    Ember.defineProperty(this, 'errors', Ember.computed.alias((`mainComponent.model.errors.${this.get('mainComponent.propertyName')}`)));
-  },
-  helpText: Ember.computed('text', 'errors.firstObject', {
+
+  helpText: computed('text', 'errors.firstObject', {
     get: function() {
       return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
     }
   }),
-  hasHelp: Ember.computed('helpText', {
+
+  hasHelp: computed('helpText', {
     get: function() {
       var helpText = this.get('helpText');
       if (!helpText) {
@@ -44,9 +45,15 @@ export default Ember.Component.extend({
       return helpText.length > 0;
     }
   }),
-  hasError: Ember.computed('errors.length', {
+
+  hasError: computed('errors.length', {
     get: function() {
       return this.get('errors') != null;
     }
-  })
+  }),
+
+  init() {
+    this._super(...arguments);
+    defineProperty(this, 'errors', computed.alias((`mainComponent.model.errors.${this.get('mainComponent.propertyName')}`)));
+  }
 });

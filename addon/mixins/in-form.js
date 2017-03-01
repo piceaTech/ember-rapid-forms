@@ -1,10 +1,12 @@
 import Ember from 'ember';
 
+const { computed, assert, Mixin } = Ember;
+
 /*
 Find the form of the component that merges this mixin
  */
-export default Ember.Mixin.create({
-  formFromPartentView: Ember.computed({
+export default Mixin.create({
+  formFromPartentView: computed({
     get: function() {
       let parentView = this.get('parentView');
 
@@ -15,10 +17,10 @@ export default Ember.Mixin.create({
         parentView = parentView.get('parentView');
       }
 
-      return Ember.assert(false, 'Cannot find form');
+      return assert(false, 'Cannot find form');
     }
   }),
-  model: Ember.computed('form', 'form.model', {
+  model: computed('form', 'form.model', {
     get: function() {
       return this.get('form.model');
     }

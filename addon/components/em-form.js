@@ -2,6 +2,8 @@ import Ember from 'ember';
 import Utils from 'ember-rapid-forms/utils/utils';
 import layout from '../templates/components/em-form';
 
+const { Component, computed, isNone } = Ember;
+
 /*
 Form View
 
@@ -9,25 +11,38 @@ A component for rendering a form element.
 
 Syntax:
 {{em-form
-    //The layout of the form
+//The layout of the form
     form_layout="form|inline|horizontal"
-    //The model bound to the form if any
+//The model bound to the form if any
     model="some_model_instance"
-    //The action to be invoked on the controller when a form is submitted.
+//The action to be invoked on the controller when a form is submitted.
     action="some_action"
-    //if true a submit button will be rendered
+//if true a submit button will be rendered
     submitButton=true|false
-    //if true validation icons will be rendered
+//if true validation icons will be rendered
     validationIcons=true|false
 }}
 */
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
   tagName: 'form',
   classNameBindings: ['formLayoutClass'],
   attributeBindings: ['role'],
   role: 'form',
-  formLayoutClass: Ember.computed('formLayout', {
+  action: 'submit',
+  model: null,
+  formLayout: 'form',
+  submitButton: true,
+  validationIcons: true,
+  showErrorsOnRender: false,
+  showErrorsOnFocusIn: false,
+  showErrorsOnSubmit: true,
+
+  isDefaultLayout: Utils.createBoundSwitchAccessor('form', 'formLayout', 'form'),
+  isInline: Utils.createBoundSwitchAccessor('inline', 'formLayout', 'form'),
+  isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'formLayout', 'form'),
+
+  formLayoutClass: computed('formLayout', {
     get: function() {
       switch (this.get('formLayout')) {
         case 'horizontal':
@@ -38,40 +53,28 @@ export default Ember.Component.extend({
       }
     }
   }),
-  isDefaultLayout: Utils.createBoundSwitchAccessor('form', 'formLayout', 'form'),
-  isInline: Utils.createBoundSwitchAccessor('inline', 'formLayout', 'form'),
-  isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'formLayout', 'form'),
-  action: 'submit',
-  model: null,
-  formLayout: 'form',
-  submitButton: true,
-  validationIcons: true,
-  showErrorsOnRender: false,
-  showErrorsOnFocusIn: false,
-  showErrorsOnSubmit: true,
 
   /*
   Form submit
 
   Optionally execute model validations and perform a form submission.
-   */
-  submit(e) {
-    var promise;
-    if (e) {
-      e.preventDefault();
+  */
+  actions: {
+    submit() {
+      const model = this.get('model');
+
+      if (isNone(this.get('model.validate'))) {
+        return this.sendAction('action', model);
+      } else {
+        return model.validate().then(this._sendAction(model));
+      }
     }
-    if (Ember.isNone(this.get('model.validate'))) {
-      return this.sendAction('action', this.get('model'));
-    } else {
-      promise = this.get('model').validate();
-      return promise.then((function(_this) {
-        _this.set('isSubmitted', true);
-        return function() {
-          if (_this.get('model.isValid')) {
-            return _this.sendAction('action', _this.get('model'));
-          }
-        };
-      })(this)).catch(function(){});
+  },
+
+  _sendAction(model) {
+    this.set('isSubmitted', true);
+    if (model.get('isValid')) {
+      return this.sendAction('action', model);
     }
   }
 });
