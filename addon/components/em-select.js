@@ -35,7 +35,7 @@ export default Component.extend(HasIdMixin, {
 
   didReceiveAttrs() {
     this._super(...arguments);
-    var content = this.get('content');
+    const content = this.get('content');
 
     if (!content) {
       this.set('content', []);
@@ -44,7 +44,7 @@ export default Component.extend(HasIdMixin, {
     // set it to the correct value of the selection
     this.selectedValue = computed('model.' + this.get('property'), function() {
       const propertyIsModel = this.get('propertyIsModel');
-      var value = this.get('model.' + this.get('property'));
+      let value = this.get('model.' + this.get('property'));
       if(propertyIsModel && value != null) {
         const optionValuePath = this.get('optionValuePath');
         if(value.get === undefined) {
@@ -77,7 +77,7 @@ export default Component.extend(HasIdMixin, {
       const selectedValue = content.objectAt(selectedIndex);
       const optionValuePath = this.get('optionValuePath');
       const propertyIsModel = this.get('propertyIsModel');
-      var selectedID;
+      let selectedID;
 
       if(propertyIsModel) {
         selectedID = selectedValue;

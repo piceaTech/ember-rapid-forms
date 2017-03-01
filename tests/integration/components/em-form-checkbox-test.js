@@ -14,7 +14,7 @@ let someModel = Ember.Object.create({
   userAgree: false,
   errors: Ember.Object.create(),
   validate() {
-    var promise = new Ember.RSVP.Promise((resolve) => {
+    const promise = new Ember.RSVP.Promise((resolve) => {
       resolve('ok!');
     });
     return promise;

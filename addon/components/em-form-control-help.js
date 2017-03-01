@@ -38,7 +38,7 @@ export default Component.extend({
 
   hasHelp: computed('helpText', {
     get() {
-      var helpText = this.get('helpText');
+      const helpText = this.get('helpText');
       if (!helpText) {
         return false;
       }

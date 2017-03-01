@@ -15,11 +15,11 @@ moduleForComponent('em-form', 'component:em-form ember-data', {
 });
 
 
-var somePerson = Ember.Object.create({
+const somePerson = Ember.Object.create({
   name: 'my-name',
   errors: Ember.Object.create(),
   validate() {
-    var promise = new Ember.RSVP.Promise((resolve) => {
+    const promise = new Ember.RSVP.Promise((resolve) => {
       resolve('ok!');
     });
     return promise;
@@ -35,7 +35,7 @@ test('a form display DS.Errors when rendered if showErrorsOnRender is set', func
   });
 
   Ember.run(() => {
-    var errors = DS.Errors.create();
+    const errors = DS.Errors.create();
     errors.add('name', 'name!');
     this.get('someModel').set('isValid', false);
     this.get('someModel').set('errors', errors);

@@ -25,7 +25,7 @@ test('renders with label', function(assert) {
 
 test('renders with labelWrapperClass', function(assert) {
   this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form}}`);
-  var wrapper = this.$().find('div.wrapper-class');
+  const wrapper = this.$().find('div.wrapper-class');
 
   assert.ok(wrapper, 'Wrapper exists');
   assert.equal(wrapper.find('label:contains("my-label")').length, 1, 'Label is inside wrapper');
@@ -34,7 +34,7 @@ test('renders with labelWrapperClass', function(assert) {
 test('renders with yieldInLabel', function(assert) {
   this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent label='my-label' yieldInLabel=true}}{{/em-form}}`);
 
-  var label = this.$().find('label');
+  const label = this.$().find('label');
   assert.equal(label.length, 1, 'Label is a wrapper tag');
   assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
 });
@@ -42,10 +42,10 @@ test('renders with yieldInLabel', function(assert) {
 test('renders with yieldInLabel with labelWrapperClass', function(assert) {
   this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form}}`);
 
-  var wrapper = this.$().find('div.wrapper-class');
+  const wrapper = this.$().find('div.wrapper-class');
   assert.equal(wrapper.length, 1, 'Wrapper exists');
 
-  var label = wrapper.find('label');
+  const label = wrapper.find('label');
   assert.ok(label, 'Label is a wrapper tag');
   assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
 });
@@ -53,7 +53,7 @@ test('renders with yieldInLabel with labelWrapperClass', function(assert) {
 test('renders v_icon', function(assert) {
   this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent validationIcons=true}}{{/em-form}}`);
 
-  var icons = this.$().find('span');
+  const icons = this.$().find('span');
   assert.equal(icons.length, 1, 'Has icon span');
   assert.ok(icons.hasClass('form-control-feedback'), 'Has proper class');
   assert.equal(icons.find('i').length, 1, 'Has icon');
@@ -63,7 +63,7 @@ test('renders v_icon', function(assert) {
 test('renders error message', function(assert) {
   this.render(hbs `{{#em-form as |form|}}{{form.group mainComponent=mainComponent shouldShowErrors=true help='help text here'}}{{/em-form}}`);
 
-  var helpSpan = this.$().find('span');
+  const helpSpan = this.$().find('span');
   assert.equal(helpSpan.length, 1, 'Has help span');
   assert.ok(helpSpan.hasClass('help-block'), 'span has correct class');
   assert.equal(helpSpan.text().trim(), 'help text here', 'span has correct help text');
@@ -72,7 +72,7 @@ test('renders error message', function(assert) {
 test('does not renders error message when layout is inline', function(assert) {
   this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group mainComponent=mainComponent shouldShowErrors=true help='help text here'}}{{/em-form}}`);
 
-  var helpSpan = this.$().find('span');
+  const helpSpan = this.$().find('span');
   assert.equal(helpSpan.length, 0, 'Has no help span');
 
 });

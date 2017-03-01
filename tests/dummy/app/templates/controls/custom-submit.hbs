@@ -30,7 +30,7 @@ Few things happen here:
 <div class="well line-example">
     <pre><code class="coffeescript">
 #Our Model
-var Credentials = DS.Model.extend(EmberValidations, {
+const Credentials = DS.Model.extend(EmberValidations, {
   user: DS.attr('string'),
   password: DS.attr('string'),
   #Opposite if isValid, required to judge whether the submit button should be disabled or not.

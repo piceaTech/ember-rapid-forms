@@ -10,7 +10,7 @@ moduleForComponent('em-form', 'em-form multi models', {
   integration: true
 });
 
-var myHash = Ember.Object.create({
+const myHash = Ember.Object.create({
   modelA: Ember.Object.create({
     name: 'model-a'
   }),
@@ -30,8 +30,8 @@ test('a form with hashed models works as expected', function(assert) {
     {{/em-form}}`);
 
   Ember.run(() => {
-    var inputA = this.$().find('input[name="a"]');
-    var inputB = this.$().find('input[name="b"]');
+    const inputA = this.$().find('input[name="a"]');
+    const inputB = this.$().find('input[name="b"]');
 
     assert.equal(inputA.val(), 'model-a', 'Input A has the correct value');
     assert.equal(inputB.val(), 'model-b', 'Input B has the correct value');
@@ -49,8 +49,8 @@ test('a form with hashed models updates correct model', function(assert) {
     {{/em-form}}`);
 
   Ember.run(() => {
-    var inputA = this.$().find('input[name="a"]');
-    var inputB = this.$().find('input[name="b"]');
+    const inputA = this.$().find('input[name="a"]');
+    const inputB = this.$().find('input[name="b"]');
 
     assert.equal(inputA.val(), 'model-a', 'Input A has the correct value');
     assert.equal(inputB.val(), 'model-b', 'Input B has the correct value');

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
 
-const { Component, computed, inject, isPresent } = Ember;
+const { Component, computed, inject, isPresent, defineProperty } = Ember;
 
 /*
 Form Group
@@ -78,7 +78,7 @@ export default Component.extend(HasPropertyValidationMixin, {
     }
   }),
 
-  label: computed('inputComponent.label', function () {
+  label: computed('inputComponent.label', () => {
     const i18n = this.get('i18n');
     const label = this.get('inputComponent.label');
 
@@ -101,32 +101,12 @@ export default Component.extend(HasPropertyValidationMixin, {
     }
   }),
 
-  controlWrapper: computed('form.formLayout', {
-    get() {
-      if (this.get('form.formLayout') === 'horizontal') {
-        return 'col-sm-10';
-      }
-      return null;
-    }
-  }),
-
-  required: computed('property', 'validations.attrs.@each.options.presence.presence', function () {
-    const property = this.get('property');
-
-    return this.get(`model.validations.attrs.${property}.options.presence.presence`) || false;
-  }),
-
-  hideValidationsOnFormChange: observer('form', 'form.model', function() {
-    this.set('canShowErrors', false);
-  }),
-
   didReceiveAttrs(arg) {
     this._super(...arguments);
     if(!!arg.newAttrs.form && !this.get('hasSetForm')){
       this.set('hasSetForm', true);
     }
     else if(!arg.newAttrs.form && !this.get('hasSetForm')){
-      deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
       defineProperty(this, 'form', computed.alias('formFromPartentView'));
       this.set('hasSetForm', true);
     }

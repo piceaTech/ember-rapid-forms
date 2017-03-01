@@ -11,14 +11,14 @@ moduleForComponent('em-form-control-help', {
 });
 
 test('it renders', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   this.render();
 
   assert.ok(Ember.$(component.element).hasClass('help-block'), 'DOM element has default css class');
 });
 
 test('renders with extraClass for css', function(assert) {
-  var component = this.subject({
+  const component = this.subject({
     extraClass: 'foo'
   });
   this.render();
@@ -27,7 +27,7 @@ test('renders with extraClass for css', function(assert) {
 });
 
 test('Help text is rendered properly', function(assert) {
-  var component = this.subject({
+  const component = this.subject({
     text: 'Hello!'
   });
   this.render();
@@ -36,7 +36,7 @@ test('Help text is rendered properly', function(assert) {
 });
 
 test('Help properties', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   this.render();
 
   assert.ok(!Ember.$(component.element).text(), 'Text is empty');
@@ -55,7 +55,7 @@ test('Help properties', function(assert) {
 });
 
 test('Help error binding', function(assert) {
-  var component = this.subject({
+  const component = this.subject({
     mainComponent: Ember.Object.create({
       propertyName: 'name',
       model: Ember.Object.create({

@@ -14,7 +14,7 @@ test('a form with em-form-submit components renders correctly', function(assert)
   this.render(hbs`{{#em-form submitButton=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`);
 
 
-  var elem = this.$();
+  const elem = this.$();
 
   assert.equal(elem.find('button').length, 1, '1 button found');
   assert.equal(elem.find('button').text().trim(), 'Submit!', 'submit has correct text');

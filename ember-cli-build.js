@@ -1,11 +1,11 @@
 /*jshint node:true*/
 /* global require, module */
-var mergeTrees = require('broccoli-merge-trees');
-var funnel = require('broccoli-funnel');
-var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+const mergeTrees = require('broccoli-merge-trees');
+const funnel = require('broccoli-funnel');
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {
+  const app = new EmberAddon(defaults, {
     // Add options here
   });
 
@@ -21,12 +21,12 @@ module.exports = function(defaults) {
   app.import('bower_components/highlightjs/highlight.pack.js');
   app.import('bower_components/highlightjs/styles/tomorrow.css');
   app.import('bower_components/ember/ember-template-compiler.js');
-  
-  var extraAssets = funnel('bower_components/fontawesome/fonts', {
+
+  const extraAssets = funnel('bower_components/fontawesome/fonts', {
       srcDir  : '/',
       files   : [ 'fontawesome-webfont.woff' ],
       destDir : '/fonts'
   });
-  
+
   return  mergeTrees([app.toTree(), extraAssets]);
 };

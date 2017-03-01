@@ -8,7 +8,7 @@ moduleFor('mixin:ember-cp-validations-helper', 'Unit | Mixin | ember cp validati
 test('it works', function(assert) {
   let ValidationsMixin = Ember.Mixin.create({
     validate() {
-      var promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new Ember.RSVP.Promise((resolve) => {
         resolve('ok!');
       });
       return promise;
@@ -36,7 +36,7 @@ test('it works on Object', function(assert) {
         }
       },
       validate() {
-        var promise = new Ember.RSVP.Promise((resolve) => {
+        const promise = new Ember.RSVP.Promise((resolve) => {
           resolve('ok!');
         });
         return promise;

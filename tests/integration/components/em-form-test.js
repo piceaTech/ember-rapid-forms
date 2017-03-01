@@ -13,11 +13,11 @@ moduleForComponent('em-form', {
   integration: true
 });
 
-var somePerson = Ember.Object.create({
+const somePerson = Ember.Object.create({
   name: 'my-name',
   errors: Ember.Object.create(),
   validate() {
-    var promise = new Ember.RSVP.Promise((resolve) => {
+    const promise = new Ember.RSVP.Promise((resolve) => {
       resolve('ok!');
     });
     return promise;
@@ -122,7 +122,7 @@ test('a form update inputs on model change', function(assert) {
 
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  var input = this.$().find('input');
+  let input = this.$().find('input');
   assert.equal(input.length, 1, "Found input");
   input = this.$(input[0]);
   assert.equal(input.val(), 'my-name', "Input has original model value");
@@ -142,22 +142,22 @@ test('a form update inputs on model change', function(assert) {
 });
 
 test('a form changes its model and fields are updated', function(assert) {
-  var modelA = Ember.Object.create({
+  const modelA = Ember.Object.create({
     name: 'model-a',
     errors: Ember.Object.create(),
     validate() {
-      var promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new Ember.RSVP.Promise((resolve) => {
         resolve('ok!');
       });
       return promise;
     }
   });
 
-  var modelB = Ember.Object.create({
+  const modelB = Ember.Object.create({
     name: 'model-b',
     errors: Ember.Object.create(),
     validate() {
-      var promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new Ember.RSVP.Promise((resolve) => {
         resolve('ok!');
       });
       return promise;
@@ -168,7 +168,7 @@ test('a form changes its model and fields are updated', function(assert) {
 
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  var input = this.$().find('input');
+  let input = this.$().find('input');
   assert.equal(input.length, 1, "Found input");
   input = this.$(input[0]);
   assert.equal(input.val(), 'model-a', "Input has original model value");
@@ -182,11 +182,11 @@ test('a form changes its model and fields are updated', function(assert) {
 });
 
 test('a form changes its model and errors are reseted', function(assert) {
-  var modelA = Ember.Object.create({
+  const modelA = Ember.Object.create({
     name: 'model-a',
     errors: Ember.Object.create(),
     validate() {
-      var promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new Ember.RSVP.Promise((resolve) => {
         resolve('ok!');
       });
       return promise;
@@ -198,11 +198,11 @@ test('a form changes its model and errors are reseted', function(assert) {
     modelA.set('errors.name', Ember.A(['name!']));
   });
 
-  var modelB = Ember.Object.create({
+  const modelB = Ember.Object.create({
     name: 'model-b',
     errors: Ember.Object.create(),
     validate() {
-      var promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new Ember.RSVP.Promise((resolve) => {
         resolve('ok!');
       });
       return promise;
@@ -213,7 +213,7 @@ test('a form changes its model and errors are reseted', function(assert) {
 
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  var input = this.$().find('input');
+  let input = this.$().find('input');
   assert.equal(input.length, 1, "Found input");
   input = this.$(input[0]);
   assert.equal(input.val(), 'model-a', "Input has original model value");
