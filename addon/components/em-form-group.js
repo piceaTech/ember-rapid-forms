@@ -99,5 +99,63 @@ export default Component.extend(HasPropertyValidationMixin, {
         return i18n.t(key);
       }
     }
-  })
+  }),
+
+  controlWrapper: computed('form.formLayout', {
+    get() {
+      if (this.get('form.formLayout') === 'horizontal') {
+        return 'col-sm-10';
+      }
+      return null;
+    }
+  }),
+
+  required: computed('property', 'validations.attrs.@each.options.presence.presence', function () {
+    const property = this.get('property');
+
+    return this.get(`model.validations.attrs.${property}.options.presence.presence`) || false;
+  }),
+
+  hideValidationsOnFormChange: observer('form', 'form.model', function() {
+    this.set('canShowErrors', false);
+  }),
+
+  didReceiveAttrs(arg) {
+    this._super(...arguments);
+    if(!!arg.newAttrs.form && !this.get('hasSetForm')){
+      this.set('hasSetForm', true);
+    }
+    else if(!arg.newAttrs.form && !this.get('hasSetForm')){
+      deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
+      defineProperty(this, 'form', computed.alias('formFromPartentView'));
+      this.set('hasSetForm', true);
+    }
+
+  },
+
+  /*
+  Observes the helpHasErrors of the help control and modify the 'status' property accordingly.
+   */
+
+  focusIn() {
+    if (this.get('form.showErrorsOnFocusIn')) {
+      return this.set('canShowErrors', true);
+    }
+  },
+
+  /*
+  Listen to the focus out of the form group and display the errors
+   */
+  focusOut() {
+    return this.set('canShowErrors', true);
+  },
+
+  /*
+  Listen to the keyUp of the form group and display the errors if showOnKeyUp is true.
+   */
+  keyUp() {
+    if (this.get('showOnKeyUp')) {
+      return this.set('canShowErrors', true);
+    }
+  }
 });

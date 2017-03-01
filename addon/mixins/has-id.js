@@ -13,7 +13,7 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
 
 export default Mixin.create({
   inputId: computed('cid', 'property', 'id', {
-    get: function() {
+    get() {
       if (this.get('cid')) {
         return this.get('cid');
       } else {

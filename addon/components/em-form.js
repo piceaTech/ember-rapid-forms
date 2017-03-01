@@ -43,7 +43,7 @@ export default Component.extend({
   isHorizontal: Utils.createBoundSwitchAccessor('horizontal', 'formLayout', 'form'),
 
   formLayoutClass: computed('formLayout', {
-    get: function() {
+    get() {
       switch (this.get('formLayout')) {
         case 'horizontal':
         case 'inline':

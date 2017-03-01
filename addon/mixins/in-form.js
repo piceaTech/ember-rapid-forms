@@ -7,7 +7,7 @@ Find the form of the component that merges this mixin
  */
 export default Mixin.create({
   formFromPartentView: computed({
-    get: function() {
+    get() {
       let parentView = this.get('parentView');
 
       while (parentView) {
@@ -21,7 +21,7 @@ export default Mixin.create({
     }
   }),
   model: computed('form', 'form.model', {
-    get: function() {
+    get() {
       return this.get('form.model');
     }
   })

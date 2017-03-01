@@ -23,7 +23,7 @@ export default Component.extend({
   horiClass: 'col-sm-offset-2 col-sm-10',
 
   horiClassCalc: computed('form.isHorizontal', {
-    get: function() {
+    get() {
       if (this.get('form.isHorizontal') && this.get('horiClass')) {
         return this.get('horiClass');
       }
@@ -31,13 +31,13 @@ export default Component.extend({
   }),
 
   helpText: computed('text', 'errors.firstObject', {
-    get: function() {
+    get() {
       return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
     }
   }),
 
   hasHelp: computed('helpText', {
-    get: function() {
+    get() {
       var helpText = this.get('helpText');
       if (!helpText) {
         return false;
@@ -47,7 +47,7 @@ export default Component.extend({
   }),
 
   hasError: computed('errors.length', {
-    get: function() {
+    get() {
       return this.get('errors') != null;
     }
   }),

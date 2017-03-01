@@ -10,14 +10,14 @@ This mixin binds a property named `errors` to the model's `model.errors.@propert
  */
 
 export default Mixin.create({
-  init: function() {
+  init() {
     this._super(...arguments);
     assert(!isNone(this.get('propertyName')), 'propertyName is required.');
     defineProperty(this, 'errors', computed.alias((`model.errors.${this.get('propertyName')}`)));
   },
 
   status: computed('errors.length', 'form.isSubmitted', {
-    get: function() {
+    get() {
       if (this.get('errors.length')) {
         if (this.get('form.showErrorsOnRender')) {
           this.set('canShowErrors', true);

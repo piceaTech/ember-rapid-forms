@@ -17,7 +17,7 @@ export default Component.extend(HasIdMixin, {
   yieldInLabel: true,
 
   wrapperClass: computed('form.formLayout', {
-    get: function() {
+    get() {
       if (this.get('form.formLayout') === 'horizontal') {
         return 'col-sm-offset-2 col-sm-10';
       }
@@ -25,7 +25,7 @@ export default Component.extend(HasIdMixin, {
   }),
 
   labelWrapperClass: computed('form.formLayout', {
-    get: function() {
+    get() {
       if (this.get('form.formLayout') === 'horizontal') {
         return 'checkbox';
       }
@@ -34,7 +34,7 @@ export default Component.extend(HasIdMixin, {
   }),
 
   class: computed('form.formLayout', {
-    get: function() {
+    get() {
       if (this.get('form.formLayout') !== 'horizontal') {
         return 'checkbox';
       }

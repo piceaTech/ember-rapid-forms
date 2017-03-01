@@ -17,7 +17,7 @@ export default Component.extend({
   type: 'submit',
   horiClass: 'col-sm-offset-2 col-sm-10',
   disabled: computed('model.isValid', {
-    get: function() {
+    get() {
       if (this.get('form.showErrorsOnSubmit') && !this.get('form.isSubmitted')) {
         return false;
       }

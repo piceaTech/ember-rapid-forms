@@ -30,7 +30,7 @@ export default Component.extend({
   inlineClass: 'sr-only',
 
   horiClassCalc: computed('form.isHorizontal', {
-    get: function() {
+    get() {
       if (this.get('form.isHorizontal') && this.get('horiClass')) {
         return this.get('horiClass');
       }
@@ -38,7 +38,7 @@ export default Component.extend({
   }),
 
   inlineClassCalc: computed('form.formLayout', {
-    get: function() {
+    get() {
       if (this.get('form.isInline') && this.get('inlineClass')) {
         return this.get('inlineClass');
       }

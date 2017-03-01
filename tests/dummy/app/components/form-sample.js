@@ -21,15 +21,15 @@ export default Ember.Component.extend({
       this.model.validate().then(this._showErrors());
     },
 
-    clearValidations: function() {
+    clearValidations() {
       this.model.hideErrors();
     },
 
-    submit: function() {
+    submit() {
       return alert("Submitted!");
     },
 
-    layout: function(t) {
+    layout(t) {
       return this.set('layout', t);
     }
   },

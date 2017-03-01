@@ -16,7 +16,7 @@ export default Mixin.create(HasIdMixin, {
   property: undefined,
 
   propertyName: computed('property', 'mainComponent.property', {
-    get: function() {
+    get() {
       if (this.get('property')) {
         return this.get('property');
       } else if (this.get('mainComponent.property')) {
@@ -27,7 +27,7 @@ export default Mixin.create(HasIdMixin, {
     }
   }),
 
-  init: function() {
+  init() {
     this._super(...arguments);
     defineProperty(this, 'errors', computed.alias((`model.errors.${this.get('propertyName')}`)));
   }
