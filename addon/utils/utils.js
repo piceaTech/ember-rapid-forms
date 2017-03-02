@@ -4,7 +4,7 @@ const { computed } = Ember;
 
 export default {
   createBoundSwitchAccessor(switchValue, myProperty, myDefault) {
-    if (myDefault == null) {
+    if (myDefault === null) {
       myDefault = 'default';
     }
     return computed(myProperty, {

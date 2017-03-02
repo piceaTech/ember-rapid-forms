@@ -38,13 +38,13 @@ export default Component.extend(HasIdMixin, {
 
     if (!content) {
       this.set('content', []);
-      // TODO ember warn no content set
     }
+
     // set it to the correct value of the selection
     this.selectedValue = computed('model.' + this.get('property'), function() {
       const propertyIsModel = this.get('propertyIsModel');
       let value = this.get('model.' + this.get('property'));
-      if(propertyIsModel && value != null) {
+      if(propertyIsModel && value !== null) {
         const optionValuePath = this.get('optionValuePath');
         if(value.get === undefined) {
           value = value[optionValuePath];

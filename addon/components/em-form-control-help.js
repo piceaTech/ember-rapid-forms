@@ -48,7 +48,7 @@ export default Component.extend({
 
   hasError: computed('errors.length', {
     get() {
-      return this.get('errors') != null;
+      return !!this.get('errors');
     }
   }),
 

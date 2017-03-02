@@ -16,14 +16,6 @@ export default Component.extend(HasIdMixin, {
   validations: false,
   yieldInLabel: true,
 
-  wrapperClass: computed('form.formLayout', {
-    get() {
-      if (this.get('form.formLayout') === 'horizontal') {
-        return 'col-sm-offset-2 col-sm-10';
-      }
-    }
-  }),
-
   labelWrapperClass: computed('form.formLayout', {
     get() {
       if (this.get('form.formLayout') === 'horizontal') {
