@@ -1,9 +1,9 @@
 {
   "name": "ember-rapid-forms",
   "dependencies": {
-    "ember": "~2.8.0",
+    "ember": "~2.11.1",
     "ember-load-initializers": "ember-cli/ember-load-initializers#0.1.7",
-    "ember-qunit": "0.4.16",
+    "ember-qunit": "1.0.0",
     "ember-qunit-notifications": "0.1.0",
     "ember-resolver": "~0.1.18",
     "jquery": "1.11.3",
@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "ember-cli-shims": "0.1.1",
-    "ember-cli-test-loader": "0.2.2",
     "ember-qunit-notifications": "0.1.0",
     "bootstrap": "3.3.6",
     "highlightjs": "9.4.0",

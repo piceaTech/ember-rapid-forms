@@ -5,45 +5,47 @@ module.exports = {
       dependencies: { }
     },
     {
-      name: 'ember-2.3',
-      dependencies: {
-        'ember': '2.3.2',
-      }
-    },
-    {
       name: 'ember-2.4',
       dependencies: {
-        'ember': '2.4.6',
-      }
-    },
-    {
-      name: 'ember-2.6',
-      dependencies: {
-        'ember': '2.6.2',
-      }
-    },
-    {
-      name: 'ember-2.7',
-      dependencies: {
-        'ember': '2.7.3',
+        'ember': '2.4.6'
+      },
+      npm: {
+        devDependencies: {
+          'ember-data': '2.4.3'
+        }
       }
     },
     {
       name: 'ember-2.8',
       dependencies: {
-        'ember': '2.8.0',
+        'ember': '2.8.3'
+      },
+      npm: {
+        devDependencies: {
+          'ember-data': '2.8.1'
+        }
       }
     },
     {
-      name: 'ember-2.5',
+      name: 'ember-2.9',
       dependencies: {
-        'ember': '2.5.1',
+        'ember': '2.9.1'
+      },
+      npm: {
+        devDependencies: {
+          'ember-data': '2.9.0'
+        }
       }
     },
     {
-      name: 'ember-2.1',
+      name: 'ember-2.10',
       dependencies: {
-        'ember': '2.1.1',
+        'ember': '2.10.2'
+      },
+      npm: {
+        devDependencies: {
+          'ember-data': '2.10.0'
+        }
       }
     },
     {
