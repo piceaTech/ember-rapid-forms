@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "4.1"
+  - "6.9"
 
 sudo: false
 
@@ -10,12 +10,11 @@ cache:
     - node_modules
 
 env:
-  - EMBER_TRY_SCENARIO=ember-2.3
   - EMBER_TRY_SCENARIO=ember-2.4
-  - EMBER_TRY_SCENARIO=ember-2.5
-  - EMBER_TRY_SCENARIO=ember-2.6
-  - EMBER_TRY_SCENARIO=ember-2.7
   - EMBER_TRY_SCENARIO=ember-2.8
+  - EMBER_TRY_SCENARIO=ember-2.9
+  - EMBER_TRY_SCENARIO=ember-2.10
+  - EMBER_TRY_SCENARIO=ember-2.11
   - EMBER_TRY_SCENARIO=ember-release
   - EMBER_TRY_SCENARIO=ember-beta
   - ALLOW_DEPRECATIONS=true EMBER_TRY_SCENARIO=ember-canary
