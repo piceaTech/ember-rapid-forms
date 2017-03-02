@@ -19,9 +19,6 @@ export default Mixin.create({
   status: computed('errors.length', 'form.isSubmitted', {
     get() {
       if (this.get('errors.length')) {
-        if (this.get('form.showErrorsOnRender')) {
-          this.set('canShowErrors', true);
-        }
         if (this.get('form.showErrorsOnSubmit') && this.get('form.isSubmitted')) {
           this.set('canShowErrors', true);
         }
