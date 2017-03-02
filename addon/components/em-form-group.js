@@ -33,7 +33,9 @@ export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMix
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
-  i18n: Ember.inject.service(),
+  i18n: Ember.computed(function() {
+    return Ember.getOwner(this).lookup('service:i18n');
+  }),
 
   hasSuccess: Ember.computed('status', 'canShowErrors', {
     get: function() {
