@@ -28,24 +28,9 @@ test('renders with extraClass for css', function(assert) {
 
 test('Help text is rendered properly', function(assert) {
   const component = this.subject({
-    text: 'Hello!'
+    helpText: 'Hello!'
   });
   this.render();
 
-  assert.equal(Ember.$(component.element).text().trim(), 'Hello!', 'DOM element has default css class');
-});
-
-test('Help properties', function(assert) {
-  const component = this.subject();
-  this.render();
-
-  assert.ok(!Ember.$(component.element).text().trim(), 'Text is empty');
-  assert.ok(!component.get('helpText'), 'no help text');
-
-  Ember.run(() => {
-    component.set('text', 'Hello!');
-  });
-
-  assert.equal(Ember.$(component.element).text().trim(), 'Hello!', 'Text is empty');
-  assert.ok(component.get('helpText'), 'has help text');
+  assert.equal(Ember.$(component.element).text().trim(), 'Hello!', 'Text is rendered');
 });

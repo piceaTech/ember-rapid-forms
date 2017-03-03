@@ -24,11 +24,5 @@ export default Component.extend(HasClassClacMixin, {
   horiClass: 'col-sm-offset-2 col-sm-10',
 
   errors: computed.alias('formComponent.errors'),
-  hasError: computed.alias('formComponent.hasError'),
-
-  helpText: computed('text', 'formComponent.helpText', {
-    get() {
-      return this.get('formComponent.helpText') || this.get('errors.firstObject') || this.get('text');
-    }
-  })
+  hasError: computed.alias('formComponent.hasError')
 });

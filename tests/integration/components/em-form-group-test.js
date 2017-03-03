@@ -156,7 +156,7 @@ test('renders v_icon', function(assert) {
 });
 
 test('renders error message', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group shouldShowErrors=true help='help text here'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
 
   const helpSpan = this.$().find('span.help-block');
   assert.equal(helpSpan.length, 1, 'Has help span');
@@ -165,7 +165,7 @@ test('renders error message', function(assert) {
 });
 
 test('does not renders error message when layout is inline', function(assert) {
-  this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group shouldShowErrors=true help='help text here'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
 
   const helpSpan = this.$().find('span.help-block');
   assert.equal(helpSpan.length, 0, 'Has no help span');

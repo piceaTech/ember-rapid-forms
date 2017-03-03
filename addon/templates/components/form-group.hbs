@@ -41,6 +41,6 @@
 {{!Currently no errors when layout is inline}}
 {{#unless form.isInline}}
     {{#if formComponent.shouldShowErrors}}
-        {{em-form-control-help text=formComponent.help formComponent=formComponent form=form}}
+        {{em-form-control-help helpText=formComponent.helpText formComponent=formComponent form=form}}
     {{/if}}
 {{/unless}}
