@@ -17,25 +17,19 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
 export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdMixin, {
   hasSuccess: computed('status', 'canShowErrors', {
     get() {
-      const success = this.get('validations') && this.get('status') === 'success' && this.get('canShowErrors');
-      this.set('success', success);
-      return success;
+      return this._hasStatus('success');
     }
   }),
 
   hasWarning: computed('status', 'canShowErrors', {
     get() {
-      const warning = this.get('validations') && this.get('status') === 'warning' && this.get('canShowErrors');
-      this.set('warning', warning);
-      return warning;
+      return this._hasStatus('warning');
     }
   }),
 
   hasError: computed('status', 'canShowErrors', {
     get() {
-      const error = this.get('validations') && this.get('status') === 'error' && this.get('canShowErrors');
-      this.set('error', error);
-      return error;
+      return this._hasStatus('error');
     }
   }),
 
@@ -129,5 +123,12 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
     if (this.get('showOnKeyUp')) {
       return this.set('canShowErrors', true);
     }
+  },
+
+  _hasStatus(type) {
+    const status = this.get('validations') && this.get('status') === type
+      && this.get('canShowErrors');
+    this.set(type, type);
+    return status;
   }
 });
