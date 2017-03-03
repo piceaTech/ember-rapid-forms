@@ -61,14 +61,6 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
     return this.get(`model.validations.attrs.${property}.options.presence.presence`) || false;
   }),
 
-  horiClassCalc: computed('form.isHorizontal', {
-    get() {
-      if (this.get('form.isHorizontal') && this.get('horiClass')) {
-        return this.get('horiClass');
-      }
-    }
-  }),
-
   formSubmitted: observer('form.isSubmitted', 'form.showErrorsOnSubmit', 'errors.length', function () {
     if (this.get('errors.length') && this.get('form.showErrorsOnSubmit') && this.get('form.isSubmitted')) {
       this.set('canShowErrors', true);

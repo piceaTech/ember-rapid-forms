@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-form-control-help';
+import HasClassClacMixin from '../mixins/has-class-calc';
 
 const { Component, computed } = Ember;
 
@@ -13,7 +14,7 @@ Note: currently must be a direct descendant of a form-group or 'property' must b
 Syntax:
 {{em-form-control-help}}
  */
-export default Component.extend({
+export default Component.extend(HasClassClacMixin, {
   layout: layout,
   tagName: 'span',
   classNames: ['help-block'],
@@ -24,7 +25,6 @@ export default Component.extend({
 
   errors: computed.alias('formComponent.errors'),
   hasError: computed.alias('formComponent.hasError'),
-  horiClassCalc: computed.alias('formComponent.horiClassCalc'),
 
   helpText: computed('text', 'formComponent.helpText', {
     get() {
