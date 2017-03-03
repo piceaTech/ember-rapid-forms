@@ -16,15 +16,6 @@ export default Component.extend(InputComponentMixin, {
   validations: false,
   yieldInLabel: true,
 
-  labelWrapperClass: computed('form.formLayout', {
-    get() {
-      if (this.get('form.formLayout') === 'horizontal') {
-        return 'checkbox';
-      }
-      return null;
-    }
-  }),
-
   class: computed('form.formLayout', {
     get() {
       if (this.get('form.formLayout') !== 'horizontal') {
