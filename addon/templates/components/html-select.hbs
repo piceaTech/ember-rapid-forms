@@ -5,7 +5,7 @@
   </option>
 {{/if}}
 {{#each (get mainComponent "content") key="@index" as |item|}}
-  <option value="{{get item mainComponent.optionValuePath}}" selected={{eq (get item mainComponent.optionValuePath) selectedValue}}>
+  <option value="{{get item mainComponent.optionValuePath}}" selected={{eq (get item mainComponent.optionValuePath) selectedValue}} disabled={{get item mainComponent.optionDisabledPath}}>
     {{get item mainComponent.optionLabelPath}}
   </option>
   {{/each}}
