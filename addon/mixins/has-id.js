@@ -5,7 +5,7 @@ const { computed, Mixin } = Ember;
 /*
 A mixin that enriches a component that is attached to a model property.
 
-The property name by default is taken from the mainComponent unless explictly
+The property name by default is taken from the formComponent unless explictly
     defined in the `property` variable.
 
 This mixin also binds a property named `errors` to the model's `model.errors.@propertyName` array

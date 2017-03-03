@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-checkbox';
-import HasIdMixin from '../mixins/has-id';
+import InputComponentMixin from '../mixins/input-component';
 
 const { Component, computed } = Ember;
 
@@ -10,7 +10,7 @@ Form Input
 Syntax:
 {{em-checkbox property="property name"}}
  */
-export default Component.extend(HasIdMixin, {
+export default Component.extend(InputComponentMixin, {
   layout: layout,
   validationIcons: false,
   validations: false,

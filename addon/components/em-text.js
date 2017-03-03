@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-text';
-import HasIdMixin from '../mixins/has-id';
+import InputComponentMixin from '../mixins/input-component';
 
 const { Component } = Ember;
 
@@ -10,7 +10,7 @@ Form Text Area
 Syntax:
 {{em-text property="property name" rows=4 cols=40}}
  */
-export default Component.extend(HasIdMixin, {
+export default Component.extend(InputComponentMixin, {
   layout: layout,
   elementClass: null,
   property: null,

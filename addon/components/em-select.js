@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/em-select';
-import HasIdMixin from '../mixins/has-id';
+import InputComponentMixin from '../mixins/input-component';
 
 const { Component, computed } = Ember;
 
@@ -17,7 +17,7 @@ Syntax:
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
-export default Component.extend(HasIdMixin, {
+export default Component.extend(InputComponentMixin, {
   layout: layout,
   validationIcons: false,
   propertyIsModel:false,

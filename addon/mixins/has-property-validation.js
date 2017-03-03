@@ -16,12 +16,9 @@ export default Mixin.create({
     defineProperty(this, 'errors', computed.alias((`model.errors.${this.get('propertyName')}`)));
   },
 
-  status: computed('errors.length', 'form.isSubmitted', {
+  status: computed('errors.length', {
     get() {
       if (this.get('errors.length')) {
-        if (this.get('form.showErrorsOnSubmit') && this.get('form.isSubmitted')) {
-          this.set('canShowErrors', true);
-        }
         return 'error';
       } else {
         return 'success';

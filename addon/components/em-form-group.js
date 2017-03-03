@@ -2,7 +2,7 @@ import Ember from 'ember';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
 
-const { Component, computed, inject, isPresent, defineProperty } = Ember;
+const { Component, computed, inject, isPresent } = Ember;
 
 /*
 Form Group
@@ -99,43 +99,5 @@ export default Component.extend(HasPropertyValidationMixin, {
         return i18n.t(key);
       }
     }
-  }),
-
-  didReceiveAttrs(arg) {
-    this._super(...arguments);
-    if(!!arg.newAttrs.form && !this.get('hasSetForm')){
-      this.set('hasSetForm', true);
-    }
-    else if(!arg.newAttrs.form && !this.get('hasSetForm')){
-      defineProperty(this, 'form', computed.alias('formFromPartentView'));
-      this.set('hasSetForm', true);
-    }
-
-  },
-
-  /*
-  Observes the helpHasErrors of the help control and modify the 'status' property accordingly.
-   */
-
-  focusIn() {
-    if (this.get('form.showErrorsOnFocusIn')) {
-      return this.set('canShowErrors', true);
-    }
-  },
-
-  /*
-  Listen to the focus out of the form group and display the errors
-   */
-  focusOut() {
-    return this.set('canShowErrors', true);
-  },
-
-  /*
-  Listen to the keyUp of the form group and display the errors if showOnKeyUp is true.
-   */
-  keyUp() {
-    if (this.get('showOnKeyUp')) {
-      return this.set('canShowErrors', true);
-    }
-  }
+  })
 });

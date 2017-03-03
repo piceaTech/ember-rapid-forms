@@ -1,46 +1,46 @@
-{{#if label}}
+{{#if formComponent.label}}
     {{#if yieldInLabel}}
-        {{#if labelWrapperClass}}
-            <div class={{labelWrapperClass}}>
-                {{#control-within-label label=label extraClass=labelClass
-                  controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+        {{#if formComponent.labelWrapperClass}}
+            <div class={{formComponent.labelWrapperClass}}>
+                {{#control-within-label label=formComponent.label extraClass=formComponent.labelClass
+                  controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
                   {{yield}}
                 {{/control-within-label}}
             </div>
         {{else}}
-            {{#control-within-label label=label extraClass=labelClass
-              controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+            {{#control-within-label label=formComponent.label extraClass=formComponent.labelClass
+              controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
               {{yield}}
             {{/control-within-label}}
         {{/if}}
     {{else}}
-        {{#if labelWrapperClass}}
-            <div class={{labelWrapperClass}}>
-                {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.inputId}}
-                {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+        {{#if formComponent.labelWrapperClass}}
+            <div class={{formComponent.labelWrapperClass}}>
+                {{em-form-label text=formComponent.label extraClass=formComponent.labelClass form=form for=formComponent.inputId}}
+                {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
                     {{yield}}
                 {{/form-group-control}}
             </div>
         {{else}}
-            {{em-form-label text=label extraClass=labelClass form=form for=mainComponent.inputId}}
-            {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+            {{em-form-label text=formComponent.label extraClass=formComponent.labelClass form=form for=formComponent.inputId}}
+            {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
                 {{yield}}
             {{/form-group-control}}
         {{/if}}
     {{/if}}
 {{else}}
-    {{#form-group-control controlWrapper=controlWrapper mainComponent=mainComponent form=form}}
+    {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
         {{yield}}
     {{/form-group-control}}
 {{/if}}
 
-{{#if validationIcons}}
-    <span class="form-control-feedback"><i class={{mainComponent.validationIcon}}></i></span>
+{{#if formComponent.validationIcons}}
+    <span class="form-control-feedback"><i class={{formComponent.validationIcon}}></i></span>
 {{/if}}
 
 {{!Currently no errors when layout is inline}}
 {{#unless form.isInline}}
-    {{#if shouldShowErrors}}
-        {{em-form-control-help text=help mainComponent=mainComponent form=form}}
+    {{#if formComponent.shouldShowErrors}}
+        {{em-form-control-help text=formComponent.help formComponent=formComponent form=form}}
     {{/if}}
 {{/unless}}
