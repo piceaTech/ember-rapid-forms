@@ -6,8 +6,6 @@ from 'ember-qunit';
 import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
-/* globals ok:true */
-
 moduleForComponent('em-form', {
   // Specify the other units that are required for this test
   integration: true
@@ -238,7 +236,7 @@ test('form cannot be submitted if model is invalid', function(assert) {
   assert.expect(0);
 
   this.on('submit', function() {
-    ok(true, 'submit action invoked!');
+    assert.ok(true, 'submit action invoked!');
   });
   this.set('model', somePerson);
   somePerson.set('isValid', false);
@@ -253,7 +251,7 @@ test('form can be submitted if model is valid', function(assert) {
   assert.expect(1);
 
   this.on('submit', function() {
-    ok(true, 'submit action invoked!');
+    assert.ok(true, 'submit action invoked!');
   });
   this.set('model', somePerson);
   somePerson.set('isValid', true);
@@ -288,7 +286,7 @@ test('form submission with custom action', function(assert) {
   assert.expect(1);
 
   this.on('submitNow', function() {
-    ok(true, 'submitNow action invoked!');
+    assert.ok(true, 'submitNow action invoked!');
   });
   this.set('model', somePerson);
   somePerson.set('isValid', true);
@@ -303,7 +301,7 @@ test('form submission with a model that has no validation support and no isValid
   assert.expect(1);
 
   this.on('submit', function() {
-    ok(true, 'submit action invoked!');
+    assert.ok(true, 'submit action invoked!');
   });
   this.set('model', {});
 

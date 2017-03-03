@@ -2,7 +2,7 @@ import Ember from 'ember';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
 
-const { Component, computed, inject, isPresent } = Ember;
+const { Component, computed, getOwner, isPresent } = Ember;
 
 /*
 Form Group
@@ -27,8 +27,6 @@ Syntax:
 }}
  */
 export default Component.extend(HasPropertyValidationMixin, {
-  i18n: inject.service(),
-
   tagName: 'div',
   class: 'form-group',
   layout: layout,
@@ -59,6 +57,10 @@ export default Component.extend(HasPropertyValidationMixin, {
   validationIcons: computed.alias('inputComponent.validationIcons'),
   form: computed.alias('inputComponent.form'),
 
+  i18n: computed(function () {
+    return getOwner(this).lookup('service:i18n');
+  }),
+
   validationIcon: computed('status', 'canShowErrors', {
     get() {
       if (!this.get('canShowErrors')) {
@@ -78,11 +80,11 @@ export default Component.extend(HasPropertyValidationMixin, {
     }
   }),
 
-  label: computed('inputComponent.label', () => {
+  label: computed('inputComponent.label', function () {
     const i18n = this.get('i18n');
     const label = this.get('inputComponent.label');
 
-    if(label) {
+    if (label) {
       return label;
     } else if(isPresent(i18n)) {
       const property = this.get('property');
