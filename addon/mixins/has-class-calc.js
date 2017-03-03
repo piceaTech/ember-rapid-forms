@@ -5,17 +5,19 @@ const { computed, Mixin } = Ember;
 export default Mixin.create({
   horiClassCalc: computed('form.isHorizontal', {
     get() {
-      if (this.get('form.isHorizontal') && this.get('horiClass')) {
-        return this.get('horiClass');
-      }
+      return this._classCalc('form.isHorizontal', 'horiClass');
     }
   }),
 
   inlineClassCalc: computed('form.formLayout', {
     get() {
-      if (this.get('form.isInline') && this.get('inlineClass')) {
-        return this.get('inlineClass');
-      }
+      return this._classCalc('form.isInline', 'inlineClass');
     }
-  })
+  }),
+
+  _classCalc(condition, cssClass) {
+    if (this.get(condition) && this.get(cssClass)) {
+      return this.get(cssClass);
+    }
+  }
 });
