@@ -26,6 +26,7 @@ test('it works', function(assert) {
 
 test('it works on Object', function(assert) {
   assert.expect(5);
+  var finished = assert.async();
   let ValidationsMixin = Ember.Mixin.create({
     validations: {
       validatableAttributes: ['username'],
@@ -37,6 +38,7 @@ test('it works on Object', function(assert) {
       validate() {
         const promise = new Ember.RSVP.Promise((resolve) => {
           resolve('ok!');
+          finished();
         });
         return promise;
       },
