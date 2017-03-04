@@ -12,7 +12,7 @@ moduleForComponent('em-form-label', {
 
 test('Label renders', function(assert) {
 
-  var component = this.subject({for: 'name'});
+  const component = this.subject({for: 'name'});
 
   this.render();
   assert.equal(Ember.$(component.element).attr('for'), 'name', 'label has for property');
@@ -21,7 +21,7 @@ test('Label renders', function(assert) {
 
 test('Label renders with extra class', function(assert) {
 
-  var component = this.subject({extraClass: 'foo'});
+  const component = this.subject({extraClass: 'foo'});
 
   this.render();
   assert.ok(Ember.$(component.element).hasClass('foo'), 'label has extra css class');
@@ -29,7 +29,7 @@ test('Label renders with extra class', function(assert) {
 
 test('Label text is set', function(assert) {
 
-  var component = this.subject({text: 'Some text'});
+  const component = this.subject({text: 'Some text'});
 
   this.render();
   assert.ok(Ember.$(component.element).text, 'Some text', 'label renders text');

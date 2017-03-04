@@ -1,7 +1,8 @@
 import Ember from 'ember';
-import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
 import layout from '../templates/components/em-form-group';
+
+const { Component, computed, getOwner, isPresent } = Ember;
 
 /*
 Form Group
@@ -25,50 +26,43 @@ Syntax:
     label="Some label"
 }}
  */
-export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMixin, {
+export default Component.extend(HasPropertyValidationMixin, {
   tagName: 'div',
-  "class": 'form-group',
-  htmlComponent: 'em-custom-input',
+  class: 'form-group',
   layout: layout,
   classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
-  i18n: Ember.computed(function() {
-    return Ember.getOwner(this).lookup('service:i18n');
-  }),
-
-  hasSuccess: Ember.computed('status', 'canShowErrors', {
-    get: function() {
-      var success;
-      success = this.get('validations') && this.get('status') === 'success' && this.get('canShowErrors');
-      this.set('success', success);
-      return success;
-    }
-  }),
-  hasWarning: Ember.computed('status', 'canShowErrors', {
-    get: function() {
-      var warning;
-      warning = this.get('validations') && this.get('status') === 'warning' && this.get('canShowErrors');
-      this.set('warning', warning);
-      return warning;
-    }
-  }),
-  hasError: Ember.computed('status', 'canShowErrors', {
-    get: function() {
-      var error;
-      error = this.get('validations') && this.get('status') === 'error' && this.get('canShowErrors');
-      this.set('error', error);
-      return error;
-    }
-  }),
-  validationIcons: Ember.computed.alias('form.validationIcons'),
   successIcon: 'fa fa-check',
   warningIcon: 'fa fa-exclamation-triangle',
   errorIcon: 'fa fa-times',
   validations: true,
-  yieldInLabel: false,
-  validationIcon: Ember.computed('status', 'canShowErrors', {
-    get: function() {
+  hasSetForm: false,
+
+  inputComponent: Ember.Object.create(),
+
+  inputId: computed.alias('inputComponent.inputId'),
+  yieldInLabel: computed.alias('inputComponent.yieldInLabel'),
+  hasError: computed.alias('inputComponent.hasError'),
+  hasSuccess: computed.alias('inputComponent.hasSuccess'),
+  hasWarning: computed.alias('inputComponent.hasWarning'),
+  shouldShowErrors: computed.alias('inputComponent.shouldShowErrors'),
+  helpText: computed.alias('inputComponent.helpText'),
+  required: computed.alias('inputComponent.required'),
+  hideValidationsOnFormChange: computed.alias('inputComponent.hideValidationsOnFormChange'),
+  labelWrapperClass: computed.alias('inputComponent.labelWrapperClass'),
+  labelClass: computed.alias('inputComponent.labelClass'),
+  help: computed.alias('inputComponent.help'),
+  controlWrapper: computed.alias('inputComponent.controlWrapper'),
+  validationIcons: computed.alias('inputComponent.validationIcons'),
+  form: computed.alias('inputComponent.form'),
+
+  i18n: computed(function () {
+    return getOwner(this).lookup('service:i18n');
+  }),
+
+  validationIcon: computed('status', 'canShowErrors', {
+    get() {
       if (!this.get('canShowErrors')) {
         return;
       }
@@ -85,64 +79,14 @@ export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMix
       }
     }
   }),
-  hideValidationsOnFormChange: Ember.observer('form', 'form.model', function() {
-    this.set('canShowErrors', false);
-  }),
-  shouldShowErrors: Ember.computed('canShowErrors', 'helpText', {
-    get: function() {
-      var text = this.get('helpText') || "";
-      return text.length > 0 && this.get('canShowErrors');
-    }
-  }),
-  helpText: Ember.computed('text', 'errors.firstObject', {
-    get: function() {
-      return this.get('errors.firstObject.message') || this.get('errors.firstObject') || this.get('text');
-    }
-  }),
-  hasSetForm: false,
-  didReceiveAttrs(arg) {
-    this._super(...arguments);
-    if(!!arg.newAttrs.form && !this.get('hasSetForm')){
-      this.set('hasSetForm', true);
-    }
-    else if(!arg.newAttrs.form && !this.get('hasSetForm')){
-      Ember.deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
-      Ember.defineProperty(this, 'form', Ember.computed.alias('formFromPartentView'));
-      this.set('hasSetForm', true);
-    }
 
-  },
-
-  /*
-  Observes the helpHasErrors of the help control and modify the 'status' property accordingly.
-   */
-
-  focusIn() {
-    if (this.get('form.showErrorsOnFocusIn')) {
-      return this.set('canShowErrors', true);
-    }
-  },
-
-  /*
-  Listen to the focus out of the form group and display the errors
-   */
-  focusOut() {
-    return this.set('canShowErrors', true);
-  },
-
-  /*
-  Listen to the keyUp of the form group and display the errors if showOnKeyUp is true.
-   */
-  keyUp() {
-    if (this.get('showOnKeyUp')) {
-      return this.set('canShowErrors', true);
-    }
-  },
-
-  label: Ember.computed(function () {
+  label: computed('inputComponent.label', function () {
     const i18n = this.get('i18n');
+    const label = this.get('inputComponent.label');
 
-    if(Ember.isPresent(i18n)) {
+    if (label) {
+      return label;
+    } else if(isPresent(i18n)) {
       const property = this.get('property');
       const modelName = this.get('model.constructor.modelName');
       let key;
@@ -157,15 +101,5 @@ export default Ember.Component.extend(HasPropertyMixin, HasPropertyValidationMix
         return i18n.t(key);
       }
     }
-  }),
-
-  propertyOptions: Ember.computed('property', 'validations.attrs.@each.options', function() {
-    const property = this.get('property');
-
-    return this.get(`model.validations.attrs.${property}.options`) || false;
-  }),
-
-  required: Ember.computed('propertyOptions.presence.presence', function () {
-    return this.get('propertyOptions.presence.presence') || false;
   })
 });

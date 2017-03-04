@@ -7,7 +7,7 @@ import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 
-var fruitSalad = null;
+let fruitSalad = null;
 
 moduleForComponent('em-select', {
   // Specify the other units that are required for this test
@@ -18,7 +18,7 @@ moduleForComponent('em-select', {
       fruits: Ember.Object.create(),
       errors: Ember.Object.create(),
       validate() {
-        var promise = new Ember.RSVP.Promise((resolve) => {
+        const promise = new Ember.RSVP.Promise((resolve) => {
           resolve('ok!');
         });
         return promise;
@@ -33,7 +33,7 @@ moduleForComponent('em-select', {
 });
 
 
-var fruitOptions = Ember.A([{
+const fruitOptions = Ember.A([{
   id: 1,
   name: 'Banana'
 }, {
@@ -52,11 +52,11 @@ test('em-select renders', function(assert) {
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
 
-  var element = this.$();
+  const element = this.$();
 
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-  var select = element.find('select')[0];
+  const select = element.find('select')[0];
   assert.ok(select, 'select exists');
 
   fruitOptions.forEach((item, index) => {
@@ -71,11 +71,11 @@ test('em-select renders with a prompt', function(assert) {
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
 
-  var element = this.$();
+  const element = this.$();
 
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-  var select = element.find('select')[0];
+  const select = element.find('select')[0];
   assert.ok(select, 'select exists');
   assert.equal(select.options[0].text, 'None', 'Prompt gets rendered');
 });
@@ -87,10 +87,10 @@ test('em-select can select an item', function(assert) {
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
 
-  var element = this.$();
+  const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-  var select = element.find('select')[0];
+  const select = element.find('select')[0];
   assert.ok(select.options.length > 3, 'select has options');
 
   Ember.run(() => {
@@ -108,10 +108,10 @@ test('em-select can select the model itself', function(assert) {
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions propertyIsModel=true optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
 
-  var element = this.$();
+  const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-  var select = element.find('select')[0];
+  const select = element.find('select')[0];
   assert.ok(select.options.length > 3, 'select has options');
 
   Ember.run(() => {
@@ -124,7 +124,7 @@ test('em-select can select the model itself', function(assert) {
 
 });
 
-test('Textarea renders with custom css', function(assert) {
+test('Select renders with custom css', function(assert) {
   this.render(hbs`{{#em-form as |form|}}{{form.select elementClass="col-md-6"}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').hasClass('col-md-6'), 'Select has correct class');
@@ -175,10 +175,10 @@ test('Input can have a size', function(assert) {
 
 //   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='fruits' model=fruitSalad propertyIsModel=true multiple=true}}{{/em-form}}`);
 
-//   var element = this.$();
+//   const element = this.$();
 //   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-//   var select = element.find('select')[0];
+//   const select = element.find('select')[0];
 //   assert.ok(select.options.length > 3, 'select has options');
 
 //   Ember.run(() => {

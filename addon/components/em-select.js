@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import FormGroupComponent from './em-form-group';
+import layout from '../templates/components/em-select';
+import InputComponentMixin from '../mixins/input-component';
+
+const { Component, computed } = Ember;
 
 /*
 Form Select
@@ -14,9 +17,9 @@ Syntax:
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
-export default FormGroupComponent.extend({
+export default Component.extend(InputComponentMixin, {
+  layout: layout,
   validationIcons: false,
-  htmlComponent: 'erf-html-select',
   propertyIsModel:false,
   property: null,
   content: null,
@@ -29,12 +32,63 @@ export default FormGroupComponent.extend({
   autofocus: null,
   size: 0,
 
-  controlWrapper: Ember.computed('form.formLayout', {
-    get: function() {
-      if (this.get('form.formLayout') === 'horizontal') {
-        return 'col-sm-10';
-      }
-      return null;
+  didReceiveAttrs() {
+    this._super(...arguments);
+    const content = this.get('content');
+
+    if (!content) {
+      this.set('content', []);
     }
-  })
+
+    // set it to the correct value of the selection
+    this.selectedValue = computed('model.' + this.get('property'), function() {
+      const propertyIsModel = this.get('propertyIsModel');
+      let value = this.get('model.' + this.get('property'));
+      if(propertyIsModel && value !== null) {
+        const optionValuePath = this.get('optionValuePath');
+        if(value.get === undefined) {
+          value = value[optionValuePath];
+        } else {
+          value = value.get(optionValuePath);
+        }
+      }
+      return value;
+    });
+  },
+
+  actions: {
+    change() {
+
+      const selectedEl = this.$('select')[0];
+      let selectedIndex = selectedEl.selectedIndex;
+      // check whether we show prompt the correct to show index is one less
+      // when selecting prompt don't change anything
+      if(this.get('prompt')){
+        if(selectedIndex !== 0){
+          selectedIndex--;
+        } else {
+          this.set('model.' + this.get('property'), null);
+          return;
+        }
+      }
+
+      const content = this.get('content');
+      const selectedValue = content.objectAt(selectedIndex);
+      const optionValuePath = this.get('optionValuePath');
+      const propertyIsModel = this.get('propertyIsModel');
+      let selectedID;
+
+      if(propertyIsModel) {
+        selectedID = selectedValue;
+      } else {
+        selectedID = selectedValue[optionValuePath];
+      }
+
+      this.set('model.' + this.get('property'), selectedID);
+      const changeAction = this.get('action');
+      if(changeAction){
+        changeAction(selectedID);
+      }
+    }
+  }
 });

@@ -1,20 +1,22 @@
 import Ember from 'ember';
 
-export default Ember.Mixin.create({
-  init: function () {
+const { Mixin } = Ember;
+
+export default Mixin.create({
+  init() {
     this._super();
     this.set('visibleErrors', {});
   },
 
-  showErrors: function() {
+  showErrors() {
     this.changeErrorsVisibility(true);
   },
 
-  hideErrors: function() {
+  hideErrors() {
     this.changeErrorsVisibility(false);
   },
 
-  changeErrorsVisibility: function(visible) {
+  changeErrorsVisibility(visible) {
     const validatableAttributes = this.get('validations.validatableAttributes');
     const dependentValidationKeys = this.get('dependentValidationKeys');
 

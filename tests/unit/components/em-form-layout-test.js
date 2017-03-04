@@ -10,12 +10,12 @@ moduleForComponent('em-form', 'component:em-form layout', {
 });
 
 test('form rendering', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   assert.equal(component._state, 'preRender');
 
   this.render();
   assert.equal(component._state, 'inDOM');
-  var elem = Ember.$(component.element);
+  const elem = Ember.$(component.element);
 
   assert.equal(elem.attr("role"), "form", "Has form role.");
   assert.equal(elem.prop('tagName'), 'FORM', "Form got rendered");
@@ -24,10 +24,10 @@ test('form rendering', function(assert) {
 });
 
 test('submit button rendering', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   this.render();
 
-  var elem = Ember.$(component.element);
+  const elem = Ember.$(component.element);
   assert.ok(elem.find('button').get(0), "Submit got rendered");
 
   Ember.run(() => {
@@ -38,10 +38,10 @@ test('submit button rendering', function(assert) {
 });
 
 test('form layout - default', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   this.render();
 
-  var elem = Ember.$(component.element);
+  const elem = Ember.$(component.element);
   assert.ok(elem.hasClass('form'), "Is form");
   assert.ok(!elem.hasClass('form-inline'), "Is not inline");
   assert.ok(!elem.hasClass('form-horizontal'), "Is not horizontal");
@@ -52,12 +52,12 @@ test('form layout - default', function(assert) {
 });
 
 test('form layout - inline', function(assert) {
-  var component = this.subject({
+  const component = this.subject({
     formLayout: 'inline'
   });
   this.render();
 
-  var elem = Ember.$(component.element);
+  const elem = Ember.$(component.element);
   assert.ok(elem.hasClass('form-inline'), "Is inline");
   assert.ok(!elem.hasClass('form'), "Is not form");
   assert.ok(!elem.hasClass('form-horizontal'), "Is not horizontal");
@@ -68,12 +68,12 @@ test('form layout - inline', function(assert) {
 });
 
 test('form layout - horizontal', function(assert) {
-  var component = this.subject({
+  const component = this.subject({
     formLayout: 'horizontal'
   });
   this.render();
 
-  var elem = Ember.$(component.element);
+  const elem = Ember.$(component.element);
   assert.ok(elem.hasClass('form-horizontal'), "Is horizontal");
   assert.ok(!elem.hasClass('form'));
   assert.ok(!elem.hasClass('form-inline'));

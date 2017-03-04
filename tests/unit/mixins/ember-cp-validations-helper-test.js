@@ -1,4 +1,3 @@
-/*global expect*/
 import Ember from 'ember';
 import EmberCpValidationsHelperMixin from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
 import { moduleFor, test } from 'ember-qunit';
@@ -8,7 +7,7 @@ moduleFor('mixin:ember-cp-validations-helper', 'Unit | Mixin | ember cp validati
 test('it works', function(assert) {
   let ValidationsMixin = Ember.Mixin.create({
     validate() {
-      var promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new Ember.RSVP.Promise((resolve) => {
         resolve('ok!');
       });
       return promise;
@@ -26,7 +25,8 @@ test('it works', function(assert) {
 });
 
 test('it works on Object', function(assert) {
-  expect(5);
+  assert.expect(5);
+  var finished = assert.async();
   let ValidationsMixin = Ember.Mixin.create({
     validations: {
       validatableAttributes: ['username'],
@@ -36,8 +36,9 @@ test('it works on Object', function(assert) {
         }
       },
       validate() {
-        var promise = new Ember.RSVP.Promise((resolve) => {
+        const promise = new Ember.RSVP.Promise((resolve) => {
           resolve('ok!');
+          finished();
         });
         return promise;
       },
@@ -65,8 +66,10 @@ test('it works on Object', function(assert) {
   assert.ok(subject);
   assert.notOk(subject.get('errors.username'));
 
+  const done = assert.async();
   subject.validate().then(function() {
     assert.ok(subject);
     assert.equal(subject.get('errors.username'), 'Can\'t be blank');
+    done();
   });
 });

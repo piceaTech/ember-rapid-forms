@@ -26,7 +26,6 @@ test('Input has name attribute', function(assert) {
 
 
 test('Input can be disabled', function(assert) {
-
   this.render(hbs`{{#em-form as |form|}}{{form.input disabled=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('input').attr('disabled'), 'input renders disabled');
@@ -36,7 +35,7 @@ test('Input renders with custom css', function(assert) {
   this.render(hbs`{{#em-form as |form|}}{{form.input label='My label' elementClass="col-md-6" controlWrapper="col-md-6" labelClass="col-md-4"}}{{/em-form}}`);
 
   assert.ok(this.$().find('label').hasClass('col-md-4'), 'Label has correct class');
-  assert.ok(this.$().find('input').parent().parent().hasClass('col-md-6'), 'Input parent has correct class');
+  assert.ok(this.$().find('input').closest('.col-md-6').length, 'Input parent has correct class');
   assert.ok(this.$().find('input').hasClass('col-md-6'), 'Input has correct class');
 });
 

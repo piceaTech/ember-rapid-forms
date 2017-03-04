@@ -11,22 +11,12 @@ moduleForComponent('form-group-control', {
   integration: true,
 
   beforeEach() {
-    const mainComponent = Ember.Object.create({
-      htmlComponent: 'erf-html-input'
-    });
-    this.set('mainComponent', mainComponent);
+    this.set('mainComponent', Ember.Object.create());
   }
-});
-
-test('renders the component', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.group-control mainComponent=mainComponent}}{{/em-form}}`);
-
-  assert.equal(this.$().find('input').length, 1, 'Has htmlComponent rendered');
 });
 
 test('renders the component with wrapper', function(assert) {
   this.render(hbs`{{#em-form as |form|}}{{form.group-control mainComponent=mainComponent controlWrapper='control-wrapper-class'}}{{/em-form}}`);
 
-  assert.equal(this.$().find('input').length, 1, 'Has htmlComponent rendered');
   assert.ok(this.$().find('div.control-wrapper-class'), 'Has wrapper div');
 });
