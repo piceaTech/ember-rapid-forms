@@ -19,7 +19,7 @@
   "engines": {
     "node": ">= 6.0.0"
   },
-  "license": "APACHE2",
+  "license": "Apache-2.0",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
     "broccoli-funnel": "^0.2.3",
