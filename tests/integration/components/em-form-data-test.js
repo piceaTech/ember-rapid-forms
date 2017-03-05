@@ -7,8 +7,6 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
-/* globals ok:true */
-
 moduleForComponent('em-form', 'component:em-form ember-data', {
   // Specify the other units that are required for this test
   integration: true
@@ -31,7 +29,7 @@ test('a form display DS.Errors when rendered if showErrorsOnRender is set', func
 
   this.set('someModel', somePerson);
   this.on('submit', function() {
-    ok(true, 'submit action invoked!');
+    assert.ok(true, 'submit action invoked!');
   });
 
   Ember.run(() => {

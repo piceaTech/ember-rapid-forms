@@ -78,13 +78,14 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
     }
   },
 
-  didReceiveAttrs(arg) {
+  didReceiveAttrs() {
     this._super(...arguments);
-    if(!!arg.newAttrs.form && !this.get('hasSetForm')){
+    const hasForm = !!this.get('form');
+    if(hasForm && !this.get('hasSetForm')){
       this.set('hasSetForm', true);
     }
-    else if(!arg.newAttrs.form && !this.get('hasSetForm')){
-      deprecate('Please use the new form.input helper defined in 1.0.0beta10', !!arg.newAttrs.form, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
+    else if(hasForm && !this.get('hasSetForm')){
+      Ember.deprecate('Please use the new form.input helper defined in 1.0.0beta10', hasForm, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
       defineProperty(this, 'form', computed.alias('formFromPartentView'));
       this.set('hasSetForm', true);
     }
