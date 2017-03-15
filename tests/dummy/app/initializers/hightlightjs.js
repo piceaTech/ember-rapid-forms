@@ -3,9 +3,9 @@ import Ember from 'ember';
 
 export default {
   name: 'hightlightjs',
-  initialize: function() {
+  initialize() {
     return Ember.Route.reopen({
-      renderTemplate: function() {
+      renderTemplate() {
         this._super();
         return Ember.run.next(this, function() {
           return $('pre code').each(function(i, e) {

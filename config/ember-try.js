@@ -29,7 +29,7 @@ module.exports = {
     {
       name: 'ember-2.9',
       dependencies: {
-        'ember': '2.9.1'
+        'ember': '2.9.0',
       },
       npm: {
         devDependencies: {
@@ -45,6 +45,17 @@ module.exports = {
       npm: {
         devDependencies: {
           'ember-data': '2.10.0'
+        }
+      }
+    },
+    {
+      name: 'ember-2.11',
+      dependencies: {
+        'ember': '2.11.0',
+      },
+      npm: {
+        devDependencies: {
+          'ember-data': '2.11.0'
         }
       }
     },

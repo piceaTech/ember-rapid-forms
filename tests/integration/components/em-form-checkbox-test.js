@@ -14,7 +14,7 @@ let someModel = Ember.Object.create({
   userAgree: false,
   errors: Ember.Object.create(),
   validate() {
-    var promise = new Ember.RSVP.Promise((resolve) => {
+    const promise = new Ember.RSVP.Promise((resolve) => {
       resolve('ok!');
     });
     return promise;
@@ -56,10 +56,10 @@ test('a checkbox without a label updates data', function(assert) {
 });
 
 test('Checkbox renders with custom css', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.checkbox label='My label' elementClass="col-md-6" controlWrapper="col-md-6" labelClass="col-md-4"}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.checkbox label='My label' elementClass="col-md-6" controlWrapper="col-md-8" labelClass="col-md-4"}}{{/em-form}}`);
 
   assert.ok(this.$().find('label').hasClass('col-md-4'), 'Label has correct class');
-  assert.ok(this.$().find('input').parent().hasClass('col-md-6'), 'Checkbox parent has correct class');
+  assert.ok(this.$().find('label').find('.col-md-8').length, 'Checkbox parent has correct class');
   assert.ok(this.$().find('input').hasClass('col-md-6'), 'Checkbox input has correct class');
 });
 

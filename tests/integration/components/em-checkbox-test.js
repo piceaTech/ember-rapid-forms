@@ -10,8 +10,6 @@ moduleForComponent('em-checkbox', {
 });
 
 test('checkbox gets rendered', function(assert) {
-  // console.log('as8j');
-  // console.log(JSON.stringify(requirejs.entries));
   this.render(hbs`
   {{#em-form as |form|}}
     {{form.checkbox property="asd"}}

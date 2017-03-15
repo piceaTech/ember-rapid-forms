@@ -30,14 +30,14 @@ const person = DS.Model.extend(Validations, InputErrors, helper, {
   active: DS.attr('boolean'),
   gender: DS.attr('string'),
   nameHasValue: Ember.computed('fullName', {
-    get: function() {
+    get() {
       return !!this.get('fullName');
     }
   }),
 
   fullName: Ember.computed('firstName', 'lastName', {
     //jshint unused:false
-    get: function() {
+    get() {
       if (this.get('firstName')) {
         return `${this.get('firstName')} ${this.get('lastName')}`;
       }
@@ -45,7 +45,7 @@ const person = DS.Model.extend(Validations, InputErrors, helper, {
         return null;
       }
     },
-    set: function(key, value) {
+    set(key, value) {
       let [firstName, lastName] = value.split(/\s+/);
       firstName = firstName ? firstName : null;
       lastName = lastName ? lastName : null;
