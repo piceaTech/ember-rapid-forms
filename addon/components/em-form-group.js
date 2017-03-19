@@ -36,7 +36,6 @@ export default Component.extend(HasPropertyValidationMixin, {
   successIcon: 'fa fa-check',
   warningIcon: 'fa fa-exclamation-triangle',
   errorIcon: 'fa fa-times',
-  validations: true,
   hasSetForm: false,
 
   inputComponent: Ember.Object.create(),

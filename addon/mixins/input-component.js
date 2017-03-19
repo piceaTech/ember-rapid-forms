@@ -15,6 +15,8 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
  */
 
 export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdMixin, {
+  validations: true,
+
   hasSuccess: computed('status', 'canShowErrors', {
     get() {
       return this._hasStatus('success');
