@@ -16,7 +16,7 @@ export default Mixin.create({
     get() {
       if (this.get('cid')) {
         return this.get('cid');
-      } else {
+      } else if (this.elementId && this.get('property')) {
         return `${this.get('property')}-${this.elementId}`;
       }
     }
