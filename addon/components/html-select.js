@@ -4,7 +4,7 @@ import layout from '../templates/components/html-select';
 export default Ember.Component.extend({
   layout: layout,
 
-  didReceiveAttrs(/*attrs*/) {
+  didReceiveAttrs() {
     this._super(...arguments);
     var content = this.get('content');
 

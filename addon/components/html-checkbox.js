@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     this.elementId = this.get('mainComponent.id');
     this._super(...arguments);
   },
-  didReceiveAttrs( /*attrs*/ ) {
+  didReceiveAttrs() {
     this._super(...arguments);
     // set it to the correct value of the selection
     this.checked = Ember.computed('mainComponent.model.' + this.get('mainComponent.property'), function() {
