@@ -4,7 +4,9 @@ Copied from GCorbel from https://github.com/piceaTech/ember-rapid-forms/issues/1
 
 import Ember from 'ember';
 
-export default Ember.Mixin.create({
+const { Mixin, isNone, canInvoke } = Ember;
+
+export default Mixin.create({
   init() {
     this._super(...arguments);
 
@@ -17,17 +19,22 @@ export default Ember.Mixin.create({
   },
 
   validate() {
-    return this.get('validations').validate(...arguments)
-      .then((validations)=> {
-        const modelErrors = this.get('errors');
-        if (!Ember.isNone(modelErrors) && Ember.canInvoke(modelErrors, 'add')) {
-          this.get('validations.validatableAttributes').forEach((va) =>{
-            this._copyErrors(this, va);
-          });
-        }
-        return validations;
-      });
+    return this
+      .get('validations')
+      .validate(...arguments)
+      .then(this._copyEachErrors.bind(this));
   },
+
+  _copyEachErrors(validations) {
+    const modelErrors = this.get('errors');
+    if (!isNone(modelErrors) && canInvoke(modelErrors, 'add')) {
+      this.get('validations.validatableAttributes').forEach((va) =>{
+        this._copyErrors(this, va);
+      });
+    }
+    return validations;
+  },
+
   // gets called when a message is added (that means there is a validation-error)
   _copyErrors(model, attribute) {
     if (model.currentState.stateName === 'root.loaded.saved' || model.currentState.stateName === 'root.deleted.saved') {

@@ -1,0 +1,13 @@
+{{#em-form-group model=model property=property inputComponent=this}}
+  {{input
+    id=inputId
+    type='checkbox'
+    checked=(get model property)
+    disabled=disabled
+    required=required
+    autofocus=autofocus
+    readonly=readonly
+    title=title
+    class=elementClass
+    name=name}}
+{{/em-form-group}}

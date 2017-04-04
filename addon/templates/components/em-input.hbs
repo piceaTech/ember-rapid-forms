@@ -1,0 +1,18 @@
+{{#em-form-group model=model property=property inputComponent=this}}
+  {{input
+    type=type
+
+    placeholder=placeholder
+    value=(mut (get model property))
+    name=name
+    disabled=disabled
+    class=(concat "form-control " elementClass)
+    id=inputId
+    required=required
+    title=title
+    pattern=pattern
+    autofocus=autofocus
+    readonly=readonly
+    autoresize=autoresize
+  }}
+{{/em-form-group}}

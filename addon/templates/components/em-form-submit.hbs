@@ -1,7 +1,7 @@
 {{#if form.isHorizontal}}
     <div class={{horiClass}}>
-        <button class={{classes}} type={{type}} disabled={{disabled}}>{{text}}</button>
+        <button class={{classes}} type={{type}} disabled={{disabled}} {{action 'submit'}}>{{text}}</button>
     </div>
 {{else}}
-    <button class={{classes}} type={{type}} disabled={{disabled}}>{{text}}</button>
+    <button class={{classes}} type={{type}} disabled={{disabled}} {{action 'submit'}}>{{text}}</button>
 {{/if}}

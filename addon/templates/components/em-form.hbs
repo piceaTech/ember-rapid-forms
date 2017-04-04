@@ -8,12 +8,8 @@
   submit=(component 'em-form-submit' form=this model=model)
 
   group-control=(component 'form-group-control' form=this model=model)
-  group=(component 'form-group' form=this model=model)
-
-  formGroup=(component 'em-form-group' form=this model=model)
-
-
+  group=(component 'em-form-group' form=this model=model)
 )}}
 {{#if submitButton}}
-    {{em-form-submit form=this}}
+    {{em-form-submit form=this submit='submit'}}
 {{/if}}

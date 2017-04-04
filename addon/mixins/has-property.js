@@ -1,38 +1,34 @@
 import Ember from 'ember';
+import HasIdMixin from '../mixins/has-id';
+
+const { computed, Mixin, assert, defineProperty } = Ember;
 
 /*
 A mixin that enriches a component that is attached to a model property.
 
-The property name by default is taken from the mainComponent unless explictly
+The property name by default is taken from the formComponent, computed unless explictly
     defined in the `property` variable.
 
 This mixin also binds a property named `errors` to the model's `model.errors.@propertyName` array
  */
 
-export default Ember.Mixin.create({
+export default Mixin.create(HasIdMixin, {
   property: undefined,
-  propertyName: Ember.computed('property', 'mainComponent.property', {
-    get: function() {
+
+  propertyName: computed('property', 'formComponent.property', {
+    get() {
       if (this.get('property')) {
         return this.get('property');
-      } else if (this.get('mainComponent.property')) {
-        return this.get('mainComponent.property');
+      } else if (this.get('formComponent.property')) {
+        return this.get('formComponent.property');
       } else {
-        return Ember.assert(false, 'Property could not be found.');
+        return assert(false, 'Property could not be found.');
       }
     }
   }),
-  id: Ember.computed('cid', 'property', {
-    get: function() {
-      if (this.get('cid')) {
-        return this.get('cid');
-      } else {
-        return `${this.get('property')}-${this.elementId}`;
-      }
-    }
-  }),
-  init: function() {
+
+  init() {
     this._super(...arguments);
-    Ember.defineProperty(this, 'errors', Ember.computed.alias((`model.errors.${this.get('propertyName')}`)));
+    defineProperty(this, 'errors', computed.alias((`model.errors.${this.get('propertyName')}`)));
   }
 });
