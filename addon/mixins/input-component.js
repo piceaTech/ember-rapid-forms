@@ -57,13 +57,13 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
     }
   }),
 
-  propertyOptions: Ember.computed('property', 'validations.attrs.@each.options', function() {
+  propertyOptions: computed('property', 'validations.attrs.@each.options', function() {
     const property = this.get('property');
 
     return this.get(`model.validations.attrs.${property}.options`) || false;
   }),
 
-  required: Ember.computed('propertyOptions.presence.presence', function() {
+  required: computed('propertyOptions.presence.presence', function() {
     return this.get('propertyOptions.presence.presence') || false;
   }),
 
