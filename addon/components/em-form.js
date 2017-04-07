@@ -54,6 +54,17 @@ export default Component.extend({
     }
   }),
 
+  /*
+  Form submit
+
+  Optionally execute model validations and perform a form submission.
+  */
+  actions: {
+    submit() {
+      this._submit();
+    }
+  },
+
   submit() {
     this._submit();
   },
@@ -72,17 +83,6 @@ export default Component.extend({
     this.set('isSubmitted', true);
     if (model.get('isValid')) {
       return this.sendAction('action', model);
-    }
-  },
-
-  /*
-  Form submit
-
-  Optionally execute model validations and perform a form submission.
-  */
-  actions: {
-    submit() {
-      this._submit();
     }
   }
 });
