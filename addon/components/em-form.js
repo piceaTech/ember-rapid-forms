@@ -67,6 +67,7 @@ export default Component.extend({
 
   submit() {
     this._submit();
+    return false;
   },
 
   _submit() {
