@@ -61,13 +61,22 @@ export default Component.extend({
   */
   actions: {
     submit() {
-      const model = this.get('model');
+      this._submit();
+    }
+  },
 
-      if (isNone(this.get('model.validate'))) {
-        return this.sendAction('action', model);
-      } else {
-        return model.validate().then(this._sendAction(model));
-      }
+  submit() {
+    this._submit();
+    return false;
+  },
+
+  _submit() {
+    const model = this.get('model');
+
+    if (isNone(this.get('model.validate'))) {
+      return this.sendAction('action', model);
+    } else {
+      return model.validate().then(this._sendAction(model));
     }
   },
 
