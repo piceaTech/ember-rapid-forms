@@ -11,8 +11,8 @@ The form component can be bound to a <i>model</i> to support better bindings &am
 <h2>Markup</h2>
 <div class="well line-example">
     <pre><code class="handlebars">
-\{{#em-form formLayout="horizontal" model=someModel action="some-action"}}
-    \{{em-input label="Name" property="name"}}
+\{{#em-form formLayout="horizontal" model=someModel action="some-action" as |form|}}
+    \{{form.input label="Name" property="name"}}
     other controls here...
 \{{/em-form}}
     </code></pre>
@@ -38,4 +38,17 @@ The form component can be bound to a <i>model</i> to support better bindings &am
     <tr><td>validationIcons</td><td>boolean, if true validation icons will be rendered per input control.</td><td>true</td></tr>
     <tr><td>showErrorsOnRender</td><td>boolean, display errors when the form is rendered</td><td>false</td></tr>
     <tr><td>showErrorsOnFocusIn</td><td>boolean, display errors when an input if focused</td><td>false</td></tr>
+</table>
+
+<h2>Update to after 1.0.0-beta10</h2>
+<p>To Update to a version after 1.0.0-beta10 \{{em-form}} now should be yielded as a form and has the following attributes on the hash</p>
+
+<table class="table table-striped">
+    <tr><th>Attribute Name</th><th>Old Element</th><th>description</th></tr>
+    <tr><td>input</td><td>em-input</td><td>Standard element used to create a input field</td></tr>
+    <tr><td>checkbox</td><td>em-checkbox</td><td>Element used to create a checkbox</td></tr>
+    <tr><td>select</td><td>em-select</td><td>Element used to create a Select box</td></tr>
+    <tr><td>text</td><td>em-text</td><td>Element used to create a Textarea</td></tr>
+    <tr><td>custom-input</td><td>em-custom-input</td><td>Element used to create a custom element</td></tr>
+    <tr><td>submit</td><td>em-submit</td><td>Element used to create the submit button</td></tr>
 </table>
