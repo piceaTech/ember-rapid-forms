@@ -96,13 +96,13 @@ const person = DS.Model.extend(Validations, InputErrors, helper, {
 
 <h3>With this template:</h3>
 <div class="well line-example">
-    <pre><code class="handlebars">
-\{{#em-form model=model formLayout=layout}}
-    \{{em-input property="fullName" label="Full Name" placeholder="Enter a full name..." canShowErrors=model.visibleErrors.fullName}}
-    \{{em-input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
-    \{{em-text property="comment" label="Comment" placeholder="Comment please.." rows=4 canShowErrors=model.visibleErrors.comment}}
-    \{{em-select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name" canShowErrors=model.visibleErrors.gender}}
-    \{{em-checkbox property="active" label="Active?" canShowErrors=model.visibleErrors.active}}
+    <pre><code class="html">
+\{{#em-form model=model formLayout=layout as |form|}}
+    \{{form.input property="fullName" label="Full Name" placeholder="Enter a full name..." canShowErrors=model.visibleErrors.fullName}}
+    \{{form.input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
+    \{{form.text property="comment" label="Comment" placeholder="Comment please.." rows=4 canShowErrors=model.visibleErrors.comment}}
+    \{{form.select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name" canShowErrors=model.visibleErrors.gender}}
+    \{{form.checkbox property="active" label="Active?" canShowErrors=model.visibleErrors.active}}
     &lt;div class="form-group"&gt;
         &lt;button class="btn btn-default" \{{ action "validate" }}&gt;Run Validations&lt;/button&gt;
         &lt;button class="btn btn-default" \{{ action "clearValidations" }}&gt;Clear Validations&lt;/button&gt;
@@ -119,7 +119,6 @@ const person = DS.Model.extend(Validations, InputErrors, helper, {
 
 <h3>The result would be:</h3>
 
-<a href="http://jsbin.com/pexolude/201" target="_blank" class="btn btn-warning jsbin pull-right">jsBin</a>
 <div class="well line-example">
     {{form-sample model=model}}
 </div>
