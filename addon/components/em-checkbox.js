@@ -30,7 +30,6 @@ export default Component.extend(InputComponentMixin, {
       if (this.get('form.formLayout') === 'horizontal') {
         return 'checkbox';
       }
-
       return null;
     }
   })
