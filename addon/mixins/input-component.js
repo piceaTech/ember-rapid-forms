@@ -48,11 +48,16 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
     }
   }),
 
-  controlWrapper: computed('form.formLayout', {
+  controlWrapper: computed('form.formLayout', 'labelInControl', {
     get() {
       if (this.get('form.formLayout') === 'horizontal') {
+        if (this.get('labelInControl')) {
+          return 'col-sm-offset-2 col-sm-10';
+        }
+
         return 'col-sm-10';
       }
+
       return null;
     }
   }),

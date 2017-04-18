@@ -1,13 +1,34 @@
 {{#em-form-group model=model property=property inputComponent=this}}
-  {{input
-    id=inputId
-    type='checkbox'
-    checked=(mut (get model property))
-    disabled=disabled
-    required=required
-    autofocus=autofocus
-    readonly=readonly
-    title=title
-    class=elementClass
-    name=name}}
+    {{#if checkboxWrapper}}
+        <div class={{checkboxWrapper}}>
+            {{#em-form-label text=label horiClass='' inlineClass='' form=form for=inputId extraClass=labelClass}}
+                {{input
+                  id=inputId
+                  type='checkbox'
+                  checked=(mut (get model property))
+                  disabled=disabled
+                  required=required
+                  autofocus=autofocus
+                  readonly=readonly
+                  title=title
+                  class=elementClass
+                  name=name}}
+            {{/em-form-label}}
+        </div>
+    {{else}}
+        {{#em-form-label text=label horiClass='' inlineClass='' form=form for=inputId extraClass=labelClass}}
+            {{input
+              id=inputId
+              type='checkbox'
+              checked=(mut (get model property))
+              disabled=disabled
+              required=required
+              autofocus=autofocus
+              readonly=readonly
+              title=title
+              class=elementClass
+              name=name}}
+        {{/em-form-label}}
+    {{/if}}
+
 {{/em-form-group}}

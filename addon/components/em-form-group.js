@@ -42,6 +42,7 @@ export default Component.extend(HasPropertyValidationMixin, {
 
   inputId: computed.alias('inputComponent.inputId'),
   yieldInLabel: computed.alias('inputComponent.yieldInLabel'),
+  labelInControl: computed.alias('inputComponent.labelInControl'),
   hasError: computed.alias('inputComponent.hasError'),
   hasSuccess: computed.alias('inputComponent.hasSuccess'),
   hasWarning: computed.alias('inputComponent.hasWarning'),

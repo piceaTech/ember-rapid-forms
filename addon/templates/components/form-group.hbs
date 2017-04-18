@@ -1,5 +1,9 @@
 {{#if formComponent.label}}
-    {{#if yieldInLabel}}
+    {{#if labelInControl}}
+        {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
+            {{yield}}
+        {{/form-group-control}}
+    {{else if yieldInLabel}}
         {{#if formComponent.labelWrapperClass}}
             <div class={{formComponent.labelWrapperClass}}>
                 {{#control-within-label label=formComponent.label extraClass=formComponent.labelClass
