@@ -28,9 +28,9 @@ Syntax:
  */
 export default Component.extend(HasPropertyValidationMixin, {
   tagName: 'div',
-  class: 'form-group',
+  groupClass: 'form-group',
   layout: layout,
-  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
+  classNameBindings: ['groupClass', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
   successIcon: 'fa fa-check',

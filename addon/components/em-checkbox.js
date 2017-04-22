@@ -16,7 +16,7 @@ export default Component.extend(InputComponentMixin, {
   validations: false,
   labelInControl: true,
 
-  class: computed('form.formLayout', {
+  groupClass: computed('form.formLayout', {
     get() {
       if (this.get('form.formLayout') !== 'horizontal') {
         return 'checkbox';
