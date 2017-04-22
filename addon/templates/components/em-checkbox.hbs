@@ -1,17 +1,9 @@
 {{#em-form-group model=model property=property inputComponent=this class=class}}
-    {{em-checkbox-input
-        autofocus=autofocus
-        checkboxWrapper=checkboxWrapper
-        disabled=disabled
-        elementClass=elementClass
-        form=form
-        inputId=inputId
-        label=label
-        labelClass=labelClass
-        model=model
-        name=name
-        property=property
-        readonly=readonly
-        required=required
-        title=title}}
+    {{#if checkboxWrapper}}
+        <div class={{checkboxWrapper}}>
+            {{em-checkbox-input checkboxComponent=this}}
+        </div>
+    {{else}}
+        {{em-checkbox-input checkboxComponent=this}}
+    {{/if}}
 {{/em-form-group}}
