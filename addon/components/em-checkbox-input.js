@@ -5,14 +5,14 @@ const { Component, computed } = Ember;
 
 export default Component.extend({
   layout: layout,
-  tagName: computed('checkboxWrapper', {
-    get() {
-      if (this.get('checkboxWrapper')) {
-        return 'div';
-      }
-
-      return '';
+  tagName: '',
+  classNameBindings: ['checkboxWrapper'],
+  didReceiveAttrs() {
+    this._super(...arguments);
+    if (this.get('checkboxWrapper')) {
+      this.set('tagName', 'div');
+    } else {
+      this.set('tagName', '');
     }
-  }),
-  classNameBindings: ['checkboxWrapper']
+  },
 });
