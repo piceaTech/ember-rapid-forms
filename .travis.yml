@@ -39,8 +39,7 @@ before_install:
   - bower --version
 
 install:
-  - cat package.json
-  - npm install
+  - npm install -ddd
   - bower install
 
 script:
