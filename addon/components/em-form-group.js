@@ -28,9 +28,9 @@ Syntax:
  */
 export default Component.extend(HasPropertyValidationMixin, {
   tagName: 'div',
-  class: 'form-group',
+  groupClass: 'form-group',
   layout: layout,
-  classNameBindings: ['class', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
+  classNameBindings: ['groupClass', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
   successIcon: 'fa fa-check',
@@ -42,6 +42,7 @@ export default Component.extend(HasPropertyValidationMixin, {
 
   inputId: computed.alias('inputComponent.inputId'),
   yieldInLabel: computed.alias('inputComponent.yieldInLabel'),
+  labelInControl: computed.alias('inputComponent.labelInControl'),
   hasError: computed.alias('inputComponent.hasError'),
   hasSuccess: computed.alias('inputComponent.hasSuccess'),
   hasWarning: computed.alias('inputComponent.hasWarning'),

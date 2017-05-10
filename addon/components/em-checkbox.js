@@ -14,14 +14,23 @@ export default Component.extend(InputComponentMixin, {
   layout: layout,
   validationIcons: false,
   validations: false,
-  yieldInLabel: true,
+  labelInControl: true,
 
-  class: computed('form.formLayout', {
+  groupClass: computed('form.formLayout', {
     get() {
       if (this.get('form.formLayout') !== 'horizontal') {
         return 'checkbox';
       }
       return 'form-group';
+    }
+  }),
+
+  checkboxWrapper: computed('form.formLayout', {
+    get() {
+      if (this.get('form.formLayout') === 'horizontal') {
+        return 'checkbox';
+      }
+      return null;
     }
   })
 });

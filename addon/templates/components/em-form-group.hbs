@@ -1,11 +1,11 @@
 {{#if wrapperClass}}
     <div class={{wrapperClass}}>
-        {{#form-group yieldInLabel=yieldInLabel formComponent=this form=form}}
+        {{#form-group yieldInLabel=yieldInLabel labelInControl=labelInControl formComponent=this form=form}}
             {{yield this}}
         {{/form-group}}
     </div>
 {{else}}
-    {{#form-group yieldInLabel=yieldInLabel formComponent=this form=form}}
+    {{#form-group yieldInLabel=yieldInLabel labelInControl=labelInControl formComponent=this form=form}}
         {{yield this}}
     {{/form-group}}
 {{/if}}

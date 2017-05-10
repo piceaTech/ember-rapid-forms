@@ -1,13 +1,9 @@
-{{#em-form-group model=model property=property inputComponent=this}}
-  {{input
-    id=inputId
-    type='checkbox'
-    checked=(mut (get model property))
-    disabled=disabled
-    required=required
-    autofocus=autofocus
-    readonly=readonly
-    title=title
-    class=elementClass
-    name=name}}
+{{#em-form-group model=model property=property inputComponent=this groupClass=groupClass}}
+    {{#if checkboxWrapper}}
+        <div class={{checkboxWrapper}}>
+            {{em-checkbox-input checkboxComponent=this}}
+        </div>
+    {{else}}
+        {{em-checkbox-input checkboxComponent=this}}
+    {{/if}}
 {{/em-form-group}}
