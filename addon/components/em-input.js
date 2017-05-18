@@ -23,6 +23,7 @@ export default Component.extend(InputComponentMixin, {
   autoresize: null,
   disabled: null,
   canShowErrors: false,
+  maxlength:null,
 
   hideValidationsOnFormChange: observer('form', 'form.model', function() {
     this.set('canShowErrors', false);
