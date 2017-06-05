@@ -101,6 +101,23 @@ test('em-select can select an item', function(assert) {
 
 });
 
+test('em-select selects the first item when the is no prompt', function(assert) {
+
+  this.set('fruitOptions', fruitOptions);
+  this.set('fruitSalad', fruitSalad);
+
+  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+
+  const element = this.$();
+  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+
+  const select = element.find('select')[0];
+  assert.ok(select.options.length > 3, 'select has options');
+
+  assert.equal(fruitSalad.get('favoriteFruit'), 1, 'model favorite fruit is the selection');
+
+});
+
 test('em-select can select the model itself', function(assert) {
 
   this.set('fruitOptions', fruitOptions);
@@ -167,36 +184,3 @@ test('Input can have a size', function(assert) {
 
   assert.equal(this.$().find('select').attr('size'), 3, 'select has a size field');
 });
-
-// test('em-select can select multiple items', function(assert) {
-
-//   this.set('fruitOptions', fruitOptions);
-//   this.set('fruitSalad', fruitSalad);
-
-//   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='fruits' model=fruitSalad propertyIsModel=true multiple=true}}{{/em-form}}`);
-
-//   const element = this.$();
-//   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
-
-//   const select = element.find('select')[0];
-//   assert.ok(select.options.length > 3, 'select has options');
-
-//   Ember.run(() => {
-//     Ember.$(select.options).each(function() {
-//       if (this.text === 'Apple' || this.text === 'Orange') {
-//         this.selected = true;
-//       }
-//     });
-//     Ember.$(select).trigger('change');
-//   });
-
-//   console.log(fruitSalad.get('fruits.content'), fruitSalad.get('fruits'));
-//   assert.deepEqual(fruitSalad.get('fruits.content'), [{
-//     id: 3,
-//     name: 'Orange'
-//   }, {
-//     id: 4,
-//     name: 'Apple'
-//   }], 'fruits got selected');
-
-// });

@@ -56,10 +56,21 @@ export default Component.extend(InputComponentMixin, {
     });
   },
 
+  didInsertElement() {
+    this._setValue();
+  },
+
   actions: {
     change() {
+      this._setValue();
+    }
+  },
 
-      const selectedEl = this.$('select')[0];
+  _setValue() {
+    const selectedEl = this.$('select')[0];
+    const model = this.get('model');
+    if (model) {
+
       let selectedIndex = selectedEl.selectedIndex;
       // check whether we show prompt the correct to show index is one less
       // when selecting prompt don't change anything
@@ -67,7 +78,7 @@ export default Component.extend(InputComponentMixin, {
         if(selectedIndex !== 0){
           selectedIndex--;
         } else {
-          this.set('model.' + this.get('property'), null);
+          model.set(this.get('property'), null);
           return;
         }
       }
@@ -84,7 +95,7 @@ export default Component.extend(InputComponentMixin, {
         selectedID = selectedValue[optionValuePath];
       }
 
-      this.set('model.' + this.get('property'), selectedID);
+      model.set(this.get('property'), selectedID);
       const changeAction = this.get('action');
       if(changeAction){
         changeAction(selectedID);
