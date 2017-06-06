@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/em-select';
 import InputComponentMixin from '../mixins/input-component';
 
-const { Component, computed } = Ember;
+const { Component, computed, run } = Ember;
 
 /*
 Form Select
@@ -32,8 +32,21 @@ export default Component.extend(InputComponentMixin, {
   autofocus: null,
   size: 0,
 
-  didReceiveAttrs() {
-    this._super(...arguments);
+  didRender() {
+    run.schedule('sync', this, () => {
+      this._super(...arguments);
+      this._addComputedSelectedValue();
+      this._setValue();
+    });
+  },
+
+  actions: {
+    change() {
+      this._setValue();
+    }
+  },
+
+  _addComputedSelectedValue() {
     const content = this.get('content');
 
     if (!content) {
@@ -56,18 +69,22 @@ export default Component.extend(InputComponentMixin, {
     });
   },
 
-  actions: {
-    change() {
+  _setValue() {
+    const selectedEl = this.$('select')[0];
+    const model = this.get('model');
+    if (model) {
 
-      const selectedEl = this.$('select')[0];
       let selectedIndex = selectedEl.selectedIndex;
+
+      if (selectedIndex < 0) return;
+
       // check whether we show prompt the correct to show index is one less
       // when selecting prompt don't change anything
       if(this.get('prompt')){
         if(selectedIndex !== 0){
           selectedIndex--;
         } else {
-          this.set('model.' + this.get('property'), null);
+          model.set(this.get('property'), null);
           return;
         }
       }
@@ -84,7 +101,7 @@ export default Component.extend(InputComponentMixin, {
         selectedID = selectedValue[optionValuePath];
       }
 
-      this.set('model.' + this.get('property'), selectedID);
+      model.set(this.get('property'), selectedID);
       const changeAction = this.get('action');
       if(changeAction){
         changeAction(selectedID);
