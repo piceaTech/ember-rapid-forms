@@ -32,7 +32,7 @@ export default Component.extend(InputComponentMixin, {
   autofocus: null,
   size: 0,
 
-  didReceiveAttrs() {
+  didRender() {
     this._super(...arguments);
     const content = this.get('content');
 
@@ -54,9 +54,7 @@ export default Component.extend(InputComponentMixin, {
       }
       return value;
     });
-  },
 
-  didInsertElement() {
     this._setValue();
   },
 
@@ -72,6 +70,9 @@ export default Component.extend(InputComponentMixin, {
     if (model) {
 
       let selectedIndex = selectedEl.selectedIndex;
+
+      if (selectedIndex < 0) return;
+
       // check whether we show prompt the correct to show index is one less
       // when selecting prompt don't change anything
       if(this.get('prompt')){
