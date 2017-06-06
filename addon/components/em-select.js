@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/em-select';
 import InputComponentMixin from '../mixins/input-component';
 
-const { Component, computed } = Ember;
+const { Component, computed, run } = Ember;
 
 /*
 Form Select
@@ -33,7 +33,20 @@ export default Component.extend(InputComponentMixin, {
   size: 0,
 
   didRender() {
-    this._super(...arguments);
+    run.schedule('sync', this, () => {
+      this._super(...arguments);
+      this._addComputedSelectedValue();
+      this._setValue();
+    });
+  },
+
+  actions: {
+    change() {
+      this._setValue();
+    }
+  },
+
+  _addComputedSelectedValue() {
     const content = this.get('content');
 
     if (!content) {
@@ -54,14 +67,6 @@ export default Component.extend(InputComponentMixin, {
       }
       return value;
     });
-
-    this._setValue();
-  },
-
-  actions: {
-    change() {
-      this._setValue();
-    }
   },
 
   _setValue() {
