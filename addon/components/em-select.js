@@ -32,7 +32,7 @@ export default Component.extend(InputComponentMixin, {
   autofocus: null,
   size: 0,
 
-  didRender() {
+  didInsertElement() {
     run.schedule('sync', this, () => {
       this._super(...arguments);
       this._addComputedSelectedValue();
