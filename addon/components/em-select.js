@@ -36,7 +36,14 @@ export default Component.extend(InputComponentMixin, {
     run.schedule('sync', this, () => {
       this._super(...arguments);
       this._addComputedSelectedValue();
-      this._setValue();
+
+      if(this.get('model.isLoading')) {
+        this.get('model').on('didLoad', () => {
+          this._setValue();
+        });
+      } else {
+        this._setValue();
+      }
     });
   },
 
