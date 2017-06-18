@@ -32,11 +32,18 @@ export default Component.extend(InputComponentMixin, {
   autofocus: null,
   size: 0,
 
-  didRender() {
+  didInsertElement() {
     run.schedule('sync', this, () => {
       this._super(...arguments);
       this._addComputedSelectedValue();
-      this._setValue();
+
+      if(this.get('model.isLoading')) {
+        this.get('model').on('didLoad', () => {
+          this._setValue();
+        });
+      } else {
+        this._setValue();
+      }
     });
   },
 
@@ -84,7 +91,9 @@ export default Component.extend(InputComponentMixin, {
         if(selectedIndex !== 0){
           selectedIndex--;
         } else {
-          model.set(this.get('property'), null);
+          if (model.get('property')) {
+            model.set(this.get('property'), null);
+          }
           return;
         }
       }
