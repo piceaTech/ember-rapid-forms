@@ -33,10 +33,9 @@ export default Component.extend(InputComponentMixin, {
   size: 0,
 
   didInsertElement() {
-    run.schedule('sync', this, () => {
-      this._super(...arguments);
-      this._addComputedSelectedValue();
+    this._super(...arguments);
 
+    run.schedule('sync', this, () => {
       if(this.get('model.isLoading')) {
         this.get('model').on('didLoad', () => {
           this._setValue();
@@ -45,6 +44,11 @@ export default Component.extend(InputComponentMixin, {
         this._setValue();
       }
     });
+  },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this._addComputedSelectedValue();
   },
 
   actions: {
