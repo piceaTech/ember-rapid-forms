@@ -104,7 +104,7 @@ module.exports = {
         devDependencies: {
           'ember-data': '2.15.0-beta.1'
         }
-      }
+      },
       resolutions: {
         'ember': 'beta'
       }
