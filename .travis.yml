@@ -22,9 +22,10 @@ env:
   - EMBER_TRY_SCENARIO=ember-2.9
   - EMBER_TRY_SCENARIO=ember-2.10
   - EMBER_TRY_SCENARIO=ember-2.11
+  - EMBER_TRY_SCENARIO=ember-2.12
+  - EMBER_TRY_SCENARIO=ember-2.13
   - EMBER_TRY_SCENARIO=ember-release
   - EMBER_TRY_SCENARIO=ember-beta
-  - ALLOW_DEPRECATIONS=true EMBER_TRY_SCENARIO=ember-canary
 
 matrix:
   fast_finish: true
