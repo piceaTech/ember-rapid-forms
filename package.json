@@ -2,6 +2,19 @@
   "name": "ember-rapid-forms",
   "version": "1.0.0-beta14",
   "description": "Intuitive, Smart and Beautiful Forms for Ember.js",
+  "keywords": [
+    "ember-addon"
+  ],
+  "license": "Apache-2.0",
+  "authors": [
+    "Indexia Technologies, ltd.",
+    "Spruce, <dev@spruce.de>",
+    "GCorbel, <guirec.corbel@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piceaTech/ember-rapid-forms.git"
+  },
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -12,53 +25,36 @@
     "test": "ember try:each",
     "update-page": "ember build --environment=production && echo \"now build checking out gh-pages branch\" && git checkout gh-pages && echo \"copying it into root folder and adding\"  && cp -R dist/* . && git add . && echo \"now commiting\" && git commit -m \"Update GH-Page\" && git checkout master"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/piceaTech/ember-rapid-forms.git"
+  "dependencies": {
+    "ember-cli-babel": "^6.3.0",
+    "ember-cli-htmlbars": "^2.0.1"
+  },
+  "devDependencies": {
+    "broccoli-asset-rev": "^2.4.5",
+    "ember-ajax": "^3.0.0",
+    "ember-cli": "~2.14.0",
+    "ember-cli-dependency-checker": "^1.3.0",
+    "ember-cli-eslint": "^3.0.0",
+    "ember-cli-htmlbars": "^2.0.1",
+    "ember-cli-htmlbars-inline-precompile": "^0.4.3",
+    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-qunit": "^4.0.0",
+    "ember-cli-shims": "^1.1.0",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-cp-validations": "~3.3.2",
+    "ember-data": "^2.11.1",
+    "ember-truth-helpers": "~1.3.0",
+    "eslint-plugin-ember": "^3.0.1",
+    "ember-disable-prototype-extensions": "^1.1.2",
+    "ember-export-application-global": "^2.0.0",
+    "ember-load-initializers": "^1.0.0",
+    "ember-resolver": "^4.0.0",
+    "ember-source": "~2.14.0",
+    "loader.js": "^4.2.3"
   },
   "engines": {
-    "node": ">= 6.0.0"
-  },
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "broccoli-asset-rev": "^2.4.2",
-    "broccoli-funnel": "^0.2.3",
-    "broccoli-merge-trees": "^0.2.3",
-    "ember-ajax": "^2.0.1",
-    "ember-cli": "2.11.1",
-    "ember-cli-app-version": "^1.0.0",
-    "ember-cli-dependency-checker": "^1.2.0",
-    "ember-cli-eslint": "3.0.2",
-    "ember-cli-htmlbars": "^1.1.1",
-    "ember-cli-htmlbars-inline-precompile": "^0.3.6",
-    "ember-cli-inject-live-reload": "^1.4.0",
-    "ember-cli-qunit": "^3.0.0",
-    "ember-cli-release": "^0.2.9",
-    "ember-cli-sri": "^2.1.0",
-    "ember-cli-test-loader": "^1.1.0",
-    "ember-cli-uglify": "^1.2.0",
-    "ember-cp-validations": "3.1.4",
-    "ember-data": "^2.11.1",
-    "ember-disable-prototype-extensions": "^1.1.0",
-    "ember-export-application-global": "^1.0.5",
-    "ember-load-initializers": "0.6.3",
-    "ember-resolver": "^2.0.3",
-    "ember-truth-helpers": "1.1.0",
-    "eslint": "^3.16.1",
-    "eslint-plugin-ember": "^3.0.1",
-    "loader.js": "^4.0.1"
-  },
-  "authors": [
-    "Indexia Technologies, ltd.",
-    "Spruce, <dev@spruce.de>",
-    "GCorbel, <guirec.corbel@gmail.com>"
-  ],
-  "keywords": [
-    "ember-addon"
-  ],
-  "dependencies": {
-    "ember-cli-htmlbars": "^1.1.1",
-    "ember-cli-babel": "^5.1.6"
+    "node": "^4.5 || 6.* || >= 7.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
