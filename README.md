@@ -40,6 +40,12 @@ To test on all ember versions:
 
 * `ember build`
 
+## Releasing a new version
+
+* Make the required changes which follow the [Conventional Commits Specification](https://conventionalcommits.org).
+* Run the script `npm run release`
+* `git push --tags` && `npm publish`
+
 
 ## Contributing
 
