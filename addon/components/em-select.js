@@ -12,8 +12,8 @@ Syntax:
     content=array_of_options
     optionValuePath=keyForValue
     optionLabelPath=keyForLabel
+    optionDisabledPath=keyForDisabled
     prompt="Optional default prompt"}}
-
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
@@ -27,6 +27,7 @@ export default Component.extend(InputComponentMixin, {
   selection: null,
   optionValuePath: 'id',
   optionLabelPath: 'value',
+  optionDisabledPath: null,
   prompt: null,
   disabled: null,
   autofocus: null,
