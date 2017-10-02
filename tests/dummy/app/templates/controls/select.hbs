@@ -81,6 +81,25 @@ App.ControlsSelectController = Ember.Controller.extend({
     Disabled: {{model.third}}
 </div>
 
+<h2>Result with optionsGroups</h2>
+<div class="well line-example">
+{{#em-form model=model submitButton=false as |form|}}
+    {{form.select
+        label="Eatables"
+        optionGroups=groups
+        optionGroupLabelPath="name"
+        optionGroupContentPath="content"
+        optionValuePath="id"
+        optionLabelPath="name"
+        prompt="--select--"
+        property='forth'
+    }}
+{{/em-form}}
+</div>
+<div class="well line-example">
+    Eatables: {{model.forth}}
+</div>
+
 <h2>Parameters</h2>
 <table class="table table-striped">
     <tr><th>Param name</th><th>Description</th><th>Default</th></tr>
@@ -91,6 +110,9 @@ App.ControlsSelectController = Ember.Controller.extend({
     <tr><td>optionLabelPath</td><td>the path on each object to the desired property to be displayed as the label of the selection</td><td>none, required.</td></tr>
     <tr><td>optionValuePath</td><td>the path on each object to the desired property value of the selection</td><td>none, required.</td></tr>
     <tr><td>optionDisabledPath</td><td>the path on each object which distinguishes whether to disable the element or not</td><td>none, optional.</td></tr>
+    <tr><td>optionGroups</td><td>the option groups to be displayed. If present content is ignored</td><td>none</td></tr>
+    <tr><td>optionGroupLabelPath</td><td>the path on each group which is the desired property to show</td><td></td></tr>
+    <tr><td>optionGroupContentPath</td><td></td><td></td></tr>
     <tr><td>multiple</td><td>If true multiple item selection will be supported.</td><td>false, optional.</td></tr>
     <tr><td>disabled</td><td>Standard HTML5 disabled attribute.</td><td>null</td></tr>
     <tr><td>required</td><td>Standard HTML5 required attribute.</td><td>null</td></tr>
