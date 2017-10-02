@@ -116,7 +116,7 @@ export default Component.extend(InputComponentMixin, {
         const positionInOptGroup = Array.prototype.indexOf.call(optGroupOptions, selectedElement);
         const optionGroup = this.get('optionGroups').filterBy(this.get('optionGroupLabelPath'), optGroup.label)[0];
 
-        selectedValue = Ember.get(optionGroup, this.get('optionGroupContentPath')).objectAt(positionInOptGroup);
+        selectedValue = get(optionGroup, this.get('optionGroupContentPath')).objectAt(positionInOptGroup);
       }
       else{
         const content = this.get('content');

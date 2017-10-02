@@ -51,6 +51,40 @@ const fruitOptions = Ember.A([{
   disabled: true
 }]);
 
+const eatables = Ember.A([
+    {
+      name: 'Fruits',
+      content: Ember.A([
+        {
+          id: "A",
+          name: "Apple"
+        },{
+          id: "P",
+          name: "Peach"
+        }])
+    }, { 
+      name: 'Vegetables',
+      content: Ember.A([
+        {
+          id: "T",
+          name: "Tomato"
+        },{
+          id: "C",
+          name: "Cucumber"
+        }])
+    }, {
+      name: 'Other',
+      content: Ember.A([
+        {
+          id: "B",
+          name: "Bread"
+        },{
+          id: "S",
+          name: "Soup"
+        }])
+    }
+  ])
+
 test('em-select renders', function(assert) {
   this.set('fruitOptions', fruitOptions);
 
@@ -184,6 +218,30 @@ test('em-select can select the model itself', function(assert) {
 
   assert.equal(fruitSalad.get('favoriteFruit.id'), 3, 'model favorite fruit is the selection');
   assert.equal(fruitSalad.get('favoriteFruit.name'), 'Orange', 'model favorite fruit is the selection');
+
+});
+
+
+test('em-select can select correct with optGroups', function(assert) {
+
+  this.set('eatables', eatables);
+  this.set('fruitSalad', fruitSalad);
+
+  this.render(hbs`{{#em-form as |form|}}{{form.select label="Eatables:" optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad
+    optionGroups=eatables optionGroupLabelPath="name" optionGroupContentPath="content"}}{{/em-form}}`);
+
+  const element = this.$();
+  assert.equal(element.find('label:contains("Eatables:")').length, 1, 'label has for property');
+
+  const select = element.find('select')[0];
+  assert.ok(select.options.length === 7, 'select has correct amount of options');
+
+  Ember.run(() => {
+    this.$(select).val('A');
+    this.$(select).trigger('change');
+  });
+
+  assert.equal(fruitSalad.get('favoriteFruit'), "A", 'model favorite fruit is the selection');
 
 });
 
