@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/em-select';
 import InputComponentMixin from '../mixins/input-component';
 
-const { Component, computed, run } = Ember;
+const { Component, computed, run, get } = Ember;
 
 /*
 Form Select
@@ -105,6 +105,11 @@ export default Component.extend(InputComponentMixin, {
 
       const content = this.get('content');
       const selectedValue = content.objectAt(selectedIndex);
+      if(this.get('optionDisabledPath') && get(selectedValue, this.get('optionDisabledPath'))){
+        // if it is disabled don't do anything
+        return;
+      }
+
       const optionValuePath = this.get('optionValuePath');
       const propertyIsModel = this.get('propertyIsModel');
       let selectedID;

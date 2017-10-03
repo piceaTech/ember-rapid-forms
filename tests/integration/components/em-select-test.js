@@ -131,7 +131,7 @@ test('em-select can\'t select an item when disabled', function(assert) {
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' optionValuePath='disabled' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' optionDisabledPath='disabled' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
 
   const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
