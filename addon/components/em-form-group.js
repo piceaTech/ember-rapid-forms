@@ -33,9 +33,9 @@ export default Component.extend(HasPropertyValidationMixin, {
   classNameBindings: ['groupClass', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
   canShowErrors: false,
-  successIcon: 'fa fa-check',
-  warningIcon: 'fa fa-exclamation-triangle',
-  errorIcon: 'fa fa-times',
+  successIcon: 'check',
+  warningIcon: 'exclamation-triangle',
+  errorIcon: 'times',
   hasSetForm: false,
 
   inputComponent: Ember.Object.create(),
