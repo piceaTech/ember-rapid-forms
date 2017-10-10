@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0",
-    "bootstrap": "3.3.6",
     "highlightjs": "9.4.0"
   }
 }
