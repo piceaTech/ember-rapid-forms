@@ -1,5 +1,3 @@
-const mergeTrees = require('broccoli-merge-trees');
-const funnel = require('broccoli-funnel');
 /* eslint-env node */
 'use strict';
 
