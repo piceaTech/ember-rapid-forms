@@ -1,8 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from '../templates/components/em-form-label';
 import HasClassClacMixin from '../mixins/has-class-calc';
-
-const { Component } = Ember;
 
 /*
 Form Label

@@ -1,8 +1,10 @@
+import { run } from '@ember/runloop';
+import { Promise as EmberPromise } from 'rsvp';
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
   } from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', 'em-form checkbox', {
@@ -10,11 +12,11 @@ moduleForComponent('em-form', 'em-form checkbox', {
   integration: true
 });
 
-let someModel = Ember.Object.create({
+let someModel = EmberObject.create({
   userAgree: false,
-  errors: Ember.Object.create(),
+  errors: EmberObject.create(),
   validate() {
-    const promise = new Ember.RSVP.Promise((resolve) => {
+    const promise = new EmberPromise((resolve) => {
       resolve('ok!');
     });
     return promise;
@@ -29,11 +31,11 @@ test('a checkbox clicked updates its model', function(assert) {
 
   let input = this.$('input');
 
-  Ember.run(() => {
+  run(() => {
     input.click();
   });
 
-  Ember.run(() => {
+  run(() => {
     assert.ok(someModel.get('userAgree'), "Checkbox click");
     someModel.set('userAgree', false);
   });
@@ -44,11 +46,11 @@ test('a checkbox without a label updates data', function(assert) {
   this.set('someModel', someModel);
   this.render(hbs`{{#em-form model=someModel submitButton=false showErrorsOnFocusIn=true  as |form|}}Something here: {{form.checkbox property="userAgree"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     this.$('input').click();
   });
 
-  Ember.run(() => {
+  run(() => {
     assert.ok(someModel.get('userAgree'), "Checkbox click");
     // reset model after assertion
     someModel.set('userAgree', false);

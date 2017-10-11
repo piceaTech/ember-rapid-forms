@@ -1,8 +1,8 @@
+import { run } from '@ember/runloop';
 import {
   moduleForComponent,
   test
   } from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-text', {
@@ -28,7 +28,7 @@ test('Textarea renders with rows', function(assert) {
   const element = this.$();
   assert.equal(element.find('textarea').attr('rows'), '3', 'label has rows attr');
 
-  Ember.run(() => {
+  run(() => {
     this.set('rows', 4);
   });
 
@@ -44,7 +44,7 @@ test('Textarea renders with cols', function(assert) {
   const element = this.$();
   assert.equal(element.find('textarea').attr('cols'), '30', 'label has cols attr');
 
-  Ember.run(() => {
+  run(() => {
     this.set('cols', 40);
   });
 

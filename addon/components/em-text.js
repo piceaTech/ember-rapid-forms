@@ -1,8 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from '../templates/components/em-text';
 import InputComponentMixin from '../mixins/input-component';
-
-const { Component } = Ember;
 
 /*
 Form Text Area

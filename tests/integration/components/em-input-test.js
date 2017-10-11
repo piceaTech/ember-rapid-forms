@@ -1,9 +1,9 @@
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
   } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
 
 moduleForComponent('em-input', {
   // Specify the other units that are required for this test
@@ -61,7 +61,7 @@ test('Input can be a required field', function(assert) {
 });
 
 test('Input can be autofocused', function(assert) {
-  this.set('fruit', Ember.Object.create());
+  this.set('fruit', EmberObject.create());
 
   this.render(hbs`{{#em-form as |form|}}{{form.input model=fruit autofocus=true}}{{/em-form}}`);
 

@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import Controller from '@ember/controller';
+import { alias } from '@ember/object/computed';
 
-export default Ember.Controller.extend({
-  genderOptions: Ember.A([
+export default Controller.extend({
+  person: alias('model'),
+  genderOptions: A([
     {
       id: 'M',
       name: 'Male'

@@ -1,10 +1,12 @@
+import { run } from '@ember/runloop';
+import { Promise as EmberPromise } from 'rsvp';
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
 }
 from 'ember-qunit';
 import DS from 'ember-data';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', 'component:em-form ember-data', {
@@ -13,11 +15,11 @@ moduleForComponent('em-form', 'component:em-form ember-data', {
 });
 
 
-const somePerson = Ember.Object.create({
+const somePerson = EmberObject.create({
   name: 'my-name',
-  errors: Ember.Object.create(),
+  errors: EmberObject.create(),
   validate() {
-    const promise = new Ember.RSVP.Promise((resolve) => {
+    const promise = new EmberPromise((resolve) => {
       resolve('ok!');
     });
     return promise;
@@ -32,7 +34,7 @@ test('a form display DS.Errors when rendered if showErrorsOnRender is set', func
     assert.ok(true, 'submit action invoked!');
   });
 
-  Ember.run(() => {
+  run(() => {
     const errors = DS.Errors.create();
     errors.add('name', 'name!');
     this.get('someModel').set('isValid', false);
@@ -41,7 +43,7 @@ test('a form display DS.Errors when rendered if showErrorsOnRender is set', func
 
   this.render(hbs `{{#em-form model=someModel showErrorsOnRender=true as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     assert.equal(this.$().find('span:contains("name!")').length, 1, "Found help text on form");
   });
 });

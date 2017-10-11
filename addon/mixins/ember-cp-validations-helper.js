@@ -2,9 +2,15 @@
 Copied from GCorbel from https://github.com/piceaTech/ember-rapid-forms/issues/139#issuecomment-257280656
 */
 
+import Mixin from '@ember/object/mixin';
+
+import { isNone } from '@ember/utils';
+
 import Ember from 'ember';
 
-const { Mixin, isNone, canInvoke } = Ember;
+const {
+  canInvoke
+} = Ember;
 
 export default Mixin.create({
   init() {

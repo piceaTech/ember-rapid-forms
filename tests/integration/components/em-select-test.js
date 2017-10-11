@@ -1,9 +1,12 @@
+import { A } from '@ember/array';
+import { run } from '@ember/runloop';
+import { Promise as EmberPromise } from 'rsvp';
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
 }
 from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 
@@ -13,12 +16,12 @@ moduleForComponent('em-select', {
   // Specify the other units that are required for this test
   integration: true,
   beforeEach() {
-    fruitSalad = Ember.Object.create({
+    fruitSalad = EmberObject.create({
       favoriteFruit: null,
-      fruits: Ember.Object.create(),
-      errors: Ember.Object.create(),
+      fruits: EmberObject.create(),
+      errors: EmberObject.create(),
       validate() {
-        const promise = new Ember.RSVP.Promise((resolve) => {
+        const promise = new EmberPromise((resolve) => {
           resolve('ok!');
         });
         return promise;
@@ -26,14 +29,14 @@ moduleForComponent('em-select', {
     });
   },
   afterEach() {
-    Ember.run(() => {
+    run(() => {
       fruitSalad.destroy();
     });
   }
 });
 
 
-const fruitOptions = Ember.A([{
+const fruitOptions = A([{
   id: 1,
   name: 'Banana'
 }, {
@@ -93,7 +96,7 @@ test('em-select can select an item', function(assert) {
   const select = element.find('select')[0];
   assert.ok(select.options.length > 3, 'select has options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('3');
     this.$(select).trigger('change');
   });
@@ -131,7 +134,7 @@ test('em-select can select the model itself', function(assert) {
   const select = element.find('select')[0];
   assert.ok(select.options.length > 3, 'select has options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('3');
     this.$(select).trigger('change');
   });

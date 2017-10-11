@@ -1,9 +1,9 @@
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
 import stubI18n from '../../helpers/stub-i18n';
 
 moduleForComponent('em-form-group', {
@@ -28,7 +28,7 @@ test('it renders with label', function(assert) {
 });
 
 test('it renders proper error validation icon', function(assert) {
-  const form = Ember.Object.extend();
+  const form = EmberObject.extend();
   this.set('form', form);
 
   this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='error' errorIcon='error'}}{{/em-form}}`);
@@ -39,7 +39,7 @@ test('it renders proper error validation icon', function(assert) {
 });
 
 test('it renders proper warning validation icon', function(assert) {
-  const form = Ember.Object.extend();
+  const form = EmberObject.extend();
   this.set('form', form);
 
   this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='warning' warningIcon='warning'}}{{/em-form}}`);
@@ -51,7 +51,7 @@ test('it renders proper warning validation icon', function(assert) {
 });
 
 test('it renders proper success validation icon', function(assert) {
-  const form = Ember.Object.extend();
+  const form = EmberObject.extend();
   this.set('form', form);
 
   this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='success' validationIcon='success'}}{{/em-form}}`);
@@ -68,7 +68,7 @@ test('Find the label if i18n is set', function(assert) {
   const i18n = this.container.lookup('service:i18n');
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
 
-  const fruit = Ember.Object.create();
+  const fruit = EmberObject.create();
   fruit.constructor.modelName = 'fruit';
 
   this.set('fruit', fruit);
@@ -83,14 +83,14 @@ test('I18n label is overrided by a given value', function(assert) {
   const i18n = this.container.lookup('service:i18n');
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
 
-  this.set('model', Ember.Object.create());
+  this.set('model', EmberObject.create());
   this.render(hbs`{{#em-form as |form|}}{{form.group model=model label='Custom Label'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'Custom Label', 'Doesn\t use custom labels');
 });
 
 test('Add required class if the field is required', function(assert) {
-  this.set('model', Ember.Object.create());
+  this.set('model', EmberObject.create());
   this.render(hbs`{{#em-form as |form|}}{{form.group model=model required=true}}{{/em-form}}`);
 
   assert.ok(this.$('.form-group').hasClass('required'));
@@ -98,7 +98,7 @@ test('Add required class if the field is required', function(assert) {
 
 test('When there a presence validator', function(assert) {
   // Stub ember-cp-validation
-  const Model = Ember.Object.extend({
+  const Model = EmberObject.extend({
     validations: {
       attrs: {
         fullName: {

@@ -1,3 +1,6 @@
-import Ember from 'ember';
-
-export default Ember.Controller.extend();
+import Controller from '@ember/controller';
+import { alias } from '@ember/object/computed';
+  
+export default Controller.extend({
+  person: alias('model')
+});

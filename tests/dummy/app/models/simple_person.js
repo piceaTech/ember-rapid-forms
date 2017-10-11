@@ -1,5 +1,5 @@
-import Ember from 'ember';
-import DS from 'ember-data';
+import { computed } from '@ember/object';
+import { Model, attr } from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 import InputErrors from 'ember-rapid-forms/mixins/input-errors';
 import helper from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
@@ -22,20 +22,20 @@ const Validations = buildValidations({
   gender: validator('presence', true)
 });
 
-const person = DS.Model.extend(Validations, InputErrors, helper, {
-  firstName: DS.attr('string', { defaultValue: null }),
-  lastName: DS.attr('string', { defaultValue: null }),
-  password: DS.attr('string'),
-  comment: DS.attr('string'),
-  active: DS.attr('boolean'),
-  gender: DS.attr('string'),
-  nameHasValue: Ember.computed('fullName', {
+const person = Model.extend(Validations, InputErrors, helper, {
+  firstName: attr('string', { defaultValue: null }),
+  lastName: attr('string', { defaultValue: null }),
+  password: attr('string'),
+  comment: attr('string'),
+  active: attr('boolean'),
+  gender: attr('string'),
+  nameHasValue: computed('fullName', {
     get() {
       return !!this.get('fullName');
     }
   }),
 
-  fullName: Ember.computed('firstName', 'lastName', {
+  fullName: computed('firstName', 'lastName', {
     //jshint unused:false
     get() {
       if (this.get('firstName')) {
@@ -54,7 +54,7 @@ const person = DS.Model.extend(Validations, InputErrors, helper, {
     }
   }),
 
-  asjson: Ember.computed('fullName', 'firstName', 'lastName', 'password', 'comment', 'active', 'gender', function() {
+  asjson: computed('fullName', 'firstName', 'lastName', 'password', 'comment', 'active', 'gender', function() {
     return "fullName: " + (this.get('fullName')) + ", firstName: " + (this.get('firstName')) + ", lastName: " + (this.get('lastName')) + ", password: " + (this.get('password')) + ", comment: " + (this.get('comment')) + ", active: " + (this.get('active')) + ", gender: " + (this.get('gender'));
   })
 });

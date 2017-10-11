@@ -1,6 +1,6 @@
-import Ember from 'ember';
-
-const { computed, assert, Mixin } = Ember;
+import { computed } from '@ember/object';
+import { assert } from '@ember/debug';
+import Mixin from '@ember/object/mixin';
 
 /*
 Find the form of the component that merges this mixin

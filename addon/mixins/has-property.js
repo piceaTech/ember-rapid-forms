@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import Mixin from '@ember/object/mixin';
+import { assert } from '@ember/debug';
+import { defineProperty, computed } from '@ember/object';
 import HasIdMixin from '../mixins/has-id';
-
-const { computed, Mixin, assert, defineProperty } = Ember;
 
 /*
 A mixin that enriches a component that is attached to a model property.
@@ -29,6 +30,6 @@ export default Mixin.create(HasIdMixin, {
 
   init() {
     this._super(...arguments);
-    defineProperty(this, 'errors', computed.alias((`model.errors.${this.get('propertyName')}`)));
+    defineProperty(this, 'errors', alias((`model.errors.${this.get('propertyName')}`)));
   }
 });
