@@ -1,4 +1,4 @@
-import { alias } from '@ember/object/computed';
+import { alias, oneWay } from '@ember/object/computed';
 import Mixin from '@ember/object/mixin';
 import { deprecate } from '@ember/application/deprecations';
 import { defineProperty, observer, computed } from '@ember/object';
@@ -17,6 +17,7 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
 
 export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdMixin, {
   validations: true,
+  validationIcons: oneWay('form.validationIcons'),
 
   hasSuccess: computed('status', 'canShowErrors', {
     get() {

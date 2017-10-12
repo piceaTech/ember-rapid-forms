@@ -4,6 +4,7 @@ import EmberObject, { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { isPresent } from '@ember/utils';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
+import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
 import layout from '../templates/components/em-form-group';
 
 /*
@@ -28,13 +29,12 @@ Syntax:
     label="Some label"
 }}
  */
-export default Component.extend(HasPropertyValidationMixin, {
+export default Component.extend(HasPropertyMixin, HasPropertyValidationMixin, {
   tagName: 'div',
   groupClass: 'form-group',
   layout: layout,
   classNameBindings: ['groupClass', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
-  canShowErrors: false,
   successIcon: 'check',
   warningIcon: 'exclamation-triangle',
   errorIcon: 'times',
@@ -63,9 +63,9 @@ export default Component.extend(HasPropertyValidationMixin, {
     return getOwner(this).lookup('service:i18n');
   }),
 
-  validationIcon: computed('status', 'canShowErrors', {
+  validationIcon: computed('status', 'shouldShowErrors', {
     get() {
-      if (!this.get('canShowErrors')) {
+      if (!this.get('shouldShowErrors')) {
         return;
       }
       switch (this.get('status')) {
