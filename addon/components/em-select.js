@@ -106,7 +106,6 @@ export default Component.extend(InputComponentMixin, {
         }
       }
 
-
       let selectedID, selectedValue;
 
       if(this.get('optionGroups')){
@@ -132,10 +131,10 @@ export default Component.extend(InputComponentMixin, {
       const propertyIsModel = this.get('propertyIsModel');
 
       if(propertyIsModel) {
-          selectedID = selectedValue;
-        } else {
-          selectedID = selectedValue[optionValuePath];
-        }
+        selectedID = selectedValue;
+      } else {
+        selectedID = selectedValue[optionValuePath];
+      }
 
       model.set(this.get('property'), selectedID);
       const changeAction = this.get('action');
