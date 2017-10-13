@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/em-select';
 import InputComponentMixin from '../mixins/input-component';
 
-const { Component, computed, run } = Ember;
+const { Component, computed, run, get } = Ember;
 
 /*
 Form Select
@@ -12,8 +12,8 @@ Syntax:
     content=array_of_options
     optionValuePath=keyForValue
     optionLabelPath=keyForLabel
+    optionDisabledPath=keyForDisabled
     prompt="Optional default prompt"}}
-
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
@@ -27,6 +27,7 @@ export default Component.extend(InputComponentMixin, {
   selection: null,
   optionValuePath: 'id',
   optionLabelPath: 'value',
+  optionDisabledPath: null,
   prompt: null,
   disabled: null,
   autofocus: null,
@@ -104,6 +105,11 @@ export default Component.extend(InputComponentMixin, {
 
       const content = this.get('content');
       const selectedValue = content.objectAt(selectedIndex);
+      if(this.get('optionDisabledPath') && get(selectedValue, this.get('optionDisabledPath'))){
+        // if it is disabled don't do anything
+        return;
+      }
+
       const optionValuePath = this.get('optionValuePath');
       const propertyIsModel = this.get('propertyIsModel');
       let selectedID;

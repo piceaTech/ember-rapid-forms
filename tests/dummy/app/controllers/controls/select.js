@@ -10,7 +10,8 @@ export default Ember.Controller.extend({
       name: 'Female'
     }, {
       id: 'O',
-      name: 'Other'
+      name: 'Other',
+      disabled: true
     }
   ])
 });
