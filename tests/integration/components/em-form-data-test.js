@@ -7,6 +7,7 @@ import {
 }
 from 'ember-qunit';
 import DS from 'ember-data';
+const { Errors } = DS;
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', 'component:em-form ember-data', {
@@ -35,7 +36,7 @@ test('a form display DS.Errors when rendered if showErrorsOnRender is set', func
   });
 
   run(() => {
-    const errors = DS.Errors.create();
+    const errors = Errors.create();
     errors.add('name', 'name!');
     this.get('someModel').set('isValid', false);
     this.get('someModel').set('errors', errors);

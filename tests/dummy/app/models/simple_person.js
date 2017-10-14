@@ -1,5 +1,6 @@
 import { computed } from '@ember/object';
-import { Model, attr } from 'ember-data';
+import DS from 'ember-data';
+const { Model, attr } = DS;
 import { validator, buildValidations } from 'ember-cp-validations';
 import InputErrors from 'ember-rapid-forms/mixins/input-errors';
 import helper from 'ember-rapid-forms/mixins/ember-cp-validations-helper';

@@ -69,7 +69,7 @@ test('it works on Object', function(assert) {
   assert.notOk(subject.get('errors.username'));
 
   const done = assert.async();
-  subject.validate().then(function() {
+  subject.validate().then(function() { // eslint-disable-line ember/named-functions-in-promises
     assert.ok(subject);
     assert.equal(subject.get('errors.username'), 'Can\'t be blank');
     done();

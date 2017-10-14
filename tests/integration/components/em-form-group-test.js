@@ -99,27 +99,29 @@ test('Add required class if the field is required', function(assert) {
 test('When there a presence validator', function(assert) {
   // Stub ember-cp-validation
   const Model = EmberObject.extend({
-    validations: {
-      attrs: {
-        fullName: {
-          options: {
-            presence: {
-              presence: true
+    init(){
+      this.set('validations', {
+        attrs: {
+          fullName: {
+            options: {
+              presence: {
+                presence: true
+              }
             }
           }
         }
-      }
+      });
     }
   });
 
   this.set('model', Model.create());
-  this.render(hbs`{{#em-form as |form|}}{{form.group property='fullName' model=model}}{{/em-form}}`);
-
-  assert.ok(this.$('.form-group').hasClass('required'));
+  // this has to be an input because setting of required only happens in the input-component mixin
+  this.render(hbs`{{#em-form as |form|}}{{form.input property='fullName' model=model}}{{/em-form}}`);
+  assert.ok(this.$('.form-group').hasClass('required'), 'from-group should have class required');
 });
 
 test('renders with labelWrapperClass', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form}}`);
   const wrapper = this.$().find('div.wrapper-class');
 
   assert.ok(wrapper, 'Wrapper exists');
