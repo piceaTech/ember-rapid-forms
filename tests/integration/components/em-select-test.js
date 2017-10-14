@@ -53,7 +53,7 @@ const fruitOptions = A([{
 test('em-select renders', function(assert) {
   this.set('fruitOptions', fruitOptions);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
 
   const element = this.$();
 
@@ -72,7 +72,7 @@ test('em-select renders with a prompt', function(assert) {
 
   this.set('fruitOptions', fruitOptions);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
 
   const element = this.$();
 
@@ -145,14 +145,14 @@ test('em-select can select the model itself', function(assert) {
 });
 
 test('Select renders with custom css', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select elementClass="col-md-6"}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" elementClass="col-md-6"}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').hasClass('col-md-6'), 'Select has correct class');
 });
 
 test('cid correctly sets the id for the select and it\'s label', function(assert) {
   assert.expect(2);
-  this.render(hbs`{{#em-form as |form|}}{{form.select label="some label" cid='test-cid'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="some label" cid='test-cid'}}{{/em-form}}`);
 
   assert.equal(this.$('select').attr('id'), 'test-cid', 'select has correct id');
   assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
@@ -165,25 +165,25 @@ test('the "for" of the label is the "id" of the select', function(assert) {
 });
 
 test('Input can be a required field', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select required=true}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" required=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').attr('required'), 'select becomes a required field');
 });
 
 test('Input can be a disabled field', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select disabled=true}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" disabled=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').attr('disabled'), 'select becomes a disabled field');
 });
 
 test('Input can be a autofocus field', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select autofocus=true}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" autofocus=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').attr('autofocus'), 'select becomes a autofocus field');
 });
 
 test('Input can have a size', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select size=3}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" size=3}}{{/em-form}}`);
 
   assert.equal(this.$().find('select').attr('size'), 3, 'select has a size field');
 });

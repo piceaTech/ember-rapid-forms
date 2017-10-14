@@ -12,17 +12,17 @@ moduleForComponent('em-form-group', {
 });
 
 test('it renders', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd"}}{{/em-form}}`);
   assert.ok(this.$('.form-group').length, 'group has default css class');
 });
 
 test('it renders with no label', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd"}}{{/em-form}}`);
   assert.ok(this.$('label').length === 0, 'group has no label');
 });
 
 test('it renders with label', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='hello'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='hello'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'hello', 'group has label after it being set');
 });
@@ -84,14 +84,14 @@ test('I18n label is overrided by a given value', function(assert) {
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
 
   this.set('model', EmberObject.create());
-  this.render(hbs`{{#em-form as |form|}}{{form.group model=model label='Custom Label'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.group property="asd" model=model label='Custom Label'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'Custom Label', 'Doesn\t use custom labels');
 });
 
 test('Add required class if the field is required', function(assert) {
   this.set('model', EmberObject.create());
-  this.render(hbs`{{#em-form as |form|}}{{form.group model=model required=true}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.group property="asd" model=model required=true}}{{/em-form}}`);
 
   assert.ok(this.$('.form-group').hasClass('required'));
 });
@@ -129,7 +129,7 @@ test('renders with labelWrapperClass', function(assert) {
 });
 
 test('renders with yieldInLabel', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='my-label' yieldInLabel=true}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' yieldInLabel=true}}{{/em-form}}`);
 
   const label = this.$().find('label');
   assert.equal(label.length, 1, 'Label is a wrapper tag');
@@ -137,7 +137,7 @@ test('renders with yieldInLabel', function(assert) {
 });
 
 test('renders with yieldInLabel with labelWrapperClass', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form}}`);
 
   const wrapper = this.$().find('div.wrapper-class');
   assert.equal(wrapper.length, 1, 'Wrapper exists');
@@ -158,7 +158,7 @@ test('renders v_icon', function(assert) {
 });
 
 test('renders error message', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
 
   const helpSpan = this.$().find('span.help-block');
   assert.equal(helpSpan.length, 1, 'Has help span');
@@ -167,7 +167,7 @@ test('renders error message', function(assert) {
 });
 
 test('does not renders error message when layout is inline', function(assert) {
-  this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
 
   const helpSpan = this.$().find('span.help-block');
   assert.equal(helpSpan.length, 0, 'Has no help span');
