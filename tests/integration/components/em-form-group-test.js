@@ -31,35 +31,35 @@ test('it renders proper error validation icon', function(assert) {
   const form = EmberObject.extend();
   this.set('form', form);
 
-  this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='error' errorIcon='error'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='error' errorIcon='bell'}}{{/em-form}}`);
 
-  let icons = this.$('span i.error');
+  let icons = this.$('span i.fa-bell');
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(icons.hasClass('error'));
+  assert.ok(icons.hasClass('fa-bell'), 'has error icon');
 });
 
 test('it renders proper warning validation icon', function(assert) {
   const form = EmberObject.extend();
   this.set('form', form);
 
-  this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='warning' warningIcon='warning'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='warning' warningIcon='exclamation'}}{{/em-form}}`);
 
-  let icons = this.$('span i.warning');
+  let icons = this.$('span i.fa-exclamation');
 
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(icons.hasClass('warning'));
+  assert.ok(icons.hasClass('fa-exclamation'), 'has warning icon');
 });
 
 test('it renders proper success validation icon', function(assert) {
   const form = EmberObject.extend();
   this.set('form', form);
 
-  this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='success' validationIcon='success'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='success' validationIcon='check-circle'}}{{/em-form}}`);
 
-  let icons = this.$('span i.success');
+  let icons = this.$('span i.fa-check-circle');
 
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(icons.hasClass('success'));
+  assert.ok(icons.hasClass('fa-check-circle'));
 });
 
 test('Find the label if i18n is set', function(assert) {
@@ -148,13 +148,13 @@ test('renders with yieldInLabel with labelWrapperClass', function(assert) {
 });
 
 test('renders v_icon', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group validationIcon='some-icon-class' canShowErrors=true validationIcons=true}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" validationIcon='check-square' shouldShowErrors=true validationIcons=true}}{{/em-form}}`);
 
   const icons = this.$().find('span.form-control-feedback');
   assert.equal(icons.length, 1, 'Has icon span');
   assert.ok(icons.hasClass('form-control-feedback'), 'Has proper class');
   assert.equal(icons.find('i').length, 1, 'Has icon');
-  assert.ok(this.$(icons.find('i')[0]).hasClass('some-icon-class'), 'Icon has proper class');
+  assert.ok(this.$(icons.find('i')[0]).hasClass('fa-check-square'), 'Icon has proper class');
 });
 
 test('renders error message', function(assert) {
