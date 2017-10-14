@@ -1,6 +1,7 @@
 import { alias } from '@ember/object/computed';
 import Mixin from '@ember/object/mixin';
-import { assert } from '@ember/debug';
+import Ember from 'ember';
+const { assert } = Ember;
 import { defineProperty, computed } from '@ember/object';
 import HasIdMixin from '../mixins/has-id';
 
@@ -23,7 +24,7 @@ export default Mixin.create(HasIdMixin, {
       } else if (this.get('formComponent.property')) {
         return this.get('formComponent.property');
       } else {
-        return assert(false, 'Property could not be found.');
+        return assert('Property could not be found.');
       }
     }
   }),

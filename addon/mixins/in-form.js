@@ -17,7 +17,7 @@ export default Mixin.create({
         parentView = parentView.get('parentView');
       }
 
-      return assert(false, 'Cannot find form');
+      return assert('Cannot find form');
     }
   }),
   model: computed('form', 'form.model', {

@@ -14,7 +14,7 @@ This mixin binds a property named `errors` to the model's `model.errors.@propert
 export default Mixin.create({
   init() {
     this._super(...arguments);
-    assert(!isNone(this.get('propertyName')), 'propertyName is required.');
+    assert('propertyName is required.', !isNone(this.get('propertyName')));
     defineProperty(this, 'errors', alias((`model.errors.${this.get('propertyName')}`)));
   },
 
