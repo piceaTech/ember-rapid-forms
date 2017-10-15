@@ -32,6 +32,9 @@ export default Component.extend(InputComponentMixin, {
   disabled: null,
   autofocus: null,
   size: 0,
+  optionGroups: null,
+  optionGroupLabelPath: null,
+  optionGroupContentPath: null,
 
   didInsertElement() {
     this._super(...arguments);
@@ -96,15 +99,29 @@ export default Component.extend(InputComponentMixin, {
         if(selectedIndex !== 0){
           selectedIndex--;
         } else {
-          if (model.get('property')) {
+          if (this.get('property')) {
             model.set(this.get('property'), null);
           }
           return;
         }
       }
 
-      const content = this.get('content');
-      const selectedValue = content.objectAt(selectedIndex);
+      let selectedID, selectedValue;
+
+      if(this.get('optionGroups')){
+        const selectedElement = selectedEl.options[selectedIndex + 1];
+        const optGroup = selectedElement.parentNode;
+        const optGroupOptions = optGroup.children;
+        const positionInOptGroup = Array.prototype.indexOf.call(optGroupOptions, selectedElement);
+        const optionGroup = this.get('optionGroups').filterBy(this.get('optionGroupLabelPath'), optGroup.label)[0];
+
+        selectedValue = get(optionGroup, this.get('optionGroupContentPath')).objectAt(positionInOptGroup);
+      }
+      else{
+        const content = this.get('content');
+        selectedValue = content.objectAt(selectedIndex);
+      }
+
       if(this.get('optionDisabledPath') && get(selectedValue, this.get('optionDisabledPath'))){
         // if it is disabled don't do anything
         return;
@@ -112,7 +129,6 @@ export default Component.extend(InputComponentMixin, {
 
       const optionValuePath = this.get('optionValuePath');
       const propertyIsModel = this.get('propertyIsModel');
-      let selectedID;
 
       if(propertyIsModel) {
         selectedID = selectedValue;
