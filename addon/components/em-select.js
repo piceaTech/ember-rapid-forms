@@ -1,10 +1,8 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import { run } from '@ember/runloop';
 import layout from '../templates/components/em-select';
 import InputComponentMixin from '../mixins/input-component';
-
-const { Component, computed, run, get } = Ember;
 
 /*
 Form Select

@@ -17,10 +17,10 @@ export default Controller.extend({
       disabled: true
     }
   ]),
-  groups: Ember.A([
+  groups: A([
     {
       name: 'Fruits',
-      content: Ember.A([
+      content: A([
         {
           id: "A",
           name: "Apple"
@@ -30,7 +30,7 @@ export default Controller.extend({
         }])
     }, { 
       name: 'Vegetables',
-      content: Ember.A([
+      content: A([
         {
           id: "T",
           name: "Tomato"
@@ -40,7 +40,7 @@ export default Controller.extend({
         }])
     }, {
       name: 'Other',
-      content: Ember.A([
+      content: A([
         {
           id: "B",
           name: "Bread"

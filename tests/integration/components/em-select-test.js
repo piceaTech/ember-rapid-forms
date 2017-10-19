@@ -2,11 +2,8 @@ import { A } from '@ember/array';
 import { run } from '@ember/runloop';
 import { Promise as EmberPromise } from 'rsvp';
 import EmberObject from '@ember/object';
-import {
-  moduleForComponent,
-  test
-}
-from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
+
 import hbs from 'htmlbars-inline-precompile';
 
 
@@ -54,10 +51,10 @@ const fruitOptions = A([{
   disabled: true
 }]);
 
-const eatables = Ember.A([
+const eatables = A([
     {
       name: 'Fruits',
-      content: Ember.A([
+      content: A([
         {
           id: "A",
           name: "Apple"
@@ -67,7 +64,7 @@ const eatables = Ember.A([
         }])
     }, { 
       name: 'Vegetables',
-      content: Ember.A([
+      content: A([
         {
           id: "T",
           name: "Tomato"
@@ -77,7 +74,7 @@ const eatables = Ember.A([
         }])
     }, {
       name: 'Other',
-      content: Ember.A([
+      content: A([
         {
           id: "B",
           name: "Bread"
@@ -155,7 +152,7 @@ test('em-select can select an item when not disabled', function(assert) {
   const select = element.find('select')[0];
   assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('5');
     this.$(select).trigger('change');
   });
@@ -176,7 +173,7 @@ test('em-select can\'t select an item when disabled', function(assert) {
   const select = element.find('select')[0];
   assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('5');
     this.$(select).trigger('change');
   });
@@ -239,7 +236,7 @@ test('em-select can select correct with optGroups', function(assert) {
   const select = element.find('select')[0];
   assert.ok(select.options.length === 7, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('A');
     this.$(select).trigger('change');
   });
