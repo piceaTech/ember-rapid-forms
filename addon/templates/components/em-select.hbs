@@ -5,10 +5,25 @@
       {{prompt}}
       </option>
     {{/if}}
-    {{#each content key="@index" as |item|}}
-      <option value="{{get item optionValuePath}}" selected={{eq (get item optionValuePath) selectedValue}}>
-      {{get item optionLabelPath}}
-      </option>
-    {{/each}}
+
+    {{#if optionGroupContentPath}}
+      {{#each optionGroups key="@index" as |group|}}
+        <optgroup label="{{get group optionGroupLabelPath}}">
+          {{#each (get group optionGroupContentPath) key="@index" as |item|}}
+            <option value="{{get item optionValuePath}}"
+                selected={{eq (get item optionValuePath) selectedValue}} disabled={{get item optionDisabledPath}}>
+              {{get item optionLabelPath}}
+            </option>
+          {{/each}}
+        </optgroup>
+      {{/each}}
+    {{else}}
+      {{#each content key="@index" as |item|}}
+        <option value="{{get item optionValuePath}}" selected={{eq (get item optionValuePath) selectedValue}} disabled={{get item optionDisabledPath}}>
+        {{get item optionLabelPath}}
+        </option>
+      {{/each}}
+    {{/if}}
+
   </select>
 {{/em-form-group}}

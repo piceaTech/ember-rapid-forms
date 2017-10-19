@@ -4,6 +4,8 @@ import { run } from '@ember/runloop';
 import layout from '../templates/components/em-select';
 import InputComponentMixin from '../mixins/input-component';
 
+const { Component, computed, run, get } = Ember;
+
 /*
 Form Select
 
@@ -12,8 +14,8 @@ Syntax:
     content=array_of_options
     optionValuePath=keyForValue
     optionLabelPath=keyForLabel
+    optionDisabledPath=keyForDisabled
     prompt="Optional default prompt"}}
-
     //Optional params
     @param propertyIsModel - (boolean) forces the selected object to be assigned to the property instead of the optionValuePath
  */
@@ -27,10 +29,14 @@ export default Component.extend(InputComponentMixin, {
   selection: null,
   optionValuePath: 'id',
   optionLabelPath: 'value',
+  optionDisabledPath: null,
   prompt: null,
   disabled: null,
   autofocus: null,
   size: 0,
+  optionGroups: null,
+  optionGroupLabelPath: null,
+  optionGroupContentPath: null,
 
   didInsertElement() {
     this._super(...arguments);
@@ -95,18 +101,36 @@ export default Component.extend(InputComponentMixin, {
         if(selectedIndex !== 0){
           selectedIndex--;
         } else {
-          if (model.get('property')) {
+          if (this.get('property')) {
             model.set(this.get('property'), null);
           }
           return;
         }
       }
 
-      const content = this.get('content');
-      const selectedValue = content.objectAt(selectedIndex);
+      let selectedID, selectedValue;
+
+      if(this.get('optionGroups')){
+        const selectedElement = selectedEl.options[selectedIndex + 1];
+        const optGroup = selectedElement.parentNode;
+        const optGroupOptions = optGroup.children;
+        const positionInOptGroup = Array.prototype.indexOf.call(optGroupOptions, selectedElement);
+        const optionGroup = this.get('optionGroups').filterBy(this.get('optionGroupLabelPath'), optGroup.label)[0];
+
+        selectedValue = get(optionGroup, this.get('optionGroupContentPath')).objectAt(positionInOptGroup);
+      }
+      else{
+        const content = this.get('content');
+        selectedValue = content.objectAt(selectedIndex);
+      }
+
+      if(this.get('optionDisabledPath') && get(selectedValue, this.get('optionDisabledPath'))){
+        // if it is disabled don't do anything
+        return;
+      }
+
       const optionValuePath = this.get('optionValuePath');
       const propertyIsModel = this.get('propertyIsModel');
-      let selectedID;
 
       if(propertyIsModel) {
         selectedID = selectedValue;
