@@ -99,7 +99,7 @@ export default Component.extend(InputComponentMixin, {
         if(selectedIndex !== 0){
           selectedIndex--;
         } else {
-          if (this.get('property')) {
+          if (this.get(this.get('property'))) {
             model.set(this.get('property'), null);
           }
           return;
