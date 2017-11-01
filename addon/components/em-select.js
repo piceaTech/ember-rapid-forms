@@ -91,7 +91,7 @@ export default Component.extend(InputComponentMixin, {
 
       let selectedIndex = selectedEl.selectedIndex;
 
-      if (selectedIndex < 0) return;
+      if (selectedIndex < 0 || !this.get('content.length')) return;
 
       // check whether we show prompt the correct to show index is one less
       // when selecting prompt don't change anything
