@@ -1,14 +1,15 @@
 /* eslint-env node */
 module.exports = {
+  useYarn: true,
   scenarios: [
     {
-      name: 'ember-lts-2.4',
+      name: 'ember-lts-2.8',
       bower: {
         dependencies: {
-          'ember': 'components/ember#lts-2-4'
+          'ember': 'components/ember#lts-2-8'
         },
         resolutions: {
-          'ember': 'lts-2-4'
+          'ember': 'lts-2-8'
         }
       },
       npm: {
@@ -18,13 +19,13 @@ module.exports = {
       }
     },
     {
-      name: 'ember-lts-2.8',
+      name: 'ember-lts-2.12',
       bower: {
         dependencies: {
-          'ember': 'components/ember#lts-2-8'
+          'ember': 'components/ember#2.12.2'
         },
         resolutions: {
-          'ember': 'lts-2-8'
+          'ember': '2.12.2'
         }
       },
       npm: {

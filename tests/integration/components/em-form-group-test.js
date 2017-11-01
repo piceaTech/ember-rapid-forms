@@ -1,9 +1,9 @@
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
 import stubI18n from '../../helpers/stub-i18n';
 
 moduleForComponent('em-form-group', {
@@ -12,54 +12,54 @@ moduleForComponent('em-form-group', {
 });
 
 test('it renders', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd"}}{{/em-form}}`);
   assert.ok(this.$('.form-group').length, 'group has default css class');
 });
 
 test('it renders with no label', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd"}}{{/em-form}}`);
   assert.ok(this.$('label').length === 0, 'group has no label');
 });
 
 test('it renders with label', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='hello'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='hello'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'hello', 'group has label after it being set');
 });
 
 test('it renders proper error validation icon', function(assert) {
-  const form = Ember.Object.extend();
+  const form = EmberObject.extend();
   this.set('form', form);
 
-  this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='error' errorIcon='error'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='error' errorIcon='bell'}}{{/em-form}}`);
 
-  let icons = this.$('span i.error');
+  let icons = this.$('span i.fa-bell');
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(icons.hasClass('error'));
+  assert.ok(icons.hasClass('fa-bell'), 'has error icon');
 });
 
 test('it renders proper warning validation icon', function(assert) {
-  const form = Ember.Object.extend();
+  const form = EmberObject.extend();
   this.set('form', form);
 
-  this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='warning' warningIcon='warning'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='warning' warningIcon='exclamation'}}{{/em-form}}`);
 
-  let icons = this.$('span i.warning');
+  let icons = this.$('span i.fa-exclamation');
 
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(icons.hasClass('warning'));
+  assert.ok(icons.hasClass('fa-exclamation'), 'has warning icon');
 });
 
 test('it renders proper success validation icon', function(assert) {
-  const form = Ember.Object.extend();
+  const form = EmberObject.extend();
   this.set('form', form);
 
-  this.render(hbs `{{#em-form as |form|}}{{form.group form=form canShowErrors=true validationIcons=true status='success' validationIcon='success'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='success' validationIcon='check-circle'}}{{/em-form}}`);
 
-  let icons = this.$('span i.success');
+  let icons = this.$('span i.fa-check-circle');
 
   assert.equal(icons.length, 1, 'found validation icon');
-  assert.ok(icons.hasClass('success'));
+  assert.ok(icons.hasClass('fa-check-circle'));
 });
 
 test('Find the label if i18n is set', function(assert) {
@@ -68,7 +68,7 @@ test('Find the label if i18n is set', function(assert) {
   const i18n = this.container.lookup('service:i18n');
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
 
-  const fruit = Ember.Object.create();
+  const fruit = EmberObject.create();
   fruit.constructor.modelName = 'fruit';
 
   this.set('fruit', fruit);
@@ -83,43 +83,45 @@ test('I18n label is overrided by a given value', function(assert) {
   const i18n = this.container.lookup('service:i18n');
   i18n.addTranslations('en', { 'fruit.name': 'Name' });
 
-  this.set('model', Ember.Object.create());
-  this.render(hbs`{{#em-form as |form|}}{{form.group model=model label='Custom Label'}}{{/em-form}}`);
+  this.set('model', EmberObject.create());
+  this.render(hbs`{{#em-form as |form|}}{{form.group property="asd" model=model label='Custom Label'}}{{/em-form}}`);
 
   assert.equal(this.$('label').text().trim(), 'Custom Label', 'Doesn\t use custom labels');
 });
 
 test('Add required class if the field is required', function(assert) {
-  this.set('model', Ember.Object.create());
-  this.render(hbs`{{#em-form as |form|}}{{form.group model=model required=true}}{{/em-form}}`);
+  this.set('model', EmberObject.create());
+  this.render(hbs`{{#em-form as |form|}}{{form.group property="asd" model=model required=true}}{{/em-form}}`);
 
   assert.ok(this.$('.form-group').hasClass('required'));
 });
 
 test('When there a presence validator', function(assert) {
   // Stub ember-cp-validation
-  const Model = Ember.Object.extend({
-    validations: {
-      attrs: {
-        fullName: {
-          options: {
-            presence: {
-              presence: true
+  const Model = EmberObject.extend({
+    init(){
+      this.set('validations', {
+        attrs: {
+          fullName: {
+            options: {
+              presence: {
+                presence: true
+              }
             }
           }
         }
-      }
+      });
     }
   });
 
   this.set('model', Model.create());
-  this.render(hbs`{{#em-form as |form|}}{{form.group property='fullName' model=model}}{{/em-form}}`);
-
-  assert.ok(this.$('.form-group').hasClass('required'));
+  // this has to be an input because setting of required only happens in the input-component mixin
+  this.render(hbs`{{#em-form as |form|}}{{form.input property='fullName' model=model}}{{/em-form}}`);
+  assert.ok(this.$('.form-group').hasClass('required'), 'from-group should have class required');
 });
 
 test('renders with labelWrapperClass', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form}}`);
   const wrapper = this.$().find('div.wrapper-class');
 
   assert.ok(wrapper, 'Wrapper exists');
@@ -127,7 +129,7 @@ test('renders with labelWrapperClass', function(assert) {
 });
 
 test('renders with yieldInLabel', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='my-label' yieldInLabel=true}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' yieldInLabel=true}}{{/em-form}}`);
 
   const label = this.$().find('label');
   assert.equal(label.length, 1, 'Label is a wrapper tag');
@@ -135,7 +137,7 @@ test('renders with yieldInLabel', function(assert) {
 });
 
 test('renders with yieldInLabel with labelWrapperClass', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form}}`);
 
   const wrapper = this.$().find('div.wrapper-class');
   assert.equal(wrapper.length, 1, 'Wrapper exists');
@@ -146,17 +148,17 @@ test('renders with yieldInLabel with labelWrapperClass', function(assert) {
 });
 
 test('renders v_icon', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group validationIcon='some-icon-class' canShowErrors=true validationIcons=true}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" validationIcon='check-square' shouldShowErrors=true validationIcons=true}}{{/em-form}}`);
 
   const icons = this.$().find('span.form-control-feedback');
   assert.equal(icons.length, 1, 'Has icon span');
   assert.ok(icons.hasClass('form-control-feedback'), 'Has proper class');
   assert.equal(icons.find('i').length, 1, 'Has icon');
-  assert.ok(this.$(icons.find('i')[0]).hasClass('some-icon-class'), 'Icon has proper class');
+  assert.ok(this.$(icons.find('i')[0]).hasClass('fa-check-square'), 'Icon has proper class');
 });
 
 test('renders error message', function(assert) {
-  this.render(hbs `{{#em-form as |form|}}{{form.group shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
 
   const helpSpan = this.$().find('span.help-block');
   assert.equal(helpSpan.length, 1, 'Has help span');
@@ -165,7 +167,7 @@ test('renders error message', function(assert) {
 });
 
 test('does not renders error message when layout is inline', function(assert) {
-  this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
+  this.render(hbs `{{#em-form formLayout='inline' as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`);
 
   const helpSpan = this.$().find('span.help-block');
   assert.equal(helpSpan.length, 0, 'Has no help span');

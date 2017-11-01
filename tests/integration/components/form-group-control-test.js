@@ -1,9 +1,9 @@
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
 }
 from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('form-group-control', {
@@ -11,7 +11,7 @@ moduleForComponent('form-group-control', {
   integration: true,
 
   beforeEach() {
-    this.set('mainComponent', Ember.Object.create());
+    this.set('mainComponent', EmberObject.create());
   }
 });
 

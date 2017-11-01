@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import Component from '@ember/component';
 import layout from '../templates/components/em-form-control-help';
 import HasClassClacMixin from '../mixins/has-class-calc';
-
-const { Component, computed } = Ember;
 
 /*
 Form Control Help
@@ -23,6 +22,6 @@ export default Component.extend(HasClassClacMixin, {
   extraClass: null,
   horiClass: 'col-sm-offset-2 col-sm-10',
 
-  errors: computed.alias('formComponent.errors'),
-  hasError: computed.alias('formComponent.hasError')
+  errors: alias('formComponent.errors'),
+  hasError: alias('formComponent.hasError')
 });

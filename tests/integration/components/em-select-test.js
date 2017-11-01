@@ -1,9 +1,9 @@
-import {
-  moduleForComponent,
-  test
-}
-from 'ember-qunit';
-import Ember from 'ember';
+import { A } from '@ember/array';
+import { run } from '@ember/runloop';
+import { Promise as EmberPromise } from 'rsvp';
+import EmberObject from '@ember/object';
+import { moduleForComponent, test } from 'ember-qunit';
+
 import hbs from 'htmlbars-inline-precompile';
 
 
@@ -13,12 +13,12 @@ moduleForComponent('em-select', {
   // Specify the other units that are required for this test
   integration: true,
   beforeEach() {
-    fruitSalad = Ember.Object.create({
+    fruitSalad = EmberObject.create({
       favoriteFruit: null,
-      fruits: Ember.Object.create(),
-      errors: Ember.Object.create(),
+      fruits: EmberObject.create(),
+      errors: EmberObject.create(),
       validate() {
-        const promise = new Ember.RSVP.Promise((resolve) => {
+        const promise = new EmberPromise((resolve) => {
           resolve('ok!');
         });
         return promise;
@@ -26,14 +26,14 @@ moduleForComponent('em-select', {
     });
   },
   afterEach() {
-    Ember.run(() => {
+    run(() => {
       fruitSalad.destroy();
     });
   }
 });
 
 
-const fruitOptions = Ember.A([{
+const fruitOptions = A([{
   id: 1,
   name: 'Banana'
 }, {
@@ -51,10 +51,10 @@ const fruitOptions = Ember.A([{
   disabled: true
 }]);
 
-const eatables = Ember.A([
+const eatables = A([
     {
       name: 'Fruits',
-      content: Ember.A([
+      content: A([
         {
           id: "A",
           name: "Apple"
@@ -64,7 +64,7 @@ const eatables = Ember.A([
         }])
     }, { 
       name: 'Vegetables',
-      content: Ember.A([
+      content: A([
         {
           id: "T",
           name: "Tomato"
@@ -74,7 +74,7 @@ const eatables = Ember.A([
         }])
     }, {
       name: 'Other',
-      content: Ember.A([
+      content: A([
         {
           id: "B",
           name: "Bread"
@@ -88,7 +88,7 @@ const eatables = Ember.A([
 test('em-select renders', function(assert) {
   this.set('fruitOptions', fruitOptions);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
 
   const element = this.$();
 
@@ -107,7 +107,7 @@ test('em-select renders with a prompt', function(assert) {
 
   this.set('fruitOptions', fruitOptions);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
 
   const element = this.$();
 
@@ -131,7 +131,7 @@ test('em-select can select an item', function(assert) {
   const select = element.find('select')[0];
   assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('3');
     this.$(select).trigger('change');
   });
@@ -152,7 +152,7 @@ test('em-select can select an item when not disabled', function(assert) {
   const select = element.find('select')[0];
   assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('5');
     this.$(select).trigger('change');
   });
@@ -173,7 +173,7 @@ test('em-select can\'t select an item when disabled', function(assert) {
   const select = element.find('select')[0];
   assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('5');
     this.$(select).trigger('change');
   });
@@ -211,7 +211,7 @@ test('em-select can select the model itself', function(assert) {
   const select = element.find('select')[0];
   assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('3');
     this.$(select).trigger('change');
   });
@@ -236,7 +236,7 @@ test('em-select can select correct with optGroups', function(assert) {
   const select = element.find('select')[0];
   assert.ok(select.options.length === 7, 'select has correct amount of options');
 
-  Ember.run(() => {
+  run(() => {
     this.$(select).val('A');
     this.$(select).trigger('change');
   });
@@ -246,14 +246,14 @@ test('em-select can select correct with optGroups', function(assert) {
 });
 
 test('Select renders with custom css', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select elementClass="col-md-6"}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" elementClass="col-md-6"}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').hasClass('col-md-6'), 'Select has correct class');
 });
 
 test('cid correctly sets the id for the select and it\'s label', function(assert) {
   assert.expect(2);
-  this.render(hbs`{{#em-form as |form|}}{{form.select label="some label" cid='test-cid'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="some label" cid='test-cid'}}{{/em-form}}`);
 
   assert.equal(this.$('select').attr('id'), 'test-cid', 'select has correct id');
   assert.equal(this.$('label').attr('for'), 'test-cid', 'label has correct \'for\'');
@@ -266,25 +266,25 @@ test('the "for" of the label is the "id" of the select', function(assert) {
 });
 
 test('Input can be a required field', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select required=true}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" required=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').attr('required'), 'select becomes a required field');
 });
 
 test('Input can be a disabled field', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select disabled=true}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" disabled=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').attr('disabled'), 'select becomes a disabled field');
 });
 
 test('Input can be a autofocus field', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select autofocus=true}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" autofocus=true}}{{/em-form}}`);
 
   assert.ok(this.$().find('select').attr('autofocus'), 'select becomes a autofocus field');
 });
 
 test('Input can have a size', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.select size=3}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" size=3}}{{/em-form}}`);
 
   assert.equal(this.$().find('select').attr('size'), 3, 'select has a size field');
 });

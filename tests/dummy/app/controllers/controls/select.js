@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import Controller from '@ember/controller';
+import { alias } from '@ember/object/computed';
 
-export default Ember.Controller.extend({
-  genderOptions: Ember.A([
+export default Controller.extend({
+  person: alias('model'),
+  genderOptions: A([
     {
       id: 'M',
       name: 'Male'
@@ -14,10 +17,10 @@ export default Ember.Controller.extend({
       disabled: true
     }
   ]),
-  groups: Ember.A([
+  groups: A([
     {
       name: 'Fruits',
-      content: Ember.A([
+      content: A([
         {
           id: "A",
           name: "Apple"
@@ -27,7 +30,7 @@ export default Ember.Controller.extend({
         }])
     }, { 
       name: 'Vegetables',
-      content: Ember.A([
+      content: A([
         {
           id: "T",
           name: "Tomato"
@@ -37,7 +40,7 @@ export default Ember.Controller.extend({
         }])
     }, {
       name: 'Other',
-      content: Ember.A([
+      content: A([
         {
           id: "B",
           name: "Bread"

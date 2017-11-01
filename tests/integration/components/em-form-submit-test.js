@@ -1,8 +1,9 @@
+import { run } from '@ember/runloop';
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
 } from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', 'em-form-submit tests', {
@@ -21,13 +22,13 @@ test('a form with em-form-submit components renders correctly', function(assert)
 });
 
 test('Form submit button is disabled when model isnt valid & enabled when is valid', function(assert) {
-  this.set('someModel', Ember.Object.create({isValid: false}));
+  this.set('someModel', EmberObject.create({isValid: false}));
 
   this.render(hbs`{{#em-form submitButton=false model=someModel showErrorsOnSubmit=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`);
 
   assert.ok(this.$().find('button').attr('disabled'), 'Button is disabled');
 
-  Ember.run(() => {
+  run(() => {
     this.set('someModel.isValid', true);
   });
 

@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 
 export default function() {
-  return Ember.Object.extend({
+  return EmberObject.extend({
     t(key) {
       return this.translations[key];
     },

@@ -1,8 +1,9 @@
+import { run } from '@ember/runloop';
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
   } from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', 'em-form multi models', {
@@ -10,11 +11,11 @@ moduleForComponent('em-form', 'em-form multi models', {
   integration: true
 });
 
-const myHash = Ember.Object.create({
-  modelA: Ember.Object.create({
+const myHash = EmberObject.create({
+  modelA: EmberObject.create({
     name: 'model-a'
   }),
-  modelB: Ember.Object.create({
+  modelB: EmberObject.create({
     name: 'model-b'
   })
 });
@@ -29,7 +30,7 @@ test('a form with hashed models works as expected', function(assert) {
       {{form.input name="b" property="modelB.name" label="modelB name:"}}
     {{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     const inputA = this.$().find('input[name="a"]');
     const inputB = this.$().find('input[name="b"]');
 
@@ -48,7 +49,7 @@ test('a form with hashed models updates correct model', function(assert) {
       {{form.input name="b" property="modelB.name" label="modelB name:"}}
     {{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     const inputA = this.$().find('input[name="a"]');
     const inputB = this.$().find('input[name="b"]');
 
@@ -59,7 +60,7 @@ test('a form with hashed models updates correct model', function(assert) {
     inputB.trigger('change');
   });
 
-  Ember.run(() => {
+  run(() => {
     assert.equal(myHash.get('modelB.name'), 'my-new-val', 'Input updates its model correctly');
   });
 });

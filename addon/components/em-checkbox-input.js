@@ -1,22 +1,21 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import Component from '@ember/component';
 import layout from '../templates/components/em-checkbox-input';
-
-const { Component, computed } = Ember;
 
 export default Component.extend({
   layout: layout,
   tagName: '',
-  label: computed.alias('checkboxComponent.label'),
-  form: computed.alias('checkboxComponent.form'),
-  inputId: computed.alias('checkboxComponent.inputId'),
-  labelClass: computed.alias('checkboxComponent.labelClass'),
-  model: computed.alias('checkboxComponent.model'),
-  property: computed.alias('checkboxComponent.property'),
-  disabled: computed.alias('checkboxComponent.disabled'),
-  required: computed.alias('checkboxComponent.required'),
-  autofocus: computed.alias('checkboxComponent.autofocus'),
-  readonly: computed.alias('checkboxComponent.readonly'),
-  title: computed.alias('checkboxComponent.title'),
-  elementClass: computed.alias('checkboxComponent.elementClass'),
-  name: computed.alias('checkboxComponent.name')
+  label: alias('checkboxComponent.label'),
+  form: alias('checkboxComponent.form'),
+  inputId: alias('checkboxComponent.inputId'),
+  labelClass: alias('checkboxComponent.labelClass'),
+  model: alias('checkboxComponent.model'),
+  property: alias('checkboxComponent.property'),
+  disabled: alias('checkboxComponent.disabled'),
+  required: alias('checkboxComponent.required'),
+  autofocus: alias('checkboxComponent.autofocus'),
+  readonly: alias('checkboxComponent.readonly'),
+  title: alias('checkboxComponent.title'),
+  elementClass: alias('checkboxComponent.elementClass'),
+  name: alias('checkboxComponent.name')
 });
