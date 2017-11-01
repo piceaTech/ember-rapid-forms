@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/piceaTech/ember-rapid-forms/compare/v1.1.0...v1.2.0) (2017-11-01)
+
+
+### Bug Fixes
+
+* Possible fix for rare backtracking re-render issue ([#177](https://github.com/piceaTech/ember-rapid-forms/issues/177)) ([ca4241d](https://github.com/piceaTech/ember-rapid-forms/commit/ca4241d))
+
+
+### Features
+
+* Adding optionality for optgroups in em-select ([570dffd](https://github.com/piceaTech/ember-rapid-forms/commit/570dffd))
+* Upgrading multiple things ([#175](https://github.com/piceaTech/ember-rapid-forms/issues/175)) ([23ad73b](https://github.com/piceaTech/ember-rapid-forms/commit/23ad73b))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/piceaTech/ember-rapid-forms/compare/v1.0.0...v1.1.0) (2017-10-13)
 
