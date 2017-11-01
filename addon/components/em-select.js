@@ -32,7 +32,6 @@ export default Component.extend(InputComponentMixin, {
   disabled: null,
   autofocus: null,
   size: 0,
-  optionGroups: null,
   optionGroupLabelPath: null,
   optionGroupContentPath: null,
 
@@ -108,12 +107,12 @@ export default Component.extend(InputComponentMixin, {
 
       let selectedID, selectedValue;
 
-      if(this.get('optionGroups')){
+      if(this.get('optionGroupContentPath')){
         const selectedElement = selectedEl.options[selectedIndex + 1];
         const optGroup = selectedElement.parentNode;
         const optGroupOptions = optGroup.children;
         const positionInOptGroup = Array.prototype.indexOf.call(optGroupOptions, selectedElement);
-        const optionGroup = this.get('optionGroups').filterBy(this.get('optionGroupLabelPath'), optGroup.label)[0];
+        const optionGroup = this.get('content').filterBy(this.get('optionGroupLabelPath'), optGroup.label)[0];
 
         selectedValue = get(optionGroup, this.get('optionGroupContentPath')).objectAt(positionInOptGroup);
       }

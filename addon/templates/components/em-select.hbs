@@ -7,7 +7,7 @@
     {{/if}}
 
     {{#if optionGroupContentPath}}
-      {{#each optionGroups key="@index" as |group|}}
+      {{#each content key="@index" as |group|}}
         <optgroup label="{{get group optionGroupLabelPath}}">
           {{#each (get group optionGroupContentPath) key="@index" as |item|}}
             <option value="{{get item optionValuePath}}"

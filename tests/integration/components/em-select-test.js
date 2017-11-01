@@ -228,7 +228,7 @@ test('em-select can select correct with optGroups', function(assert) {
   this.set('fruitSalad', fruitSalad);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Eatables:" optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad
-    optionGroups=eatables optionGroupLabelPath="name" optionGroupContentPath="content"}}{{/em-form}}`);
+    content=eatables optionGroupLabelPath="name" optionGroupContentPath="content"}}{{/em-form}}`);
 
   const element = this.$();
   assert.equal(element.find('label:contains("Eatables:")').length, 1, 'label has for property');
