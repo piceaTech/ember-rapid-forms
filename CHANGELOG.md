@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/piceaTech/ember-rapid-forms/compare/v1.2.0...v1.2.1) (2017-11-05)
+
+
+### Bug Fixes
+
+* move ember-font-awesome to the dependencies ([#180](https://github.com/piceaTech/ember-rapid-forms/issues/180)) ([d2d7964](https://github.com/piceaTech/ember-rapid-forms/commit/d2d7964))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/piceaTech/ember-rapid-forms/compare/v1.1.0...v1.2.0) (2017-11-01)
 
