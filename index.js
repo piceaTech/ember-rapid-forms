@@ -4,6 +4,6 @@
 module.exports = {
   name: 'ember-rapid-forms',
   included: function(app) {
-    this._super.included(...arguments);
+    this._super.included.apply(this, arguments)
   }
 };
