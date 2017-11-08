@@ -23,11 +23,22 @@ export default Component.extend(InputComponentMixin, {
   autoresize: null,
   disabled: null,
   canShowErrors: false,
-  maxlength:null,
+  maxlength: null,
 
   hideValidationsOnFormChange: observer('form', 'form.model', function() {
     this.set('canShowErrors', false);
   }),
+
+  actions: {
+    /*
+    Listen to the focus out of the form group and display the errors
+    Relay action as emFocusOut
+     */
+    focusOut() {
+      this.sendAction('emFocusOut');
+      return this.set('canShowErrors', true);
+    },
+  },
 
   /*
   Observes the helpHasErrors of the help control and modify the 'status' property accordingly.
@@ -36,13 +47,6 @@ export default Component.extend(InputComponentMixin, {
     if (this.get('form.showErrorsOnFocusIn')) {
       return this.set('canShowErrors', true);
     }
-  },
-
-  /*
-  Listen to the focus out of the form group and display the errors
-   */
-  focusOut() {
-    return this.set('canShowErrors', true);
   },
 
   /*
