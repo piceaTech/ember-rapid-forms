@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.4"></a>
+## [1.2.4](https://github.com/piceaTech/ember-rapid-forms/compare/v1.2.3...v1.2.4) (2017-12-03)
+
+
+### Bug Fixes
+
+* Upgrade ember font awesome to 3.1.0 to fix the include hook ([#184](https://github.com/piceaTech/ember-rapid-forms/issues/184)) ([8c322c1](https://github.com/piceaTech/ember-rapid-forms/commit/8c322c1))
+
+
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/piceaTech/ember-rapid-forms/compare/v1.2.2...v1.2.3) (2017-11-05)
 
