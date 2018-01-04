@@ -77,6 +77,6 @@ test('Input can have emFocusOut event', function(assert) {
     assert.ok(true);
   });
 
-  this.render(hbs`{{#em-form as |form|}}{{form.input model=fruit emFocusOut='focusOutHandler'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.input  property="asd" emFocusOut='focusOutHandler'}}{{/em-form}}`);
   this.$().find('input').click().blur();
 });
