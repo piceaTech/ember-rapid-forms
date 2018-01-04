@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { isNone } from '@ember/utils';
 import Utils from 'ember-rapid-forms/utils/utils';
 import layout from '../templates/components/em-form';
-
-const { Component, computed, isNone } = Ember;
 
 /*
 Form View

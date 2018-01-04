@@ -1,9 +1,12 @@
+import { run } from '@ember/runloop';
+import { A } from '@ember/array';
+import { Promise as EmberPromise } from 'rsvp';
+import EmberObject from '@ember/object';
 import {
   moduleForComponent,
   test
 }
 from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('em-form', {
@@ -11,11 +14,11 @@ moduleForComponent('em-form', {
   integration: true
 });
 
-const somePerson = Ember.Object.create({
+const somePerson = EmberObject.create({
   name: 'my-name',
-  errors: Ember.Object.create(),
+  errors: EmberObject.create(),
   validate() {
-    const promise = new Ember.RSVP.Promise((resolve) => {
+    const promise = new EmberPromise((resolve) => {
       resolve('ok!');
     });
     return promise;
@@ -33,13 +36,13 @@ test('a form display errors when rendered if showErrorsOnRender is set', functio
   assert.expect(1);
 
   somePerson.set('isValid', false);
-  somePerson.set('errors.name', Ember.A(['name!']));
+  somePerson.set('errors.name', A(['name!']));
 
   this.set('model', somePerson);
 
   this.render(hbs `{{#em-form model=model showErrorsOnRender=true as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
   });
 });
@@ -48,7 +51,7 @@ test('a form display errors when field is focused in', function(assert) {
   assert.expect(2);
 
   somePerson.set('isValid', false);
-  somePerson.set('errors.name', Ember.A(['name!']));
+  somePerson.set('errors.name', A(['name!']));
 
   this.set('model', somePerson);
 
@@ -65,7 +68,7 @@ test('a form display errors when field is focused out', function(assert) {
   assert.expect(2);
 
   somePerson.set('isValid', false);
-  somePerson.set('errors.name', Ember.A(['name!']));
+  somePerson.set('errors.name', A(['name!']));
 
   this.set('model', somePerson);
 
@@ -84,7 +87,7 @@ test('a form display errors on key up events when field has showOnKeyUp is set',
   this.set('model', somePerson);
 
   somePerson.set('isValid', false);
-  somePerson.set('errors.name', Ember.A(['name!']));
+  somePerson.set('errors.name', A(['name!']));
 
 
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name" showOnKeyUp=true}}{{/em-form}}`);
@@ -100,14 +103,14 @@ test('a form display errors when form is submitted and field is invalid', functi
   assert.expect(2);
 
   somePerson.set('isValid', false);
-  somePerson.set('errors.name', Ember.A(['name!']));
+  somePerson.set('errors.name', A(['name!']));
   this.set('model', somePerson);
 
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
   assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before submit");
 
-  Ember.run(() => {
+  run(() => {
     this.$().find('button').click();
   });
 
@@ -124,13 +127,13 @@ test('a form update inputs on model change', function(assert) {
   input = this.$(input[0]);
   assert.equal(input.val(), 'my-name', "Input has original model value");
 
-  Ember.run(() => {
+  run(() => {
     somePerson.set('name', 'joseph');
   });
 
   assert.equal(input.val(), 'joseph', "Input has new model value");
 
-  Ember.run(() => {
+  run(() => {
     somePerson.set('name', 'my-name');
   });
 
@@ -139,22 +142,22 @@ test('a form update inputs on model change', function(assert) {
 });
 
 test('a form changes its model and fields are updated', function(assert) {
-  const modelA = Ember.Object.create({
+  const modelA = EmberObject.create({
     name: 'model-a',
-    errors: Ember.Object.create(),
+    errors: EmberObject.create(),
     validate() {
-      const promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new EmberPromise((resolve) => {
         resolve('ok!');
       });
       return promise;
     }
   });
 
-  const modelB = Ember.Object.create({
+  const modelB = EmberObject.create({
     name: 'model-b',
-    errors: Ember.Object.create(),
+    errors: EmberObject.create(),
     validate() {
-      const promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new EmberPromise((resolve) => {
         resolve('ok!');
       });
       return promise;
@@ -170,7 +173,7 @@ test('a form changes its model and fields are updated', function(assert) {
   input = this.$(input[0]);
   assert.equal(input.val(), 'model-a', "Input has original model value");
 
-  Ember.run(() => {
+  run(() => {
     this.set('model', modelB);
   });
 
@@ -179,27 +182,27 @@ test('a form changes its model and fields are updated', function(assert) {
 });
 
 test('a form changes its model and errors are reseted', function(assert) {
-  const modelA = Ember.Object.create({
+  const modelA = EmberObject.create({
     name: 'model-a',
-    errors: Ember.Object.create(),
+    errors: EmberObject.create(),
     validate() {
-      const promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new EmberPromise((resolve) => {
         resolve('ok!');
       });
       return promise;
     }
   });
 
-  Ember.run(() => {
+  run(() => {
     modelA.set('isValid', false);
-    modelA.set('errors.name', Ember.A(['name!']));
+    modelA.set('errors.name', A(['name!']));
   });
 
-  const modelB = Ember.Object.create({
+  const modelB = EmberObject.create({
     name: 'model-b',
-    errors: Ember.Object.create(),
+    errors: EmberObject.create(),
     validate() {
-      const promise = new Ember.RSVP.Promise((resolve) => {
+      const promise = new EmberPromise((resolve) => {
         resolve('ok!');
       });
       return promise;
@@ -215,15 +218,15 @@ test('a form changes its model and errors are reseted', function(assert) {
   input = this.$(input[0]);
   assert.equal(input.val(), 'model-a', "Input has original model value");
 
-  Ember.run(() => {
+  run(() => {
     this.$().find('input').focusout();
   });
 
-  Ember.run(() => {
+  run(() => {
     assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
   });
 
-  Ember.run(() => {
+  run(() => {
     this.set('model', modelB);
   });
 
@@ -242,7 +245,7 @@ test('form cannot be submitted if model is invalid', function(assert) {
   somePerson.set('isValid', false);
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     this.$().find('button').click();
   });
 });
@@ -257,7 +260,7 @@ test('form can be submitted if model is valid', function(assert) {
   somePerson.set('isValid', true);
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     this.$().find('button').click();
   });
 });
@@ -273,11 +276,11 @@ test('model in an argument of the form submission', function(assert) {
   somePerson.set('isValid', true);
   this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     this.$().find('button').click();
   });
 
-  Ember.run(() => {
+  run(() => {
     assert.equal(somePerson.get('name'), 'other-name', 'Model is an argument of the form submission');
   });
 });
@@ -292,7 +295,7 @@ test('form submission with custom action', function(assert) {
   somePerson.set('isValid', true);
   this.render(hbs `{{#em-form model=model action="submitNow" as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     this.$().find('button').click();
   });
 });
@@ -307,7 +310,7 @@ test('form submission with a model that has no validation support and no isValid
 
   this.render(hbs `{{#em-form model=model action='submit' as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  Ember.run(() => {
+  run(() => {
     this.$().find('button').click();
   });
 });

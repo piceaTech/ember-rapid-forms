@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { computed, Mixin } = Ember;
+import { computed } from '@ember/object';
+import Mixin from '@ember/object/mixin';
 
 /*
 A mixin that enriches a component that is attached to a model property.

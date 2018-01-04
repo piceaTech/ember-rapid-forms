@@ -1,8 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import HasIdMixin from '../mixins/has-id';
 import layout from '../templates/components/em-custom-input';
-
-const { Component } = Ember;
 
 /*
 Form Input

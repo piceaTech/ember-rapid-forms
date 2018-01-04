@@ -1,8 +1,11 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import Component from '@ember/component';
+import EmberObject, { computed } from '@ember/object';
+import { getOwner } from '@ember/application';
+import { isPresent } from '@ember/utils';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
+import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
 import layout from '../templates/components/em-form-group';
-
-const { Component, computed, getOwner, isPresent } = Ember;
 
 /*
 Form Group
@@ -26,44 +29,43 @@ Syntax:
     label="Some label"
 }}
  */
-export default Component.extend(HasPropertyValidationMixin, {
+export default Component.extend(HasPropertyMixin, HasPropertyValidationMixin, {
   tagName: 'div',
   groupClass: 'form-group',
   layout: layout,
   classNameBindings: ['groupClass', 'hasSuccess', 'hasWarning', 'hasError', 'validationIcons:has-feedback', 'required'],
   attributeBindings: ['disabled'],
-  canShowErrors: false,
-  successIcon: 'fa fa-check',
-  warningIcon: 'fa fa-exclamation-triangle',
-  errorIcon: 'fa fa-times',
+  successIcon: 'check',
+  warningIcon: 'exclamation-triangle',
+  errorIcon: 'times',
   hasSetForm: false,
 
-  inputComponent: Ember.Object.create(),
+  inputComponent: EmberObject.create(),
 
-  inputId: computed.alias('inputComponent.inputId'),
-  yieldInLabel: computed.alias('inputComponent.yieldInLabel'),
-  labelInControl: computed.alias('inputComponent.labelInControl'),
-  hasError: computed.alias('inputComponent.hasError'),
-  hasSuccess: computed.alias('inputComponent.hasSuccess'),
-  hasWarning: computed.alias('inputComponent.hasWarning'),
-  shouldShowErrors: computed.alias('inputComponent.shouldShowErrors'),
-  helpText: computed.alias('inputComponent.helpText'),
-  required: computed.alias('inputComponent.required'),
-  hideValidationsOnFormChange: computed.alias('inputComponent.hideValidationsOnFormChange'),
-  labelWrapperClass: computed.alias('inputComponent.labelWrapperClass'),
-  labelClass: computed.alias('inputComponent.labelClass'),
-  help: computed.alias('inputComponent.help'),
-  controlWrapper: computed.alias('inputComponent.controlWrapper'),
-  validationIcons: computed.alias('inputComponent.validationIcons'),
-  form: computed.alias('inputComponent.form'),
+  inputId: alias('inputComponent.inputId'),
+  yieldInLabel: alias('inputComponent.yieldInLabel'),
+  labelInControl: alias('inputComponent.labelInControl'),
+  hasError: alias('inputComponent.hasError'),
+  hasSuccess: alias('inputComponent.hasSuccess'),
+  hasWarning: alias('inputComponent.hasWarning'),
+  shouldShowErrors: alias('inputComponent.shouldShowErrors'),
+  helpText: alias('inputComponent.helpText'),
+  required: alias('inputComponent.required'),
+  hideValidationsOnFormChange: alias('inputComponent.hideValidationsOnFormChange'),
+  labelWrapperClass: alias('inputComponent.labelWrapperClass'),
+  labelClass: alias('inputComponent.labelClass'),
+  help: alias('inputComponent.help'),
+  controlWrapper: alias('inputComponent.controlWrapper'),
+  validationIcons: alias('inputComponent.validationIcons'),
+  form: alias('inputComponent.form'),
 
   i18n: computed(function () {
     return getOwner(this).lookup('service:i18n');
   }),
 
-  validationIcon: computed('status', 'canShowErrors', {
+  validationIcon: computed('status', 'shouldShowErrors', {
     get() {
-      if (!this.get('canShowErrors')) {
+      if (!this.get('shouldShowErrors')) {
         return;
       }
       switch (this.get('status')) {

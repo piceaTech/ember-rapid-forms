@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { isNone } from '@ember/utils';
 import layout from '../templates/components/em-form-submit';
-
-const { Component, computed, isNone } = Ember;
 
 /*
 Form Submit Button

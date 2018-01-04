@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { observer } from '@ember/object';
 import layout from '../templates/components/em-input';
 import InputComponentMixin from '../mixins/input-component';
-
-const { Component, observer } = Ember;
 
 /*
 Form Input

@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import { alias, oneWay } from '@ember/object/computed';
+import Mixin from '@ember/object/mixin';
+import { deprecate } from '@ember/application/deprecations';
+import { defineProperty, observer, computed } from '@ember/object';
 import HasIdMixin from './has-id';
 import HasPropertyMixin from 'ember-rapid-forms/mixins/has-property';
 import HasPropertyValidationMixin from 'ember-rapid-forms/mixins/has-property-validation';
-
-const { Mixin, computed, observer, deprecate, defineProperty } = Ember;
 
 /*
 A mixin that enriches a component that is attached to a model property.
@@ -16,6 +17,7 @@ This mixin also binds a property named `errors` to the model's `model.errors.@pr
 
 export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdMixin, {
   validations: true,
+  validationIcons: oneWay('form.validationIcons'),
 
   hasSuccess: computed('status', 'canShowErrors', {
     get() {
@@ -97,7 +99,7 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
     }
     else if(hasForm && !this.get('hasSetForm')){
       deprecate('Please use the new form.input helper defined in 1.0.0beta10', hasForm, {id: 'ember-rapid-forms.yielded-form', until: 'v1.0'});
-      defineProperty(this, 'form', computed.alias('formFromPartentView'));
+      defineProperty(this, 'form', alias('formFromPartentView'));
       this.set('hasSetForm', true);
     }
 

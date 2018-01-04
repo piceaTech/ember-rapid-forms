@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import Component from '@ember/component';
 /*global alert*/
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout: 'default',
-  genderOptions: Ember.A([
+  genderOptions: A([
     {
       id: 'M',
       name: 'Male'
