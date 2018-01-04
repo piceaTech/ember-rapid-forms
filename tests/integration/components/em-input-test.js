@@ -70,13 +70,17 @@ test('Input can be autofocused', function(assert) {
 
 
 test('Input can have emFocusOut event', function(assert) {
-  assert.expect(1);
+  assert.expect(2);
 
   this.set('fruit', EmberObject.create());
+
   this.on('focusOutHandler', function(){
     assert.ok(true);
   });
 
-  this.render(hbs`{{#em-form as |form|}}{{form.input  property="asd" emFocusOut='focusOutHandler'}}{{/em-form}}`);
+  this.render(hbs`{{#em-form as |form|}}{{form.input property="asd" model=fruit emFocusOut='focusOutHandler'}}{{/em-form}}`);
+
+  assert.ok(this.$().find('input'), 'input has emFocusOut');
+
   this.$().find('input').click().blur();
 });
