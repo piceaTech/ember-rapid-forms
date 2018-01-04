@@ -73,11 +73,9 @@ test('Input can have emFocusOut event', function(assert) {
   assert.expect(1);
 
   this.set('fruit', Ember.Object.create());
-  const focusOutHandler = () => {
+  this.on('focusOutHandler', function(){
     assert.ok(true);
-  }
-  this.on('focusOutHandler', focusOutHandler);
-  this.set('focusOutHandler', focusOutHandler);
+  });
 
   this.render(hbs`{{#em-form as |form|}}{{form.input model=fruit emFocusOut='focusOutHandler'}}{{/em-form}}`);
   this.$().find('input').click().blur();
