@@ -31,7 +31,7 @@ export default Component.extend(InputComponentMixin, {
   actions: {
     /*
     Listen to the focus out of the form group and display the errors
-    Relay action as emFocusOut
+    Pass this event as emFocusOut
      */
     focusOut() {
       this.sendAction('emFocusOut');
