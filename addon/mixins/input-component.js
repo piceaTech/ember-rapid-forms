@@ -119,6 +119,7 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
   Listen to the focus out of the form group and display the errors
    */
   focusOut() {
+    this.sendAction('focusOut');
     return this.set('canShowErrors', true);
   },
 

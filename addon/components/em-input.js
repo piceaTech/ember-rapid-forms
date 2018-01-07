@@ -28,17 +28,6 @@ export default Component.extend(InputComponentMixin, {
     this.set('canShowErrors', false);
   }),
 
-  actions: {
-    /*
-    Listen to the focus out of the form group and display the errors
-    Pass this event as emFocusOut
-     */
-    focusOut() {
-      this.sendAction('emFocusOut');
-      return this.set('canShowErrors', true);
-    },
-  },
-
   /*
   Observes the helpHasErrors of the help control and modify the 'status' property accordingly.
    */
