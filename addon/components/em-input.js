@@ -31,10 +31,10 @@ export default Component.extend(InputComponentMixin, {
   actions: {
     /*
     Listen to the focus out of the form group and display the errors
-    Pass this event as emFocusOut
+    Pass this event as focusOut
      */
     focusOut() {
-      this.sendAction('emFocusOut');
+      this.sendAction('focusOut');
       return this.set('canShowErrors', true);
     },
   },
