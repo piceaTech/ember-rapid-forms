@@ -22,7 +22,7 @@ export default Component.extend(InputComponentMixin, {
   autoresize: null,
   disabled: null,
   canShowErrors: false,
-  maxlength:null,
+  maxlength: null,
 
   hideValidationsOnFormChange: observer('form', 'form.model', function() {
     this.set('canShowErrors', false);
@@ -35,13 +35,6 @@ export default Component.extend(InputComponentMixin, {
     if (this.get('form.showErrorsOnFocusIn')) {
       return this.set('canShowErrors', true);
     }
-  },
-
-  /*
-  Listen to the focus out of the form group and display the errors
-   */
-  focusOut() {
-    return this.set('canShowErrors', true);
   },
 
   /*
