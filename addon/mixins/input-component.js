@@ -120,6 +120,7 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
    */
   focusOut() {
     if (this) {
+      this.sendAction('focusOut');
       return this.set('canShowErrors', true);
     }
   },
