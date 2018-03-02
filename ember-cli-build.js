@@ -10,6 +10,9 @@ module.exports = function(defaults) {
       'importBootstrapFont': false,
       'importBootstrapCSS': true,
       whitelist: []
+    },
+    'ember-font-awesome': {
+      includeFontFiles: false
     }
   });
 
@@ -18,7 +21,7 @@ module.exports = function(defaults) {
     addon, located in `/tests/dummy`
     This build file does *not* influence how the addon or the app using it
     behave. You most likely want to be modifying `./index.js` or app's build file
-  */
+    */
   app.import('bower_components/highlightjs/highlight.pack.js');
   app.import('bower_components/highlightjs/styles/tomorrow.css');
   app.import('bower_components/ember/ember-template-compiler.js');
