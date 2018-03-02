@@ -1,6 +1,6 @@
 app:
   build: .
-  command: ember s
+  command: ember s --host 0.0.0.0
   working_dir: /app
   volumes:
     - .:/app
