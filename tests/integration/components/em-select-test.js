@@ -3,6 +3,7 @@ import { run } from '@ember/runloop';
 import { Promise as EmberPromise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { moduleForComponent, test } from 'ember-qunit';
+import wait from 'ember-test-helpers/wait';
 
 import hbs from 'htmlbars-inline-precompile';
 
@@ -85,10 +86,11 @@ const eatables = A([
     }
   ])
 
-test('em-select renders', function(assert) {
+test('em-select renders', async function(assert) {
   this.set('fruitOptions', fruitOptions);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
 
@@ -103,11 +105,12 @@ test('em-select renders', function(assert) {
   });
 });
 
-test('em-select renders with a prompt', function(assert) {
+test('em-select renders with a prompt', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
 
@@ -118,12 +121,13 @@ test('em-select renders with a prompt', function(assert) {
   assert.equal(select.options[0].text, 'None', 'Prompt gets rendered');
 });
 
-test('em-select can select an item', function(assert) {
+test('em-select can select an item', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
@@ -139,12 +143,13 @@ test('em-select can select an item', function(assert) {
 
 });
 
-test('em-select can select an item when not disabled', function(assert) {
+test('em-select can select an item when not disabled', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
@@ -160,12 +165,13 @@ test('em-select can select an item when not disabled', function(assert) {
 
 });
 
-test('em-select can\'t select an item when disabled', function(assert) {
+test('em-select can\'t select an item when disabled', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' optionDisabledPath='disabled' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
@@ -181,12 +187,13 @@ test('em-select can\'t select an item when disabled', function(assert) {
 
 });
 
-test('em-select selects the first item when the is no prompt', function(assert) {
+test('em-select selects the first item when the is no prompt', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
@@ -198,12 +205,13 @@ test('em-select selects the first item when the is no prompt', function(assert) 
 
 });
 
-test('em-select can select the model itself', function(assert) {
+test('em-select can select the model itself', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions propertyIsModel=true optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
   assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
@@ -222,13 +230,14 @@ test('em-select can select the model itself', function(assert) {
 });
 
 
-test('em-select can select correct with optGroups', function(assert) {
+test('em-select can select correct with optGroups', async function(assert) {
 
   this.set('eatables', eatables);
   this.set('fruitSalad', fruitSalad);
 
   this.render(hbs`{{#em-form as |form|}}{{form.select label="Eatables:" optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad
     content=eatables optionGroupLabelPath="name" optionGroupContentPath="content"}}{{/em-form}}`);
+  await wait();
 
   const element = this.$();
   assert.equal(element.find('label:contains("Eatables:")').length, 1, 'label has for property');
