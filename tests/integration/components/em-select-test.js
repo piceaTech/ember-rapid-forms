@@ -62,7 +62,7 @@ const eatables = A([
           id: "P",
           name: "Peach"
         }])
-    }, { 
+    }, {
       name: 'Vegetables',
       content: A([
         {
@@ -287,4 +287,25 @@ test('Input can have a size', function(assert) {
   this.render(hbs`{{#em-form as |form|}}{{form.select property="asd" size=3}}{{/em-form}}`);
 
   assert.equal(this.$().find('select').attr('size'), 3, 'select has a size field');
+});
+
+test('Triggers the action', function(assert) {
+  assert.expect(1);
+
+  this.set('fruitOptions', fruitOptions);
+  this.set('fruitSalad', fruitSalad);
+  this.set('action', function() {
+    assert.ok(true, 'submit action invoked!');
+  });
+
+  this.render(hbs`{{#em-form as |form|}}
+    {{form.select content=fruitOptions property='favoriteFruit' model=fruitSalad action=action}}
+    {{/em-form}}`);
+
+  const select = this.$().find('select')[0];
+
+  run(() => {
+    this.$(select).val('3');
+    this.$(select).trigger('change');
+  });
 });
