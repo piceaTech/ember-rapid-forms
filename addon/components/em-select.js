@@ -57,6 +57,14 @@ export default Component.extend(InputComponentMixin, {
   actions: {
     change() {
       this._setValue();
+
+      const changeAction = this.get('action');
+      const model = this.get('model');
+      const selectedID = model.get(this.get('property'));
+
+      if(model && changeAction){
+        changeAction(selectedID);
+      }
     }
   },
 
@@ -136,10 +144,6 @@ export default Component.extend(InputComponentMixin, {
       }
 
       model.set(this.get('property'), selectedID);
-      const changeAction = this.get('action');
-      if(changeAction){
-        changeAction(selectedID);
-      }
     }
   }
 });
