@@ -38,8 +38,8 @@ export default Component.extend(InputComponentMixin, {
   didInsertElement() {
     this._super(...arguments);
 
-    run.schedule('sync', this, () => {
-      if(this.get('model.isLoading')) {
+    run.next(() => {
+      if (this.get('model.isLoading')) {
         this.get('model').on('didLoad', () => {
           this._setValue();
         });
