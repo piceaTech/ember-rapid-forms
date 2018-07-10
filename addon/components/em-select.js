@@ -38,7 +38,7 @@ export default Component.extend(InputComponentMixin, {
   didInsertElement() {
     this._super(...arguments);
 
-    next(() => {
+    next(this, () => {
       if(this.get('model.isLoading')) {
         this.get('model').on('didLoad', () => {
           this._setValue();
