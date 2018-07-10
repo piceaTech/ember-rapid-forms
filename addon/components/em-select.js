@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed, get, defineProperty } from '@ember/object';
-import { run } from '@ember/runloop';
+import { next } from '@ember/runloop';
 import layout from '../templates/components/em-select';
 import InputComponentMixin from '../mixins/input-component';
 
@@ -38,7 +38,7 @@ export default Component.extend(InputComponentMixin, {
   didInsertElement() {
     this._super(...arguments);
 
-    run.schedule('sync', this, () => {
+    next(this, () => {
       if(this.get('model.isLoading')) {
         this.get('model').on('didLoad', () => {
           this._setValue();
