@@ -48,7 +48,7 @@ module('component:em-form ember-data', function(hooks) {
     );
 
     run(() => {
-      assert.equal(this.$().find('span:contains("name!")').length, 1, "Found help text on form");
+      assert.equal(findAll('span:contains("name!")').length, 1, "Found help text on form");
     });
   });
 });

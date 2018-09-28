@@ -28,11 +28,11 @@ module('em-form multi models', function(hooks) {
       {{/em-form}}`);
 
     run(() => {
-      const inputA = this.$().find('input[name="a"]');
-      const inputB = this.$().find('input[name="b"]');
+      const inputA = find('input[name="a"]');
+      const inputB = find('input[name="b"]');
 
-      assert.equal(inputA.val(), 'model-a', 'Input A has the correct value');
-      assert.equal(inputB.val(), 'model-b', 'Input B has the correct value');
+      assert.equal(inputA.value, 'model-a', 'Input A has the correct value');
+      assert.equal(inputB.value, 'model-b', 'Input B has the correct value');
     });
   });
 
@@ -47,11 +47,11 @@ module('em-form multi models', function(hooks) {
       {{/em-form}}`);
 
     run(() => {
-      const inputA = this.$().find('input[name="a"]');
-      const inputB = this.$().find('input[name="b"]');
+      const inputA = find('input[name="a"]');
+      const inputB = find('input[name="b"]');
 
-      assert.equal(inputA.val(), 'model-a', 'Input A has the correct value');
-      assert.equal(inputB.val(), 'model-b', 'Input B has the correct value');
+      assert.equal(inputA.value, 'model-a', 'Input A has the correct value');
+      assert.equal(inputB.value, 'model-b', 'Input B has the correct value');
 
       inputB.val('my-new-val');
       inputB.trigger('change');

@@ -116,9 +116,7 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`
     );
 
-    const element = this.$();
-
-    assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
 
     const select = element.find('select')[0];
     assert.ok(select, 'select exists');
@@ -134,15 +132,15 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    const element = this.$();
-    assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
     run(() => {
-      this.$(select).val('3');
-      this.$(select).trigger('change');
+      select.value = 3;
+      // maybe still need next line
+      // this.$(select).trigger('change'); 
     });
     assert.equal(fruitSalad.get('favoriteFruit'), 3, 'model favorite fruit is the selection');
 
@@ -157,15 +155,16 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    const element = this.$();
-    assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
     run(() => {
-      this.$(select).val('5');
-      this.$(select).trigger('change');
+
+      select.value = 5;
+      // maybe still need next line
+      //this.$(select).trigger('change');
     });
     assert.equal(fruitSalad.get('favoriteFruit'), 5, 'model favorite fruit is the selection');
 
@@ -180,15 +179,17 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' optionDisabledPath='disabled' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    const element = this.$();
-    assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+    
+    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
     run(() => {
-      this.$(select).val('5');
-      this.$(select).trigger('change');
+
+      select.value = 5;
+      // maybe still need next line
+      //this.$(select).trigger('change');
     });
     assert.equal(fruitSalad.get('favoriteFruit'), null, 'model favorite fruit is the selection');
 
@@ -203,10 +204,9 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    const element = this.$();
-    assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.equal(select.options.length, 5, 'select has correct amount of options');
 
     assert.equal(fruitSalad.get('favoriteFruit'), 1, 'model favorite fruit is the selection');
@@ -222,15 +222,15 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions propertyIsModel=true optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    const element = this.$();
-    assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
 
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
     run(() => {
-      this.$(select).val('3');
-      this.$(select).trigger('change');
+      select.value = 3;
+      // maybe still need next line
+      //this.$(select).trigger('change');
     });
 
     assert.equal(fruitSalad.get('favoriteFruit.id'), 3, 'model favorite fruit is the selection');
@@ -249,15 +249,15 @@ module('em-select', function(hooks) {
         content=eatables optionGroupLabelPath="name" optionGroupContentPath="content"}}{{/em-form}}`
     );
 
-    const element = this.$();
-    assert.equal(element.find('label:contains("Eatables:")').length, 1, 'label has for property');
+    assert.equal(find('label:contains("Eatables:")').length, 1, 'label has for property');
 
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.ok(select.options.length === 7, 'select has correct amount of options');
 
     run(() => {
-      this.$(select).val('A');
-      this.$(select).trigger('change');
+      select.value = 'A';
+      // maybe still need next line
+      //this.$(select).trigger('change');
     });
 
     assert.equal(fruitSalad.get('favoriteFruit'), "A", 'model favorite fruit is the selection');
@@ -267,7 +267,7 @@ module('em-select', function(hooks) {
   test('Select renders with custom css', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" elementClass="col-md-6"}}{{/em-form}}`);
 
-    assert.ok(this.$().find('select').hasClass('col-md-6'), 'Select has correct class');
+    assert.ok(find('select').hasClass('col-md-6'), 'Select has correct class');
   });
 
   test('cid correctly sets the id for the select and it\'s label', async function(assert) {
@@ -289,25 +289,25 @@ module('em-select', function(hooks) {
   test('Input can be a required field', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" required=true}}{{/em-form}}`);
 
-    assert.ok(this.$().find('select').attr('required'), 'select becomes a required field');
+    assert.ok(find('select').attr('required'), 'select becomes a required field');
   });
 
   test('Input can be a disabled field', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" disabled=true}}{{/em-form}}`);
 
-    assert.ok(this.$().find('select').attr('disabled'), 'select becomes a disabled field');
+    assert.ok(find('select').attr('disabled'), 'select becomes a disabled field');
   });
 
   test('Input can be a autofocus field', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" autofocus=true}}{{/em-form}}`);
 
-    assert.ok(this.$().find('select').attr('autofocus'), 'select becomes a autofocus field');
+    assert.ok(find('select').attr('autofocus'), 'select becomes a autofocus field');
   });
 
   test('Input can have a size', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" size=3}}{{/em-form}}`);
 
-    assert.equal(this.$().find('select').attr('size'), 3, 'select has a size field');
+    assert.equal(find('select').attr('size'), 3, 'select has a size field');
   });
 
   test('Triggers the action', async function(assert) {
@@ -323,11 +323,12 @@ module('em-select', function(hooks) {
       {{form.select content=fruitOptions property='favoriteFruit' model=fruitSalad action=action}}
       {{/em-form}}`);
 
-    const select = this.$().find('select')[0];
+    const select = find('select');
 
     run(() => {
-      this.$(select).val('3');
-      this.$(select).trigger('change');
+      select.value = 3;
+      // maybe still need next line
+      //this.$(select).trigger('change');
     });
   });
 });

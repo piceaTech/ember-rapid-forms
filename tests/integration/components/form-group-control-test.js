@@ -16,6 +16,6 @@ module('form-group-control', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.group-control mainComponent=mainComponent controlWrapper='control-wrapper-class'}}{{/em-form}}`
     );
 
-    assert.ok(this.$().find('div.control-wrapper-class'), 'Has wrapper div');
+    assert.dom('div.control-wrapper-class').exists('Has wrapper div');
   });
 });

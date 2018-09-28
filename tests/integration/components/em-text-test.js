@@ -51,7 +51,7 @@ module('em-text', function(hooks) {
 
   test('Textarea can be disabled', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.text property="asd" disabled=true}}{{/em-form}}`);
-    assert.ok(this.$().find('textarea').attr('disabled'), 'input renders disabled');
+    assert.ok(find('textarea').attr('disabled'), 'input renders disabled');
   });
 
   test('Textarea renders with custom css', async function(assert) {
@@ -68,7 +68,7 @@ module('em-text', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.text property="asd" label='some label' cid='test-cid'}}{{/em-form}}`
     );
 
-    assert.equal(this.$().find('textarea').attr('id'), 'test-cid', 'textarea has correct id');
+    assert.equal(find('textarea').attr('id'), 'test-cid', 'textarea has correct id');
     assert.equal(find('label').getAttribute('for'), 'test-cid', 'label has correct \'for\'');
   });
 

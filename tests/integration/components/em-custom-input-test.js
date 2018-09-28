@@ -12,15 +12,15 @@ module('em-custom-input', function(hooks) {
       hbs`{{#em-form as |form|}}{{#form.custom-input property="asd"}}{{input}}{{/form.custom-input}}{{/em-form}}`
     );
 
-    assert.equal(this.$().find('input').length, 1, 'Input is rendered correctly');
+    assert.dom('input').exists({ count: 1 }, 'Input is rendered correctly');
   });
 
   test('Input renders with custom css', async function(assert) {
     await render(
       hbs`{{#em-form as |form|}}{{#form.custom-input property="asd" label='My label' elementClass="col-md-6" controlWrapper="col-md-8" labelClass="col-md-4" as |mainComponent|}}{{input class=mainComponent.elementClass}}{{/form.custom-input}}{{/em-form}}`
     );
-    assert.ok(this.$().find('label').hasClass('col-md-4'), 'Label has correct class');
-    assert.ok(this.$().find('input').parent().hasClass('col-md-8'), 'Input parent has correct class');
+    assert.ok(find('label').hasClass('col-md-4'), 'Label has correct class');
+    assert.ok(find('input').parent().hasClass('col-md-8'), 'Input parent has correct class');
   });
 
   test('cid correctly sets the id for the input and it\'s label', async function(assert) {

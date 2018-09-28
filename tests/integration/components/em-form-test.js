@@ -4,7 +4,7 @@ import { Promise as EmberPromise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('em-form', function(hooks) {
@@ -46,7 +46,7 @@ module('em-form', function(hooks) {
     );
 
     run(() => {
-      assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+      assert.ok(find('div:contains("name!")').length, "Found help text on form");
     });
   });
 
@@ -62,10 +62,10 @@ module('em-form', function(hooks) {
       hbs `{{#em-form model=model showErrorsOnFocusIn=true as |form|}}{{form.input property="name"}}{{/em-form}}`
     );
 
-    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before focusin");
+    assert.equal(find('div:contains("name!")').length, 0, "Found no help text on form before focusin");
 
-    this.$().find('input').focusin();
-    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+    find('input').focusin();
+    assert.ok(find('div:contains("name!")').length, "Found help text on form");
 
   });
 
@@ -79,10 +79,10 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before focusout");
-    this.$().find('input').focusout();
+    assert.equal(find('div:contains("name!")').length, 0, "Found help text on form before focusout");
+    find('input').focusout();
 
-    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+    assert.ok(find('div:contains("name!")').length, "Found help text on form");
 
   });
 
@@ -97,10 +97,10 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name" showOnKeyUp=true}}{{/em-form}}`);
 
-    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before keyup");
+    assert.equal(find('div:contains("name!")').length, 0, "Found no help text on form before keyup");
 
-    this.$().find('input').keyup();
-    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+    find('input').keyup();
+    assert.ok(find('div:contains("name!")').length, "Found help text on form");
 
   });
 
@@ -113,13 +113,13 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before submit");
+    assert.equal(find('div:contains("name!")').length, 0, "Found help text on form before submit");
 
     run(() => {
-      this.$().find('button').click();
+      find('button').click();
     });
 
-    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+    assert.ok(find('div:contains("name!")').length, "Found help text on form");
   });
 
   test('a form update inputs on model change', async function(assert) {
@@ -127,22 +127,23 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-    let input = this.$().find('input');
-    assert.equal(input.length, 1, "Found input");
-    input = this.$(input[0]);
-    assert.equal(input.val(), 'my-name', "Input has original model value");
+    let input = find('input');
+    let inputAll = findAll('input');
+    assert.equal(inputAll.length, 1, "Found input");
+    input = this.$(input);
+    assert.equal(input.value, 'my-name', "Input has original model value");
 
     run(() => {
       somePerson.set('name', 'joseph');
     });
 
-    assert.equal(input.val(), 'joseph', "Input has new model value");
+    assert.equal(input.value, 'joseph', "Input has new model value");
 
     run(() => {
       somePerson.set('name', 'my-name');
     });
 
-    assert.equal(input.val(), 'my-name', "Input has original model value again");
+    assert.equal(input.value, 'my-name', "Input has original model value again");
 
   });
 
@@ -173,16 +174,16 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-    let input = this.$().find('input');
-    assert.equal(input.length, 1, "Found input");
-    input = this.$(input[0]);
-    assert.equal(input.val(), 'model-a', "Input has original model value");
+    let input = find('input');
+    let inputAll = findAll('input');
+    assert.equal(inputAll.length, 1, "Found input");
+    assert.equal(input.value, 'model-a', "Input has original model value");
 
     run(() => {
       this.set('model', modelB);
     });
 
-    assert.equal(input.val(), 'model-b', "Input has new model value");
+    assert.equal(input.value, 'model-b', "Input has new model value");
 
   });
 
@@ -218,25 +219,26 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-    let input = this.$().find('input');
-    assert.equal(input.length, 1, "Found input");
-    input = this.$(input[0]);
-    assert.equal(input.val(), 'model-a', "Input has original model value");
+    let input = find('input');
+    let inputAll = findAll('input');
+    assert.equal(inputAll.length, 1, "Found input");
+    assert.equal(input.value, 'model-a', "Input has original model value");
 
     run(() => {
-      this.$().find('input').focusout();
+      find('input').focusout();
     });
 
     run(() => {
-      assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+      assert.ok(find('div:contains("name!")').length, "Found help text on form");
     });
 
     run(() => {
       this.set('model', modelB);
     });
 
-    assert.ok(!input.parent().hasClass('has-success'), "Input is not marked as valid");
-    assert.equal(input.val(), 'model-b', "Input has new model value");
+    // jQuery hasClass
+    assert.ok(!input.parentElement.hasClass('has-success'), "Input is not marked as valid");
+    assert.equal(input.value, 'model-b', "Input has new model value");
 
   });
 
@@ -251,7 +253,7 @@ module('em-form', function(hooks) {
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
     run(() => {
-      this.$().find('button').click();
+      click('button');
     });
   });
 
@@ -266,7 +268,7 @@ module('em-form', function(hooks) {
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
     run(() => {
-      this.$().find('button').click();
+      click('button');
     });
   });
 
@@ -282,7 +284,7 @@ module('em-form', function(hooks) {
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
     run(() => {
-      this.$().find('button').click();
+      click('button');
     });
 
     run(() => {
@@ -303,7 +305,7 @@ module('em-form', function(hooks) {
     );
 
     run(() => {
-      this.$().find('button').click();
+      click('button');
     });
   });
 
@@ -318,7 +320,7 @@ module('em-form', function(hooks) {
     await render(hbs `{{#em-form model=model action='submit' as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
     run(() => {
-      this.$().find('button').click();
+      click('button');
     });
   });
 });

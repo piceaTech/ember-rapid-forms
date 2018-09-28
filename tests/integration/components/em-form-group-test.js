@@ -32,7 +32,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='error' errorIcon='bell'}}{{/em-form}}`
     );
 
-    let icons = this.$('span i.fa-bell');
+    let icons = find('span i.fa-bell');
     assert.equal(icons.length, 1, 'found validation icon');
     assert.ok(icons.hasClass('fa-bell'), 'has error icon');
   });
@@ -45,7 +45,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='warning' warningIcon='exclamation'}}{{/em-form}}`
     );
 
-    let icons = this.$('span i.fa-exclamation');
+    let icons = find('span i.fa-exclamation');
 
     assert.equal(icons.length, 1, 'found validation icon');
     assert.ok(icons.hasClass('fa-exclamation'), 'has warning icon');
@@ -59,7 +59,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='success' validationIcon='check-circle'}}{{/em-form}}`
     );
 
-    let icons = this.$('span i.fa-check-circle');
+    let icons = find('span i.fa-check-circle');
 
     assert.equal(icons.length, 1, 'found validation icon');
     assert.ok(icons.hasClass('fa-check-circle'));
@@ -129,7 +129,7 @@ module('em-form-group', function(hooks) {
     await render(
       hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form}}`
     );
-    const wrapper = this.$().find('div.wrapper-class');
+    const wrapper = find('div.wrapper-class');
 
     assert.ok(wrapper, 'Wrapper exists');
     assert.equal(wrapper.find('label:contains("my-label")').length, 1, 'Label is inside wrapper');
@@ -140,7 +140,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' yieldInLabel=true}}{{/em-form}}`
     );
 
-    const label = this.$().find('label');
+    const label = find('label');
     assert.equal(label.length, 1, 'Label is a wrapper tag');
     assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
   });
@@ -150,7 +150,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form}}`
     );
 
-    const wrapper = this.$().find('div.wrapper-class');
+    const wrapper = find('div.wrapper-class');
     assert.equal(wrapper.length, 1, 'Wrapper exists');
 
     const label = wrapper.find('label');
@@ -163,7 +163,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" validationIcon='check-square' shouldShowErrors=true validationIcons=true}}{{/em-form}}`
     );
 
-    const icons = this.$().find('span.form-control-feedback');
+    const icons = find('span.form-control-feedback');
     assert.equal(icons.length, 1, 'Has icon span');
     assert.ok(icons.hasClass('form-control-feedback'), 'Has proper class');
     assert.equal(icons.find('i').length, 1, 'Has icon');
@@ -175,7 +175,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`
     );
 
-    const helpSpan = this.$().find('span.help-block');
+    const helpSpan = find('span.help-block');
     assert.equal(helpSpan.length, 1, 'Has help span');
     assert.ok(helpSpan.hasClass('help-block'), 'span has correct class');
     assert.equal(helpSpan.text().trim(), 'help text here', 'span has correct help text');
@@ -186,7 +186,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form formLayout='inline' as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`
     );
 
-    const helpSpan = this.$().find('span.help-block');
+    const helpSpan = find('span.help-block');
     assert.equal(helpSpan.length, 0, 'Has no help span');
   });
 });

@@ -28,10 +28,8 @@ module('em-form checkbox', function(hooks) {
       hbs`{{#em-form model=someModel submitButton=false showErrorsOnFocusIn=false  as |form|}}{{form.checkbox property="userAgree"}}{{/em-form}}`
     );
 
-    let input = this.$('input');
-
-    run(() => {
-      input.click();
+    run(async () => {
+      await click('input');
     });
 
     run(() => {
@@ -63,16 +61,16 @@ module('em-form checkbox', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.checkbox property="asd" label='My label' elementClass="col-md-6" controlWrapper="col-md-8" labelClass="col-md-4"}}{{/em-form}}`
     );
 
-    assert.ok(this.$().find('label').hasClass('col-md-4'), 'Label has correct class');
-    assert.ok(this.$().find('label').parent().hasClass('col-md-8'), 'Checkbox parent has correct class');
-    assert.ok(this.$().find('input').hasClass('col-md-6'), 'Checkbox input has correct class');
+    assert.ok(find('label').hasClass('col-md-4'), 'Label has correct class');
+    assert.ok(find('label').parent().hasClass('col-md-8'), 'Checkbox parent has correct class');
+    assert.ok(find('input').hasClass('col-md-6'), 'Checkbox input has correct class');
   });
 
   test('Checkbox can be disabled', async function(assert) {
 
     await render(hbs`{{#em-form as |form|}}{{form.checkbox property="asd" disabled=true}}{{/em-form}}`);
 
-    assert.ok(this.$().find('input').attr('disabled'), 'checkbox input renders disabled');
+    assert.ok(find('input').attr('disabled'), 'checkbox input renders disabled');
   });
 
   test('cid correctly sets the id for the checkbox and it\'s label', async function(assert) {
@@ -95,13 +93,13 @@ module('em-form checkbox', function(hooks) {
 
     await render(hbs`{{#em-form as |form|}}{{form.checkbox property="asd" required=true}}{{/em-form}}`);
 
-    assert.ok(this.$().find('input').attr('required'), 'checkbox input becomes a required field');
+    assert.ok(find('input').attr('required'), 'checkbox input becomes a required field');
   });
 
   test('Checkbox can be autofocused', async function(assert) {
 
     await render(hbs`{{#em-form as |form|}}{{form.checkbox property="asd" autofocus=true}}{{/em-form}}`);
 
-    assert.ok(this.$().find('input').attr('autofocus'), 'checkbox input has autofocus');
+    assert.ok(find('input').attr('autofocus'), 'checkbox input has autofocus');
   });
 });
