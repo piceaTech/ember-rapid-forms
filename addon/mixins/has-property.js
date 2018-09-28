@@ -1,7 +1,6 @@
+import { assert } from '@ember/debug';
 import { alias } from '@ember/object/computed';
 import Mixin from '@ember/object/mixin';
-import Ember from 'ember';
-const { assert } = Ember;
 import { defineProperty, computed } from '@ember/object';
 import HasIdMixin from '../mixins/has-id';
 

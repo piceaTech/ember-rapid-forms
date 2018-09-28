@@ -2,315 +2,323 @@ import { run } from '@ember/runloop';
 import { A } from '@ember/array';
 import { Promise as EmberPromise } from 'rsvp';
 import EmberObject from '@ember/object';
-import {
-  moduleForComponent,
-  test
-}
-from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('em-form', {
-  // Specify the other units that are required for this test
-  integration: true
-});
+module('em-form', function(hooks) {
+  setupRenderingTest(hooks);
 
-const somePerson = EmberObject.create({
-  name: 'my-name',
-  errors: EmberObject.create(),
-  validate() {
-    const promise = new EmberPromise((resolve) => {
-      resolve('ok!');
+  hooks.beforeEach(function() {
+    this.actions = {};
+    this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
+  });
+
+  const somePerson = EmberObject.create({
+    name: 'my-name',
+    errors: EmberObject.create(),
+    validate() {
+      const promise = new EmberPromise((resolve) => {
+        resolve('ok!');
+      });
+      return promise;
+    }
+  });
+
+  test('form model is set', async function(assert) {
+    this.set('model', somePerson);
+
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+    assert.dom('input').hasValue('my-name', 'Model was set.');
+  });
+
+  test('a form display errors when rendered if showErrorsOnRender is set', async function(assert) {
+    assert.expect(1);
+
+    somePerson.set('isValid', false);
+    somePerson.set('errors.name', A(['name!']));
+
+    this.set('model', somePerson);
+
+    await render(
+      hbs `{{#em-form model=model showErrorsOnRender=true as |form|}}{{form.input property="name"}}{{/em-form}}`
+    );
+
+    run(() => {
+      assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
     });
-    return promise;
-  }
-});
+  });
 
-test('form model is set', function(assert) {
-  this.set('model', somePerson);
+  test('a form display errors when field is focused in', async function(assert) {
+    assert.expect(2);
 
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
-  assert.equal(this.$('input').val(), 'my-name', 'Model was set.');
-});
+    somePerson.set('isValid', false);
+    somePerson.set('errors.name', A(['name!']));
 
-test('a form display errors when rendered if showErrorsOnRender is set', function(assert) {
-  assert.expect(1);
+    this.set('model', somePerson);
 
-  somePerson.set('isValid', false);
-  somePerson.set('errors.name', A(['name!']));
+    await render(
+      hbs `{{#em-form model=model showErrorsOnFocusIn=true as |form|}}{{form.input property="name"}}{{/em-form}}`
+    );
 
-  this.set('model', somePerson);
+    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before focusin");
 
-  this.render(hbs `{{#em-form model=model showErrorsOnRender=true as |form|}}{{form.input property="name"}}{{/em-form}}`);
-
-  run(() => {
+    this.$().find('input').focusin();
     assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
-  });
-});
 
-test('a form display errors when field is focused in', function(assert) {
-  assert.expect(2);
-
-  somePerson.set('isValid', false);
-  somePerson.set('errors.name', A(['name!']));
-
-  this.set('model', somePerson);
-
-  this.render(hbs `{{#em-form model=model showErrorsOnFocusIn=true as |form|}}{{form.input property="name"}}{{/em-form}}`);
-
-  assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before focusin");
-
-  this.$().find('input').focusin();
-  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
-
-});
-
-test('a form display errors when field is focused out', function(assert) {
-  assert.expect(2);
-
-  somePerson.set('isValid', false);
-  somePerson.set('errors.name', A(['name!']));
-
-  this.set('model', somePerson);
-
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
-
-  assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before focusout");
-  this.$().find('input').focusout();
-
-  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
-
-});
-
-test('a form display errors on key up events when field has showOnKeyUp is set', function(assert) {
-  assert.expect(2);
-
-  this.set('model', somePerson);
-
-  somePerson.set('isValid', false);
-  somePerson.set('errors.name', A(['name!']));
-
-
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name" showOnKeyUp=true}}{{/em-form}}`);
-
-  assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before keyup");
-
-  this.$().find('input').keyup();
-  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
-
-});
-
-test('a form display errors when form is submitted and field is invalid', function(assert) {
-  assert.expect(2);
-
-  somePerson.set('isValid', false);
-  somePerson.set('errors.name', A(['name!']));
-  this.set('model', somePerson);
-
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
-
-  assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before submit");
-
-  run(() => {
-    this.$().find('button').click();
   });
 
-  assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
-});
+  test('a form display errors when field is focused out', async function(assert) {
+    assert.expect(2);
 
-test('a form update inputs on model change', function(assert) {
-  this.set('model', somePerson);
+    somePerson.set('isValid', false);
+    somePerson.set('errors.name', A(['name!']));
 
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+    this.set('model', somePerson);
 
-  let input = this.$().find('input');
-  assert.equal(input.length, 1, "Found input");
-  input = this.$(input[0]);
-  assert.equal(input.val(), 'my-name', "Input has original model value");
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  run(() => {
-    somePerson.set('name', 'joseph');
-  });
-
-  assert.equal(input.val(), 'joseph', "Input has new model value");
-
-  run(() => {
-    somePerson.set('name', 'my-name');
-  });
-
-  assert.equal(input.val(), 'my-name', "Input has original model value again");
-
-});
-
-test('a form changes its model and fields are updated', function(assert) {
-  const modelA = EmberObject.create({
-    name: 'model-a',
-    errors: EmberObject.create(),
-    validate() {
-      const promise = new EmberPromise((resolve) => {
-        resolve('ok!');
-      });
-      return promise;
-    }
-  });
-
-  const modelB = EmberObject.create({
-    name: 'model-b',
-    errors: EmberObject.create(),
-    validate() {
-      const promise = new EmberPromise((resolve) => {
-        resolve('ok!');
-      });
-      return promise;
-    }
-  });
-
-  this.set('model', modelA);
-
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
-
-  let input = this.$().find('input');
-  assert.equal(input.length, 1, "Found input");
-  input = this.$(input[0]);
-  assert.equal(input.val(), 'model-a', "Input has original model value");
-
-  run(() => {
-    this.set('model', modelB);
-  });
-
-  assert.equal(input.val(), 'model-b', "Input has new model value");
-
-});
-
-test('a form changes its model and errors are reseted', function(assert) {
-  const modelA = EmberObject.create({
-    name: 'model-a',
-    errors: EmberObject.create(),
-    validate() {
-      const promise = new EmberPromise((resolve) => {
-        resolve('ok!');
-      });
-      return promise;
-    }
-  });
-
-  run(() => {
-    modelA.set('isValid', false);
-    modelA.set('errors.name', A(['name!']));
-  });
-
-  const modelB = EmberObject.create({
-    name: 'model-b',
-    errors: EmberObject.create(),
-    validate() {
-      const promise = new EmberPromise((resolve) => {
-        resolve('ok!');
-      });
-      return promise;
-    }
-  });
-
-  this.set('model', modelA);
-
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
-
-  let input = this.$().find('input');
-  assert.equal(input.length, 1, "Found input");
-  input = this.$(input[0]);
-  assert.equal(input.val(), 'model-a', "Input has original model value");
-
-  run(() => {
+    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before focusout");
     this.$().find('input').focusout();
+
+    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+
   });
 
-  run(() => {
+  test('a form display errors on key up events when field has showOnKeyUp is set', async function(assert) {
+    assert.expect(2);
+
+    this.set('model', somePerson);
+
+    somePerson.set('isValid', false);
+    somePerson.set('errors.name', A(['name!']));
+
+
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name" showOnKeyUp=true}}{{/em-form}}`);
+
+    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found no help text on form before keyup");
+
+    this.$().find('input').keyup();
+    assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+
+  });
+
+  test('a form display errors when form is submitted and field is invalid', async function(assert) {
+    assert.expect(2);
+
+    somePerson.set('isValid', false);
+    somePerson.set('errors.name', A(['name!']));
+    this.set('model', somePerson);
+
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+
+    assert.equal(this.$().find('div:contains("name!")').length, 0, "Found help text on form before submit");
+
+    run(() => {
+      this.$().find('button').click();
+    });
+
     assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
   });
 
-  run(() => {
-    this.set('model', modelB);
+  test('a form update inputs on model change', async function(assert) {
+    this.set('model', somePerson);
+
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+
+    let input = this.$().find('input');
+    assert.equal(input.length, 1, "Found input");
+    input = this.$(input[0]);
+    assert.equal(input.val(), 'my-name', "Input has original model value");
+
+    run(() => {
+      somePerson.set('name', 'joseph');
+    });
+
+    assert.equal(input.val(), 'joseph', "Input has new model value");
+
+    run(() => {
+      somePerson.set('name', 'my-name');
+    });
+
+    assert.equal(input.val(), 'my-name', "Input has original model value again");
+
   });
 
-  assert.ok(!input.parent().hasClass('has-success'), "Input is not marked as valid");
-  assert.equal(input.val(), 'model-b', "Input has new model value");
+  test('a form changes its model and fields are updated', async function(assert) {
+    const modelA = EmberObject.create({
+      name: 'model-a',
+      errors: EmberObject.create(),
+      validate() {
+        const promise = new EmberPromise((resolve) => {
+          resolve('ok!');
+        });
+        return promise;
+      }
+    });
 
-});
+    const modelB = EmberObject.create({
+      name: 'model-b',
+      errors: EmberObject.create(),
+      validate() {
+        const promise = new EmberPromise((resolve) => {
+          resolve('ok!');
+        });
+        return promise;
+      }
+    });
 
-test('form cannot be submitted if model is invalid', function(assert) {
-  assert.expect(0);
+    this.set('model', modelA);
 
-  this.on('submit', function() {
-    assert.ok(true, 'submit action invoked!');
-  });
-  this.set('model', somePerson);
-  somePerson.set('isValid', false);
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  run(() => {
-    this.$().find('button').click();
-  });
-});
+    let input = this.$().find('input');
+    assert.equal(input.length, 1, "Found input");
+    input = this.$(input[0]);
+    assert.equal(input.val(), 'model-a', "Input has original model value");
 
-test('form can be submitted if model is valid', function(assert) {
-  assert.expect(1);
+    run(() => {
+      this.set('model', modelB);
+    });
 
-  this.on('submit', function() {
-    assert.ok(true, 'submit action invoked!');
-  });
-  this.set('model', somePerson);
-  somePerson.set('isValid', true);
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+    assert.equal(input.val(), 'model-b', "Input has new model value");
 
-  run(() => {
-    this.$().find('button').click();
-  });
-});
-
-test('model in an argument of the form submission', function(assert) {
-  assert.expect(1);
-
-  this.on('submit', function(model) {
-    model.set('name', 'other-name');
   });
 
-  this.set('model', somePerson);
-  somePerson.set('isValid', true);
-  this.render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+  test('a form changes its model and errors are reseted', async function(assert) {
+    const modelA = EmberObject.create({
+      name: 'model-a',
+      errors: EmberObject.create(),
+      validate() {
+        const promise = new EmberPromise((resolve) => {
+          resolve('ok!');
+        });
+        return promise;
+      }
+    });
 
-  run(() => {
-    this.$().find('button').click();
+    run(() => {
+      modelA.set('isValid', false);
+      modelA.set('errors.name', A(['name!']));
+    });
+
+    const modelB = EmberObject.create({
+      name: 'model-b',
+      errors: EmberObject.create(),
+      validate() {
+        const promise = new EmberPromise((resolve) => {
+          resolve('ok!');
+        });
+        return promise;
+      }
+    });
+
+    this.set('model', modelA);
+
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+
+    let input = this.$().find('input');
+    assert.equal(input.length, 1, "Found input");
+    input = this.$(input[0]);
+    assert.equal(input.val(), 'model-a', "Input has original model value");
+
+    run(() => {
+      this.$().find('input').focusout();
+    });
+
+    run(() => {
+      assert.ok(this.$().find('div:contains("name!")').length, "Found help text on form");
+    });
+
+    run(() => {
+      this.set('model', modelB);
+    });
+
+    assert.ok(!input.parent().hasClass('has-success'), "Input is not marked as valid");
+    assert.equal(input.val(), 'model-b', "Input has new model value");
+
   });
 
-  run(() => {
-    assert.equal(somePerson.get('name'), 'other-name', 'Model is an argument of the form submission');
+  test('form cannot be submitted if model is invalid', async function(assert) {
+    assert.expect(0);
+
+    this.actions.submit = function() {
+      assert.ok(true, 'submit action invoked!');
+    };
+    this.set('model', somePerson);
+    somePerson.set('isValid', false);
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+
+    run(() => {
+      this.$().find('button').click();
+    });
   });
-});
 
-test('form submission with custom action', function(assert) {
-  assert.expect(1);
+  test('form can be submitted if model is valid', async function(assert) {
+    assert.expect(1);
 
-  this.on('submitNow', function() {
-    assert.ok(true, 'submitNow action invoked!');
+    this.actions.submit = function() {
+      assert.ok(true, 'submit action invoked!');
+    };
+    this.set('model', somePerson);
+    somePerson.set('isValid', true);
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+
+    run(() => {
+      this.$().find('button').click();
+    });
   });
-  this.set('model', somePerson);
-  somePerson.set('isValid', true);
-  this.render(hbs `{{#em-form model=model action="submitNow" as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-  run(() => {
-    this.$().find('button').click();
+  test('model in an argument of the form submission', async function(assert) {
+    assert.expect(1);
+
+    this.actions.submit = function(model) {
+      model.set('name', 'other-name');
+    };
+
+    this.set('model', somePerson);
+    somePerson.set('isValid', true);
+    await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
+
+    run(() => {
+      this.$().find('button').click();
+    });
+
+    run(() => {
+      assert.equal(somePerson.get('name'), 'other-name', 'Model is an argument of the form submission');
+    });
   });
-});
 
-test('form submission with a model that has no validation support and no isValid property should be submitted', function(assert) {
-  assert.expect(1);
+  test('form submission with custom action', async function(assert) {
+    assert.expect(1);
 
-  this.on('submit', function() {
-    assert.ok(true, 'submit action invoked!');
+    this.actions.submitNow = function() {
+      assert.ok(true, 'submitNow action invoked!');
+    };
+    this.set('model', somePerson);
+    somePerson.set('isValid', true);
+    await render(
+      hbs `{{#em-form model=model action="submitNow" as |form|}}{{form.input property="name"}}{{/em-form}}`
+    );
+
+    run(() => {
+      this.$().find('button').click();
+    });
   });
-  this.set('model', {});
 
-  this.render(hbs `{{#em-form model=model action='submit' as |form|}}{{form.input property="name"}}{{/em-form}}`);
+  test('form submission with a model that has no validation support and no isValid property should be submitted', async function(assert) {
+    assert.expect(1);
 
-  run(() => {
-    this.$().find('button').click();
+    this.actions.submit = function() {
+      assert.ok(true, 'submit action invoked!');
+    };
+    this.set('model', {});
+
+    await render(hbs `{{#em-form model=model action='submit' as |form|}}{{form.input property="name"}}{{/em-form}}`);
+
+    run(() => {
+      this.$().find('button').click();
+    });
   });
 });
