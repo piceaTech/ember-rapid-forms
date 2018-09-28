@@ -5,15 +5,16 @@ import Route from '@ember/routing/route';
 export default {
   name: 'hightlightjs',
   initialize() {
-    return Route.reopen({
-      renderTemplate() {
-        this._super();
-        return next(this, function() {
-          return $('pre code').each(function(i, e) {
-            return hljs.highlightBlock(e);
-          });
-        });
-      }
-    });
+    // return Route.reopen({
+    //   renderTemplate() {
+    //     this._super();
+    //     return next(this, function() {
+    //       // jQuery
+    //       return $('pre code').each(function(i, e) {
+    //         return hljs.highlightBlock(e);
+    //       });
+    //     });
+    //   }
+    // });
   }
 };
