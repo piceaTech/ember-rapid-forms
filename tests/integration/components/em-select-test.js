@@ -95,11 +95,9 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name'}}{{/em-form}}`
     );
 
-    const element = this.$();
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
-    assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
-
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.ok(select, 'select exists');
 
     fruitOptions.forEach((item, index) => {
@@ -116,7 +114,7 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select property="asd" label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None'}}{{/em-form}}`
     );
 
-    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
     const select = element.find('select')[0];
     assert.ok(select, 'select exists');
@@ -132,7 +130,7 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
@@ -155,7 +153,7 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
@@ -180,7 +178,7 @@ module('em-select', function(hooks) {
     );
 
     
-    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
@@ -204,7 +202,7 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
     const select = find('select');
     assert.equal(select.options.length, 5, 'select has correct amount of options');
@@ -222,7 +220,7 @@ module('em-select', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.select label="Fruits:" content=fruitOptions propertyIsModel=true optionLabelPath='name' prompt='None' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`
     );
 
-    assert.equal(find('label:contains("Fruits:")').length, 1, 'label has for property');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
@@ -249,7 +247,7 @@ module('em-select', function(hooks) {
         content=eatables optionGroupLabelPath="name" optionGroupContentPath="content"}}{{/em-form}}`
     );
 
-    assert.equal(find('label:contains("Eatables:")').length, 1, 'label has for property');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('Eatables:')).length, 1, 'label has for property');
 
     const select = find('select');
     assert.ok(select.options.length === 7, 'select has correct amount of options');

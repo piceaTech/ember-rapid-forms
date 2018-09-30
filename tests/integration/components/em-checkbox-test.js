@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('em-checkbox', function(hooks) {
@@ -18,7 +18,7 @@ module('em-checkbox', function(hooks) {
   test('checkbox also renders label', async function(assert) {
     await render(hbs`{{#em-form as |form|}} {{form.checkbox property="asd" label="my-label"}}{{/em-form}}`);
     assert.dom('[type=checkbox]').exists({ count: 1 });
-    assert.equal(find('label:contains("my-label")').length, 1);
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('my-label')).length, 1);
   });
 
   test('cid correctly sets the id for the checkbox and it\'s label', async function(assert) {

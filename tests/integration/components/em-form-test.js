@@ -46,7 +46,7 @@ module('em-form', function(hooks) {
     );
 
     run(() => {
-      assert.ok(find('div:contains("name!")').length, "Found help text on form");
+      assert.ok(findAll('div').filter((e) => e.textContent.includes('name!')).length, "Found help text on form");
     });
   });
 
@@ -62,10 +62,10 @@ module('em-form', function(hooks) {
       hbs `{{#em-form model=model showErrorsOnFocusIn=true as |form|}}{{form.input property="name"}}{{/em-form}}`
     );
 
-    assert.equal(find('div:contains("name!")').length, 0, "Found no help text on form before focusin");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 0, "Found no help text on form before focusin");
 
     find('input').focusin();
-    assert.ok(find('div:contains("name!")').length, "Found help text on form");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
 
   });
 
@@ -79,10 +79,10 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-    assert.equal(find('div:contains("name!")').length, 0, "Found help text on form before focusout");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 0, "Found help text on form before focusout");
     find('input').focusout();
 
-    assert.ok(find('div:contains("name!")').length, "Found help text on form");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
 
   });
 
@@ -97,10 +97,10 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name" showOnKeyUp=true}}{{/em-form}}`);
 
-    assert.equal(find('div:contains("name!")').length, 0, "Found no help text on form before keyup");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 0, "Found no help text on form before keyup");
 
     find('input').keyup();
-    assert.ok(find('div:contains("name!")').length, "Found help text on form");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
 
   });
 
@@ -113,13 +113,13 @@ module('em-form', function(hooks) {
 
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
-    assert.equal(find('div:contains("name!")').length, 0, "Found help text on form before submit");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 0, "Found help text on form before submit");
 
     run(() => {
       find('button').click();
     });
 
-    assert.ok(find('div:contains("name!")').length, "Found help text on form");
+    assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
   });
 
   test('a form update inputs on model change', async function(assert) {
@@ -130,7 +130,6 @@ module('em-form', function(hooks) {
     let input = find('input');
     let inputAll = findAll('input');
     assert.equal(inputAll.length, 1, "Found input");
-    input = this.$(input);
     assert.equal(input.value, 'my-name', "Input has original model value");
 
     run(() => {
@@ -229,7 +228,7 @@ module('em-form', function(hooks) {
     });
 
     run(() => {
-      assert.ok(find('div:contains("name!")').length, "Found help text on form");
+      assert.equal(findAll('div').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
     });
 
     run(() => {
