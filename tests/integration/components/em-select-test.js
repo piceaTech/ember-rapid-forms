@@ -5,7 +5,7 @@ import EmberObject from '@ember/object';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { render, find } from '@ember/test-helpers';
+import { render, find, findAll } from '@ember/test-helpers';
 
 import hbs from 'htmlbars-inline-precompile';
 
@@ -116,7 +116,7 @@ module('em-select', function(hooks) {
 
     assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
-    const select = element.find('select')[0];
+    const select = find('select');
     assert.ok(select, 'select exists');
     assert.equal(select.options[0].text, 'None', 'Prompt gets rendered');
   });
@@ -135,13 +135,10 @@ module('em-select', function(hooks) {
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-    run(() => {
-      select.value = 3;
-      // maybe still need next line
-      // this.$(select).trigger('change'); 
-    });
-    assert.equal(fruitSalad.get('favoriteFruit'), 3, 'model favorite fruit is the selection');
+    select.value = 3;
+    select.dispatchEvent(new Event('change'));
 
+    assert.equal(fruitSalad.get('favoriteFruit'), 3, 'model favorite fruit is the selection');
   });
 
   test('em-select can select an item when not disabled', async function(assert) {
@@ -158,12 +155,9 @@ module('em-select', function(hooks) {
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-    run(() => {
+    select.value = 5;
+    select.dispatchEvent(new Event('change'));
 
-      select.value = 5;
-      // maybe still need next line
-      //this.$(select).trigger('change');
-    });
     assert.equal(fruitSalad.get('favoriteFruit'), 5, 'model favorite fruit is the selection');
 
   });
@@ -183,12 +177,9 @@ module('em-select', function(hooks) {
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-    run(() => {
+    select.value = 5;
+    select.dispatchEvent(new Event('change'));
 
-      select.value = 5;
-      // maybe still need next line
-      //this.$(select).trigger('change');
-    });
     assert.equal(fruitSalad.get('favoriteFruit'), null, 'model favorite fruit is the selection');
 
   });
@@ -225,11 +216,8 @@ module('em-select', function(hooks) {
     const select = find('select');
     assert.equal(select.options.length, 6, 'select has correct amount of options');
 
-    run(() => {
-      select.value = 3;
-      // maybe still need next line
-      //this.$(select).trigger('change');
-    });
+    select.value = 3;
+    select.dispatchEvent(new Event('change'));
 
     assert.equal(fruitSalad.get('favoriteFruit.id'), 3, 'model favorite fruit is the selection');
     assert.equal(fruitSalad.get('favoriteFruit.name'), 'Orange', 'model favorite fruit is the selection');
@@ -252,11 +240,8 @@ module('em-select', function(hooks) {
     const select = find('select');
     assert.ok(select.options.length === 7, 'select has correct amount of options');
 
-    run(() => {
-      select.value = 'A';
-      // maybe still need next line
-      //this.$(select).trigger('change');
-    });
+    select.value = 'A';
+    select.dispatchEvent(new Event('change'));
 
     assert.equal(fruitSalad.get('favoriteFruit'), "A", 'model favorite fruit is the selection');
 
@@ -265,7 +250,7 @@ module('em-select', function(hooks) {
   test('Select renders with custom css', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" elementClass="col-md-6"}}{{/em-form}}`);
 
-    assert.ok(find('select').hasClass('col-md-6'), 'Select has correct class');
+    assert.ok(find('select').className.includes('col-md-6'), 'Select has correct class');
   });
 
   test('cid correctly sets the id for the select and it\'s label', async function(assert) {
@@ -287,25 +272,25 @@ module('em-select', function(hooks) {
   test('Input can be a required field', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" required=true}}{{/em-form}}`);
 
-    assert.ok(find('select').attr('required'), 'select becomes a required field');
+    assert.ok(find('select').required, 'select becomes a required field');
   });
 
   test('Input can be a disabled field', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" disabled=true}}{{/em-form}}`);
 
-    assert.ok(find('select').attr('disabled'), 'select becomes a disabled field');
+    assert.ok(find('select').disabled, 'select becomes a disabled field');
   });
 
   test('Input can be a autofocus field', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" autofocus=true}}{{/em-form}}`);
 
-    assert.ok(find('select').attr('autofocus'), 'select becomes a autofocus field');
+    assert.ok(find('select').autofocus, 'select becomes a autofocus field');
   });
 
   test('Input can have a size', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.select property="asd" size=3}}{{/em-form}}`);
 
-    assert.equal(find('select').attr('size'), 3, 'select has a size field');
+    assert.equal(find('select').getAttribute('size'), 3, 'select has a size field');
   });
 
   test('Triggers the action', async function(assert) {
@@ -323,10 +308,9 @@ module('em-select', function(hooks) {
 
     const select = find('select');
 
-    run(() => {
-      select.value = 3;
-      // maybe still need next line
-      //this.$(select).trigger('change');
-    });
+    select.value = 5;
+    select.dispatchEvent(new Event('change'));
+
+    
   });
 });

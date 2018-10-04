@@ -92,7 +92,8 @@ export default Component.extend(InputComponentMixin, {
   },
 
   _setValue() {
-    const selectedEl = this.$('select')[0];
+
+    const selectedEl = this.element.querySelector('select');
     const model = this.get('model');
     if (model) {
 
