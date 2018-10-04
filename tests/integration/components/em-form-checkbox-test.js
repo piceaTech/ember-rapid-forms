@@ -1,4 +1,3 @@
-import { run } from '@ember/runloop';
 import { Promise as EmberPromise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { module, test } from 'qunit';
@@ -28,14 +27,11 @@ module('em-form checkbox', function(hooks) {
       hbs`{{#em-form model=someModel submitButton=false showErrorsOnFocusIn=false  as |form|}}{{form.checkbox property="userAgree"}}{{/em-form}}`
     );
 
-    run(async () => {
-      await click('input');
-    });
+    await click('input');
 
-    run(() => {
-      assert.ok(someModel.get('userAgree'), "Checkbox click");
-      someModel.set('userAgree', false);
-    });
+    
+    assert.ok(someModel.get('userAgree'), "Checkbox click");
+    someModel.set('userAgree', false);
   });
 
   test('a checkbox without a label updates data', async function(assert) {
@@ -45,15 +41,14 @@ module('em-form checkbox', function(hooks) {
       hbs`{{#em-form model=someModel submitButton=false showErrorsOnFocusIn=true  as |form|}}Something here: {{form.checkbox property="userAgree"}}{{/em-form}}`
     );
 
-    run(async () => {
-      await click('input');
-    });
+    
+    await click('input');   
 
-    run(() => {
-      assert.ok(someModel.get('userAgree'), "Checkbox click");
-      // reset model after assertion
-      someModel.set('userAgree', false);
-    });
+  
+    assert.ok(someModel.get('userAgree'), "Checkbox click");
+    // reset model after assertion
+    someModel.set('userAgree', false);
+    
   });
 
   test('Checkbox renders with custom css', async function(assert) {
@@ -61,16 +56,15 @@ module('em-form checkbox', function(hooks) {
       hbs`{{#em-form as |form|}}{{form.checkbox property="asd" label='My label' elementClass="col-md-6" controlWrapper="col-md-8" labelClass="col-md-4"}}{{/em-form}}`
     );
 
-    assert.ok(find('label').hasClass('col-md-4'), 'Label has correct class');
-    assert.ok(find('label').parent().hasClass('col-md-8'), 'Checkbox parent has correct class');
-    assert.ok(find('input').hasClass('col-md-6'), 'Checkbox input has correct class');
+    assert.ok(find('label').className.includes('col-md-4'), 'Label has correct class');
+    assert.ok(find('label').parentNode.className.includes('col-md-8'), 'Checkbox parent has correct class');
+    assert.ok(find('input').className.includes('col-md-6'), 'Checkbox input has correct class');
   });
 
   test('Checkbox can be disabled', async function(assert) {
 
     await render(hbs`{{#em-form as |form|}}{{form.checkbox property="asd" disabled=true}}{{/em-form}}`);
-
-    assert.ok(find('input').attr('disabled'), 'checkbox input renders disabled');
+    assert.ok(find('input').disabled, 'checkbox input renders disabled');
   });
 
   test('cid correctly sets the id for the checkbox and it\'s label', async function(assert) {
@@ -92,14 +86,13 @@ module('em-form checkbox', function(hooks) {
   test('Checkbox can be a required field', async function(assert) {
 
     await render(hbs`{{#em-form as |form|}}{{form.checkbox property="asd" required=true}}{{/em-form}}`);
-
-    assert.ok(find('input').attr('required'), 'checkbox input becomes a required field');
+    assert.ok(find('input').required, 'checkbox input becomes a required field');
   });
 
   test('Checkbox can be autofocused', async function(assert) {
 
     await render(hbs`{{#em-form as |form|}}{{form.checkbox property="asd" autofocus=true}}{{/em-form}}`);
 
-    assert.ok(find('input').attr('autofocus'), 'checkbox input has autofocus');
+    assert.ok(find('input').autofocus, 'checkbox input has autofocus');
   });
 });
