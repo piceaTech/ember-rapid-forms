@@ -4,27 +4,29 @@ Standard <i>&lt;input&gt;</i> tag which is a one-line input field that a user ca
 
 <h2>Markup</h2>
 <div class="well line-example">
-    <pre><code class="handlebars">
+  <pre {{! template-lint-disable-tree }}><code class="handlebars">
 \{{#em-form model=model as |form|}}
     \{{form.input label="First Name" property="firstName" cid="FID"}}
 \{{/em-form}}
-    </code></pre>
+    </code>
+  </pre>
 </div>
 
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form submit_button=false model=model as |form|}}
-        {{form.input label="First Name" property="firstName" cid="FID"}}
-    {{/em-form}}
+  {{#em-form submit_button=false model=model as |form|}}
+    {{form.input label="First Name" property="firstName" cid="FID"}}
+  {{/em-form}}
 </div>
 
 <div class="well line-example">
-    inputData: {{model.firstName}}
+  inputData: {{model.firstName}}
 </div>
 
 <h2>Parameters</h2>
 <table class="table table-striped">
+  <tbody>
     <tr><th>Param name</th><th>Description</th><th>Default</th></tr>
     <tr><td>label</td><td>The label of the input</td><td>A humanized form of the property name</td></tr>
     <tr><td>property</td><td>The property name in the model instance bound to the form</td><td>none, value is required.</td></tr>
@@ -33,10 +35,23 @@ Standard <i>&lt;input&gt;</i> tag which is a one-line input field that a user ca
     <tr><td>name</td><td>The name of the input element.</td><td>null</td></tr>
     <tr><td>placeholder</td><td>The standard input placeholder.</td><td>null</td></tr>
     <tr><td>elementClass</td><td>The class of the input element concatenated with the default 'form-control' class.</td><td>form-control</td></tr>
-    <tr><td>autoresize</td><td>If true, will activate automatic resizing from <a href="https://github.com/tim-evans/ember-autoresize" target="_blank">ember-autoresize addon</a>.</td><td>null</td></tr>
+    <tr>
+      <td>autoresize</td>
+      <td>
+        If true, will activate automatic resizing from 
+        <a
+          href="https://github.com/tim-evans/ember-autoresize"
+          target="_blank"
+          rel="noopener"
+        >
+          ember-autoresize addon
+        </a>.
+      </td><td>null</td>
+    </tr>
     <tr><td>disabled</td><td>Standard HTML5 disabled attribute.</td><td>null</td></tr>
     <tr><td>required</td><td>Standard HTML5 required attribute.</td><td>null</td></tr>
     <tr><td>autofocus</td><td>Standard HTML5 autofocus attribute.</td><td>null</td></tr>
     <tr><td>readonly</td><td>Standard HTML5 readonly attribute.</td><td>null</td></tr>
     <tr><td>onKeyUp</td><td>If true, errors will show as soon as the user types in the field.</td><td>false</td></tr>
+  </tbody>
 </table>

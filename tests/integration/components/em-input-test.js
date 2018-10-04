@@ -18,24 +18,23 @@ module('em-input', function(hooks) {
 
     await render(hbs`{{#em-form as |form|}}{{form.input property="asd" name="my-name"}}{{/em-form}}`);
 
-    assert.equal(find('input').attr('name'), 'my-name', 'name attribute gets rendered');
+    assert.equal(find('input').getAttribute('name'), 'my-name', 'name attribute gets rendered');
   });
 
 
   test('Input can be disabled', async function(assert) {
     await render(hbs`{{#em-form as |form|}}{{form.input property="asd" disabled=true}}{{/em-form}}`);
 
-    assert.ok(find('input').attr('disabled'), 'input renders disabled');
+    assert.ok(find('input').disabled, 'input renders disabled');
   });
 
   test('Input renders with custom css', async function(assert) {
     await render(
       hbs`{{#em-form as |form|}}{{form.input property="asd" label='My label' elementClass="col-md-6" controlWrapper="col-md-6" labelClass="col-md-4"}}{{/em-form}}`
     );
-
-    assert.ok(find('label').hasClass('col-md-4'), 'Label has correct class');
-    assert.ok(find('input').closest('.col-md-6').length, 'Input parent has correct class');
-    assert.ok(find('input').hasClass('col-md-6'), 'Input has correct class');
+    assert.ok(find('label').className.includes('col-md-4'), 'Label has correct class');
+    assert.ok(find('input').parentNode.className.includes('col-md-6'), 'Input parent has correct class');
+    assert.ok(find('input').className.includes('col-md-6'), 'Input has correct class');
   });
 
   test('cid correctly sets the id for the input and it\'s label', async function(assert) {
@@ -58,7 +57,7 @@ module('em-input', function(hooks) {
 
     await render(hbs`{{#em-form as |form|}}{{form.input property="asd" required=true}}{{/em-form}}`);
 
-    assert.ok(find('input').attr('required'), 'input becomes a required field');
+    assert.ok(find('input').required, 'input becomes a required field');
   });
 
   test('Input can be autofocused', async function(assert) {

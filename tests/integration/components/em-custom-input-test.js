@@ -19,8 +19,8 @@ module('em-custom-input', function(hooks) {
     await render(
       hbs`{{#em-form as |form|}}{{#form.custom-input property="asd" label='My label' elementClass="col-md-6" controlWrapper="col-md-8" labelClass="col-md-4" as |mainComponent|}}{{input class=mainComponent.elementClass}}{{/form.custom-input}}{{/em-form}}`
     );
-    assert.ok(find('label').hasClass('col-md-4'), 'Label has correct class');
-    assert.ok(find('input').parent().hasClass('col-md-8'), 'Input parent has correct class');
+    assert.ok(find('label').className.includes('col-md-4'), 'Label has correct class');
+    assert.ok(find('input').parentNode.className.includes('col-md-8'), 'Input parent has correct class');
   });
 
   test('cid correctly sets the id for the input and it\'s label', async function(assert) {
