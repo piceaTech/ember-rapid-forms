@@ -1,8 +1,7 @@
-import { run } from '@ember/runloop';
 import EmberObject from '@ember/object';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find, fillIn } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('em-form multi models', function(hooks) {
@@ -27,13 +26,11 @@ module('em-form multi models', function(hooks) {
         {{form.input name="b" property="modelB.name" label="modelB name:"}}
       {{/em-form}}`);
 
-    run(() => {
-      const inputA = find('input[name="a"]');
-      const inputB = find('input[name="b"]');
+    const inputA = find('input[name="a"]');
+    const inputB = find('input[name="b"]');
 
-      assert.equal(inputA.value, 'model-a', 'Input A has the correct value');
-      assert.equal(inputB.value, 'model-b', 'Input B has the correct value');
-    });
+    assert.equal(inputA.value, 'model-a', 'Input A has the correct value');
+    assert.equal(inputB.value, 'model-b', 'Input B has the correct value');
   });
 
   test('a form with hashed models updates correct model', async function(assert) {
@@ -45,20 +42,15 @@ module('em-form multi models', function(hooks) {
         {{form.input name="a" property="modelA.name" label="modelA name:"}}
         {{form.input name="b" property="modelB.name" label="modelB name:"}}
       {{/em-form}}`);
+      
+    const inputA = find('input[name="a"]');
+    const inputB = find('input[name="b"]');
 
-    run(() => {
-      const inputA = find('input[name="a"]');
-      const inputB = find('input[name="b"]');
+    assert.equal(inputA.value, 'model-a', 'Input A has the correct value');
+    assert.equal(inputB.value, 'model-b', 'Input B has the correct value');
 
-      assert.equal(inputA.value, 'model-a', 'Input A has the correct value');
-      assert.equal(inputB.value, 'model-b', 'Input B has the correct value');
+    await fillIn('input[name="b"]', 'my-new-val');
 
-      inputB.val('my-new-val');
-      inputB.trigger('change');
-    });
-
-    run(() => {
-      assert.equal(myHash.get('modelB.name'), 'my-new-val', 'Input updates its model correctly');
-    });
+    assert.equal(myHash.get('modelB.name'), 'my-new-val', 'Input updates its model correctly');
   });
 });
