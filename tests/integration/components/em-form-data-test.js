@@ -1,9 +1,8 @@
-import { run } from '@ember/runloop';
 import { Promise as EmberPromise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, findAll } from '@ember/test-helpers';
 import DS from 'ember-data';
 const { Errors } = DS;
 import hbs from 'htmlbars-inline-precompile';
@@ -36,19 +35,15 @@ module('component:em-form ember-data', function(hooks) {
       assert.ok(true, 'submit action invoked!');
     };
 
-    run(() => {
-      const errors = Errors.create();
-      errors.add('name', 'name!');
-      this.get('someModel').set('isValid', false);
-      this.get('someModel').set('errors', errors);
-    });
+    const errors = Errors.create();
+    errors.add('name', 'name!');
+    this.get('someModel').set('isValid', false);
+    this.get('someModel').set('errors', errors);
 
     await render(
       hbs `{{#em-form model=someModel showErrorsOnRender=true as |form|}}{{form.input property="name"}}{{/em-form}}`
     );
 
-    run(() => {
-      assert.equal(findAll('span:contains("name!")').length, 1, "Found help text on form");
-    });
+    assert.equal(findAll('span').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
   });
 });
