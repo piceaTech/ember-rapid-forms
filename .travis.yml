@@ -48,11 +48,9 @@ before_install:
   - npm config set spin false
   - npm install -g npm@4
   - npm --version
-  - npm install -g bower
 
 install:
   - npm install
-  - bower install
 
 script:
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
