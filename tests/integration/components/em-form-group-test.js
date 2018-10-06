@@ -32,9 +32,9 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='error' errorIcon='bell'}}{{/em-form}}`
     );
 
-    let icons = find('span i.fa-bell');
+    let icons = findAll('span i.fa-bell');
     assert.equal(icons.length, 1, 'found validation icon');
-    assert.ok(icons.hasClass('fa-bell'), 'has error icon');
+    assert.ok(icons[0].className.includes('fa-bell'), 'has error icon');
   });
 
   test('it renders proper warning validation icon', async function(assert) {
@@ -45,10 +45,10 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='warning' warningIcon='exclamation'}}{{/em-form}}`
     );
 
-    let icons = find('span i.fa-exclamation');
+    let icons = findAll('span i.fa-exclamation');
 
     assert.equal(icons.length, 1, 'found validation icon');
-    assert.ok(icons.hasClass('fa-exclamation'), 'has warning icon');
+    assert.ok(icons[0].className.includes('fa-exclamation'), 'has warning icon');
   });
 
   test('it renders proper success validation icon', async function(assert) {
@@ -59,10 +59,10 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" form=form shouldShowErrors=true validationIcons=true status='success' validationIcon='check-circle'}}{{/em-form}}`
     );
 
-    let icons = find('span i.fa-check-circle');
+    let icons = findAll('span i.fa-check-circle');
 
     assert.equal(icons.length, 1, 'found validation icon');
-    assert.ok(icons.hasClass('fa-check-circle'));
+    assert.ok(icons[0].className.includes('fa-check-circle'));
   });
 
   test('Find the label if i18n is set', async function(assert) {
@@ -98,13 +98,14 @@ module('em-form-group', function(hooks) {
     this.set('model', EmberObject.create());
     await render(hbs`{{#em-form as |form|}}{{form.group property="asd" model=model required=true}}{{/em-form}}`);
 
-    assert.dom('.form-group').hasClass('required');
+    assert.ok(find('.form-group').className.includes('required'));
   });
 
   test('When there a presence validator', async function(assert) {
     // Stub ember-cp-validation
     const Model = EmberObject.extend({
       init(){
+        this._super(...arguments);
         this.set('validations', {
           attrs: {
             fullName: {
@@ -130,9 +131,8 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class'}}{{/em-form}}`
     );
     const wrapper = find('div.wrapper-class');
-
     assert.ok(wrapper, 'Wrapper exists');
-    assert.equal(wrapper.find('label:contains("my-label")').length, 1, 'Label is inside wrapper');
+    assert.equal(findAll('label').filter((e) => e.textContent.includes('my-label')).length, 1);
   });
 
   test('renders with yieldInLabel', async function(assert) {
@@ -140,9 +140,9 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' yieldInLabel=true}}{{/em-form}}`
     );
 
-    const label = find('label');
-    assert.equal(label.length, 1, 'Label is a wrapper tag');
-    assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
+    const labels = findAll('label');
+    assert.equal(labels.length, 1, 'Label is a wrapper tag');
+    assert.equal(labels.filter((e) => e.textContent.includes('my-label')).length, 1, 'Label is set correctly');
   });
 
   test('renders with yieldInLabel with labelWrapperClass', async function(assert) {
@@ -150,12 +150,12 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" label='my-label' labelWrapperClass='wrapper-class' yieldInLabel=true}}{{/em-form}}`
     );
 
-    const wrapper = find('div.wrapper-class');
-    assert.equal(wrapper.length, 1, 'Wrapper exists');
+    const wrappers = findAll('div.wrapper-class');
+    assert.equal(wrappers.length, 1, 'Wrapper exists');
 
-    const label = wrapper.find('label');
-    assert.ok(label, 'Label is a wrapper tag');
-    assert.ok(label.text().indexOf('my-label') > -1, 'Label is set correctly');
+    const labels = findAll('label');
+    assert.equal(labels.length, 1, 'Label is a wrapper tag');
+    assert.equal(labels.filter((e) => e.textContent.includes('my-label')).length, 1, 'Label is set correctly');
   });
 
   test('renders v_icon', async function(assert) {
@@ -163,11 +163,11 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" validationIcon='check-square' shouldShowErrors=true validationIcons=true}}{{/em-form}}`
     );
 
-    const icons = find('span.form-control-feedback');
+    const icons = findAll('span.form-control-feedback');
     assert.equal(icons.length, 1, 'Has icon span');
-    assert.ok(icons.hasClass('form-control-feedback'), 'Has proper class');
-    assert.equal(icons.find('i').length, 1, 'Has icon');
-    assert.ok(this.$(icons.find('i')[0]).hasClass('fa-check-square'), 'Icon has proper class');
+    assert.ok(icons[0].className.includes('form-control-feedback'), 'Has proper class');
+    assert.equal(icons[0].querySelectorAll('i').length, 1, 'Has icon');
+    assert.ok(icons[0].querySelector('i').className.includes('fa-check-square'), 'Icon has proper class');
   });
 
   test('renders error message', async function(assert) {
@@ -175,10 +175,10 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`
     );
 
-    const helpSpan = find('span.help-block');
+    const helpSpan = findAll('span.help-block');
     assert.equal(helpSpan.length, 1, 'Has help span');
-    assert.ok(helpSpan.hasClass('help-block'), 'span has correct class');
-    assert.equal(helpSpan.text().trim(), 'help text here', 'span has correct help text');
+    assert.ok(helpSpan[0].className.includes('help-block'), 'span has correct class');
+    assert.equal(helpSpan[0].textContent.trim(), 'help text here', 'span has correct help text');
   });
 
   test('does not renders error message when layout is inline', async function(assert) {
@@ -186,7 +186,7 @@ module('em-form-group', function(hooks) {
       hbs `{{#em-form formLayout='inline' as |form|}}{{form.group property="asd" shouldShowErrors=true helpText='help text here'}}{{/em-form}}`
     );
 
-    const helpSpan = find('span.help-block');
+    const helpSpan = findAll('span.help-block');
     assert.equal(helpSpan.length, 0, 'Has no help span');
   });
 });
