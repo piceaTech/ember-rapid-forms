@@ -1,8 +1,7 @@
-import { run } from '@ember/runloop';
 import EmberObject from '@ember/object';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('em-form-submit tests', function(hooks) {
@@ -22,19 +21,19 @@ module('em-form-submit tests', function(hooks) {
     await render(
       hbs`{{#em-form submitButton=false model=someModel showErrorsOnSubmit=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`
     );
+    assert.ok(find('button').disabled, 'Button is disabled');
 
-    assert.ok(find('button').attr('disabled'), 'Button is disabled');
+    this.set('someModel.isValid', true);
+    await render(
+      hbs`{{#em-form submitButton=false model=someModel showErrorsOnSubmit=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`
+    );
 
-    run(() => {
-      this.set('someModel.isValid', true);
-    });
-
-    assert.ok(!find('button').attr('disabled'), 'Button is enabled');
+    assert.ok(!find('button').disabled, 'Button is enabled');
   });
 
   test('Submit button has the correct type attribute', async function(assert) {
     await render(hbs`{{#em-form submitButton=false as |form|}}{{form.submit text="Submit!"}}{{/em-form}}`);
 
-    assert.equal(find('button').attr('type'), 'submit', 'default type is submit');
+    assert.equal(find('button').getAttribute('type'), 'submit', 'default type is submit');
   });
 });

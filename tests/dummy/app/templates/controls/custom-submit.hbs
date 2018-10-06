@@ -1,12 +1,12 @@
 <h3>Custom Submit Button</h3>
 
 <p>
-It is possible to have a custom submit button by not rendering the default submit button and adding a custom button of your own.
+  It is possible to have a custom submit button by not rendering the default submit button and adding a custom button of your own.
 </p>
 
 <h2>Markup</h2>
 <div class="well line-example">
-    <pre><code class="handlebars">
+  <pre {{! template-lint-disable-tree }}><code class="handlebars">
 \{{#em-form model=model as |form|}}
     \{{form.input label="Name" property="user"}}
     \{{form.input label="Password" property="password"}}
@@ -14,21 +14,21 @@ It is possible to have a custom submit button by not rendering the default submi
         &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
     &lt;/div&gt;
 \{{/em-form}}
-    </code></pre>
+  </code></pre>
 </div>
 
 <p>
-Few things happen here:
-<ol>
+  Few things happen here:
+  <ol>
     <li>Bind the controller's model to the <i>model</i> property of the form component.</li>
     <li>Disable rendering the default submit button by setting <i>submitButton=false</i></li>
     <li>We add an input button (type must be <i>submit</i>) and bind its <i>disabled</i> property to the <i>isntValid</i> property of our model</li>
-</ol>
+  </ol>
 </p>
 
 <h2>Controller/Model</h2>
 <div class="well line-example">
-    <pre><code class="coffeescript">
+  <pre {{! template-lint-disable-tree }}><code class="coffeescript">
 #Our Model
 const Credentials = DS.Model.extend(EmberValidations, {
   user: DS.attr('string'),
@@ -63,20 +63,25 @@ export default Em.Controller.extend({
     }
   }
 });
-    </code></pre>
+  </code></pre>
 </div>
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form model=model submitButton=false as |form|}}
-        {{form.input label="Name" property="user"}}
-        {{form.input label="Password" property="password"}}
-        <div class="form-actions">
-            <input disabled={{model.isntValid}} type="submit" class="btn btn-primary" value="Login">
-        </div>
-    {{/em-form}}
+  {{#em-form model=model submitButton=false as |form|}}
+    {{form.input label="Name" property="user"}}
+    {{form.input label="Password" property="password"}}
+    <div class="form-actions">
+      <input
+        disabled={{model.isntValid}}
+        type="submit"
+        class="btn btn-primary"
+        value="Login"
+      >
+    </div>
+  {{/em-form}}
 </div>
 
 <div class="well line-example">
-    name: {{model.user}}, password: {{model.password}}
+  name: {{model.user}}, password: {{model.password}}
 </div>
