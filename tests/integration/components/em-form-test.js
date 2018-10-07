@@ -77,6 +77,8 @@ module('em-form', function(hooks) {
     await render(hbs `{{#em-form model=model as |form|}}{{form.input property="name"}}{{/em-form}}`);
 
     assert.equal(findAll('span').filter((e) => e.textContent.includes('name!')).length, 0, "Found help text on form before focusout");
+    
+    await focus('input');
     await blur('input');
 
     assert.equal(findAll('span').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
@@ -98,6 +100,7 @@ module('em-form', function(hooks) {
 
     await typeIn('input', 'a');
     assert.equal(findAll('span').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
+    somePerson.set('name', 'my-name')
 
   });
 
@@ -211,7 +214,7 @@ module('em-form', function(hooks) {
     assert.equal(inputAll.length, 1, "Found input");
     assert.equal(input.value, 'model-a', "Input has original model value");
 
-    
+    await focus('input');
     await blur('input');
     assert.equal(findAll('span').filter((e) => e.textContent.includes('name!')).length, 1, "Found help text on form");
     
