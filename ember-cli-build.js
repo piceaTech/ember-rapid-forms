@@ -12,7 +12,11 @@ module.exports = function(defaults) {
     },
     'ember-font-awesome': {
       includeFontFiles: false
-    }
+    },
+    'ember-prism': {
+      'theme': 'okaidia',
+      'components': ['handlebars', 'css', 'javascript','markup-templating',], //needs to be an array, or undefined.
+      }
   });
 
   /*
@@ -21,9 +25,6 @@ module.exports = function(defaults) {
     This build file does *not* influence how the addon or the app using it
     behave. You most likely want to be modifying `./index.js` or app's build file
     */
-//  app.import('bower_components/highlightjs/highlight.pack.js');
-//  app.import('bower_components/highlightjs/styles/tomorrow.css');
-
 
   return app.toTree();
 };

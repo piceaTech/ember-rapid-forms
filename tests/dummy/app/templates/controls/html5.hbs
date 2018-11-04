@@ -4,8 +4,8 @@
 <p>The controls are just standard {{#link-to "controls.input"}}\{{em-input}}{{/link-to}} tag with different <i>type</i> property.</p>
 
 <h2>Markup</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form model=model as |form|}}
   \{{form.input label="Email" property="email" type="email"}}
   \{{form.input label="Telephone" property="tel" type="tel"}}
@@ -15,7 +15,7 @@
   \{{form.input label="Month" property="month" type="month"}}
   \{{form.input label="Week" property="week" type="week"}}
 \{{/em-form}}
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>Result</h2>

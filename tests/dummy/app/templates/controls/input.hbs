@@ -3,13 +3,12 @@
 Standard <i>&lt;input&gt;</i> tag which is a one-line input field that a user can enter text into.
 
 <h2>Markup</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form model=model as |form|}}
   \{{form.input label="First Name" property="firstName" cid="FID"}}
 \{{/em-form}}
-    </code>
-  </pre>
+  {{/code-block}}
 </div>
 
 

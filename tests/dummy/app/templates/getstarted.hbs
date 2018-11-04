@@ -8,8 +8,8 @@
 <h2>Quick example</h2>
 
 <h3>Given the following controller:</h3>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="coffeescript">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="javascript"}}
 MyController = Em.Controller.extend({
   genderOptions: Ember.A([
     {id: 'M', name: 'Male'}
@@ -22,13 +22,13 @@ MyController = Em.Controller.extend({
     }
   }
 })
-  </code></pre>
+  {{/code-block}}
 </div>
 
 
 <h3>And the following model:</h3>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="coffeescript">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="javascript"}}
 import Ember from 'ember';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -89,14 +89,14 @@ const person = DS.Model.extend(Validations, InputErrors, helper, {
     return "fullName: " + (this.get('fullName')) + ", firstName: " + (this.get('firstName')) + ", lastName: " + (this.get('lastName')) + ", password: " + (this.get('password')) + ", comment: " + (this.get('comment')) + ", active: " + (this.get('active')) + ", gender: " + (this.get('gender'));
   })
 });
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <i>Note: for validation support you need: https://github.com/offirgolan/ember-cp-validations</i>
 
 <h3>With this template:</h3>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="html">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form model=model formLayout=layout as |form|}}
   \{{form.input property="fullName" label="Full Name" placeholder="Enter a full name..." canShowErrors=model.visibleErrors.fullName}}
   \{{form.input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
@@ -108,7 +108,7 @@ const person = DS.Model.extend(Validations, InputErrors, helper, {
     &lt;button class="btn btn-default" \{{ action "clearValidations" }}&gt;Clear Validations&lt;/button&gt;
   &lt;/div&gt;
 \{{/em-form}}
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <h3>I18n:</h3>

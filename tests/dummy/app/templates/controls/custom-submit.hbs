@@ -5,8 +5,8 @@
 </p>
 
 <h2>Markup</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form model=model as |form|}}
     \{{form.input label="Name" property="user"}}
     \{{form.input label="Password" property="password"}}
@@ -14,7 +14,7 @@
         &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
     &lt;/div&gt;
 \{{/em-form}}
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <p>
@@ -27,8 +27,8 @@
 </p>
 
 <h2>Controller/Model</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="coffeescript">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="javascript"}}
 #Our Model
 const Credentials = DS.Model.extend(EmberValidations, {
   user: DS.attr('string'),
@@ -63,7 +63,7 @@ export default Em.Controller.extend({
     }
   }
 });
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>Result</h2>

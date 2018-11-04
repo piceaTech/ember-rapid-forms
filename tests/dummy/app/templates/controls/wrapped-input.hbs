@@ -4,8 +4,8 @@ You can enrich the input control by creating your own component that wraps the i
 This gives you the freedom to support extra visual effects when neccessary.
 
 <h2>Template Markup</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form model=model formLayout=layout as |form|}}
   \{{form.input label="Name" property="name"}}
   \{{my-custom-input label="Name" property="name"}}
@@ -13,12 +13,12 @@ This gives you the freedom to support extra visual effects when neccessary.
     \{{input value=model.password type="password" name=customInput.name}}
   \{{/form.custom-input}}
 \{{/em-form}}
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>The custom component code</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="coffeescript">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="javascript"}}
 WrappedInputComponent = Em.Component.extend({
   attributeBindings: ['style'],
   style: Ember.computed({
@@ -27,17 +27,17 @@ WrappedInputComponent = Em.Component.extend({
     }
   })
 })
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>The custom component template</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{em-input error=showError placeholder="Wrapped with ugly border"}}
 \{{#if showError}}
   Extra error data !
 \{{/if}}
-  </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>Result</h2>

@@ -3,14 +3,12 @@
 Checkboxes let a user select or deselect an option.
 
 <h2>Markup</h2>
-<div class="well line-example">
-  <pre {{! template-lint-disable-tree }}>
-    <code class="handlebars" >
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form submitButton=false model=model as |form|}}
   \{{form.checkbox label="Active?" property="active"}}
 \{{/em-form}}
-    </code>
-  </pre>
+  {{/code-block}}
 </div>
 
 <h2>Result</h2>
