@@ -309,3 +309,63 @@ test('Triggers the action', function(assert) {
     this.$(select).trigger('change');
   });
 });
+
+test('em-select renders with all multiple items selected', function(assert) {
+  fruitSalad.set('fruits', [3, 4])
+
+  this.set('fruitOptions', fruitOptions);
+  this.set('fruitSalad', fruitSalad);
+
+  this.render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='fruits' model=fruitSalad}}{{/em-form}}`);
+
+  const element = this.$();
+  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+
+  const select = element.find('select')[0];
+  assert.equal(select.options.length, 5, 'select has correct amount of options');
+  assert.deepEqual($(select).val(), ['3', '4'])
+
+});
+
+test('em-select can select multiple items', function(assert) {
+
+  this.set('fruitOptions', fruitOptions);
+  this.set('fruitSalad', fruitSalad);
+
+  this.render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+
+  const element = this.$();
+  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+
+  const select = element.find('select')[0];
+  assert.equal(select.options.length, 5, 'select has correct amount of options');
+
+  run(() => {
+    this.$(select).val(['3', '4']);
+    this.$(select).trigger('change');
+  });
+
+  assert.deepEqual(fruitSalad.get('favoriteFruit'), [3, 4], 'model favorite fruit is the selection');
+
+});
+
+test('em-select uses array for single item in multiple mode', function(assert) {
+
+  this.set('fruitOptions', fruitOptions);
+  this.set('fruitSalad', fruitSalad);
+
+  this.render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+
+  const element = this.$();
+  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+
+  const select = element.find('select')[0];
+  assert.equal(select.options.length, 5, 'select has correct amount of options');
+
+  run(() => {
+    this.$(select).val('3');
+    this.$(select).trigger('change');
+  });
+  assert.deepEqual(fruitSalad.get('favoriteFruit'), [3], 'model favorite fruit is the selection');
+
+});
