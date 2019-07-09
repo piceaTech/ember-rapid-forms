@@ -32,8 +32,8 @@
     {{else}}
       {{#each content key="@index" as |item|}}
         <option
-          value={{get item optionValuePath}}
-          selected={{eq (get item optionValuePath) selectedValue}}
+          value="{{get item optionValuePath}}"
+          selected={{if multiple (contains (get item optionValuePath) selectedValue) (eq (get item optionValuePath) selectedValue)}}
           disabled={{get item optionDisabledPath}}
         >
           {{get item optionLabelPath}}
