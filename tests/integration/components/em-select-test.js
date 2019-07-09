@@ -313,64 +313,92 @@ module('em-select', function(hooks) {
 
     
   });
-});
 
-test('em-select renders with all multiple items selected', function(assert) {
+test('em-select renders with all multiple items selected', async function(assert) {
   fruitSalad.set('fruits', [3, 4])
-
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
+  await render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='fruits' model=fruitSalad}}{{/em-form}}`);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='fruits' model=fruitSalad}}{{/em-form}}`);
 
-  const element = this.$();
-  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+  assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
-  const select = element.find('select')[0];
+  const select = find('select');
   assert.equal(select.options.length, 5, 'select has correct amount of options');
-  assert.deepEqual($(select).val(), ['3', '4'])
+ 
+  assert.deepEqual(getSelectValues(select), ['3', '4'])
 
 });
 
-test('em-select can select multiple items', function(assert) {
+test('em-select can select multiple items', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  await render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
 
-  const element = this.$();
-  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+  assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
-  const select = element.find('select')[0];
+  const select = find('select');
   assert.equal(select.options.length, 5, 'select has correct amount of options');
-
+  console.log('select.options', select.options);
   run(() => {
-    this.$(select).val(['3', '4']);
-    this.$(select).trigger('change');
+    select.value = 5;
+    setSelectValues(select, ['3', '4'])
+    select.dispatchEvent(new Event('change'));
   });
 
   assert.deepEqual(fruitSalad.get('favoriteFruit'), [3, 4], 'model favorite fruit is the selection');
 
 });
 
-test('em-select uses array for single item in multiple mode', function(assert) {
+test('em-select uses array for single item in multiple mode', async function(assert) {
 
   this.set('fruitOptions', fruitOptions);
   this.set('fruitSalad', fruitSalad);
 
-  this.render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
+  await render(hbs`{{#em-form as |form|}}{{form.select multiple=true label="Fruits:" content=fruitOptions optionValuePath='id' optionLabelPath='name' property='favoriteFruit' model=fruitSalad}}{{/em-form}}`);
 
-  const element = this.$();
-  assert.equal(element.find('label:contains("Fruits:")').length, 1, 'label has for property');
+  assert.equal(findAll('label').filter((e) => e.textContent.includes('Fruits:')).length, 1, 'label has for property');
 
-  const select = element.find('select')[0];
+  const select = find('select');
   assert.equal(select.options.length, 5, 'select has correct amount of options');
 
   run(() => {
-    this.$(select).val('3');
-    this.$(select).trigger('change');
+    setSelectValues(select, ['3'])
+    select.dispatchEvent(new Event('change'));
   });
   assert.deepEqual(fruitSalad.get('favoriteFruit'), [3], 'model favorite fruit is the selection');
 
+  });
 });
+
+// Return an array of the selected opion values
+// select is an HTML select element
+function getSelectValues(select) {
+  var result = [];
+  var options = select && select.options;
+  var opt;
+
+  for (var i = 0, iLen = options.length; i<iLen; i++) {
+    opt = options[i];
+
+    if (opt.selected) {
+      result.push(opt.value || opt.text);
+    }
+  }
+  return result;
+}
+
+
+function setSelectValues(select, arr) {
+  var options = select && select.options;
+
+  for (var i = 0, iLen = options.length; i<iLen; i++) {
+    let opt = options[i];
+
+    let val = opt.value || opt.text;
+    opt.selected = arr.includes(val);
+  }
+}
+
