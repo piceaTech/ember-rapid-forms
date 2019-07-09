@@ -33,7 +33,7 @@ export default Component.extend({
   actions: {
     submit() {
       if(typeof this.submitAction === 'function'){
-        this.submitAction();
+        this.submitAction(this.get('form.model'));
       }
     }
   }

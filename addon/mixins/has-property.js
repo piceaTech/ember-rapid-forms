@@ -23,7 +23,7 @@ export default Mixin.create(HasIdMixin, {
       } else if (this.get('formComponent.property')) {
         return this.get('formComponent.property');
       } else {
-        return assert('Property could not be found.');
+        return assert('Property could not be found.', false);
       }
     }
   }),

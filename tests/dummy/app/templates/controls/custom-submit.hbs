@@ -7,11 +7,12 @@
 <h2>Markup</h2>
 <div class="well line-example" {{! template-lint-disable-tree }}>
   {{#code-block language="handlebars"}}
-\{{#em-form model=model as |form|}}
+\{{#em-form model=model submitButton=false formAction=(action "submit") as |form|}}
     \{{form.input label="Name" property="user"}}
     \{{form.input label="Password" property="password"}}
     &lt;div class="form-actions"&gt;
-        &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
+        Custom: &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
+        Dafault Submit: \{{form.submit text="Send" submitAction=(action "submit")}}
     &lt;/div&gt;
 \{{/em-form}}
   {{/code-block}}
@@ -23,6 +24,7 @@
     <li>Bind the controller's model to the <i>model</i> property of the form component.</li>
     <li>Disable rendering the default submit button by setting <i>submitButton=false</i></li>
     <li>We add an input button (type must be <i>submit</i>) and bind its <i>disabled</i> property to the <i>isntValid</i> property of our model</li>
+    <li>Notice that we didn't customize the default button at all. It will always alert LoggedIn</li>
   </ol>
 </p>
 
@@ -58,17 +60,17 @@ Credentials.reopen({
 #Our controller
 export default Em.Controller.extend({
   actions: {
-    submit() {
-      return alert("Logged in!");
+    submit(model) {
+      return alert(`Logged in as ${model.user} with pw ${model.password}!`);
     }
   }
 });
   {{/code-block}}
 </div>
 
-<h2>Result</h2>
+<h2>Result <small>with custom input element</small></h2>
 <div class="well line-example">
-  {{#em-form model=model submitButton=false as |form|}}
+  {{#em-form model=model submitButton=false formAction=(action "submit") as |form|}}
     {{form.input label="Name" property="user"}}
     {{form.input label="Password" property="password"}}
     <div class="form-actions">
@@ -82,6 +84,29 @@ export default Em.Controller.extend({
   {{/em-form}}
 </div>
 
+<h2>Result <small>with default submit button</small></h2>
+<div class="well line-example">
+  {{#em-form model=model submitButton=false as |form|}}
+    {{form.input label="Name" property="user"}}
+    {{form.input label="Password" property="password"}}
+    <div class="form-actions">
+      {{form.submit text="Send" submitAction=(action "submit")}}
+    </div>
+  {{/em-form}}
+</div>
+
 <div class="well line-example">
   name: {{model.user}}, password: {{model.password}}
 </div>
+
+<h2>Parameters for submit</h2>
+<table class="table table-striped">
+  <tbody>
+    <tr><th>Param name</th><th>Description</th><th>Default</th></tr>
+    <tr><td>classes</td><td>The classes applied to the submit button</td><td>btn btn-default</td></tr>
+    <tr><td>type</td><td>The type of the input of the submit button</td><td>submit</td></tr>
+    <tr><td>text</td><td>The displayed value of the submit button</td><td>Submit</td></tr>
+    <tr><td>submitAction</td><td>function, to execute with model as param when clicking the button</td><td>None</td></tr>
+  </tbody>
+</table>
+
