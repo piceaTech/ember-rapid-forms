@@ -341,7 +341,6 @@ test('em-select can select multiple items', async function(assert) {
 
   const select = find('select');
   assert.equal(select.options.length, 5, 'select has correct amount of options');
-  console.log('select.options', select.options);
   run(() => {
     select.value = 5;
     setSelectValues(select, ['3', '4'])

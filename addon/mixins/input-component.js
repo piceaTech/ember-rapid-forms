@@ -52,6 +52,9 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
 
   controlWrapper: computed('form.formLayout', 'labelInControl', {
     get() {
+      if (this._controlWrapper) {
+        return this._controlWrapper;
+      }
       if (this.get('form.formLayout') === 'horizontal') {
         if (this.get('labelInControl')) {
           return 'col-sm-offset-2 col-sm-10';
@@ -61,6 +64,10 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
       }
 
       return null;
+    },
+
+    set(key, value) {
+      return this._controlWrapper = value;
     }
   }),
 
@@ -70,8 +77,16 @@ export default Mixin.create(HasPropertyMixin, HasPropertyValidationMixin, HasIdM
     return this.get(`model.validations.attrs.${property}.options`) || false;
   }),
 
-  required: computed('propertyOptions.presence.presence', function() {
-    return this.get('propertyOptions.presence.presence') || false;
+  required: computed('propertyOptions.presence.presence', {
+    get(){
+      if(this._required !== undefined){
+        return this._required;
+      }
+      return this.get('propertyOptions.presence.presence') || false;
+    },
+    set(key, value){
+      return this._required = value;
+    }
   }),
 
   formSubmitted: observer('form.isSubmitted', 'form.showErrorsOnSubmit', 'errors.length', function () {
