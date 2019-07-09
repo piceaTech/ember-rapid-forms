@@ -1,34 +1,36 @@
 <h3>Custom Submit Button</h3>
 
 <p>
-It is possible to have a custom submit button by not rendering the default submit button and adding a custom button of your own.
+  It is possible to have a custom submit button by not rendering the default submit button and adding a custom button of your own.
 </p>
 
 <h2>Markup</h2>
-<div class="well line-example">
-    <pre><code class="handlebars">
-\{{#em-form model=model as |form|}}
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
+\{{#em-form model=model submitButton=false formAction=(action "submit") as |form|}}
     \{{form.input label="Name" property="user"}}
     \{{form.input label="Password" property="password"}}
     &lt;div class="form-actions"&gt;
-        &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
+        Custom: &lt;input disabled=\{{model.isntValid}} type="submit" class="btn btn-primary" value="Login"&gt;
+        Dafault Submit: \{{form.submit text="Send" submitAction=(action "submit")}}
     &lt;/div&gt;
 \{{/em-form}}
-    </code></pre>
+  {{/code-block}}
 </div>
 
 <p>
-Few things happen here:
-<ol>
+  Few things happen here:
+  <ol>
     <li>Bind the controller's model to the <i>model</i> property of the form component.</li>
     <li>Disable rendering the default submit button by setting <i>submitButton=false</i></li>
     <li>We add an input button (type must be <i>submit</i>) and bind its <i>disabled</i> property to the <i>isntValid</i> property of our model</li>
-</ol>
+    <li>Notice that we didn't customize the default button at all. It will always alert LoggedIn</li>
+  </ol>
 </p>
 
 <h2>Controller/Model</h2>
-<div class="well line-example">
-    <pre><code class="coffeescript">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="javascript"}}
 #Our Model
 const Credentials = DS.Model.extend(EmberValidations, {
   user: DS.attr('string'),
@@ -58,25 +60,53 @@ Credentials.reopen({
 #Our controller
 export default Em.Controller.extend({
   actions: {
-    submit() {
-      return alert("Logged in!");
+    submit(model) {
+      return alert(`Logged in as ${model.user} with pw ${model.password}!`);
     }
   }
 });
-    </code></pre>
+  {{/code-block}}
 </div>
 
-<h2>Result</h2>
+<h2>Result <small>with custom input element</small></h2>
 <div class="well line-example">
-    {{#em-form model=model submitButton=false as |form|}}
-        {{form.input label="Name" property="user"}}
-        {{form.input label="Password" property="password"}}
-        <div class="form-actions">
-            <input disabled={{model.isntValid}} type="submit" class="btn btn-primary" value="Login">
-        </div>
-    {{/em-form}}
+  {{#em-form model=model submitButton=false formAction=(action "submit") as |form|}}
+    {{form.input label="Name" property="user"}}
+    {{form.input label="Password" property="password"}}
+    <div class="form-actions">
+      <input
+        disabled={{model.isntValid}}
+        type="submit"
+        class="btn btn-primary"
+        value="Login"
+      >
+    </div>
+  {{/em-form}}
+</div>
+
+<h2>Result <small>with default submit button</small></h2>
+<div class="well line-example">
+  {{#em-form model=model submitButton=false as |form|}}
+    {{form.input label="Name" property="user"}}
+    {{form.input label="Password" property="password"}}
+    <div class="form-actions">
+      {{form.submit text="Send" submitAction=(action "submit")}}
+    </div>
+  {{/em-form}}
 </div>
 
 <div class="well line-example">
-    name: {{model.user}}, password: {{model.password}}
+  name: {{model.user}}, password: {{model.password}}
 </div>
+
+<h2>Parameters for submit</h2>
+<table class="table table-striped">
+  <tbody>
+    <tr><th>Param name</th><th>Description</th><th>Default</th></tr>
+    <tr><td>classes</td><td>The classes applied to the submit button</td><td>btn btn-default</td></tr>
+    <tr><td>type</td><td>The type of the input of the submit button</td><td>submit</td></tr>
+    <tr><td>text</td><td>The displayed value of the submit button</td><td>Submit</td></tr>
+    <tr><td>submitAction</td><td>function, to execute with model as param when clicking the button</td><td>None</td></tr>
+  </tbody>
+</table>
+

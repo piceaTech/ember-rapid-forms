@@ -1,5 +1,5 @@
 import { not } from '@ember/object/computed';
-import { Model, attr } from 'ember-data';
+import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 import InputErrors from 'ember-rapid-forms/mixins/input-errors';
 import helper from 'ember-rapid-forms/mixins/ember-cp-validations-helper';
@@ -19,9 +19,9 @@ const Validations = buildValidations({
   ]
 });
 
-const Credentials = Model.extend(Validations, InputErrors, helper, {
-  user: attr('string'),
-  password: attr('string'),
+const Credentials = DS.Model.extend(Validations, InputErrors, helper, {
+  user: DS.attr('string'),
+  password: DS.attr('string'),
   isntValid: not('isValid')
 });
 

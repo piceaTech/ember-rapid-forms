@@ -3,8 +3,8 @@ Selectbox let a user select one item of a multi pre defined options.
 
 <h2>Markup/Code</h2>
 <h3>Template Markup</h3>
-<div class="well line-example">
-    <pre><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{form.select
     label="Gender"
     property="gender"
@@ -12,11 +12,11 @@ Selectbox let a user select one item of a multi pre defined options.
     optionValuePath="id"
     optionLabelPath="name"
     prompt="--select--"}}
-    </code></pre>
+    {{/code-block}}
 </div>
 <h3>Controller Code</h3>
-<div class="well line-example">
-    <pre><code class="coffeescript">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="javascript"}}
 export default Controller.extend({
   genderOptions: A([
     {
@@ -66,83 +66,84 @@ export default Controller.extend({
   ])
 });
 
-    </code></pre>
+    {{/code-block}}
 </div>
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form model=model submitButton=false as |form|}}
-        {{form.select
-            label="Gender"
-            content=genderOptions
-            optionValuePath="id"
-            optionLabelPath="name"
-            prompt="--select--"
-            property='single'
-        }}
-    {{/em-form}}
+  {{#em-form model=model submitButton=false as |form|}}
+    {{form.select
+      label="Gender"
+      content=genderOptions
+      optionValuePath="id"
+      optionLabelPath="name"
+      prompt="--select--"
+      property="single"
+    }}
+  {{/em-form}}
 </div>
 <div class="well line-example">
-    Single: {{model.single}}
+  Single: {{model.single}}
 </div>
 
 <h2>Result with multiple=true</h2>
 <div class="well line-example">
-{{#em-form model=model submitButton=false as |form|}}
+  {{#em-form model=model submitButton=false as |form|}}
     {{form.select
-        label="Gender"
-        content=genderOptions
-        optionValuePath="id"
-        optionLabelPath="name"
-        multiple=true
-        prompt="--select--"
-        property='multi'
+      label="Gender"
+      content=genderOptions
+      optionValuePath="id"
+      optionLabelPath="name"
+      multiple=true
+      prompt="--select--"
+      property="multi"
     }}
-{{/em-form}}
+  {{/em-form}}
 </div>
 <div class="well line-example">
-    Multi: {{model.multi}}
+  Multi: {{model.multi}}
 </div>
 
 <h2>Result with optionDisabledPath=disabled</h2>
 <div class="well line-example">
-{{#em-form model=model submitButton=false as |form|}}
+  {{#em-form model=model submitButton=false as |form|}}
     {{form.select
-        label="Gender"
-        content=genderOptions
-        optionValuePath="id"
-        optionLabelPath="name"
-        optionDisabledPath="disabled"
-        prompt="--select--"
-        property='third'
+      label="Gender"
+      content=genderOptions
+      optionValuePath="id"
+      optionLabelPath="name"
+      optionDisabledPath="disabled"
+      prompt="--select--"
+      property="third"
     }}
-{{/em-form}}
+  {{/em-form}}
 </div>
 <div class="well line-example">
-    Disabled: {{model.third}}
+  Disabled: {{model.third}}
 </div>
 
 <h2>Result with option groups</h2>
 <div class="well line-example">
-{{#em-form model=model submitButton=false as |form|}}
+  {{#em-form model=model submitButton=false as |form|}}
     {{form.select
-        label="Eatables"
-        content=groups
-        optionGroupLabelPath="name"
-        optionGroupContentPath="content"
-        optionValuePath="id"
-        optionLabelPath="name"
-        prompt="--select--"
-        property='forth'
+      label="Eatables"
+      content=groups
+      optionGroupLabelPath="name"
+      optionGroupContentPath="content"
+      optionValuePath="id"
+      optionLabelPath="name"
+      prompt="--select--"
+      property="forth"
     }}
-{{/em-form}}
+  {{/em-form}}
 </div>
 <div class="well line-example">
-    Eatables: {{model.forth}}
+  Eatables: {{model.forth}}
 </div>
 
 <h2>Parameters</h2>
 <table class="table table-striped">
+  <tbody>
     <tr><th>Param name</th><th>Description</th><th>Default</th></tr>
     <tr><td>label</td><td>The label of the input</td><td>A humanized form of the property name</td></tr>
     <tr><td>property</td><td>The property name in the model instance bound to the form</td><td>none, value is required.</td></tr>
@@ -158,5 +159,5 @@ export default Controller.extend({
     <tr><td>required</td><td>Standard HTML5 required attribute.</td><td>null</td></tr>
     <tr><td>autofocus</td><td>Standard HTML5 autofocus attribute.</td><td>null</td></tr>
     <tr><td>size</td><td>Standard HTML5 size attribute.</td><td>0</td></tr>
+  </tbody>
 </table>
-

@@ -65,6 +65,9 @@ export default Component.extend(HasPropertyMixin, HasPropertyValidationMixin, {
 
   validationIcon: computed('status', 'shouldShowErrors', {
     get() {
+      if(this._validationIcon !== undefined){
+        return this._validationIcon;
+      }
       if (!this.get('shouldShowErrors')) {
         return;
       }
@@ -79,29 +82,40 @@ export default Component.extend(HasPropertyMixin, HasPropertyValidationMixin, {
         default:
           return null;
       }
+    },
+    set(key, value){
+      return this._validationIcon = value;
     }
   }),
 
-  label: computed('inputComponent.label', function () {
-    const i18n = this.get('i18n');
-    const label = this.get('inputComponent.label');
-
-    if (label) {
-      return label;
-    } else if(isPresent(i18n)) {
-      const property = this.get('property');
-      const modelName = this.get('model.constructor.modelName');
-      let key;
-
-      if(modelName) {
-        key = `${modelName}.${property}`;
-      } else {
-        key = property;
+  label: computed('inputComponent.label', {
+    get(){
+      if(this._label !== undefined){
+        return this._label;
       }
+      const i18n = this.get('i18n');
+      const label = this.get('inputComponent.label');
 
-      if(i18n.exists(key)) {
-        return i18n.t(key);
+      if (label) {
+        return label;
+      } else if(isPresent(i18n)) {
+        const property = this.get('property');
+        const modelName = this.get('model.constructor.modelName');
+        let key;
+
+        if(modelName) {
+          key = `${modelName}.${property}`;
+        } else {
+          key = property;
+        }
+
+        if(i18n.exists(key)) {
+          return i18n.t(key);
+        }
       }
+    },
+    set(key, value){
+      return this._label = value;
     }
   })
 });

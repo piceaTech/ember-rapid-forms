@@ -32,7 +32,9 @@ export default Component.extend({
 
   actions: {
     submit() {
-      this.sendAction('submit');
+      if(typeof this.submitAction === 'function'){
+        this.submitAction(this.get('form.model'));
+      }
     }
   }
 });

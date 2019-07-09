@@ -4,49 +4,54 @@ You can enrich the input control by creating your own component that wraps the i
 This gives you the freedom to support extra visual effects when neccessary.
 
 <h2>Template Markup</h2>
-<div class="well line-example">
-    <pre><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form model=model formLayout=layout as |form|}}
-    \{{form.input label="Name" property="name"}}
-    \{{my-custom-input label="Name" property="name"}}
-    \{{#form.custom-input label="Password" property="password" name="property" as |customInput|}}
-        \{{input value=model.password type="password" name=customInput.name}}
-    \{{/form.custom-input}}
+  \{{form.input label="Name" property="name"}}
+  \{{my-custom-input label="Name" property="name"}}
+  \{{#form.custom-input label="Password" property="password" name="property" as |customInput|}}
+    \{{input value=model.password type="password" name=customInput.name}}
+  \{{/form.custom-input}}
 \{{/em-form}}
-    </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>The custom component code</h2>
-<div class="well line-example">
-    <pre><code class="coffeescript">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="javascript"}}
 WrappedInputComponent = Em.Component.extend({
-    attributeBindings: ['style'],
-    style: Ember.computed({
-        get:function(){
-            return "border: dotted 2px;"
-        }
-    })
+  attributeBindings: ['style'],
+  style: Ember.computed({
+    get:function(){
+      return "border: dotted 2px;"
+    }
+  })
 })
-    </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>The custom component template</h2>
-<div class="well line-example">
-    <pre><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{em-input error=showError placeholder="Wrapped with ugly border"}}
 \{{#if showError}}
-    Extra error data !
+  Extra error data !
 \{{/if}}
-    </code></pre>
+  {{/code-block}}
 </div>
 
 <h2>Result</h2>
-<div class="well line-example">
-{{#em-form model=model formLayout=layout as |form|}}
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#em-form model=model formLayout=layout as |form|}}
     {{form.input label="Name" property="name"}}
     {{my-custom-input label="Name" property="name" form=form}}
-    {{#form.custom-input label="Password" property="password" name="property" as |customInput|}}
-        {{input value=model.password type="password" name=customInput.name}}
+    {{#form.custom-input
+      label="Password"
+      property="password"
+      name="property"
+      as |customInput|
+    }}
+      {{input value=model.password type="password" name=customInput.name}}
     {{/form.custom-input}}
-{{/em-form}}
+  {{/em-form}}
 </div>

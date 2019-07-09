@@ -20,11 +20,17 @@ export default Mixin.create({
 
   status: computed('errors.length', {
     get() {
+      if(this._status !== undefined){
+        return this._status;
+      }
       if (this.get('errors.length')) {
         return 'error';
       } else {
         return 'success';
       }
+    },
+    set(key, value){
+      return this._status = value;
     }
   })
 });

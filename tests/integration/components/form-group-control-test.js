@@ -1,22 +1,21 @@
 import EmberObject from '@ember/object';
-import {
-  moduleForComponent,
-  test
-}
-from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('form-group-control', {
-  // Specify the other units that are required for this test
-  integration: true,
+module('form-group-control', function(hooks) {
+  setupRenderingTest(hooks);
 
-  beforeEach() {
+  hooks.beforeEach(function() {
     this.set('mainComponent', EmberObject.create());
-  }
-});
+  });
 
-test('renders the component with wrapper', function(assert) {
-  this.render(hbs`{{#em-form as |form|}}{{form.group-control mainComponent=mainComponent controlWrapper='control-wrapper-class'}}{{/em-form}}`);
+  test('renders the component with wrapper', async function(assert) {
+    await render(
+      hbs`{{#em-form as |form|}}{{form.group-control mainComponent=mainComponent controlWrapper='control-wrapper-class'}}{{/em-form}}`
+    );
 
-  assert.ok(this.$().find('div.control-wrapper-class'), 'Has wrapper div');
+    assert.dom('div.control-wrapper-class').exists('Has wrapper div');
+  });
 });

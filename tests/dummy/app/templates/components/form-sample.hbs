@@ -1,18 +1,48 @@
 <div class="btn-group">
-    <button type="button" class="btn btn-default" {{action 'layout' 'default'}}>Default</button>
-    <button type="button" class="btn btn-default" {{action 'layout' 'horizontal'}}>Horizontal</button>
-    <button type="button" class="btn btn-default" {{action 'layout' 'inline'}}>Inline</button>
+  <button type="button" class="btn btn-default" {{action "layout" "default"}}>Default</button>
+  <button type="button" class="btn btn-default" {{action "layout" "horizontal"}}>Horizontal</button>
+  <button type="button" class="btn btn-default" {{action "layout" "inline"}}>Inline</button>
 </div>
-<hr/>
+<hr>
 
 {{#em-form model=model formLayout=layout as |form|}}
-    {{form.input property="fullName" label="Full Name" placeholder="Enter a full name..." canShowErrors=model.visibleErrors.fullName}}
-    {{form.input property="password" label="Password" placeholder="And password..." type="password" disabled=nameHasValue canShowErrors=model.visibleErrors.password}}
-    {{form.text property="comment" label="Comment" placeholder="Comment please.." rows=4 canShowErrors=model.visibleErrors.comment}}
-    {{form.select property="gender" label="Gender" prompt="-select-" content=genderOptions optionValuePath="id" optionLabelPath="name" canShowErrors=model.visibleErrors.gender}}
-    {{form.checkbox property="active" label="Active?" canShowErrors=model.visibleErrors.active}}
-    <div class="form-group">
-        <button class="btn btn-default" {{ action "validate" }}>Run Validations</button>
-        <button class="btn btn-default" {{ action "clearValidations" }}>Clear Validations</button>
-    </div>
+  {{form.input
+    property="fullName"
+    label="Full Name"
+    placeholder="Enter a full name..."
+    canShowErrors=model.visibleErrors.fullName
+  }}
+  {{form.input
+    property="password"
+    label="Password"
+    placeholder="And password..."
+    type="password"
+    disabled=nameHasValue
+    canShowErrors=model.visibleErrors.password
+  }}
+  {{form.text
+    property="comment"
+    label="Comment"
+    placeholder="Comment please.."
+    rows=4
+    canShowErrors=model.visibleErrors.comment
+  }}
+  {{form.select
+    property="gender"
+    label="Gender"
+    prompt="-select-"
+    content=genderOptions
+    optionValuePath="id"
+    optionLabelPath="name"
+    canShowErrors=model.visibleErrors.gender
+  }}
+  {{form.checkbox
+    property="active"
+    label="Active?"
+    canShowErrors=model.visibleErrors.active
+  }}
+  <div class="form-group">
+    <button class="btn btn-default" {{ action "validate" }}>Run Validations</button>
+    <button class="btn btn-default" {{ action "clearValidations" }}>Clear Validations</button>
+  </div>
 {{/em-form}}

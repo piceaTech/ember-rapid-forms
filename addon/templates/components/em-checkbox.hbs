@@ -1,9 +1,14 @@
-{{#em-form-group model=model property=property inputComponent=this groupClass=groupClass}}
-    {{#if checkboxWrapper}}
-        <div class={{checkboxWrapper}}>
-            {{em-checkbox-input checkboxComponent=this}}
-        </div>
-    {{else}}
-        {{em-checkbox-input checkboxComponent=this}}
-    {{/if}}
+{{#em-form-group
+  model=model
+  property=property 
+  inputComponent=this
+  groupClass=groupClass
+}}
+  {{#if checkboxWrapper}}
+    <div class={{checkboxWrapper}}>
+      {{em-checkbox-input checkboxComponent=this}}
+    </div>
+  {{else}}
+    {{em-checkbox-input checkboxComponent=this}}
+  {{/if}}
 {{/em-form-group}}

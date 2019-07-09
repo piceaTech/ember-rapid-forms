@@ -74,7 +74,9 @@ export default Component.extend({
     const model = this.get('model');
 
     if (isNone(this.get('model.validate'))) {
-      return this.sendAction('action', model);
+      if(typeof this.formAction === 'function'){
+        return this.formAction(model);
+      }
     } else {
       return model.validate().then(this._sendAction(model));
     }
@@ -83,7 +85,9 @@ export default Component.extend({
   _sendAction(model) {
     this.set('isSubmitted', true);
     if (model.get('isValid')) {
-      return this.sendAction('action', model);
+      if(typeof this.formAction === 'function'){
+        return this.formAction(model);
+      }
     }
   }
 });

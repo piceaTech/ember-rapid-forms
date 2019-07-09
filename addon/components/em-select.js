@@ -115,7 +115,7 @@ export default Component.extend(InputComponentMixin, {
   },
 
   _setValueSingle() {
-    const selectedEl = this.$('select')[0];
+    const selectedEl = this.element.querySelector('select');
     const model = this.get('model');
     if (model) {
 
@@ -170,7 +170,7 @@ export default Component.extend(InputComponentMixin, {
     }
   },
   _setValueMultiple() {
-    const selectedEl = this.$('select')[0];
+    const selectedEl = this.element.querySelector('select');
     const model = this.get('model');
     if (model) {
 

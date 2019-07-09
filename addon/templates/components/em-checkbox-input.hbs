@@ -1,13 +1,21 @@
-{{#em-form-label text=label horiClass='' inlineClass='' form=form for=inputId extraClass=labelClass}}
-    {{input
-      id=inputId
-      type='checkbox'
-      checked=(mut (get model property))
-      disabled=disabled
-      required=required
-      autofocus=autofocus
-      readonly=readonly
-      title=title
-      class=elementClass
-      name=name}}
+{{#em-form-label 
+  text=label
+  horiClass=""
+  inlineClass=""
+  form=form
+  for=inputId
+  extraClass=labelClass
+}}
+  {{input
+    id=inputId
+    type="checkbox"
+    checked=(mut (get model property))
+    disabled=disabled
+    required=required
+    autofocus=autofocus
+    readonly=readonly
+    title=title
+    class=elementClass
+    name=name
+  }}
 {{/em-form-label}}

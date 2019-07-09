@@ -1,35 +1,36 @@
 <h3>Form</h3>
 
 <p>
-\{{em-form}} is rendered as HTML <i>&lt;form&gt;</i> tag and acts as a container for the input fields
-of the form.
+  \{{em-form}} is rendered as HTML <i>&lt;form&gt;</i> tag and acts as a container for the input fields
+  of the form.
 </p>
 <p>
-The form component can be bound to a <i>model</i> to support better bindings &amp; validations, it also can get rendered in different layouts.
+  The form component can be bound to a <i>model</i> to support better bindings &amp; validations, it also can get rendered in different layouts.
 </p>
 
 <h2>Markup</h2>
-<div class="well line-example">
-    <pre><code class="handlebars">
+<div class="well line-example" {{! template-lint-disable-tree }}>
+  {{#code-block language="handlebars"}}
 \{{#em-form formLayout="horizontal" model=someModel action="some-action" as |form|}}
     \{{form.input label="Name" property="name"}}
     other controls here...
 \{{/em-form}}
-    </code></pre>
+    {{/code-block}}
 </div>
 
 
 <h2>Result</h2>
 <div class="well line-example">
-    {{#em-form formLayout="horizontal" model=model action="someAction" as |f|}}
-        {{f.input label="Name" property="name"}}
-    {{/em-form}}
+  {{#em-form formLayout="horizontal" model=model action="someAction" as |f|}}
+    {{f.input label="Name" property="name"}}
+  {{/em-form}}
 </div>
 
 <h2>Parameters</h2>
 <p>\{{em-form}} can accept the following parameters</p>
 
 <table class="table table-striped">
+  <tbody>
     <tr><th>Param name</th><th>Description</th><th>Default</th></tr>
     <tr><td>formLayout</td><td>Can be: default | inline | horizontal</td><td>default</td></tr>
     <tr><td>model</td><td>Can be bound to some model, then every control's <i>property</i> will be bound to the given model's property.</td><td>none</td></tr>
@@ -38,12 +39,15 @@ The form component can be bound to a <i>model</i> to support better bindings &am
     <tr><td>validationIcons</td><td>boolean, if true validation icons will be rendered per input control.</td><td>true</td></tr>
     <tr><td>showErrorsOnRender</td><td>boolean, display errors when the form is rendered</td><td>false</td></tr>
     <tr><td>showErrorsOnFocusIn</td><td>boolean, display errors when an input if focused</td><td>false</td></tr>
+    <tr><td>formAction</td><td>function, to execute with model as param when submitting the form</td><td>None</td></tr>
+  </tbody>
 </table>
 
 <h2>Update to after 1.0.0-beta10</h2>
 <p>To Update to a version after 1.0.0-beta10 \{{em-form}} now should be yielded as a form and has the following attributes on the hash</p>
 
 <table class="table table-striped">
+  <tbody>
     <tr><th>Attribute Name</th><th>Old Element</th><th>description</th></tr>
     <tr><td>input</td><td>em-input</td><td>Standard element used to create a input field</td></tr>
     <tr><td>checkbox</td><td>em-checkbox</td><td>Element used to create a checkbox</td></tr>
@@ -51,4 +55,5 @@ The form component can be bound to a <i>model</i> to support better bindings &am
     <tr><td>text</td><td>em-text</td><td>Element used to create a Textarea</td></tr>
     <tr><td>custom-input</td><td>em-custom-input</td><td>Element used to create a custom element</td></tr>
     <tr><td>submit</td><td>em-submit</td><td>Element used to create the submit button</td></tr>
+  </tbody>
 </table>

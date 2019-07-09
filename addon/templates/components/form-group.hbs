@@ -1,50 +1,90 @@
 {{#if formComponent.label}}
-    {{#if labelInControl}}
-        {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
-            {{yield}}
-        {{/form-group-control}}
-    {{else if yieldInLabel}}
-        {{#if formComponent.labelWrapperClass}}
-            <div class={{formComponent.labelWrapperClass}}>
-                {{#control-within-label label=formComponent.label extraClass=formComponent.labelClass
-                  controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
-                  {{yield}}
-                {{/control-within-label}}
-            </div>
-        {{else}}
-            {{#control-within-label label=formComponent.label extraClass=formComponent.labelClass
-              controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
-              {{yield}}
-            {{/control-within-label}}
-        {{/if}}
-    {{else}}
-        {{#if formComponent.labelWrapperClass}}
-            <div class={{formComponent.labelWrapperClass}}>
-                {{em-form-label text=formComponent.label extraClass=formComponent.labelClass form=form for=formComponent.inputId}}
-                {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
-                    {{yield}}
-                {{/form-group-control}}
-            </div>
-        {{else}}
-            {{em-form-label text=formComponent.label extraClass=formComponent.labelClass form=form for=formComponent.inputId}}
-            {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
-                {{yield}}
-            {{/form-group-control}}
-        {{/if}}
-    {{/if}}
-{{else}}
-    {{#form-group-control controlWrapper=formComponent.controlWrapper formComponent=formComponent form=form}}
-        {{yield}}
+  {{#if labelInControl}}
+    {{#form-group-control
+      controlWrapper=formComponent.controlWrapper
+      formComponent=formComponent
+      form=form
+    }}
+      {{yield}}
     {{/form-group-control}}
+  {{else if yieldInLabel}}
+    {{#if formComponent.labelWrapperClass}}
+      <div class={{formComponent.labelWrapperClass}}>
+        {{#control-within-label
+          label=formComponent.label
+          extraClass=formComponent.labelClass
+          controlWrapper=formComponent.controlWrapper
+          formComponent=formComponent
+          form=form
+        }}
+          {{yield}}
+        {{/control-within-label}}
+      </div>
+    {{else}}
+      {{#control-within-label
+        label=formComponent.label
+        extraClass=formComponent.labelClass
+        controlWrapper=formComponent.controlWrapper
+        formComponent=formComponent
+        form=form
+      }}
+        {{yield}}
+      {{/control-within-label}}
+    {{/if}}
+  {{else}}
+    {{#if formComponent.labelWrapperClass}}
+      <div class={{formComponent.labelWrapperClass}}>
+        {{em-form-label
+          text=formComponent.label
+          extraClass=formComponent.labelClass
+          form=form
+          for=formComponent.inputId
+        }}
+        {{#form-group-control
+          controlWrapper=formComponent.controlWrapper
+          formComponent=formComponent
+          form=form
+        }}
+          {{yield}}
+        {{/form-group-control}}
+      </div>
+    {{else}}
+      {{em-form-label
+        text=formComponent.label
+        extraClass=formComponent.labelClass
+        form=form
+        for=formComponent.inputId
+      }}
+      {{#form-group-control
+        controlWrapper=formComponent.controlWrapper
+        formComponent=formComponent
+        form=form
+      }}
+        {{yield}}
+      {{/form-group-control}}
+    {{/if}}
+  {{/if}}
+{{else}}
+  {{#form-group-control
+    controlWrapper=formComponent.controlWrapper
+    formComponent=formComponent
+    form=form
+  }}
+    {{yield}}
+  {{/form-group-control}}
 {{/if}}
 
 {{#if formComponent.validationIcons}}
-    <span class="form-control-feedback">{{fa-icon formComponent.validationIcon}}</span>
+  <span class="form-control-feedback">{{fa-icon formComponent.validationIcon}}</span>
 {{/if}}
 
 {{!Currently no errors when layout is inline}}
 {{#unless form.isInline}}
-    {{#if formComponent.shouldShowErrors}}
-        {{em-form-control-help helpText=formComponent.helpText formComponent=formComponent form=form}}
-    {{/if}}
+  {{#if formComponent.shouldShowErrors}}
+    {{em-form-control-help
+      helpText=formComponent.helpText
+      formComponent=formComponent
+      form=form
+    }}
+  {{/if}}
 {{/unless}}

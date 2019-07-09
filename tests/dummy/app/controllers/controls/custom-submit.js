@@ -5,8 +5,8 @@ import { alias } from '@ember/object/computed';
 export default Controller.extend({
   credentials: alias('model'),
   actions: {
-    submit() {
-      return alert("Logged in!");
+    submit(model) {
+      return alert(`Logged in as ${model.user} with pw ${model.password}!`);
     }
   }
 });

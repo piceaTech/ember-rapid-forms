@@ -1,1 +1,16 @@
-**/*{.,-}min.js
+# unconventional js
+/blueprints/*/files/
+/vendor/
+
+# compiled output
+/dist/
+/tmp/
+
+# dependencies
+
+# misc
+/coverage/
+
+# ember-try
+/.node_modules.ember-try/
+/package.json.ember-try
